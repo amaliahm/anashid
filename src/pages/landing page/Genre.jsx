@@ -49,7 +49,6 @@ const Genre = () => {
                     </div>
                 ))}
             </div>
-
           </div>
         </>
     )

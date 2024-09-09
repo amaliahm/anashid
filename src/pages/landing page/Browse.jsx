@@ -3,8 +3,7 @@ import { browseCircle } from "../../assets/images"
 
 const Browse = () => {
     return (
-        <div className="lg:pt-10 overflow-hidden">
-            
+      <div className="lg:pt-10 overflow-hidden">  
         <div className="relative">
           <img src={browseCircle} alt="hero" className="hidden lg:block absolute bottom-0 right-14 w-1/12 h-auto"/>
           <div className="bg-[rgba(113,60,150,0.24)] sm:m-14 m-24 rounded-2xl sm:p-8 md:p-10 lg:p-12 flex flex-col justify-between items-center">
@@ -14,7 +13,7 @@ const Browse = () => {
             </div>
           </div>
         </div>
-        </div>
+      </div>
     )
 }
 

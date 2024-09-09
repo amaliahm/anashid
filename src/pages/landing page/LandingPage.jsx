@@ -3,6 +3,7 @@ import NavBarComponent from "./NavBar"
 import { hero, circle } from "../../assets/images"
 import Browse from "./Browse"
 import Genre from "./Genre"
+import CreateSection from "./CreateSection"
 
 const LandingPage = () => {
 
@@ -21,6 +22,7 @@ const LandingPage = () => {
                 <Hero />
                 <Browse />
                 <Genre />
+                <CreateSection />
             </div>
         </main>
         {/* footer */}
