@@ -4,6 +4,7 @@ import { hero, circle } from "../../assets/images"
 import Browse from "./Browse"
 import Genre from "./Genre"
 import CreateSection from "./CreateSection"
+import ArtistComponent from "./ArtistComponent"
 
 const LandingPage = () => {
 
@@ -23,6 +24,7 @@ const LandingPage = () => {
                 <Browse />
                 <Genre />
                 <CreateSection />
+                <ArtistComponent />
             </div>
         </main>
         {/* footer */}
