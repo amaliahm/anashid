@@ -43,7 +43,7 @@ const Genre = () => {
                         >
                             <div className="w-14 h-14 bg-[var(--backgroundColor)] rounded-full"></div>
                         </div>
-                        <div className="relative text-2xl capitalize font-medium">
+                        <div className="relative text-2xl capitalize font-medium my-4">
                             {genre[e].name}
                         </div>
                         <div 
