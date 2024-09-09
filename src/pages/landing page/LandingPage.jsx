@@ -2,6 +2,7 @@ import Hero from "./Hero"
 import NavBarComponent from "./NavBar"
 import { hero, circle } from "../../assets/images"
 import Browse from "./Browse"
+import Genre from "./Genre"
 
 const LandingPage = () => {
 
@@ -19,6 +20,7 @@ const LandingPage = () => {
             <div id='home' className='p-0 mb-5'>
                 <Hero />
                 <Browse />
+                <Genre />
             </div>
         </main>
         {/* footer */}
