@@ -6,7 +6,6 @@
 <circle cx="684.809" cy="7.80949" r="100" transform="rotate(-1.6332 684.809 7.80949)" fill="url(#pattern2_36_1027)"/>
 <g filter="url(#filter0_d_36_1027)">
 <ellipse cx="365" cy="324" rx="223" ry="213" fill="url(#pattern3_36_1027)" shape-rendering="crispEdges"/>
-<path d="M587.5 324C587.5 441.339 487.905 536.5 365 536.5C242.095 536.5 142.5 441.339 142.5 324C142.5 206.661 242.095 111.5 365 111.5C487.905 111.5 587.5 206.661 587.5 324Z" stroke="black" shape-rendering="crispEdges"/>
 </g>
 <circle cx="489" cy="598" r="50" fill="#713C96" fill-opacity="0.85"/>
 <circle cx="295" cy="3" r="70" fill="#AF96BC"/>
