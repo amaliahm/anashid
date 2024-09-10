@@ -6,6 +6,7 @@ import Genre from "./Genre"
 import CreateSection from "./CreateSection"
 import ArtistComponent from "./ArtistComponent"
 import AboutUs from "./AboutUs"
+import Footer from "../../Components/Footer"
 
 const LandingPage = () => {
 
@@ -16,7 +17,7 @@ const LandingPage = () => {
           <img src={hero} alt="hero" className="hidden lg:block absolute top-0 right-0 w-3/6 h-auto"/>
         </div>
         <div className="relative">
-          <img src={circle} alt="hero" className="absolute pt-24 top-96 left-0 w-1/12 h-auto"/>
+          <img src={circle} alt="hero" className="absolute lg:pt-24 pt-80 top-96 left-0 w-1/12 h-auto"/>
         </div>
         <NavBarComponent />
         <main>
@@ -31,7 +32,7 @@ const LandingPage = () => {
               <AboutUs />
             </div>
         </main>
-        {/* footer */}
+        <Footer />
       </div>
     </>
   )

@@ -12,8 +12,11 @@ import artist5 from './artist5.svg'
 import artist2 from './artist2.svg'
 import artist1 from './artist1.svg'
 import aboutUs from './aboutUs.svg'
+import instagram from './instagram.svg'
+import telegram from './telegram.svg'
+import facebook from './facebook.svg'
 
 export {
     hero, circle, browseCircle, genre1, genre2, genre3, playIcon, heartCreate, playlistCreate,
-    artist1, artist2, artist5, artistArrow, aboutUs
+    artist1, artist2, artist5, artistArrow, aboutUs, telegram, instagram, facebook
 }
