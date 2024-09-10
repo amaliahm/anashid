@@ -21,7 +21,7 @@ const AboutUs = () => {
                 sign up
               </div>
               <img 
-                className="hidden lg:block absolute w-64 h-fit right-10 top-12"
+                className="hidden lg:block absolute w-64 h-fit right-10 top-28"
                 src={aboutUs} 
                 alt="About Us"
               />
