@@ -9,12 +9,11 @@ import heartCreate from './heartCreate.svg'
 import playlistCreate from './playlistCreate.svg'
 import artistArrow from './artistArrow.svg'
 import artist5 from './artist5.svg'
-import artist4 from './artist4.svg'
-import artist3 from './artist3.svg'
 import artist2 from './artist2.svg'
 import artist1 from './artist1.svg'
+import aboutUs from './aboutUs.svg'
 
 export {
     hero, circle, browseCircle, genre1, genre2, genre3, playIcon, heartCreate, playlistCreate,
-    artist1, artist2, artist3, artist4, artist5, artistArrow
+    artist1, artist2, artist5, artistArrow, aboutUs
 }

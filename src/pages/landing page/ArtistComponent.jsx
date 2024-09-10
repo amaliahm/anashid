@@ -1,4 +1,4 @@
-import { artist1, artist2, artist3, artist4, artist5, artistArrow, playIcon } from "../../assets/images"
+import { artist1, artist2, artist5, artistArrow } from "../../assets/images"
 import { useNavigate } from "react-router-dom"
 
 const ArtistComponent = () => {
@@ -17,20 +17,15 @@ const ArtistComponent = () => {
             <div className="w-11/12 m-auto flex-col lg:flex-row flex justify-between items-center relative">
               <img 
                 src={artist1} 
-                className="w-76 h-76 mb-5"
+                className="w-72 h-72 lg:w-1/4 lg:h-1/4 mb-5"
               />
               <img 
                 src={artist2} 
-                className="w-76 h-76 mb-5"
+                className="w-72 h-72 lg:w-1/4 lg:h-1/4 mb-5"
               />
               <img 
                 src={artist5} 
-                className="w-76 h-76 mb-5"
-              />
-              <img 
-                src={playIcon} 
-                className="hover:cursor-pointer w-76 h-76 mb-5 absolute right-[46%]" 
-                onClick={() => navigate('/auth/signup')}
+                className="w-72 h-72 lg:w-1/4 lg:h-1/4 mb-5"
               />
             </div>
           </div>

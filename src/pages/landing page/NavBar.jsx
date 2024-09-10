@@ -43,7 +43,7 @@ const NavBarComponent = ({element = 0}) => {
             data-text="Home"
             spy={true}
             smooth={true}
-            duration={500}
+            duration={1000}
             className={`hover:text-[var(--mainColor)] transition-all cursor-pointer no-underline element-link ${link === 0 ? 'text-[var(--mainColor)]' : 'text-[var(--semanticThirdColor)]'}`}
             onClick={() => setLink(0)}
           >
@@ -54,7 +54,7 @@ const NavBarComponent = ({element = 0}) => {
             data-text='AboutUs'
             spy={true}
             smooth={true}
-            duration={500}
+            duration={1000}
             className={`hover:text-[var(--mainColor)] transition-all cursor-pointer no-underline element-link ${link === 1 ? 'text-[var(--mainColor)]' : 'text-[var(--semanticThirdColor)]'}`}
             onClick={() => setLink(1)}
           >

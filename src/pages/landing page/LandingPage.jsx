@@ -5,6 +5,7 @@ import Browse from "./Browse"
 import Genre from "./Genre"
 import CreateSection from "./CreateSection"
 import ArtistComponent from "./ArtistComponent"
+import AboutUs from "./AboutUs"
 
 const LandingPage = () => {
 
@@ -25,6 +26,9 @@ const LandingPage = () => {
                 <Genre />
                 <CreateSection />
                 <ArtistComponent />
+            </div>
+            <div id='about-us' className='p-0 mb-5'>
+              <AboutUs />
             </div>
         </main>
         {/* footer */}
