@@ -48,8 +48,8 @@ const Signup = () => {
               welcome to anashid digital
             </div>
             <div className="lg:pl-16 lg:w-3/6 w-full text-center">
-              <h2 className="lg:text-3xl text-start font-semibold mb-4 lg:mb-10">
-                Sign Up
+              <h2 className="lg:text-3xl capitalize text-start font-semibold mb-4 lg:mb-10">
+                sign up
               </h2>
               <div className="flex flex-col justify-between items-start">
                 <input
@@ -128,14 +128,12 @@ const Signup = () => {
                 </span>
               </div>
             </div>
-        
-        
-      </form>
-    </div>
-            <Footer />
-          </div>
-        </>
-    )
+          </form>
+        </div>
+        <Footer />
+      </div>
+    </>
+  )
 }
 
 export default Signup
