@@ -36,10 +36,10 @@ const Signup = () => {
   return (
     <>
       <div 
-        className={`bg-cover bg-right`} 
+        className={`bg-cover bg-right pt-6 lg:pt-12`} 
         style={{ backgroundImage: `url('${signup}')` }}
       >
-        <div className="flex items-center justify-between h-screen py-12 px-24 ">
+        <div className="flex items-center justify-between h-screen py-12 px-10 lg:px-24">
           <form 
             onSubmit={handleSubmit} 
             className="w-full p-8 rounded rounded-3xl auth-div flex flex-wrap items:center lg:justify-between border-[1px] border-[#AFAFAF]"
