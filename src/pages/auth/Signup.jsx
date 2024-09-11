@@ -36,7 +36,7 @@ const Signup = () => {
   return (
     <>
       <div 
-        className={`bg-cover bg-right pt-6 lg:pt-12`} 
+        className={`bg-cover bg-right pt-2 lg:pt-12`} 
         style={{ backgroundImage: `url('${signup}')` }}
       >
         <div className="flex items-center justify-between h-screen py-12 px-10 lg:px-24">
