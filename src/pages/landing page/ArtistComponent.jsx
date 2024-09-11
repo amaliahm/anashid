@@ -11,21 +11,21 @@ const ArtistComponent = () => {
               src={artistArrow}
               alt="artists"
             />
-            <p className='capitalize font-medium text-white text-2xl lg:text-6xl md:text-5xl text-wrap text-center my-8'>
+            <p className='capitalize font-medium text-white text-2xl lg:text-6xl md:text-5xl text-wrap text-center my-8 mx-2'>
               Meet the Voices Behind the Anashid
             </p>
             <div className="w-11/12 m-auto flex-col lg:flex-row flex justify-between items-center relative">
               <img 
                 src={artist1} 
-                className="w-72 h-72 lg:w-1/4 lg:h-1/4 mb-5"
+                className="w-64 h-64 lg:w-1/4 lg:h-1/4 mb-5"
               />
               <img 
                 src={artist2} 
-                className="w-72 h-72 lg:w-1/4 lg:h-1/4 mb-5"
+                className="w-64 h-64 lg:w-1/4 lg:h-1/4 mb-5"
               />
               <img 
                 src={artist5} 
-                className="w-72 h-72 lg:w-1/4 lg:h-1/4 mb-5"
+                className="w-64 h-64 lg:w-1/4 lg:h-1/4 mb-5"
               />
             </div>
           </div>

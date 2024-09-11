@@ -25,6 +25,11 @@ const NavBarComponent = ({element = 0}) => {
     transition: 'background-color 0.3s ease-in-out'
   };
 
+  const buttonStyle = {
+    display: scrollPosition > 20 ? 'block' : 'none',
+    transition: 'background-color 0.3s ease-in-out'
+  };
+
   window.addEventListener('scroll', function() {
     var navbar = document.querySelector('.div-to-be-scrolled');
     if (window.scrollY > 20) {
@@ -36,8 +41,9 @@ const NavBarComponent = ({element = 0}) => {
 
   return (
     <div className="fixed w-full z-20 top-0 py-8" style={navBarStyle}>
-      <div className="flex flex-row justify-between px-5">
-        <div className="flex flex-row items-center font-semibold text-lg font-medium gap-8 div-to-be-scrolled scrolled">
+      <div className="flex flex-row justify-between px-8 ">
+        <div className="flex justify-between items-center font-semibold text-lg font-medium gap-8 div-to-be-scrolled scrolled w-full">
+          <div className="flex gap-10">
           <Link
             to='home'
             data-text="Home"
@@ -60,12 +66,13 @@ const NavBarComponent = ({element = 0}) => {
           >
             AboutUs
           </Link>
+
+          </div>
           <Link
-            to='about-us'
-            data-text='AboutUs'
             spy={true}
             smooth={true}
             duration={500}
+            style={buttonStyle}
             className={`hover:text-[var(--mainColor)] transition-all cursor-pointer no-underline element-link text-[var(--semanticThirdColor)]`}
             onClick={() => navigate('/auth/signup')}
           >
