@@ -44,7 +44,7 @@ const Signup = () => {
             onSubmit={handleSubmit} 
             className="w-full p-8 rounded rounded-3xl auth-div flex flex-wrap items:center lg:justify-between border-[1px] border-[#AFAFAF]"
           >
-            <div className="lg:my-auto mb-8 text-xl lg:text-5xl uppercase font-semibold lg:w-2/6">
+            <div className="lg:my-auto mb-8 text-xl lg:text-5xl capitalize font-semibold lg:w-2/6">
               welcome to anashid digital
             </div>
             <div className="lg:pl-16 lg:w-3/6 w-full text-center">
