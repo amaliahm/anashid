@@ -38,10 +38,6 @@
   --Glass1-Fill-Carey: linear-gradient(321deg, rgba(191, 191, 191, 0.06) 5.98%, rgba(0, 0, 0, 0.00) 66.28%), rgba(0, 0, 0, 0.14);
 }
 
-a {
-  background-image: linear-gradient(r);
-}
-
 * {
   box-sizing: border-box;
 }
