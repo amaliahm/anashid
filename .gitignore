@@ -1,5 +1,6 @@
 # Ignore environment files
 .env
+config/
 
 # Logs
 logs
