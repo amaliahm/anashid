@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { signupReducer } from "../../redux/auth/authSlice"
 import Footer from "../../Components/Footer"
@@ -9,6 +9,7 @@ import { signup, line } from "../../assets/images"
 const Signup = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch();
+  const { status, error } = useSelector((state) => state.auth);
   const [form, setForm] = useState({
     email: '',
     username: '',
@@ -27,11 +28,15 @@ const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (form.password === form.confirmPassword) {
-      dispatch(signupReducer(form));
+      dispatch(signupReducer({
+        ...form,
+        'account_name': 'email'
+      }));
+      console.log(form)
     } else {
       alert('Passwords do not match!');
     }
-  }; 
+  };
 
   return (
     <>
@@ -62,7 +67,7 @@ const Signup = () => {
                   required
                 />
                 <input
-                  type="email"
+                  type="text"
                   name="email"
                   value={form.email}
                   onChange={handleChange}
@@ -88,12 +93,14 @@ const Signup = () => {
                   className="w-full capitalize py-2 px-4 mb-5 rounded-lg border-[1px] border-[#AFAFAF] text-white placeholder-white bg-transparent"
                   required
                 />
+                {error && <p className="text-red-500 text-xs italic">{error}</p>}
               </div>
               <button 
                 type="submit" 
-                className="capitalize border-[1px] border-[var(--mainColor)] bg-[rgba(255,255,255,0.3)] font-medium px-16 py-2 my-6 rounded-2xl hover:cursor-pointer"
+                className={`capitalize border-[1px] border-[var(--mainColor)] bg-[rgba(255,255,255,0.3)] font-medium px-16 py-2 my-6 rounded-2xl ${ form.email.length === 0 || form.username.length === 0 || form.password.length < 8 ? 'opacity-50 cursor-not-allowed': 'cursor-pointer'}`}
+                disabled={form.email.length === 0 || form.username.length === 0 || form.password.length < 8}
               >
-                sign up
+                {status === 'loading' ? 'loading...' : 'sign up'}
               </button>
               <div className="flex justify-center lg:justify-between items-center flex-nowrap text-[#4D4D4D] capitalize font-lg font-semibold m-2 lg:px-6 overflow-hidden">
                 <img 

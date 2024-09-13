@@ -26,4 +26,6 @@ const setupDatabase = async () => {
   }
 };
 
-export default setupDatabase;
+export {
+  setupDatabase, pool
+};
