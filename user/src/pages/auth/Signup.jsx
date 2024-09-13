@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { signupReducer } from "../../redux/auth/authSlice"
@@ -9,7 +9,7 @@ import { signup, line } from "../../assets/images"
 const Signup = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch();
-  const { status, error } = useSelector((state) => state.auth);
+  const { errorMessage, successMessage, status } = useSelector((state) => state.auth);
   const [form, setForm] = useState({
     email: '',
     username: '',
@@ -32,7 +32,6 @@ const Signup = () => {
         ...form,
         'account_name': 'email'
       }));
-      console.log(form)
     } else {
       alert('Passwords do not match!');
     }
@@ -93,7 +92,8 @@ const Signup = () => {
                   className="w-full capitalize py-2 px-4 mb-5 rounded-lg border-[1px] border-[#AFAFAF] text-white placeholder-white bg-transparent"
                   required
                 />
-                {error && <p className="text-red-500 text-xs italic">{error}</p>}
+                {errorMessage && <p className="text-red-500 text-xs italic">{errorMessage}</p>}
+                {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
               </div>
               <button 
                 type="submit" 
