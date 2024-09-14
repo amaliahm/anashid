@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import { useDispatch } from "react-redux"
+import React, { useState, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { loginReducer } from "../../redux/auth/authSlice"
 import Footer from "../../Components/Footer"
@@ -9,6 +9,9 @@ import { signup, line } from "../../assets/images"
 const Login = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch();
+  const { errorMessage, successMessage, status } = useSelector((state) => state.auth);
+  const [loading, setLoading] = useState(false)
+  const [id, setId] = useState(0)
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -22,14 +25,23 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (form.password === form.confirmPassword) {
-      dispatch(loginReducer(form));
-    } else {
-      alert('Passwords do not match!');
+    const user = await dispatch(loginReducer(form));
+    if (user.payload.user.id !== undefined && user.payload.user.id !== null) {
+      setId(user.payload.user.id)
     }
   }; 
+
+  useEffect(() => {
+    setTimeout(() => {
+      console.log("Delayed for 1 second.");
+      if (status === 'succeeded') {
+        setLoading(true)
+        navigate(`/user/home/${id}`); 
+      }
+    }, 2000);
+  }, [status, navigate, id]);
 
   return (
     <>
@@ -68,12 +80,13 @@ const Login = () => {
                   className="w-full capitalize py-2 px-4 mb-5 rounded-lg border-[1px] border-[#AFAFAF] text-white placeholder-white bg-transparent"
                   required
                 />
+                {errorMessage && <p className="text-red-500 text-xs italic">{errorMessage}</p>}
               </div>
               <button 
                 type="submit" 
                 className="capitalize border-[1px] border-[var(--mainColor)] bg-[rgba(255,255,255,0.3)] font-medium px-16 py-2 my-6 mt-12 rounded-2xl hover:cursor-pointer"
               >
-                login
+                {status === 'loading' || loading ? 'loading...' : 'login'}
               </button>
               <div className="flex justify-center lg:justify-between items-center flex-nowrap text-[#4D4D4D] capitalize font-lg font-semibold m-2 lg:px-6 overflow-hidden">
                 <img 

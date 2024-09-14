@@ -11,6 +11,7 @@ import { pool } from './dbConnection/dbConnection.js';
 import { sendVerificationEmail } from './auth/sendEmail.js';
 import { findUserByEmail } from './auth/findUserByEmail.js';
 import { markUserAsVerified } from './auth/VerifyUser.js';
+import { userLogin } from './auth/userLogin.js';
 
 initialize(passport);
 
@@ -78,6 +79,26 @@ app.post('/auth/verify-email', async (req, res) => {
   } catch (error) {
     return res.status(500).json({ message: 'Error verifying email' });
   }
+});
+
+app.post('/auth/login', async (req, res, next) => {
+  passport.authenticate('local', async (err, user, info) => {
+      if (err) {
+          return res.status(500).json({ message: 'Please verify your information and try again' });
+      }
+      if (!user) {
+          return res.status(401).json({ message: info.message });
+      }
+      req.logIn(user, async (err) => {
+          if (err) {
+              return res.status(500).json({ message: 'Please verify your information and try again' });
+          }
+          const conn = await pool.getConnection();
+          await conn.query(userLogin, [user.id]);
+          conn.release();
+          return res.status(200).json({ message: 'Login successful', user });
+      });
+  })(req, res, next);
 });
 
 app.listen(3000, async function () {

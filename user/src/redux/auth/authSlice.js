@@ -5,7 +5,10 @@ export const signupReducer = createAsyncThunk(
   'auth/signup',
   async (userData, { rejectWithValue }) => {
     try {
-      const response = await axios.post('http://localhost:3000/auth/signup', userData);
+      const response = await axios.post(
+        'http://localhost:3000/auth/signup',
+        userData
+      );
       return response.data;
     } catch (error) {
       if (error.response && error.response.data) {
@@ -21,10 +24,17 @@ export const loginReducer = createAsyncThunk(
   'auth/login',
   async (loginData, { rejectWithValue }) => {
     try {
-      const response = await axios.post('/auth/login', loginData);
+      const response = await axios.post(
+        'http://localhost:3000/auth/login',
+        loginData,
+        { withCredentials: true }
+      );
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data.message);
+      }
+      return rejectWithValue('Network error, please try again!');
     }
   }
 );
@@ -58,14 +68,17 @@ const authSlice = createSlice({
     builder
       .addCase(loginReducer.pending, (state) => {
         state.status = 'loading';
+        state.errorMessage = null;
+        state.successMessage = null;
       })
       .addCase(loginReducer.fulfilled, (state, action) => {
         state.status = 'succeeded';
+        state.successMessage = action.payload.message;
         state.user = action.payload;
       })
       .addCase(loginReducer.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.payload;
+        state.errorMessage = action.payload;
       });
   },
 });
