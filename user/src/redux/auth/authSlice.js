@@ -9,7 +9,7 @@ export const signupReducer = createAsyncThunk(
       return response.data;
     } catch (error) {
       if (error.response && error.response.data) {
-        return rejectWithValue(error.response.data.message); // This will be the error message
+        return rejectWithValue(error.response.data.message);
       }
       return rejectWithValue('Network error, please try again!');
     }

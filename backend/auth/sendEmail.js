@@ -1,32 +1,24 @@
-import nodemailer from 'nodemailer';
 import config from 'config'
+import sgMail from '@sendgrid/mail'
 
-const dbConfig = config.get('email');
+const dbConfig = config.get('sendEmail');
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail', 
-  auth: {
-    user: dbConfig.user, 
-    pass: dbConfig.password,
-  },
-});
+sgMail.setApiKey(dbConfig.SENDGRID_API_KEY);
 
-export const sendVerificationEmail = async (email, verificationToken) => {
-  const verificationLink = `http://localhost:5173/verify-email?token=${verificationToken}`;
-
-  const mailOptions = {
+export const sendVerificationEmail = async (toEmail, verificationLink) => {
+  const msg = {
     from: dbConfig.user,
-    to: email,
+    to: toEmail,
     subject: 'Verify Your Account',
     text: `Please verify your account by clicking on the following link: ${verificationLink}`,
     html: `<p>Please verify your account by clicking on the following link: <a href="${verificationLink}">Verify Email</a></p>`
   };
 
   try {
-    await transporter.sendMail(mailOptions);
+    await sgMail.send(msg);
     console.log('Verification email sent');
   } catch (error) {
-    console.error('Error sending verification email:', error);
+    console.error('Error sending verification email:', error.response ? error.response.body : error);
     throw new Error('Unable to send verification email');
   }
 };

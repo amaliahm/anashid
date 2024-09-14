@@ -8,8 +8,9 @@ import bcrypt from 'bcryptjs';
 import session from 'express-session';
 import { register_with_email } from './auth/registerEmail.js';
 import { pool } from './dbConnection/dbConnection.js';
-import jwt from 'jsonwebtoken';
 import { sendVerificationEmail } from './auth/sendEmail.js';
+import { findUserByEmail } from './auth/findUserByEmail.js';
+import { markUserAsVerified } from './auth/VerifyUser.js';
 
 initialize(passport);
 
@@ -49,46 +50,35 @@ app.post('/auth/signup', async (req, res) => {
               return res.status(400).json({ message: 'User already exists' });
             }
             const hashedPassword = await bcrypt.hash(data.password, 10);
-        
+            const verificationLink = `http://localhost:5173/auth/verify-email/${email}`;
+            await sendVerificationEmail(email, verificationLink);
             await conn.query(
-                register_with_email,
-              [data.username, email, hashedPassword]
-            );
-
-            const verificationToken = jwt.sign({ email }, 'secret', { expiresIn: '1h' });
-
-            // Send verification email
-            await sendVerificationEmail(email, verificationToken);
-        
+              register_with_email,
+            [data.username, email, hashedPassword]
+          );
             conn.release();
-            res.status(201).json({ message: 'User created successfully' });
+            res.status(201).json({ message: 'User created successfully, please verify your email' });
           } catch (error) {
             console.error(error);
             res.status(500).json({ message: 'Please verify your information and try again' });
           }
     }
-    
 })
 
 app.post('/auth/verify-email', async (req, res) => {
-  const { token } = req.body;
+  const { email } = req.body;
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const email = decoded.email;
-
-    // Update the user's status to "verified"
-    const conn = await pool.getConnection();
-    await conn.query('UPDATE user SET is_verified = true WHERE email = ?', [email]);
-    conn.release();
-
-    res.json({ message: 'Email verified successfully.' });
+    const user = await findUserByEmail(email); 
+    if (!user) {
+      return res.status(400).json({ message: 'User not found or invalid email' });
+    }
+    await markUserAsVerified(user);
+    return res.status(200).json({ message: 'Email verified successfully' });
   } catch (error) {
-    console.error('Email verification failed:', error);
-    res.status(400).json({ message: 'Invalid or expired token.' });
+    return res.status(500).json({ message: 'Error verifying email' });
   }
 });
-
 
 app.listen(3000, async function () {
   console.log('Example app listening on port 3000!');
