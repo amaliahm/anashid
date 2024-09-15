@@ -16,6 +16,8 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { resetPasswordEmail } from './auth/resetPasswordEmail.js';
+import { changePassword } from './auth/changePassword.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -77,7 +79,6 @@ app.post('/auth/signup', async (req, res) => {
 
 app.post('/auth/verify-email', async (req, res) => {
   const { email } = req.body;
-
   try {
     const user = await findUserByEmail(email); 
     if (!user) {
@@ -142,6 +143,40 @@ app.post('/', async (req, res, next) => {
           return res.status(200).json({ message: 'Login successful', user, token });
       });
   })(req, res, next);
+});
+
+
+
+app.post('/forget-password', async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await findUserByEmail(email); 
+    if (!user) {
+      return res.status(400).json({ message: 'User not found or invalid email' });
+    }
+    const verificationLink = `http://localhost:5173/auth/reset-password/${email}`;
+    await resetPasswordEmail(email, verificationLink);
+    return res.status(200).json({ message: 'Email send successfully' });
+  } catch (error) {
+    return res.status(500).json({ message: 'Error, please try again!' });
+  }
+});
+
+app.post('/auth/reset-password/:token', async (req, res) => {
+  const { token } = req.params;
+  const { newPassword } = req.body;
+  try {
+    const user = await findUserByEmail(token); 
+    if (!user) {
+      return res.status(400).json({ message: 'User not found or invalid email' });
+    }
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+    await changePassword(hashedPassword, user.id)
+    return res.status(200).json({ message: 'Password updated successfully' });
+  } catch (error) {
+    return res.status(500).json({ message: 'Error, please try again!' });
+  }
 });
 
 app.listen(3000, async function () {

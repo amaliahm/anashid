@@ -4,6 +4,7 @@ import PrivateRoute from './pages/auth/PrivateRoute';
 import Home from './pages/home/Home';
 import useAuthInit from './pages/auth/AuthInit';
 import ForgetPassword from './pages/auth/ForgetPassword';
+import ChangePassword from './pages/auth/ChangePassword';
 
 function App() {
   useAuthInit()
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Login />} />
           <Route path='/forget-password' element={<ForgetPassword />} />
+          <Route path='/auth/reset-password/:token' element={<ChangePassword />} />
           <Route 
             path='/admin/home/:id' 
             element={

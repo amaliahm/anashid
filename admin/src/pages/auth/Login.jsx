@@ -15,6 +15,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     const result = await dispatch(loginAdmin({email, password}));
+    console.log(result)
   };
 
   useEffect(() => {
@@ -56,7 +57,7 @@ const Login = () => {
                   placeholder="password"
                   required
                 />
-                {!error && <p className="text-red-500 text-xs italic">{error}</p>}
+                {!error && <p className="text-red-500 text-xs italic">Error, please try again</p>}
               </div>
               <button
                 type="submit"

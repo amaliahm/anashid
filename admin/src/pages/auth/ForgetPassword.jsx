@@ -10,11 +10,13 @@ const ForgetPassword = () => {
   const handleResetPw = async (e) => {
     e.preventDefault();
     try {
-        await axios.post('http://localhost:3000/forgot-password', { email });
+        await axios.post('http://localhost:3000/forget-password', { email });
         setDone(true);
+        setError(false);
       } catch (error) {
         console.error(error);
         setError(true);
+        setDone(false);
       }
   };
 
