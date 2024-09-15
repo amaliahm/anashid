@@ -11,7 +11,6 @@ const Login = () => {
   const dispatch = useDispatch();
   const { errorMessage, successMessage, status } = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(false)
-  const [id, setId] = useState(0)
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -27,21 +26,16 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const user = await dispatch(loginReducer(form));
-    if (user.payload.user.id !== undefined && user.payload.user.id !== null) {
-      setId(user.payload.user.id)
+    const result = await dispatch(loginReducer(form));
+    if (result.meta.requestStatus === 'fulfilled') {
+      const userId = result.payload.user?.id;
+      if (userId) {
+        navigate(`/user/home/${userId}`); 
+      }
+    } else {
+      console.error('Login failed:', result.payload);
     }
   }; 
-
-  useEffect(() => {
-    setTimeout(() => {
-      console.log("Delayed for 1 second.");
-      if (status === 'succeeded') {
-        setLoading(true)
-        navigate(`/user/home/${id}`); 
-      }
-    }, 2000);
-  }, [status, navigate, id]);
 
   return (
     <>

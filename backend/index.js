@@ -12,6 +12,15 @@ import { sendVerificationEmail } from './auth/sendEmail.js';
 import { findUserByEmail } from './auth/findUserByEmail.js';
 import { markUserAsVerified } from './auth/VerifyUser.js';
 import { userLogin } from './auth/userLogin.js';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
 initialize(passport);
 
@@ -96,7 +105,12 @@ app.post('/auth/login', async (req, res, next) => {
           const conn = await pool.getConnection();
           await conn.query(userLogin, [user.id]);
           conn.release();
-          return res.status(200).json({ message: 'Login successful', user });
+          const token = jwt.sign(
+            { id: user.id },
+            process.env.JWT_SECRET,
+            { expiresIn: '1h' }
+          );
+          return res.status(200).json({ message: 'Login successful', user, token });
       });
   })(req, res, next);
 });

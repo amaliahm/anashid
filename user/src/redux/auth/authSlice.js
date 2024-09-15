@@ -29,6 +29,7 @@ export const loginReducer = createAsyncThunk(
         loginData,
         { withCredentials: true }
       );
+      localStorage.setItem('token', response.data.token);
       return response.data;
     } catch (error) {
       if (error.response && error.response.data) {
@@ -42,12 +43,22 @@ export const loginReducer = createAsyncThunk(
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    user: null,
+    user: localStorage.getItem('token') 
+      ? JSON.parse(localStorage.getItem('user'))
+      : null,
+    token: localStorage.getItem('token') || null,
     status: 'idle',
     errorMessage: null,
     successMessage: null,
   },
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      state.user = null;
+      state.token = null;
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(signupReducer.pending, (state) => {
@@ -74,7 +85,9 @@ const authSlice = createSlice({
       .addCase(loginReducer.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.successMessage = action.payload.message;
-        state.user = action.payload;
+        state.user = action.payload.user;
+        state.token = action.payload.token;
+        localStorage.setItem('user', JSON.stringify(action.payload.user));
       })
       .addCase(loginReducer.rejected, (state, action) => {
         state.status = 'failed';
