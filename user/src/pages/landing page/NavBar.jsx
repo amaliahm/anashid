@@ -44,29 +44,28 @@ const NavBarComponent = ({element = 0}) => {
       <div className="flex flex-row justify-between px-8 ">
         <div className="flex justify-between items-center font-semibold text-lg font-medium gap-8 div-to-be-scrolled scrolled w-full">
           <div className="flex gap-10">
-          <Link
-            to='home'
-            data-text="Home"
-            spy={true}
-            smooth={true}
-            duration={1000}
-            className={`hover:text-[var(--mainColor)] transition-all cursor-pointer no-underline element-link ${link === 0 ? 'text-[var(--mainColor)]' : 'text-[var(--semanticThirdColor)]'}`}
-            onClick={() => setLink(0)}
-          >
-            Home
-          </Link>
-          <Link
-            to='about-us'
-            data-text='AboutUs'
-            spy={true}
-            smooth={true}
-            duration={1000}
-            className={`hover:text-[var(--mainColor)] transition-all cursor-pointer no-underline element-link ${link === 1 ? 'text-[var(--mainColor)]' : 'text-[var(--semanticThirdColor)]'}`}
-            onClick={() => setLink(1)}
-          >
-            AboutUs
-          </Link>
-
+            <Link
+              to='home'
+              data-text="Home"
+              spy={true}
+              smooth={true}
+              duration={1000}
+              className={`hover:text-[var(--mainColor)] transition-all cursor-pointer no-underline element-link ${link === 0 ? 'text-[var(--mainColor)]' : 'text-[var(--semanticThirdColor)]'}`}
+              onClick={() => setLink(0)}
+            >
+              Home
+            </Link>
+            <Link
+              to='about-us'
+              data-text='AboutUs'
+              spy={true}
+              smooth={true}
+              duration={1000}
+              className={`hover:text-[var(--mainColor)] transition-all cursor-pointer no-underline element-link ${link === 1 ? 'text-[var(--mainColor)]' : 'text-[var(--semanticThirdColor)]'}`}
+              onClick={() => setLink(1)}
+            >
+              AboutUs
+            </Link>
           </div>
           <Link
             spy={true}

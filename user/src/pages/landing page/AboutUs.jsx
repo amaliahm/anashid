@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom"
 
 const AboutUs = () => {
   const navigate = useNavigate()
-
     return (
         <>
           <div className="m-6 lg:m-16 px-4 border-[1px] border-white rounded-2xl bg-gradient-to-bl from-[#0F1421] to-[#4B2F4D] relative overflow-hidden">

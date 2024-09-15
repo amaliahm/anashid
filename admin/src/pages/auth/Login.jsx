@@ -1,30 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginRequest, loginSuccess, loginFailure } from '../../redux/auth/authSlice';
 import { bg } from '../../assets/images';
+import { useNavigate } from 'react-router-dom';
+import { loginAdmin } from '../../redux/auth/authSlice';
 
 const Login = () => {
+  const navigate = useNavigate()
   const dispatch = useDispatch();
-  const { loading, error } = useSelector((state) => state.auth);
+  const { user, isAuthenticated, loading, error } = useSelector((state) => state.auth);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    dispatch(loginRequest());
-
-    setTimeout(() => {
-      if (email === 'admin' && password === 'password') {
-        dispatch(loginSuccess({ username: email }));
-      } else {
-        dispatch(loginFailure('Invalid username or password'));
-      }
-    }, 1000);
+    const result = await dispatch(loginAdmin({email, password}));
   };
 
-  return (
+  useEffect(() => {
+    if (isAuthenticated && user?.id) {
+      navigate(`/admin/home/${user.id}`);
+    }
+  }, [isAuthenticated, navigate]);
 
+  return (
     <div 
       className="bg-cover bg-center h-screen" 
       style={{ backgroundImage: `url('${bg}')`}}
@@ -66,7 +65,10 @@ const Login = () => {
               >
                 {loading ? 'logging in...' : 'login'}
               </button>
-              <div className="mt-12 mb-4 flex justify-center items-center capitalize font-semibold gap-4">
+              <div 
+                className="mt-12 mb-4 flex justify-center items-center capitalize font-semibold gap-4 hover:cursor-pointer"
+                onClick={() => navigate('/forget-password')}
+              >
                 Forgot password ?
               </div>
             </div>

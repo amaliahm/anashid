@@ -27,7 +27,7 @@ initialize(passport);
 var app = express();
 
 app.use(cors({
-  origin: 'http://localhost:5173',  
+  origin: 'http://localhost:5173', // to update 
   methods: 'GET,POST,PUT,DELETE',  
   credentials: true
 }));
@@ -97,6 +97,35 @@ app.post('/auth/login', async (req, res, next) => {
       }
       if (!user) {
           return res.status(401).json({ message: info.message });
+      }
+      req.logIn(user, async (err) => {
+          if (err) {
+              return res.status(500).json({ message: 'Please verify your information and try again' });
+          }
+          const conn = await pool.getConnection();
+          await conn.query(userLogin, [user.id]);
+          conn.release();
+          const token = jwt.sign(
+            { id: user.id },
+            process.env.JWT_SECRET,
+            { expiresIn: '1h' }
+          );
+          return res.status(200).json({ message: 'Login successful', user, token });
+      });
+  })(req, res, next);
+});
+
+
+app.post('/', async (req, res, next) => {
+  passport.authenticate('local', async (err, user, info) => {
+      if (err) {
+          return res.status(500).json({ message: 'Please verify your information and try again' });
+      }
+      if (!user) {
+          return res.status(401).json({ message: info.message });
+      }
+      if (user.account_type !== 'admin') {
+        return res.status(403).json({ message: 'Access denied. Admins only' });
       }
       req.logIn(user, async (err) => {
           if (err) {

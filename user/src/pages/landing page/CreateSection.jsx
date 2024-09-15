@@ -2,9 +2,9 @@ import { browseCircle, playlistCreate, heartCreate } from "../../assets/images"
 import Header from "../../Components/Header"
 
 const CreateSection = () => {
-    return (
-        <>
-          <div className="lg:pt-10 overflow-hidden p-0">  
+  return (
+    <>
+      <div className="lg:pt-10 overflow-hidden p-0">  
         <div className="relative">
           <img src={browseCircle} alt="hero" className="hidden lg:block absolute bottom-0 right-20 w-1/12 h-auto"/>
           <img src={heartCreate} alt="hero" className="hidden lg:block absolute top-4 right-36 w-1/12 h-auto"/>
@@ -17,8 +17,8 @@ const CreateSection = () => {
           </div>
         </div>
       </div>
-        </>
-    )
+    </>
+  )
 }
 
 export default CreateSection

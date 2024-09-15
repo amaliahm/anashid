@@ -50,7 +50,8 @@ const Genre = () => {
                           className={'hover:cursor-pointer absolute bg-cover bg-center rounded-full w-12 h-12 md:w-16 md:h-16 lg:w-24 lg:h-24 -bottom-6 right-0 lg:-bottom-14 lg:right-4'} 
                           style={{ backgroundImage: `url(${playIcon})` }}
                           onClick={() => navigate('/auth/signup')}
-                        ></div>
+                        >
+                        </div>
                     </div>
                 ))}
             </div>

@@ -75,7 +75,6 @@ const authSlice = createSlice({
         state.status = 'failed';
         state.errorMessage = action.payload;
       });
-
     builder
       .addCase(loginReducer.pending, (state) => {
         state.status = 'loading';

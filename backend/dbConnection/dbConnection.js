@@ -21,7 +21,6 @@ const pool = mariadb.createPool({
 const setupDatabase = async () => {
   let conn;
   try {
-    console.log('########"')
     conn = await pool.getConnection();
     console.log('connected');
   } catch (err) {
