@@ -13,9 +13,18 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path='/' element={<Login />} />
-          <Route path='/forget-password' element={<ForgetPassword />} />
-          <Route path='/auth/reset-password/:token' element={<ChangePassword />} />
+          <Route 
+            path='/' 
+            element={<Login />} 
+          />
+          <Route 
+            path='/forget-password' 
+            element={<ForgetPassword />} 
+          />
+          <Route 
+            path='/auth/reset-password/:token' 
+            element={<ChangePassword />} 
+          />
           <Route 
             path='/admin/home/:id' 
             element={

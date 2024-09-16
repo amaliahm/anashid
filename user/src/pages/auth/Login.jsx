@@ -78,10 +78,17 @@ const Login = () => {
               </div>
               <button 
                 type="submit" 
-                className="capitalize border-[1px] border-[var(--mainColor)] bg-[rgba(255,255,255,0.3)] font-medium px-16 py-2 my-6 mt-12 rounded-2xl hover:cursor-pointer"
+                className={`capitalize border-[1px] border-[var(--mainColor)] bg-[rgba(255,255,255,0.3)] font-medium px-16 py-2 my-6 mt-12 rounded-2xl ${form.email.length === 0 || form.password.length < 8 ? 'opacity-50 cursor-not-allowed' : 'hover:cursor-pointer'}`}
+                disabled={form.email.length === 0 || form.password.length < 8}
               >
                 {status === 'loading' || loading ? 'loading...' : 'login'}
               </button>
+              <p 
+                className="text-[var(--mainColor)] hover:cursor-pointer capitalize font-semibold"
+                onClick={() => navigate('/forget-password')}
+              >
+                forget password?
+              </p>
               <div className="flex justify-center lg:justify-between items-center flex-nowrap text-[#4D4D4D] capitalize font-lg font-semibold m-2 lg:px-6 overflow-hidden">
                 <img 
                   src={line} 

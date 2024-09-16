@@ -5,6 +5,8 @@ import Login from './pages/auth/Login';
 import Home from './pages/home/home';
 import VerifyEmail from './pages/auth/VerifyEmail';
 import PrivateRoute from './pages/auth/PrivateRoute';
+import ForgetPassword from './pages/auth/ForgetPassword';
+import ChangePassword from './pages/auth/ChangePassword';
 
 function App() {
 
@@ -27,6 +29,14 @@ function App() {
           <Route 
             path="/auth/verify-email/:email" 
             element={<VerifyEmail />} 
+          />
+          <Route 
+            path='/forget-password' 
+            element={<ForgetPassword />} 
+          /> 
+          <Route 
+            path='/auth/reset-password/:token' 
+            element={<ChangePassword />} 
           />
           <Route 
             path='/user/home/:id' 
