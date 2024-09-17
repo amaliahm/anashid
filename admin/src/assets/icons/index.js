@@ -12,7 +12,11 @@ import delete_clicked from './delete_clicked.svg'
 import nasheed_clicked from './nasheed_clicked.svg'
 import user_clicked from './user_clicked.svg'
 
+import logout from './logout.svg'
+import setting from './setting.svg'
+
 export {
     home_icon, artist_icon, category_icon, delete_icon, nasheed_icon, user_icon, 
     home_clicked, artist_clicked, category_clicked, delete_clicked, nasheed_clicked, user_clicked, 
+    logout, setting, 
 }

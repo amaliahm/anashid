@@ -1,5 +1,6 @@
 import React from "react";
 import SideBarComponent from "../../components/SideBar";
+import NavBarComponent from "../../components/NavBar";
 
 const users = [
   {
@@ -19,7 +20,8 @@ const Home = () => {
   return (
     <div className="flex">
       <SideBarComponent ele={0} />
-      <div className="ml-24 flex-1">
+      <div className="flex-1">
+        <NavBarComponent />
         <div className="p-8">
 
     <div className="p-8 bg-green-900">
