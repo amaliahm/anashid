@@ -42,6 +42,33 @@ const sidebar_element = [
     },
 ]
 
+const head_users = [
+    {
+        name: 'username',
+    },
+    {
+        name: 'photo',
+    },
+    {
+        name: 'created at',
+    },
+    {
+        name: 'last login',
+    },
+    {
+        name: 'email',
+    },
+    {
+        name: 'listened anasheed',
+    },
+    {
+        name: 'playlist',
+    },
+    {
+        name: '',
+    },
+]
+
 export {
-    sidebar_element
+    sidebar_element, head_users, 
 }

@@ -1,10 +1,15 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Login from "./pages/auth/Login"
 import PrivateRoute from './pages/auth/PrivateRoute';
-import Home from './pages/home/Home';
 import useAuthInit from './pages/auth/AuthInit';
 import ForgetPassword from './pages/auth/ForgetPassword';
 import ChangePassword from './pages/auth/ChangePassword';
+import Home from './pages/home/Home';
+import Users from './pages/home/Users';
+import Anasheed from './pages/home/Anasheed';
+import Artists from './pages/home/Artists';
+import Categories from './pages/home/Categories';
+import Trash from './pages/home/Trash';
 
 function App() {
   useAuthInit()
@@ -30,6 +35,46 @@ function App() {
             element={
               <PrivateRoute>
                 <Home />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path='/admin/users/:id' 
+            element={
+              <PrivateRoute>
+                <Users />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path='/admin/anasheed/:id' 
+            element={
+              <PrivateRoute>
+                <Anasheed />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path='/admin/artists/:id' 
+            element={
+              <PrivateRoute>
+                <Artists />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path='/admin/categories/:id' 
+            element={
+              <PrivateRoute>
+                <Categories />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path='/admin/trash/:id' 
+            element={
+              <PrivateRoute>
+                <Trash />
               </PrivateRoute>
             } 
           />
