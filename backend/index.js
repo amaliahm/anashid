@@ -18,7 +18,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { resetPasswordEmail } from './auth/resetPasswordEmail.js';
 import { changePassword } from './auth/changePassword.js';
-import getUsers from './getData/getUsers.js';
+import updateUserAccountType from './operation/updateUserAccountType.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -168,8 +168,7 @@ app.post('/auth/reset-password/:token', async (req, res) => {
     if (!user) {
       return res.status(400).json({ message: 'User not found or invalid email' });
     }
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(newPassword, salt);
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
     await changePassword(hashedPassword, user.id)
     return res.status(200).json({ message: 'Password updated successfully' });
   } catch (error) {
@@ -181,12 +180,18 @@ app.get('/admin/users/:id', async (req, res) => {
   try {
     const conn = await pool.getConnection();
     const users = await conn.query('SELECT * FROM user;');
-    console.log(users)
     conn.release();
-    res.status(200).json(users); // Send the specific user data
+    res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch user' });
   }
+});
+
+app.post('/admin/users/:id', async (req, res) => {
+  const { id } = req.params;
+  const { password, userId, account_type } = req.body;
+  const result = await updateUserAccountType(password, userId, account_type, id);
+  res.json(result);
 });
 
 app.listen(3000, async function () {

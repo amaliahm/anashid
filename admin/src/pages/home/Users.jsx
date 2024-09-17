@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect, useState} from "react";
 import SideBarComponent from "../../components/SideBar";
 import NavBarComponent from "../../components/NavBar";
 import { head_users } from "../../constant";
@@ -7,17 +7,43 @@ import { fetchUsers } from "../../redux/actions/usersActions";
 import Loading from "../../components/Loading";
 import { useParams } from "react-router-dom";
 import { format } from 'date-fns';
+import AdminModal from "../../components/AdminModal";
+import axios from "axios";
 
-
-const _users = [
-];
 
 const Users = () => {
   const { id } = useParams()
+  const [modal, setModal] = useState(false)
+  const [selectedUser, setSelectedUser] = useState(null);
   const dispatch = useDispatch()
   const userState = useSelector((state) => state.users || {});
   const { loading, users, error } = userState;
-  console.log(users)
+  
+  const openModal = (user) => {
+    setSelectedUser(user);
+    setModal(true);
+  };
+
+  const handleSubmit = async (password) => {
+    try {
+      const response = await axios.post(
+        `http://localhost:3000/admin/users/${id}`, 
+        { 
+          password,
+          userId: selectedUser.id, 
+          account_type: selectedUser.account_type, 
+          adminId: id 
+      });
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
+  const closeModal = () => {
+    setSelectedUser('');
+    dispatch(fetchUsers(id))
+    setModal(false);
+  };
 
   useEffect(() => {
     dispatch(fetchUsers(id))
@@ -88,11 +114,15 @@ const Users = () => {
                           </td>
                           <td className="px-8 py-4">
                           <span
-                            className={`px-5 py-3 rounded-full text-white text-base capitalize hover:cursor-pointer ${
+                            className={`px-5 py-3 rounded-full text-white text-base capitalize ${
                               user.account_type === "admin"
                                 ? "bg-[var(--greenColor)]"
                                 : "bg-[var(--yellowColor)]"
-                            }`}
+                            } ${
+                              user.id == id ? 'opacity-50 cursor-not-allowed' : 'hover:cursor-pointer'
+                            }
+                            `}
+                            onClick={() => openModal(user)}
                           >
                             {user.account_type}
                           </span>
@@ -101,6 +131,7 @@ const Users = () => {
                     ))}
                   </tbody>
                 </table>}
+                {modal && <AdminModal isOpen={modal} onClose={closeModal} user={selectedUser} adminId={id}/>}
               </div>
             </div>
           </div>
