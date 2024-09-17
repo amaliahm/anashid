@@ -18,6 +18,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { resetPasswordEmail } from './auth/resetPasswordEmail.js';
 import { changePassword } from './auth/changePassword.js';
+import getUsers from './getData/getUsers.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -116,7 +117,6 @@ app.post('/auth/login', async (req, res, next) => {
   })(req, res, next);
 });
 
-
 app.post('/', async (req, res, next) => {
   passport.authenticate('local', async (err, user, info) => {
       if (err) {
@@ -144,8 +144,6 @@ app.post('/', async (req, res, next) => {
       });
   })(req, res, next);
 });
-
-
 
 app.post('/forget-password', async (req, res) => {
   const { email } = req.body;
@@ -176,6 +174,18 @@ app.post('/auth/reset-password/:token', async (req, res) => {
     return res.status(200).json({ message: 'Password updated successfully' });
   } catch (error) {
     return res.status(500).json({ message: 'Error, please try again!' });
+  }
+});
+
+app.get('/admin/users/:id', async (req, res) => {
+  try {
+    const conn = await pool.getConnection();
+    const users = await conn.query('SELECT * FROM user;');
+    console.log(users)
+    conn.release();
+    res.status(200).json(users); // Send the specific user data
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch user' });
   }
 });
 

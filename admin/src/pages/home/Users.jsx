@@ -1,14 +1,36 @@
-import React from "react";
+import React, {useEffect} from "react";
 import SideBarComponent from "../../components/SideBar";
 import NavBarComponent from "../../components/NavBar";
 import { head_users } from "../../constant";
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchUsers } from "../../redux/actions/usersActions";
+import Loading from "../../components/Loading";
+import { useParams } from "react-router-dom";
+import { format } from 'date-fns';
 
 
 const _users = [
-  ];
-
+];
 
 const Users = () => {
+  const { id } = useParams()
+  const dispatch = useDispatch()
+  const userState = useSelector((state) => state.users || {});
+  const { loading, users, error } = userState;
+  console.log(users)
+
+  useEffect(() => {
+    dispatch(fetchUsers(id))
+  }, [dispatch])
+
+  if (loading) {
+    return <Loading />
+  }
+
+  if (error) {
+    return <Loading title="No data available"/>
+  }
+
     return (
         <>
           <div className="flex">
@@ -22,10 +44,10 @@ const Users = () => {
                   </div>
                   <div className="overflow-scroll w-11/12 lg:w-full h-[470px]">
                     {
-                      _users.length === 0 ? 
-                      <p className="capitalize text-3xl text-center">
-                        there's no data
-                      </p> : 
+                      loading ? 
+                      <Loading /> : 
+                      error || !users || users.length === 0 ? 
+                      <Loading title="No data available"/> : 
                       <table className="text-sm text-white text-center font-semibold">
                       <thead>
                         <tr className="border-b-2">
@@ -40,7 +62,7 @@ const Users = () => {
                         </tr>
                     </thead>
                     <tbody>
-                      {_users.map((user, index) => (
+                      {users.map((user, index) => (
                         <tr key={index} className="border-b border-gray-700">
                           <td className="px-8 py-4">
                             {user.username} 
@@ -50,29 +72,29 @@ const Users = () => {
                             </div>
                           </td>
                           <td className="px-8 py-4">
-                            {user.createdAt}
+                            {format(new Date(user.created_at), 'yyyy-MM-dd')}
                           </td>
                           <td className="px-8 py-4">
-                            {user.lastLogin}
+                            {format(new Date(user.last_login), 'yyyy-MM-dd')}
                           </td>
                           <td className="px-8 py-4">
                             {user.email}
                           </td>
                           <td className="px-8 py-4">
-                            {user.listenedAnasheed}
+                            {user.listenedAnasheed || '00'}
                           </td>
                           <td className="px-8 py-4">
-                            {user.playlist}
+                            {user.playlist || '00'}
                           </td>
                           <td className="px-8 py-4">
                           <span
-                            className={`px-5 py-3 rounded-full text-white text-base capitalize ${
-                              user.role === "admin"
+                            className={`px-5 py-3 rounded-full text-white text-base capitalize hover:cursor-pointer ${
+                              user.account_type === "admin"
                                 ? "bg-[var(--greenColor)]"
                                 : "bg-[var(--yellowColor)]"
                             }`}
                           >
-                            {user.role}
+                            {user.account_type}
                           </span>
                         </td>
                       </tr>

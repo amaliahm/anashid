@@ -7,7 +7,6 @@ import { useParams } from "react-router-dom";
 const SideBarComponent = ({ele}) => {
   const navigate = useNavigate()
   const params = useParams()
-  console.log(params.id)
 
   function handleElement (i, url) {
     navigate(`${url}/${params.id}`)
@@ -33,7 +32,7 @@ const SideBarComponent = ({ele}) => {
                   alt={element.name}
                 />
               </div>
-              <style jsx>
+              <style jsx="true">
                 {`
                   .sidebar-icon {
                     transition: background-color 0.3s;
