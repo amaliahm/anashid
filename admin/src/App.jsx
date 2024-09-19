@@ -10,6 +10,7 @@ import Anasheed from './pages/home/Anasheed';
 import Artists from './pages/home/Artists';
 import Categories from './pages/home/Categories';
 import Trash from './pages/home/Trash';
+import { Navigate } from 'react-router-dom';
 
 function App() {
   useAuthInit()
@@ -20,10 +21,14 @@ function App() {
         <Routes>
           <Route 
             path='/' 
+            element={<Navigate to='/auth/login' />} 
+          />
+          <Route 
+            path='/auth/login' 
             element={<Login />} 
           />
           <Route 
-            path='/forget-password' 
+            path='/auth/forget-password' 
             element={<ForgetPassword />} 
           />
           <Route 

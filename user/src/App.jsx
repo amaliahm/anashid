@@ -31,7 +31,7 @@ function App() {
             element={<VerifyEmail />} 
           />
           <Route 
-            path='/forget-password' 
+            path='/auth/forget-password' 
             element={<ForgetPassword />} 
           /> 
           <Route 

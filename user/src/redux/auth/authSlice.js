@@ -4,6 +4,7 @@ import axios from 'axios';
 export const signupReducer = createAsyncThunk(
   'auth/signup',
   async (userData, { rejectWithValue }) => {
+    console.log('heyy')
     try {
       const response = await axios.post(
         'http://localhost:3000/auth/signup',

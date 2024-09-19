@@ -76,7 +76,7 @@ const ChangePassword = () => {
               </button>
               <div 
                 className="mt-12 mb-4 flex justify-center items-center capitalize font-semibold gap-4 hover:cursor-pointer"
-                onClick={() => navigate('/')}
+                onClick={() => navigate('//auth/login')}
               >
                 login ?
               </div>

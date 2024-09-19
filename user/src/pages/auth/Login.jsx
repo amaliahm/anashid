@@ -85,7 +85,7 @@ const Login = () => {
               </button>
               <p 
                 className="text-[var(--mainColor)] hover:cursor-pointer capitalize font-semibold"
-                onClick={() => navigate('/forget-password')}
+                onClick={() => navigate('/auth/forget-password')}
               >
                 forget password?
               </p>

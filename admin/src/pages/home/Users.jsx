@@ -49,14 +49,6 @@ const Users = () => {
     dispatch(fetchUsers(id))
   }, [dispatch])
 
-  if (loading) {
-    return <Loading />
-  }
-
-  if (error) {
-    return <Loading title="No data available"/>
-  }
-
     return (
         <>
           <div className="flex">

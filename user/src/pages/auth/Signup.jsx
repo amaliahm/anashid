@@ -29,8 +29,9 @@ const Signup = () => {
     e.preventDefault();
     if (form.password === form.confirmPassword) {
       dispatch(signupReducer({
-        ...form,
-        'account_name': 'email'
+        username: form.username,
+        email: form.email,
+        password: form.password,
       }));
     } else {
       alert('Passwords do not match!');

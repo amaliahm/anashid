@@ -57,7 +57,7 @@ const Login = () => {
                   placeholder="password"
                   required
                 />
-                {!error && <p className="text-red-500 text-xs italic">Error, please try again</p>}
+                {error && <p className="text-red-500 text-xs italic">Error, please try again</p>}
               </div>
               <button
                 type="submit"
@@ -68,7 +68,7 @@ const Login = () => {
               </button>
               <div 
                 className="mt-12 mb-4 flex justify-center items-center capitalize font-semibold gap-4 hover:cursor-pointer"
-                onClick={() => navigate('/forget-password')}
+                onClick={() => navigate('/auth/forget-password')}
               >
                 Forgot password ?
               </div>

@@ -1,8 +1,6 @@
 import { artist1, artist2, artist5, artistArrow } from "../../assets/images"
-import { useNavigate } from "react-router-dom"
 
 const ArtistComponent = () => {
-    const navigate = useNavigate()
     return (
         <>
           <div className="bg-[var(--thirdColor)] z-18 p-2 mr-3 mt-8 lg:mr-5 rounded-2xl relative">
