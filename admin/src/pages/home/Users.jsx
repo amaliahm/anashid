@@ -29,10 +29,10 @@ const Users = () => {
       const response = await axios.post(
         `http://localhost:3000/admin/users/${id}`, 
         { 
+          adminId: id ,
           password,
           userId: selectedUser.id, 
           account_type: selectedUser.account_type, 
-          adminId: id 
       });
     } catch (error) {
       console.log(error)
@@ -49,6 +49,7 @@ const Users = () => {
     dispatch(fetchUsers(id))
   }, [dispatch])
 
+  console.log(id)
     return (
         <>
           <div className="flex">

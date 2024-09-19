@@ -16,6 +16,7 @@ const AdminModal = ({ isOpen, onClose, user, adminId }) => {
                 password,
                 userId: user.id,
                 account_type: user.account_type,
+                adminId: adminId,
             }
         );
         setIsLoading(false);

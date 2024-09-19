@@ -1,31 +1,3 @@
-// app.get('/admin/users/:id', async (req, res) => {
-//   try {
-//     const conn = await pool.getConnection();
-//     const users = await conn.query('SELECT * FROM user;');
-//     conn.release();
-//     res.status(200).json(users);
-//   } catch (error) {
-//     res.status(500).json({ error: 'Failed to fetch user' });
-//   }
-// });
-
-// app.post('/admin/users/:id', async (req, res) => {
-//   const { id } = req.params;
-//   const { password, userId, account_type } = req.body;
-//   const result = await updateUserAccountType(password, userId, account_type, id);
-//   res.json(result);
-// });
-
-// app.listen(3000, async function () {
-//   console.log('Example app listening on port 3000!');
-//   console.log('start');
-//   await setupDatabase()
-//   await createTables()
-//   console.log('end');
-// });
-
-
-
 import express from "express";
 import passport from "passport";
 import cors from "cors";
