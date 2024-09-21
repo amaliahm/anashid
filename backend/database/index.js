@@ -5,7 +5,11 @@ import mariadb from "mariadb";
 import { DATABASE } from "../configs/config.js";
 
 // CREATE TABLES
-import { userTable } from "./tables.js";
+import { 
+  userTable, 
+  anasheedTable, 
+  fileAttachmentTable,
+} from "./tables.js";
 
 export default class DataBaseRepo {
   static connection;
@@ -30,6 +34,8 @@ export default class DataBaseRepo {
 
   static async createTables() {
     await this.connection.query(userTable);
+    await this.connection.query(anasheedTable);
+    await this.connection.query(fileAttachmentTable);
   }
 
   static async queryDatabase(query, options) {
