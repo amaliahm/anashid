@@ -6,8 +6,8 @@ const validateRequest = (schema, source = "body")  =>
       });
       if (error) {
         const errorMessage = error.details
-          .map(detail => detail.message)
-          .join(', ');
+        .map(detail => detail.message)
+        .join(', ');
         return res.status(400).json({ error: errorMessage });
       }
       req[source] = value;

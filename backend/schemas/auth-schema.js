@@ -17,6 +17,9 @@ export default {
     email: joi.string().email().required()
   }),
   resetPassword: joi.object({
-    newPassword: joi.string().min(6).required()
+    newPassword: joi.string().min(8).required()
+  }),
+  logout: joi.object({
+    id: joi.number().integer().required(),
   }),
 };

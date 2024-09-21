@@ -97,4 +97,14 @@ export default class AuthController {
     await AuthRepo.changePassword(hashedPassword, token)
     return res.status(200).json({ message: 'Password reset successful' });
   }
+
+  static async logout(req, res) {
+    const { id } = req.params
+    const user = await AuthRepo.findUserById(id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    await AuthRepo.userLogout(id)
+    return res.status(200).json({ message: 'Logout successful' });
+  }
 }

@@ -23,22 +23,7 @@ const Users = () => {
     setSelectedUser(user);
     setModal(true);
   };
-
-  const handleSubmit = async (password) => {
-    try {
-      const response = await axios.post(
-        `http://localhost:3000/admin/users/${id}`, 
-        { 
-          adminId: id ,
-          password,
-          userId: selectedUser.id, 
-          account_type: selectedUser.account_type, 
-      });
-    } catch (error) {
-      console.log(error)
-    }
-  };
-
+  
   const closeModal = () => {
     setSelectedUser('');
     dispatch(fetchUsers(id))

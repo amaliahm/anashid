@@ -1,5 +1,13 @@
 import DataBaseRepo from "../database/index.js";
-import { updateUserPassword, userLogin, _findUserByEmail, register_with_email, _verifyUserEmail } from '../database/queries/auth-queries.js'
+import { 
+  updateUserPassword, 
+  userLogin,
+   _findUserByEmail, 
+   register_with_email, 
+   _verifyUserEmail, 
+   _findUserById,
+   _userLogout
+} from '../database/queries/auth-queries.js'
 
 export default class AuthRepo {
     static async logUser (id) {
@@ -22,4 +30,14 @@ export default class AuthRepo {
     static async changePassword(password, email) {
       await DataBaseRepo.queryDatabase(updateUserPassword, [password, email])
   }
+
+  static async findUserById(id) {
+    const rows = await DataBaseRepo.queryDatabase(_findUserById, [id])
+    return (rows === null || rows.length > 0) ? rows : null
+  }
+
+  static async userLogout(id) {
+    await DataBaseRepo.queryDatabase(_userLogout, [id])
+  }
+
 }

@@ -28,10 +28,19 @@ const authSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    logout: (state) => {
+    logoutRequest: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    logoutSuccess: (state) => {
       state.isAuthenticated = false;
       state.user = null;
+      state.loading = false;
       localStorage.removeItem('admin');
+    },
+    logoutFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
     },
     loadUserFromLocalStorage: (state) => {
       const storedUser = localStorage.getItem('admin');
@@ -43,7 +52,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { loginRequest, loginSuccess, loginFailure, logout, loadUserFromLocalStorage } = authSlice.actions;
+export const { loginRequest, loginSuccess, loginFailure, logoutRequest, logoutSuccess, logoutFailure, loadUserFromLocalStorage } = authSlice.actions;
 
 export const loginAdmin = (loginData) => async (dispatch) => {
   try {
@@ -62,5 +71,18 @@ export const loginAdmin = (loginData) => async (dispatch) => {
     dispatch(loginFailure(error.response ? error.response.data.message : 'Network error'));
   }
 };
+
+export const logoutAdmin = (id) => async (dispatch) => {
+  try {
+    dispatch(logoutRequest());
+    await axios.get(
+      `http://localhost:3000/auth/logout/${id}`, 
+      { withCredentials: true }
+    );
+    dispatch(logoutSuccess());
+  } catch (error) {
+    dispatch(logoutFailure(error.response ? error.response.data.message : 'Network error during logout'));
+  }
+}
 
 export default authSlice.reducer;

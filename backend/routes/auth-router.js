@@ -42,5 +42,11 @@ router.post(
   AsyncHandler(AuthController.resetPassword)
 );
 
+router.get(
+  "/logout/:id",
+  validator(authSchema.logout, 'params'),
+  AsyncHandler(AuthController.logout)
+);
+
 
 export default router;

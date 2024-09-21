@@ -21,9 +21,8 @@ const SideBarComponent = ({ele}) => {
           style={{ backgroundImage: `url('${sidebar}')`}}
         >
           {sidebar_element.map((element, index) => (
-            <>
+            <div key={index}>
               <div 
-                key={index}
                 className={`sidebar-icon h-12 w-12 rounded-2xl flex justify-center items-center hover:cursor-pointer ease-in-out ${index === ele ? 'bg-white' : ''}`}
                 onClick={() => handleElement(index, element.to)}
               >
@@ -39,7 +38,7 @@ const SideBarComponent = ({ele}) => {
                   }
                 `}
               </style>
-            </>
+            </div>
           ))}
         </div>
       </div>

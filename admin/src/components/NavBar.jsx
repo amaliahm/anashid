@@ -1,6 +1,14 @@
+import React, { useState } from 'react'
 import { logout, setting } from "../assets/icons"
+import LogoutModal from './LogoutModal'
 
-const NavBarComponent = () => {
+const NavBarComponent = ({ id }) => {
+  const [ modal, setModal ] = useState(false)
+
+  const closeModal = () => {
+    setModal(false);
+  };
+
   return (
     <div className="flex justify-end items-center py-2 pr-4 pl-24 w-screen border-b-[1px]">
       <div className="flex items-center space-x-2 flex-wrap">
@@ -8,7 +16,8 @@ const NavBarComponent = () => {
           <img 
             src={logout}
             alt="logout"
-            className="p-2"
+            className="p-2 hover:cursor-pointer"
+            onClick={() => setModal(true)}
           />
         </div>
         <div className="bg-white p-2 rounded-xl flex justify-center items-center">
@@ -25,6 +34,7 @@ const NavBarComponent = () => {
           </span>
         </div>
       </div>
+      {modal && <LogoutModal isOpen={modal} onClose={closeModal} id={id}/>}
     </div>
   )
 }
