@@ -58,7 +58,7 @@ export const loginAdmin = (loginData) => async (dispatch) => {
   try {
     dispatch(loginRequest());
     const response = await axios.post(
-      'http://localhost:3000/',
+      'http://localhost:3000/auth/login',
       loginData,
       { withCredentials: true, }
     );

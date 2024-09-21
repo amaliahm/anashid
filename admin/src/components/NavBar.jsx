@@ -1,13 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { logout, setting } from "../assets/icons"
 import LogoutModal from './LogoutModal'
 
 const NavBarComponent = ({ id }) => {
   const [ modal, setModal ] = useState(false)
+  const [ username, setUsername ] = useState('')
 
   const closeModal = () => {
     setModal(false);
   };
+
+  useEffect(() => {
+    const admin = JSON.parse(localStorage.getItem('admin'))
+    if(admin) {
+      setUsername(admin.username)
+    }
+  }, [])
 
   return (
     <div className="flex justify-end items-center py-2 pr-4 pl-24 w-screen border-b-[1px]">
@@ -30,7 +38,7 @@ const NavBarComponent = ({ id }) => {
         <div className="flex items-center space-x-4 bg-white p-2 rounded-xl">
           <div className="h-12 w-12 rounded-full bg-[var(--grayColor)]"></div>
           <span className="text-[var(--textColor)]">
-            username
+            {username}
           </span>
         </div>
       </div>
