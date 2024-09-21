@@ -47,3 +47,11 @@ CREATE TABLE IF NOT EXISTS artist (
     id_deleted TINYINT(1) DEFAULT 0
 );
 `;
+
+export const categoryTable = `
+CREATE TABLE IF NOT EXISTS category (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL,
+    id_deleted TINYINT(1) DEFAULT 0
+);
+`;

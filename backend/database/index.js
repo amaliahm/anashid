@@ -9,7 +9,8 @@ import {
   userTable, 
   anasheedTable, 
   fileAttachmentTable,
-  artistTable
+  artistTable,
+  categoryTable
 } from "./tables.js";
 
 export default class DataBaseRepo {
@@ -38,6 +39,7 @@ export default class DataBaseRepo {
     await this.connection.query(anasheedTable);
     await this.connection.query(fileAttachmentTable);
     await this.connection.query(artistTable);
+    await this.connection.query(categoryTable);
   }
 
   static async queryDatabase(query, options) {

@@ -1,4 +1,4 @@
-import DataBaseRepo from './database-repo.js'
+import DataBaseRepo from '../database/index.js'
 import { 
     _findArtistById, 
     _deleteArtist, 
