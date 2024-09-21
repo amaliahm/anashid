@@ -4,7 +4,7 @@ import {
     _deleteAnasheed, 
     _getAllAnasheed, 
     _updateAnasheed
-} from "../database/anasheed-queries.js";
+} from "../database/queries/anasheed-queries.js";
 
 export default class AnasheedRepo {
 

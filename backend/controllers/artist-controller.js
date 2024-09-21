@@ -1,4 +1,4 @@
-import ArtistRepo from "../repos/artist-repo";
+import ArtistRepo from "../repos/artist-repo.js";
 
 export default class ArtistController {
 

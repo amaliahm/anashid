@@ -1,8 +1,8 @@
-import CategoryRepo from "../repos/category-repo";
+import CategoryRepo from "../repos/category-repo.js";
 
 export default class CategoryController {
 
-    static async getAllCategorys (req, res) {
+    static async getAllCategories (req, res) {
         const users = await CategoryRepo.getAllCategory();
         if (!users) {
             return res.status(404).json({ error: 'Failed to fetch category' });

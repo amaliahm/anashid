@@ -14,13 +14,13 @@ const router = Router();
 
 router.get(
     "/",
-    AsyncHandler(ArtistController.getAllArtists)
+    AsyncHandler(CategoryController.getAllCategories)
 );
 
 router.get(
     "/:id",
     validator(categorySchema.getCategory, 'params'),
-    AsyncHandler(CategoryController.getAllCategorys)
+    AsyncHandler(CategoryController.getCategory)
 );
 
 router.post(

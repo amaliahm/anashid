@@ -4,7 +4,7 @@ import {
     _deleteArtist, 
     _getAllArtist, 
     _updateArtist 
-} from '../database/queries/artist-queries'
+} from '../database/queries/artist-queries.js'
 
 export default class ArtistRepo {
 

@@ -1,4 +1,4 @@
-import AnasheedRepo from "../repos/anasheed-repo";
+import AnasheedRepo from "../repos/anasheed-repo.js";
 
 export default class AnasheedController {
 
