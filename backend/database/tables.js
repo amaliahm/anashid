@@ -37,3 +37,13 @@ CREATE TABLE IF NOT EXISTS fileAttachment (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 `;
+
+export const artistTable = `
+CREATE TABLE IF NOT EXISTS artist (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL,
+    bio TEXT DEFAULT NULL,
+    added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    id_deleted TINYINT(1) DEFAULT 0
+);
+`;
