@@ -17,6 +17,6 @@ router.use("/admin/anasheed", anasheedRouter);
 
 router.use("/admin/artist", artistRouter);
 
-router.use("/admin/category", CategoryRouter);
+router.use("/admin/categories", CategoryRouter);
 
 export default router;

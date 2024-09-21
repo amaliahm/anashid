@@ -33,8 +33,7 @@ const Users = () => {
   useEffect(() => {
     dispatch(fetchUsers(id))
   }, [dispatch])
-
-  console.log(id)
+  
     return (
         <>
           <div className="flex">

@@ -11,6 +11,7 @@ import Artists from './pages/home/Artists';
 import Categories from './pages/home/Categories';
 import Trash from './pages/home/Trash';
 import { Navigate } from 'react-router-dom';
+import AddCategory from './pages/add/AddCategory';
 
 function App() {
   useAuthInit()
@@ -72,6 +73,14 @@ function App() {
             element={
               <PrivateRoute>
                 <Categories />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path='/admin/categories/add/:id' 
+            element={
+              <PrivateRoute>
+                <AddCategory />
               </PrivateRoute>
             } 
           />

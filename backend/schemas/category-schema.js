@@ -5,8 +5,8 @@ export default {
     id: joi.number().integer().required(),
   }),
   addCategory: joi.object({
-    id: joi.number().integer().required(),
     name: joi.string().required(),
+    photo: joi.any().meta({ swaggerType: 'file' }).required(),
   }),
   updateCategory: joi.object({
     id: joi.number().integer().required(),

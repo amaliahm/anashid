@@ -3,10 +3,37 @@ import {
     _findCategoryById,
     _deleteCategory,
     _getAllCategory,
-    _updateCategory
+    _updateCategory,
+    _addCategory,
+    _addImage
 } from '../database/queries/category-queries.js'
 
 export default class CategoryRepo {
+
+  static async addCategory(name) {
+    const result = await DataBaseRepo.getInsertedId(_addCategory, [name])
+    console.log('result')
+    console.log(result)
+    console.log(result.id)
+    return (result === null || result.length > 0) 
+    ? {
+      id: result.id
+    } 
+    : null
+  }
+
+  static async addImage(
+    name, packet_name, file_name, file_type, file_path, file_size, file_format
+  ) {
+    const category = await DataBaseRepo.getInsertedId(_addCategory, [name])
+    const result = await DataBaseRepo.queryDatabase(
+      _addImage, 
+      [
+        packet_name, file_name, file_type, file_path, file_size, file_format, category.id
+      ]
+    )
+    return (result === null || result.length > 0) ? result : null
+  }
 
   static async findCategoryById(id) {
     const rows = await DataBaseRepo.queryDatabase(_findCategoryById, [id])

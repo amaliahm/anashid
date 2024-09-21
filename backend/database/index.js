@@ -13,6 +13,9 @@ import {
   categoryTable
 } from "./tables.js";
 
+// CREATE RELATIONS
+// import { category_image_relation } from "./relations.js";
+
 export default class DataBaseRepo {
   static connection;
 
@@ -35,17 +38,33 @@ export default class DataBaseRepo {
   }
 
   static async createTables() {
+    // tables
     await this.connection.query(userTable);
     await this.connection.query(anasheedTable);
-    await this.connection.query(fileAttachmentTable);
-    await this.connection.query(artistTable);
     await this.connection.query(categoryTable);
+    await this.connection.query(artistTable);
+    await this.connection.query(fileAttachmentTable);
+
+    // relations
+    // await this.connection.query(category_image_relation);
   }
 
   static async queryDatabase(query, options) {
     try {
       const rows = await this.connection.query(query, options);
       return (rows === null || rows.length > 0) ? rows : null;
+    } catch (error) {
+      console.error("Error querying the database:", error);
+      throw error;
+    }
+  }
+
+  static async getInsertedId(query, options) {
+    try {
+      const rows = await this.connection.execute(query, options);
+      if (rows === null || rows.length > 0) return null;
+      const newId = rows.insertId;
+      return {id: newId}
     } catch (error) {
       console.error("Error querying the database:", error);
       throw error;

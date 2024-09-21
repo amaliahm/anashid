@@ -15,9 +15,11 @@ import user_clicked from './user_clicked.svg'
 import logout from './logout.svg'
 import setting from './setting.svg'
 import loader from './loader.svg'
+import add_icon from './add_icon.svg'
+import red_delete_icon from './red_delete_icon.svg'
 
 export {
     home_icon, artist_icon, category_icon, delete_icon, nasheed_icon, user_icon, 
     home_clicked, artist_clicked, category_clicked, delete_clicked, nasheed_clicked, user_clicked, 
-    logout, setting, loader, 
+    logout, setting, loader, add_icon, red_delete_icon,
 }
