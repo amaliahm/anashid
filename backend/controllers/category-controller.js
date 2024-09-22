@@ -57,4 +57,21 @@ export default class CategoryController {
         await CategoryRepo.deleteCategory(id);
         res.status(200).json({ message: 'Category deleted successfully' });
     }
+  
+    static async confirmDeleteCategory(req, res) {
+        const { id } = req.params;
+        await CategoryRepo.confirmDeleteCategory(id);
+        res.status(200).json({ message: 'Category deleted successfully' });
+    }
+  
+    static async trashCategory(req, res) {
+        const result = await CategoryRepo.trashCategory();
+        res.status(200).json({ message: 'Get data successfully', data: result });
+    }
+  
+    static async restoreCategory(req, res) {
+        const { id } = req.params;
+        await CategoryRepo.restoreCategory(id);
+        res.status(200).json({ message: 'Category restored successfully' });
+    }
 }

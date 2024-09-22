@@ -36,4 +36,21 @@ router.delete(
     AsyncHandler(ArtistController.deleteArtist)
 );
 
+router.get(
+    "/trash",
+    AsyncHandler(ArtistController.trashArtist)
+);
+
+router.delete(
+    "/delete/:id",
+    validator(artistSchema.deleteArtist, 'params'),
+    AsyncHandler(ArtistController.confirmDeleteArtist)
+);
+
+router.delete(
+    "/restore/:id",
+    validator(artistSchema.deleteArtist, 'params'),
+    AsyncHandler(ArtistController.restoreArtist)
+);
+
 export default router;

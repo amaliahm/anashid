@@ -5,7 +5,10 @@ import {
     _getAllCategory,
     _updateCategory,
     _addCategory,
-    _addImage
+    _addImage,
+    _confirmDeleteCategory,
+    _restoreCategory,
+    _trashCategory
 } from '../database/queries/category-queries.js'
 
 export default class CategoryRepo {
@@ -39,6 +42,21 @@ export default class CategoryRepo {
 
   static async deleteCategory(id) {
     await DataBaseRepo.queryDatabase(_deleteCategory, [id])
+  }
+
+  static async confirmDeleteCategory(id) {
+    await DataBaseRepo.queryDatabase(_confirmDeleteCategory, [id])
+  }
+
+  static async restoreCategory(id) {
+    await DataBaseRepo.queryDatabase(_restoreCategory, [id])
+  }
+
+  static async trashCategory() {
+    const rows = await DataBaseRepo.queryDatabase(_trashCategory, [])
+    console.log('rows')
+    console.log(rows)
+    return (rows === null || rows.length > 0) ? rows : null
   }
 
   static async getAllCategory() {

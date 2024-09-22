@@ -5,7 +5,10 @@ import {
     _getAllArtist, 
     _updateArtist ,
     _addArtist,
-    _addImage
+    _addImage,
+    _confirmDeleteArtist,
+    _restoreArtist,
+    _trashArtist
 } from '../database/queries/artist-queries.js'
 
 export default class ArtistRepo {
@@ -39,6 +42,19 @@ export default class ArtistRepo {
 
   static async deleteArtist(id) {
     await DataBaseRepo.queryDatabase(_deleteArtist, [id])
+  }
+
+  static async confirmDeleteArtist(id) {
+    await DataBaseRepo.queryDatabase(_confirmDeleteArtist, [id])
+  }
+
+  static async restoreArtist(id) {
+    await DataBaseRepo.queryDatabase(_restoreArtist, [id])
+  }
+
+  static async trashArtist() {
+    const rows = await DataBaseRepo.queryDatabase(_trashArtist, [])
+    return (rows === null || rows.length > 0) ? rows : null
   }
 
   static async getAllArtist() {

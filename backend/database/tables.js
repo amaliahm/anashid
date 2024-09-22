@@ -130,3 +130,22 @@ CREATE TABLE IF NOT EXISTS anasheedPlaylist (
     FOREIGN KEY (id_playlist) REFERENCES playlist(id) ON DELETE CASCADE
 );
 `;
+
+export const anasheedFavoriteTable = `
+CREATE TABLE IF NOT EXISTS anasheedFavorite (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_ansheed INT NOT NULL,
+    id_user INT NOT NULL,
+    FOREIGN KEY (id_ansheed) REFERENCES anasheed(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_user) REFERENCES user(id) ON DELETE CASCADE
+);
+`;
+
+export const trigger_category_fileAttachment = `
+    CREATE TRIGGER IF NOT EXISTS before_delete_category
+    BEFORE DELETE ON category
+    FOR EACH ROW
+    BEGIN
+        DELETE FROM fileAttachment WHERE fileAttachment.id = OLD.id_file;
+    END;
+`;

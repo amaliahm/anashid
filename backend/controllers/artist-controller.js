@@ -57,4 +57,21 @@ export default class ArtistController {
         await ArtistRepo.deleteArtist(id);
         res.status(200).json({ message: 'Artist deleted successfully' });
     }
+  
+    static async confirmDeleteArtist(req, res) {
+        const { id } = req.params;
+        await ArtistRepo.confirmDeleteArtist(id);
+        res.status(200).json({ message: 'Artist deleted successfully' });
+    }
+  
+    static async restoreArtist(req, res) {
+        const { id } = req.params;
+        await ArtistRepo.restoreArtist(id);
+        res.status(200).json({ message: 'Artist restored successfully' });
+    }
+  
+    static async trashArtist(req, res) {
+        const result = await ArtistRepo.trashArtist();
+        res.status(200).json({ message: 'Get data successfully', data: result });
+    }
 }

@@ -79,7 +79,10 @@ const Categories = () => {
                     </thead>
                     <tbody>
                       {categories.map((elem, index) => (
-                        <tr key={index} className={`${elem.deleted_category ? 'bg-[var(--redColor)] opacity-50' : ''} border-b border-gray-700`}>
+                        <tr 
+                          key={index} 
+                          className={`${elem.deleted_category ? 'bg-[var(--redColor)] opacity-50' : ''} border-b border-gray-700`}
+                        >
                           <td className="px-4 lg:px-32 py-4">
                             {elem.name} 
                           </td>

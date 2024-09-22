@@ -14,7 +14,7 @@ const AddCategory = () => {
   const [ name, setName ] = useState('')
   const [ photo, setPhoto ] = useState(null)
   const [photoPreview, setPhotoPreview] = useState(null)
-  const { loading, error } = useSelector((state) => state.categories)
+  const { loading, successMessage, error } = useSelector((state) => state.categories)
   const navigate = useNavigate()
   const [notif, setNotif] = useState(false)
 
@@ -109,7 +109,7 @@ const AddCategory = () => {
                 </div>
               </div>
             </div>
-            {notif && <Notification name={`${name} added successfully`} color='var(--greenColor)' />}
+            {notif && successMessage && <Notification name={`${name} added successfully`} color='var(--greenColor)' />}
           </div>
         </>
     )

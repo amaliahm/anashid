@@ -6,6 +6,18 @@ export const _deleteArtist = `
     UPDATE artist SET is_deleted = TRUE WHERE id = ?;
 `;
 
+export const _confirmDeleteArtist = `
+    DELETE FROM artist WHERE id = ?;
+`;
+
+export const _restoreArtist = `
+    UPDATE artist SET is_deleted = FALSE WHERE id = ?;
+`;
+
+export const _trashArtist = `
+    SELECT * FROM artist WHERE is_deleted = TRUE;
+`;
+
 export const _getAllArtist = `
     SELECT 
       a.id, a.name, a.is_deleted AS deleted_artist, a.bio,

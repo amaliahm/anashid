@@ -6,18 +6,43 @@ export const _deleteCategory = `
     UPDATE category SET is_deleted = TRUE WHERE id = ?;
 `;
 
+export const _restoreCategory = `
+    UPDATE category SET is_deleted = FALSE WHERE id = ?;
+`;
+
+export const _confirmDeleteCategory = `
+    DELETE FROM category WHERE id = ?;
+`;
+
+export const _trashCategory = `
+    SELECT 
+      c.id, c.name, c.is_deleted AS deleted_category,
+      f.file_path, f.file_type, f.created_at
+    FROM 
+      category c
+    JOIN
+      fileAttachment f
+    ON
+     c.id_file = f.id
+    WHERE 
+      c.is_deleted = TRUE
+    AND
+      f.file_type = 'image'
+    ;
+`;
+
 export const _getAllCategory = `
     SELECT 
       c.id, c.name, c.is_deleted AS deleted_category,
       f.file_path, f.file_type, f.created_at
     FROM 
-    category c
+      category c
     JOIN 
-    fileAttachment f 
+      fileAttachment f 
     ON 
-    c.id_file = f.id 
+      c.id_file = f.id 
     WHERE 
-    f.file_type = 'image';
+      f.file_type = 'image';
 `;
 
 export const _updateCategory = `

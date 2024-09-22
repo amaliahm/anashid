@@ -36,4 +36,21 @@ router.delete(
     AsyncHandler(CategoryController.deleteCategory)
 );
 
+router.get(
+    "/trash",
+    AsyncHandler(CategoryController.trashCategory)
+);
+
+router.delete(
+    "/delete/:id",
+    validator(categorySchema.deleteCategory, 'params'),
+    AsyncHandler(CategoryController.confirmDeleteCategory)
+);
+
+router.delete(
+    "/restore/:id",
+    validator(categorySchema.deleteCategory, 'params'),
+    AsyncHandler(CategoryController.restoreCategory)
+);
+
 export default router;
