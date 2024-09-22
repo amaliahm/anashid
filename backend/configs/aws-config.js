@@ -9,13 +9,13 @@ export const s3client = new S3Client({
     }
 });
 
-export const uploadFileToS3 = async (file) => {
+export const uploadFileToS3 = async (file, packet_name) => {
     try {
       const upload = new Upload({
         client: s3client,
         params: {
           Bucket: process.env.BUCKET_NAME,
-          Key: `${file.fieldname}-${Date.now()}`,
+          Key: `${packet_name}-${file.originalname}-${file.size}`,
           Body: file.buffer,
           ContentType: file.mimetype,
         },

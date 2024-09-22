@@ -7,12 +7,15 @@ export const _deleteCategory = `
 `;
 
 export const _getAllCategory = `
-    SELECT * FROM 
+    SELECT 
+      c.id, c.name, c.is_deleted AS deleted_category,
+      f.file_path, f.file_type, f.created_at
+    FROM 
     category c
     JOIN 
     fileAttachment f 
     ON 
-    c.category_id = f.category_file_id 
+    c.id_file = f.id 
     WHERE 
     f.file_type = 'image';
 `;
@@ -22,9 +25,9 @@ export const _updateCategory = `
 `;
 
 export const _addCategory = `
-    INSERT INTO category (name) VALUES (?);
+    INSERT INTO category (name, id_file) VALUES (?, ?);
 `;
 
 export const _addImage = `
-    INSERT INTO fileAttachment (packet_name, file_name, file_type, file_path, size, format, category_file_id) VALUES (?, ?, ?, ?, ?, ?, ?);
+    INSERT INTO fileAttachment (packet_name, file_name, file_type, file_path, size, format) VALUES (?, ?, ?, ?, ?, ?);
 `;

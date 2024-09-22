@@ -1,11 +1,7 @@
 import joi from "joi";
 
 export default {
-  getArtist: joi.object({
-    id: joi.number().integer().required(),
-  }),
   addArtist: joi.object({
-    id: joi.number().integer().required(),
     name: joi.string().required(),
     bio: joi.string().required(),  
   }),

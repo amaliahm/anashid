@@ -87,7 +87,25 @@ const head_categories = [
     },
 ]
 
+const head_artists = [
+    {
+        name: 'name',
+    },
+    {
+        name: 'photo',
+    },
+    {
+        name: 'bio',
+    },
+    {
+        name: 'anasheed',
+    },
+    {
+        name: '',
+    },
+]
+
 export {
     sidebar_element, 
-    head_users, head_categories,
+    head_users, head_categories, head_artists,
 }

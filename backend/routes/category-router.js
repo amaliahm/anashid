@@ -18,26 +18,20 @@ router.get(
     AsyncHandler(CategoryController.getAllCategories)
 );
 
-router.get(
-    "/:id",
-    validator(categorySchema.getCategory, 'params'),
-    AsyncHandler(CategoryController.getCategory)
-);
-
 router.post(
     "/add",
     upload.single('photo'),
     AsyncHandler(CategoryController.addCategory)
 );
 
-router.put(
-    "/audio",
-    validator(categorySchema.updateCategory),
-    AsyncHandler(CategoryController.updateCategory)
-);
+// router.put(
+//     "/:id",
+//     validator(categorySchema.updateCategory),
+//     AsyncHandler(CategoryController.updateCategory)
+// );
 
 router.delete(
-    "/audio/:id",
+    "/:id",
     validator(categorySchema.deleteCategory, 'params'),
     AsyncHandler(CategoryController.deleteCategory)
 );

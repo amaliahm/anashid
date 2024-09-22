@@ -1,8 +1,12 @@
-import CategoryRepo from "../repos/category-repo.js";
+// s3
 import { uploadFileToS3 } from '../configs/aws-config.js'
 import { s3client } from '../configs/aws-config.js'
 import { GetObjectCommand } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
+
+// repos
+import CategoryRepo from "../repos/category-repo.js";
+
 
 export default class CategoryController {
 
@@ -30,13 +34,13 @@ export default class CategoryController {
         const { name } = req.body;
         const file = req.file
 
-        const imageUrl = await uploadFileToS3(file)
         const packet_name = 'categories'
         const file_name = file.originalname
         const file_type = file.mimetype.includes('image') ? 'image' : 'audio'
         const file_size = file.size
         const file_format = file.mimetype.split('/')[1]
-        const file_path = `/${packet_name}/${file_name}`;
+        const file_path = `${packet_name}-${file_name}-${file_size}`;
+        const imageUrl = await uploadFileToS3(file, packet_name)
 
         await CategoryRepo.addImage(name, packet_name, file_name, file_type, file_path, file_size, file_format);
         res.status(200).json({ message: 'Category added successfully' });
@@ -49,7 +53,7 @@ export default class CategoryController {
     }
   
     static async deleteCategory(req, res) {
-        const { id } = req.body;
+        const { id } = req.params;
         await CategoryRepo.deleteCategory(id);
         res.status(200).json({ message: 'Category deleted successfully' });
     }

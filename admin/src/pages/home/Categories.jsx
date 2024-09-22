@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "../../redux/reducer/categoriesSlice";
@@ -9,12 +9,32 @@ import { useNavigate } from "react-router-dom";
 import Loading from "../../components/Loading";
 import { head_categories } from "../../constant";
 import { format } from 'date-fns';
+import Modal from "../../components/Modal";
+import { deleteCategory } from "../../redux/reducer/categoriesSlice";
 
 const Categories = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const { categories, loading, error } = useSelector((state) => state.categories)
   const naviagte = useNavigate()
+  const [modal, setModal] = useState(false)
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
+  const openModal = (elem) => {
+    setSelectedCategory(elem);
+    setModal(true);
+  };
+
+  const closeModal = () => {
+    setSelectedCategory('');
+    dispatch(fetchCategories())
+    setModal(false);
+  };
+
+  const handleDelete = async () => {
+    dispatch(deleteCategory(selectedCategory.id))
+    closeModal()
+  }
 
   useEffect(() => {
     dispatch(fetchCategories())
@@ -59,16 +79,15 @@ const Categories = () => {
                     </thead>
                     <tbody>
                       {categories.map((elem, index) => (
-                        <tr key={index} className="border-b border-gray-700">
+                        <tr key={index} className={`${elem.deleted_category ? 'bg-[var(--redColor)] opacity-50' : ''} border-b border-gray-700`}>
                           <td className="px-4 lg:px-32 py-4">
                             {elem.name} 
                           </td>
                           <td className="px-4 lg:px-32 py-4">
-                            <div className="h-16 w-32 bg-[var(--grayColor)] rounded-xl">
-                              <img
-                                src={elem.file_path}
-                                alt={elem.name}
-                              />
+                            <div 
+                              className="h-16 w-32 bg-[var(--grayColor)] rounded-xl bg-cover bg-center" 
+                              style={{ backgroundImage: `url('${elem.file_path}')`}}
+                            >
                             </div>
                           </td>
                           <td className="px-4 lg:px-32 py-4">
@@ -79,17 +98,28 @@ const Categories = () => {
                           </td>
                           <td className="px-8 py-4">
                           <span
-                            className={`px-5 py-3 rounded-full text-base capitalize hover:cursor-pointer`}
+                            className={`px-5 py-3 rounded-full text-base capitalize ${ elem.deleted_category ? '' : 'hover:cursor-pointer'}`}
                           >
-                            <img 
+                            {!elem.deleted_category && <img 
                               src={red_delete_icon}
-                            />
+                              onClick={() => openModal(elem)}
+                            />}
                           </span>
                         </td>
                       </tr>
                     ))}
                   </tbody>
                 </table>}
+                {modal && 
+                  <Modal 
+                    isOpen={modal} 
+                    onClose={closeModal} 
+                    id={selectedCategory.id} 
+                    name={selectedCategory.name} 
+                    handleDelete={handleDelete}
+                    loading={loading}
+                    error={error}
+                  />}
                 </div>
               </div>
             </div>

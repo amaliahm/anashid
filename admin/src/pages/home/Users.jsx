@@ -8,8 +8,6 @@ import Loading from "../../components/Loading";
 import { useParams } from "react-router-dom";
 import { format } from 'date-fns';
 import AdminModal from "../../components/AdminModal";
-import axios from "axios";
-
 
 const Users = () => {
   const { id } = useParams()

@@ -5,29 +5,30 @@ import SideBarComponent from "../../components/SideBar";
 import NavBarComponent from "../../components/NavBar";
 import { add_icon, close_icon } from "../../assets/icons";
 import { useNavigate } from "react-router-dom";
-import { addCategory } from "../../redux/reducer/categoriesSlice";
+import { addArtist } from "../../redux/reducer/artistsSlice";
 import Notification from "../../components/Notification";
 
-const AddCategory = () => {
+const AddArtist = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const [ name, setName ] = useState('')
+  const [bio, setBio] = useState('')
   const [ photo, setPhoto ] = useState(null)
   const [photoPreview, setPhotoPreview] = useState(null)
-  const { loading, error } = useSelector((state) => state.categories)
+  const { loading, successMessage, error } = useSelector((state) => state.artists)
   const navigate = useNavigate()
   const [notif, setNotif] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    dispatch(addCategory({
+    dispatch(addArtist({
       name: name,
+      bio: bio,
       photo: photo,
     }))
     setNotif(true)
     setTimeout(() => {
       setNotif(false)
-      navigate(`/admin/categories/${id}`)
     }, 2000)
   }
 
@@ -49,13 +50,13 @@ const AddCategory = () => {
               <div className="ml-24 p-1">
                 <div className="px-4 lg:pl-10 pt-10 w-full h-2/6 overflow-scroll">
                   <div className="text-xl lg:text-3xl capitalize font-semibold pl-2 mb-2 flex justify-between items-center">
-                    add category
+                    add artist
                     <div className="bg-white p-2 rounded-xl flex justify-center items-center">
                       <img 
                         src={close_icon}
                         alt="add"
                         className="p-2 hover:cursor-pointer"
-                        onClick={() => navigate(`/admin/categories/${id}`)}
+                        onClick={() => navigate(`/admin/artists/${id}`)}
                       />
                     </div>
                   </div>
@@ -92,13 +93,21 @@ const AddCategory = () => {
                             type="text" 
                             value={name} 
                             onChange={(e) => setName(e.target.value)} 
-                            placeholder="Category name"
+                            placeholder="Artist name"
+                            required 
+                          />
+                          <textarea 
+                            className="w-[400px] py-2 px-4 mb-5 rounded-3xl border-[1px] border-[#DEEBEE] bg-[#DEEBEE] text-[var(--textColor)] placeholder-[var(--textColor)] font-base"
+                            type="text" 
+                            value={bio} 
+                            onChange={(e) => setBio(e.target.value)} 
+                            placeholder="Bio"
                             required 
                           />
                           <button 
                             type="submit" 
-                            disabled={loading}
-                            className="border-[1px] border-[var(--greenColor)] rounded-3xl px-12 py-2 text-[var(--greenColor)] text-xl font-semibold hover:cusor-pointer mb-10"
+                            disabled={loading || bio.length === 0 || name.length === 0 || photo === null}
+                            className={`border-[1px] border-[var(--greenColor)] rounded-3xl px-12 py-2 text-[var(--greenColor)] text-xl font-semibold ${loading || bio.length === 0 || name.length === 0 || photo === null ? 'hover:cursor-not-allowed opacity-50' : 'hover:cusor-pointer'} mb-10`}
                           >
                             {loading ? 'Adding...' : 'Add '}
                           </button>
@@ -109,10 +118,10 @@ const AddCategory = () => {
                 </div>
               </div>
             </div>
-            {notif && <Notification name={`${name} added successfully`} color='var(--greenColor)' />}
+            {notif && successMessage && <Notification name={`${name} added successfully`} color='var(--greenColor)' />}
           </div>
         </>
     )
 }
 
-export default AddCategory
+export default AddArtist

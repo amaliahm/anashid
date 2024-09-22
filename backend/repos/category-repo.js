@@ -12,9 +12,6 @@ export default class CategoryRepo {
 
   static async addCategory(name) {
     const result = await DataBaseRepo.getInsertedId(_addCategory, [name])
-    console.log('result')
-    console.log(result)
-    console.log(result.id)
     return (result === null || result.length > 0) 
     ? {
       id: result.id
@@ -25,13 +22,13 @@ export default class CategoryRepo {
   static async addImage(
     name, packet_name, file_name, file_type, file_path, file_size, file_format
   ) {
-    const category = await DataBaseRepo.getInsertedId(_addCategory, [name])
-    const result = await DataBaseRepo.queryDatabase(
+    const image = await DataBaseRepo.getInsertedId(
       _addImage, 
       [
-        packet_name, file_name, file_type, file_path, file_size, file_format, category.id
+        packet_name, file_name, file_type, file_path, file_size, file_format
       ]
     )
+    const result = await DataBaseRepo.getInsertedId(_addCategory, [name, image.id])
     return (result === null || result.length > 0) ? result : null
   }
 

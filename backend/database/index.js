@@ -6,15 +6,18 @@ import { DATABASE } from "../configs/config.js";
 
 // CREATE TABLES
 import { 
-  userTable, 
-  anasheedTable, 
   fileAttachmentTable,
+  userTable,
+  playlistTable,
+  categoryTable,
   artistTable,
-  categoryTable
+  languageTable,
+  themeTable,
+  genderTable,
+  anasheedTable,
+  listeningHistoryTable,
+  anasheedPlaylistTable,
 } from "./tables.js";
-
-// CREATE RELATIONS
-// import { category_image_relation } from "./relations.js";
 
 export default class DataBaseRepo {
   static connection;
@@ -39,14 +42,17 @@ export default class DataBaseRepo {
 
   static async createTables() {
     // tables
+    await this.connection.query(fileAttachmentTable);
     await this.connection.query(userTable);
-    await this.connection.query(anasheedTable);
+    await this.connection.query(playlistTable);
     await this.connection.query(categoryTable);
     await this.connection.query(artistTable);
-    await this.connection.query(fileAttachmentTable);
-
-    // relations
-    // await this.connection.query(category_image_relation);
+    await this.connection.query(languageTable);
+    await this.connection.query(themeTable);
+    await this.connection.query(genderTable);
+    await this.connection.query(anasheedTable);
+    await this.connection.query(listeningHistoryTable);
+    await this.connection.query(anasheedPlaylistTable);
   }
 
   static async queryDatabase(query, options) {

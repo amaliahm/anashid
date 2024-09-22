@@ -41,6 +41,17 @@ const categorySlice = createSlice({
       .addCase(addCategory.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      }).addCase(deleteCategory.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteCategory.fulfilled, (state, action) => {
+        state.loading = false;
+        state.categories = state.categories.filter((category) => category.id !== action.payload);
+      })
+      .addCase(deleteCategory.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });
@@ -57,12 +68,19 @@ export const addCategory = createAsyncThunk('categories/addCategory', async (for
                 }
             }
         );
-        console.log(response)
         return response.data;
     } catch (e) {
-      console.log(e)
         return rejectWithValue(e.response.data);
     }
+});
+
+export const deleteCategory = createAsyncThunk('categories/deleteCategory', async (id, { rejectWithValue }) => {
+  try {
+    const response = await axios.delete(`http://localhost:3000/admin/categories/${id}`);
+    return response.data;
+  } catch (e) {
+    return rejectWithValue(e.response.data);
+  }
 });
 
 export default categorySlice.reducer;
