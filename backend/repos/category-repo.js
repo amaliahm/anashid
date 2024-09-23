@@ -11,6 +11,11 @@ import {
     _trashCategory
 } from '../database/queries/category-queries.js'
 
+// s3
+import { s3client } from '../configs/aws-config.js'
+import { GetObjectCommand } from '@aws-sdk/client-s3';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
+
 export default class CategoryRepo {
 
   static async addCategory(name) {
@@ -54,8 +59,6 @@ export default class CategoryRepo {
 
   static async trashCategory() {
     const rows = await DataBaseRepo.queryDatabase(_trashCategory, [])
-    console.log('rows')
-    console.log(rows)
     return (rows === null || rows.length > 0) ? rows : null
   }
 
@@ -66,6 +69,22 @@ export default class CategoryRepo {
 
   static async updateCategory(name, id) {
     await DataBaseRepo.queryDatabase(_updateCategory, [name, bio, id])
+  }
+
+  static async getUrl(result) {
+    const url = await Promise.all(result.map(async (elem) => {
+      const url = await getSignedUrl(s3client, new GetObjectCommand({
+          Bucket: process.env.BUCKET_NAME,
+          Key: elem.file_path,
+      }), {
+          expiresIn: 3600
+      })
+      return {
+          ...elem,
+          file_path: url,
+      };
+    }));
+    return url
   }
 
 }

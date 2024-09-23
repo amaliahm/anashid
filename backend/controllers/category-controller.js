@@ -1,8 +1,5 @@
 // s3
 import { uploadFileToS3 } from '../configs/aws-config.js'
-import { s3client } from '../configs/aws-config.js'
-import { GetObjectCommand } from '@aws-sdk/client-s3';
-import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
 // repos
 import CategoryRepo from "../repos/category-repo.js";
@@ -15,18 +12,7 @@ export default class CategoryController {
         if (!categories) {
             return res.status(404).json({ error: 'Failed to fetch categories' });
         }
-        const categories_with_urls = await Promise.all(categories.map(async (category) => {
-            const url = await getSignedUrl(s3client, new GetObjectCommand({
-                Bucket: process.env.BUCKET_NAME,
-                Key: category.file_path,
-            }), {
-                expiresIn: 3600
-            })
-            return {
-                ...category,
-                file_path: url,
-            };
-        }));
+        const categories_with_urls = await CategoryRepo.getUrl(categories);
         res.status(200).json(categories_with_urls);
     }
 
@@ -66,7 +52,11 @@ export default class CategoryController {
   
     static async trashCategory(req, res) {
         const result = await CategoryRepo.trashCategory();
-        res.status(200).json({ message: 'Get data successfully', data: result });
+        if (!result) {
+            return res.status(404).json({ error: 'Failed to fetch categories' });
+        }
+        const trash_categories = await CategoryRepo.getUrl(result);
+        res.status(200).json(trash_categories);
     }
   
     static async restoreCategory(req, res) {

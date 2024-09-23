@@ -11,6 +11,11 @@ import {
     _trashArtist
 } from '../database/queries/artist-queries.js'
 
+// s3
+import { s3client } from '../configs/aws-config.js'
+import { GetObjectCommand } from '@aws-sdk/client-s3';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
+
 export default class ArtistRepo {
 
   static async addArtist(name, bio) {
@@ -64,6 +69,22 @@ export default class ArtistRepo {
 
   static async updateArtist(name, bio, id) {
     await DataBaseRepo.queryDatabase(_updateArtist, [name, bio, id])
+  }
+
+  static async getUrl(result) {
+    const url = await Promise.all(result.map(async (elem) => {
+      const url = await getSignedUrl(s3client, new GetObjectCommand({
+          Bucket: process.env.BUCKET_NAME,
+          Key: elem.file_path,
+      }), {
+          expiresIn: 3600
+      })
+      return {
+          ...elem,
+          file_path: url,
+      };
+    }));
+    return url
   }
 
 }

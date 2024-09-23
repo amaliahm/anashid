@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchArtists, deleteArtist } from "../../redux/reducer/artistsSlice";
 import SideBarComponent from "../../components/SideBar";
 import NavBarComponent from "../../components/NavBar";
-import { red_delete_icon, add_icon } from "../../assets/icons";
+import { red_delete_icon, add_icon, green_close_icon, green_edit_icon } from "../../assets/icons";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../components/Loading";
 import { head_artists } from "../../constant";
@@ -79,38 +79,52 @@ const Artists = () => {
                     <tbody>
                       {artists.map((elem, index) => (
                         <tr key={index} className={`${elem.deleted_artist ? 'bg-[var(--redColor)] opacity-50' : ''} border-b border-gray-700`}>
-                          <td className="px-4 lg:px-32 py-4">
+                          <td className="px-4 lg:px-20 py-4">
                             {elem.name} 
                           </td>
-                          <td className="px-4 lg:px-32 py-4">
+                          <td className="px-4 lg:px-20 py-4">
                             <div 
-                              className="h-16 w-32 bg-[var(--grayColor)] rounded-xl bg-cover bg-start" 
+                              className="h-16 w-32 bg-[var(--grayColor)] rounded-xl bg-cover bg-center " 
                               style={{ backgroundImage: `url('${elem.file_path}')`}}
                             >
                             </div>
                           </td>
-                          <td className="px-4 lg:px-32 py-4">
-                            {elem.anasheed || 0}
+                          <td className="px-4 lg:px-20 py-4">
+                            {elem.bio}
                           </td>
-                          <td className="px-4 lg:px-32 py-4">
+                          <td className="px-4 lg:px-20 py-4">
                             {format(new Date(elem.created_at), 'yyyy-MM-dd')}
                           </td>
+                          <td className="px-4 lg:px-20 py-4">
+                            {elem.anasheed || 0}
+                          </td>
                           <td className="px-8 py-4">
-                          <span
-                            className={`px-5 py-3 rounded-full text-base capitalize ${ elem.deleted_artist ? '' : 'hover:cursor-pointer'}`}
-                          >
-                            {!elem.deleted_artist && <img 
-                              src={red_delete_icon}
-                              onClick={() => openModal(elem)}
-                            />}
-                          </span>
-                        </td>
+                            <span
+                              className={`px-5 py-3 rounded-full text-base capitalize ${ elem.deleted_artist ? '' : 'hover:cursor-pointer'}`}
+                            >
+                              {!elem.deleted_artist && <img 
+                                src={green_edit_icon}
+                                // onClick={() => openModal(elem)}
+                              />}
+                            </span>
+                          </td>
+                          <td className="px-8 py-4">
+                            <span
+                              className={`px-5 py-3 rounded-full text-base capitalize ${ elem.deleted_artist ? '' : 'hover:cursor-pointer'}`}
+                            >
+                              {!elem.deleted_artist && <img 
+                                src={red_delete_icon}
+                                onClick={() => openModal(elem)}
+                              />}
+                            </span>
+                          </td>
                       </tr>
                     ))}
                   </tbody>
                 </table>}
                 {modal && 
                   <Modal 
+                    title='Delete'
                     isOpen={modal} 
                     onClose={closeModal} 
                     id={selectedArtist.id} 

@@ -85,6 +85,9 @@ const head_categories = [
     {
         name: '',
     },
+    {
+        name: '',
+    },
 ]
 
 const head_artists = [
@@ -98,7 +101,13 @@ const head_artists = [
         name: 'bio',
     },
     {
+        name: 'added at',
+    },
+    {
         name: 'anasheed',
+    },
+    {
+        name: '',
     },
     {
         name: '',

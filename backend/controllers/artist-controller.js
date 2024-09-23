@@ -15,18 +15,7 @@ export default class ArtistController {
         if (!artists) {
             return res.status(404).json({ error: 'Failed to fetch artists' });
         }
-        const artists_with_urls = await Promise.all(artists.map(async (artist) => {
-            const url = await getSignedUrl(s3client, new GetObjectCommand({
-                Bucket: process.env.BUCKET_NAME,
-                Key: artist.file_path,
-            }), {
-                expiresIn: 3600
-            })
-            return {
-                ...artist,
-                file_path: url,
-            };
-        }));
+        const artists_with_urls = await ArtistRepo.getUrl(artists);
         res.status(200).json(artists_with_urls);
     }
 
@@ -66,12 +55,18 @@ export default class ArtistController {
   
     static async restoreArtist(req, res) {
         const { id } = req.params;
+        console.log('id')
+        console.log(id)
         await ArtistRepo.restoreArtist(id);
         res.status(200).json({ message: 'Artist restored successfully' });
     }
   
     static async trashArtist(req, res) {
         const result = await ArtistRepo.trashArtist();
-        res.status(200).json({ message: 'Get data successfully', data: result });
+        if (!result) {
+            return res.status(404).json({ error: 'Failed to fetch categories' });
+        }
+        const trash_categories = await ArtistRepo.getUrl(result);
+        res.status(200).json(trash_categories);
     }
 }

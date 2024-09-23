@@ -18,7 +18,7 @@ export const fetchTrashedItems = (table) => async (dispatch) => {
 
 export const restoreOrDelete = (table, id, operation) => async (dispatch) => {
     try {
-        await axios.post(`http://localhost:3000/admin/${table}/${operation}/${id}`);
+        await axios.delete(`http://localhost:3000/admin/${table}/${operation}/${id}`);
         dispatch({ type: 'DONE_SUCCESS', payload: { table, id } });
     } catch (error) {
         dispatch({ type: 'ERROR', payload: error.message });

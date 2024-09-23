@@ -15,7 +15,36 @@ export const _restoreArtist = `
 `;
 
 export const _trashArtist = `
-    SELECT * FROM artist WHERE is_deleted = TRUE;
+    SELECT 
+      a.id, a.name, a.bio, a.is_deleted AS deleted_artist,
+      f.file_path, f.file_type, f.created_at
+    FROM 
+      artist a
+    JOIN
+      fileAttachment f
+    ON
+      a.id_file = f.id
+    WHERE 
+      is_deleted = TRUE
+    AND
+      f.file_type = 'image';
+`;
+
+export const _trashCategory = `
+    SELECT 
+      c.id, c.name, c.is_deleted AS deleted_category,
+      f.file_path, f.file_type, f.created_at
+    FROM 
+      category c
+    JOIN
+      fileAttachment f
+    ON
+     c.id_file = f.id
+    WHERE 
+      c.is_deleted = TRUE
+    AND
+      f.file_type = 'image'
+    ;
 `;
 
 export const _getAllArtist = `

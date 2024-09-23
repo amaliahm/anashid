@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "../../redux/reducer/categoriesSlice";
 import SideBarComponent from "../../components/SideBar";
 import NavBarComponent from "../../components/NavBar";
-import { red_delete_icon, add_icon } from "../../assets/icons";
+import { red_delete_icon, add_icon, green_edit_icon } from "../../assets/icons";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../components/Loading";
 import { head_categories } from "../../constant";
@@ -83,7 +83,7 @@ const Categories = () => {
                           key={index} 
                           className={`${elem.deleted_category ? 'bg-[var(--redColor)] opacity-50' : ''} border-b border-gray-700`}
                         >
-                          <td className="px-4 lg:px-32 py-4">
+                          <td className="px-4 lg:px-24 py-4">
                             {elem.name} 
                           </td>
                           <td className="px-4 lg:px-32 py-4">
@@ -100,21 +100,32 @@ const Categories = () => {
                             {format(new Date(elem.created_at), 'yyyy-MM-dd')}
                           </td>
                           <td className="px-8 py-4">
-                          <span
-                            className={`px-5 py-3 rounded-full text-base capitalize ${ elem.deleted_category ? '' : 'hover:cursor-pointer'}`}
-                          >
-                            {!elem.deleted_category && <img 
-                              src={red_delete_icon}
-                              onClick={() => openModal(elem)}
-                            />}
-                          </span>
-                        </td>
+                            <span
+                              className={`px-5 py-3 rounded-full text-base capitalize ${ elem.deleted_category ? '' : 'hover:cursor-pointer'}`}
+                            >
+                              {!elem.deleted_category && <img 
+                                src={green_edit_icon}
+                                // onClick={() => openModal(elem)}
+                              />}
+                            </span>
+                          </td>
+                          <td className="px-8 py-4">
+                            <span
+                              className={`px-5 py-3 rounded-full text-base capitalize ${ elem.deleted_category ? '' : 'hover:cursor-pointer'}`}
+                            >
+                              {!elem.deleted_category && <img 
+                                src={red_delete_icon}
+                                onClick={() => openModal(elem)}
+                              />}
+                            </span>
+                          </td>
                       </tr>
                     ))}
                   </tbody>
                 </table>}
                 {modal && 
                   <Modal 
+                    title='Delete'
                     isOpen={modal} 
                     onClose={closeModal} 
                     id={selectedCategory.id} 

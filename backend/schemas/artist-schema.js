@@ -11,6 +11,6 @@ export default {
     bio: joi.string().required(),  
   }),
   deleteArtist: joi.object({
-    id: joi.number().integer().required(), 
+    id: joi.number().integer().required(),
   }),
 };
