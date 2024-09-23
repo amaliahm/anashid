@@ -7,8 +7,6 @@ const initialState = {
 export const trashReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'FETCH_TRASHED_ITEMS_SUCCESS':
-            console.log(action)
-            console.log(state)
             return {
                 ...state,
                 trashedItems: {

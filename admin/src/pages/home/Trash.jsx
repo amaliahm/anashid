@@ -28,7 +28,6 @@ const Trash = () => {
   }, [dispatch])
 
   const handleItem = (table, id, operation) => {
-    console.log(table, id, operation)
     dispatch(restoreOrDelete(table, id, operation))
     setModal(false)
   }
@@ -63,7 +62,6 @@ const Trash = () => {
                   {/* categories */}
                   {trashedItems['categories'] ? 
                   <div>
-                    
                     <table className="text-sm text-white text-center font-semibold">
                       <thead>
                         <tr className="border-b-2">
@@ -119,7 +117,11 @@ const Trash = () => {
                             >
                               <img 
                                 src={red_delete_icon}
-                                // onClick={() => openModal(elem)}
+                                onClick={() => {
+                                  openModal(item)
+                                  setTable('categories')
+                                  setOperation('delete')
+                                }}
                               />
                             </span>
                           </td>
@@ -196,7 +198,11 @@ const Trash = () => {
                             >
                               <img 
                                 src={red_delete_icon}
-                                // onClick={() => openModal(elem)}
+                                onClick={() => {
+                                  openModal(item)
+                                  setTable('artists')
+                                  setOperation('delete')
+                                }}
                               />
                             </span>
                           </td>

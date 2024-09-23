@@ -1,12 +1,17 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
+// COMPONENTS
 import SideBarComponent from "../../components/SideBar";
 import NavBarComponent from "../../components/NavBar";
-import { add_icon, close_icon } from "../../assets/icons";
-import { useNavigate } from "react-router-dom";
-import { addCategory } from "../../redux/reducer/categoriesSlice";
 import Notification from "../../components/Notification";
+
+// ICONS
+import { add_icon, close_icon } from "../../assets/icons";
+
+// REDUX
+import { addCategory } from "../../redux/reducer/categoriesSlice";
 
 const AddCategory = () => {
   const { id } = useParams()
@@ -27,7 +32,6 @@ const AddCategory = () => {
     setNotif(true)
     setTimeout(() => {
       setNotif(false)
-      navigate(`/admin/categories/${id}`)
     }, 2000)
   }
 

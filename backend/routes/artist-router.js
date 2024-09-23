@@ -41,11 +41,11 @@ router.get(
     AsyncHandler(ArtistController.trashArtist)
 );
 
-// router.delete(
-//     "/delete/:id",
-//     validator(artistSchema.deleteArtist, 'params'),
-//     AsyncHandler(ArtistController.confirmDeleteArtist)
-// );
+router.delete(
+    "/delete/:id",
+    validator(artistSchema.deleteArtist, 'params'),
+    AsyncHandler(ArtistController.confirmDeleteArtist)
+);
 
 router.delete(
     "/restore/:id",

@@ -1,18 +1,29 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import Login from "./pages/auth/Login"
+import { Navigate } from 'react-router-dom';
+
+// SEC STUFF
 import PrivateRoute from './pages/auth/PrivateRoute';
 import useAuthInit from './pages/auth/AuthInit';
+
+// PAGES 
+import ErrorBoundary from './pages/errorBoundary/ErrorBoundary';
+import Users from './pages/home/Users';
+
+import Login from "./pages/auth/Login"
 import ForgetPassword from './pages/auth/ForgetPassword';
 import ChangePassword from './pages/auth/ChangePassword';
+
 import Home from './pages/home/Home';
-import Users from './pages/home/Users';
+
 import Anasheed from './pages/home/Anasheed';
+
 import Artists from './pages/home/Artists';
-import Categories from './pages/home/Categories';
-import Trash from './pages/home/Trash';
-import { Navigate } from 'react-router-dom';
-import AddCategory from './pages/add/AddCategory';
 import AddArtist from './pages/add/AddArtist';
+
+import Categories from './pages/home/Categories';
+import AddCategory from './pages/add/AddCategory';
+
+import Trash from './pages/home/Trash';
 
 function App() {
   useAuthInit()
@@ -65,7 +76,9 @@ function App() {
             path='/admin/artists/:id' 
             element={
               <PrivateRoute>
-                <Artists />
+                <ErrorBoundary>
+                  <Artists />
+                </ErrorBoundary>
               </PrivateRoute>
             } 
           />
@@ -81,7 +94,9 @@ function App() {
             path='/admin/categories/:id' 
             element={
               <PrivateRoute>
-                <Categories />
+                <ErrorBoundary>
+                  <Categories />
+                </ErrorBoundary>
               </PrivateRoute>
             } 
           />

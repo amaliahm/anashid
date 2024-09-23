@@ -8,7 +8,6 @@ export const fetchTrashedItems = (table) => async (dispatch) => {
             payload: { table, data: response.data }
         });
     } catch (error) {
-        console.log(error);
         dispatch({
             type: 'FETCH_TRASHED_ITEMS_ERROR',
             payload: error.message

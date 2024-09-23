@@ -55,8 +55,6 @@ export default class ArtistController {
   
     static async restoreArtist(req, res) {
         const { id } = req.params;
-        console.log('id')
-        console.log(id)
         await ArtistRepo.restoreArtist(id);
         res.status(200).json({ message: 'Artist restored successfully' });
     }
@@ -64,9 +62,9 @@ export default class ArtistController {
     static async trashArtist(req, res) {
         const result = await ArtistRepo.trashArtist();
         if (!result) {
-            return res.status(404).json({ error: 'Failed to fetch categories' });
+            return res.status(404).json({ error: 'Failed to fetch artists' });
         }
-        const trash_categories = await ArtistRepo.getUrl(result);
-        res.status(200).json(trash_categories);
+        const trash_artists = await ArtistRepo.getUrl(result);
+        res.status(200).json(trash_artists);
     }
 }

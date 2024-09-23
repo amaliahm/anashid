@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { format, isValid } from 'date-fns';
+
+// REDUX
 import { fetchCategories } from "../../redux/reducer/categoriesSlice";
+import { deleteCategory } from "../../redux/reducer/categoriesSlice";
+
+// COMPONENTS
 import SideBarComponent from "../../components/SideBar";
 import NavBarComponent from "../../components/NavBar";
-import { red_delete_icon, add_icon, green_edit_icon } from "../../assets/icons";
-import { useNavigate } from "react-router-dom";
 import Loading from "../../components/Loading";
 import { head_categories } from "../../constant";
-import { format } from 'date-fns';
 import Modal from "../../components/Modal";
-import { deleteCategory } from "../../redux/reducer/categoriesSlice";
+
+// ICONS
+import { red_delete_icon, add_icon, green_edit_icon } from "../../assets/icons";
 
 const Categories = () => {
   const { id } = useParams()
@@ -27,7 +32,9 @@ const Categories = () => {
 
   const closeModal = () => {
     setSelectedCategory('');
-    dispatch(fetchCategories())
+    setTimeout(() => {
+      dispatch(fetchCategories())
+    }, 1000)
     setModal(false);
   };
 

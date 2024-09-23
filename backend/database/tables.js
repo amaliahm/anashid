@@ -149,3 +149,12 @@ export const trigger_category_fileAttachment = `
         DELETE FROM fileAttachment WHERE fileAttachment.id = OLD.id_file;
     END;
 `;
+
+export const trigger_artist_fileAttachment = `
+    CREATE TRIGGER IF NOT EXISTS before_delete_artist
+    BEFORE DELETE ON artist
+    FOR EACH ROW
+    BEGIN
+        DELETE FROM fileAttachment WHERE fileAttachment.id = OLD.id_file;
+    END;
+`;

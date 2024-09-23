@@ -1,12 +1,17 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
+// COMPONENTS
 import SideBarComponent from "../../components/SideBar";
 import NavBarComponent from "../../components/NavBar";
-import { add_icon, close_icon } from "../../assets/icons";
-import { useNavigate } from "react-router-dom";
-import { addArtist } from "../../redux/reducer/artistsSlice";
 import Notification from "../../components/Notification";
+
+// ICONS
+import { add_icon, close_icon } from "../../assets/icons";
+
+// REDUX
+import { addArtist } from "../../redux/reducer/artistsSlice";
 
 const AddArtist = () => {
   const { id } = useParams()

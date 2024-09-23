@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { format } from 'date-fns';
+
+// REDUX
 import { fetchArtists, deleteArtist } from "../../redux/reducer/artistsSlice";
+
+// COMPONENTS
 import SideBarComponent from "../../components/SideBar";
 import NavBarComponent from "../../components/NavBar";
-import { red_delete_icon, add_icon, green_close_icon, green_edit_icon } from "../../assets/icons";
-import { useNavigate } from "react-router-dom";
 import Loading from "../../components/Loading";
 import { head_artists } from "../../constant";
-import { format } from 'date-fns';
 import Modal from "../../components/Modal";
+
+// ICONS
+import { red_delete_icon, add_icon, green_edit_icon } from "../../assets/icons";
 
 const Artists = () => {
   const { id } = useParams()
@@ -26,7 +31,9 @@ const Artists = () => {
 
   const closeModal = () => {
     setSelectedArtist('');
-    dispatch(fetchArtists())
+    setTimeout(() => {
+      dispatch(fetchArtists())
+    }, 1000)
     setModal(false);
   };
 
