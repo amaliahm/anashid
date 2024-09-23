@@ -6,7 +6,6 @@ import PrivateRoute from './pages/auth/PrivateRoute';
 import useAuthInit from './pages/auth/AuthInit';
 
 // PAGES 
-import ErrorBoundary from './pages/errorBoundary/ErrorBoundary';
 import Users from './pages/home/Users';
 
 import Login from "./pages/auth/Login"
@@ -24,6 +23,8 @@ import Categories from './pages/home/Categories';
 import AddCategory from './pages/add/AddCategory';
 
 import Trash from './pages/home/Trash';
+
+import Profile from './pages/home/Profile';
 
 function App() {
   useAuthInit()
@@ -76,9 +77,7 @@ function App() {
             path='/admin/artists/:id' 
             element={
               <PrivateRoute>
-                <ErrorBoundary>
-                  <Artists />
-                </ErrorBoundary>
+                <Artists />
               </PrivateRoute>
             } 
           />
@@ -94,9 +93,7 @@ function App() {
             path='/admin/categories/:id' 
             element={
               <PrivateRoute>
-                <ErrorBoundary>
-                  <Categories />
-                </ErrorBoundary>
+                <Categories />
               </PrivateRoute>
             } 
           />
@@ -113,6 +110,14 @@ function App() {
             element={
               <PrivateRoute>
                 <Trash />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path='/admin/profile/:id' 
+            element={
+              <PrivateRoute>
+                <Profile />
               </PrivateRoute>
             } 
           />

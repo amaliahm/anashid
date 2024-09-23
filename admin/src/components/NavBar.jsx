@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+// ICONS
 import { logout, setting } from "../assets/icons"
+
+// COMPONENTS
 import LogoutModal from './LogoutModal'
 
 const NavBarComponent = ({ id }) => {
   const [ modal, setModal ] = useState(false)
   const [ username, setUsername ] = useState('')
+  const navigate = useNavigate()
 
   const closeModal = () => {
     setModal(false);
@@ -35,7 +41,10 @@ const NavBarComponent = ({ id }) => {
             className="p-2"
           />
         </div>
-        <div className="flex items-center space-x-4 bg-white p-2 rounded-xl">
+        <div 
+          className="flex items-center space-x-4 bg-white p-2 rounded-xl hover:cursor-pointer"
+          onClick={() => navigate(`/admin/profile/${id}`)}
+        >
           <div className="h-12 w-12 rounded-full bg-[var(--grayColor)]"></div>
           <span className="text-[var(--textColor)]">
             {username}
