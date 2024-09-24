@@ -10,6 +10,7 @@ import Modal from "../../components/Modal.jsx"
 // SETTINGS COMPONENTS
 import Publicities from "../../components/settingCompo/Publicities.jsx"
 import Gender from "../../components/settingCompo/Gender.jsx"
+import Theme from "../../components/settingCompo/Theme.jsx"
 
 // ICONS
 import { bg } from "../../assets/images"
@@ -38,11 +39,13 @@ const Settings = () => {
     useEffect(() => {
         dispatch(fetchTableData('publicity'));
         dispatch(fetchTableData('gender'));
-        // dispatch(fetchTableData('theme'));
+        dispatch(fetchTableData('theme'));
         // dispatch(fetchTableData('language'));
     }, [])
 
     const handleAdd = (table, item) => {
+        console.log(table)
+        console.log(item)
         dispatch(addItemToTable(table, item));
         closeModal()
     }
@@ -86,7 +89,17 @@ const Settings = () => {
         },
         {
             name: 'theme',
-            component: ''
+            component:  <Theme 
+                          add_icon={add_icon}
+                          data={tables.tables.theme}
+                          handleAdd={handleAdd}
+                          modal={modal}
+                          openModal={openModal}
+                          onClose={closeModal}
+                          setSelected={setSelected}
+                          selected={selected}
+                          handleDelete={handleDelete}
+                        />
         },
         {
             name: 'language',

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Modal from '../../components/Modal'
 import ModalAdd from "../ModalAdd";
 
-const Gender = ({
+const Theme = ({
     // props
     add_icon, data, handleAdd, modal, onClose, setSelected, selected, handleDelete, openModal
 }) => {
@@ -41,16 +41,16 @@ const Gender = ({
             </div>
             {add && 
               <ModalAdd 
-                table='gender'
+                table='theme'
                 value={value}
                 setValue={setValue}
                 loading={data.loading}
                 error={data.error}
                 handleAdd={() => {
-                  handleAdd('gender', value)
-                  setTimeout(() => {
-                    setAdd(false)
-                  })
+                    handleAdd('theme', value)
+                    setTimeout(() => {
+                        setAdd(false)
+                    })
                 }}
                 isOpen={add}
                 onClose={() => setAdd(false)}
@@ -63,7 +63,7 @@ const Gender = ({
                 onClose={onClose}
                 id={selected.id}
                 name={selected.value}
-                handleDelete={() => handleDelete('gender', selected.id)}
+                handleDelete={() => handleDelete('theme', selected.id)}
                 loading={data.loading}
                 error={data.error}
               />
@@ -72,4 +72,4 @@ const Gender = ({
     );
 }
 
-export default Gender;
+export default Theme;

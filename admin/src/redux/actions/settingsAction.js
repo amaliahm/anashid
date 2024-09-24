@@ -25,6 +25,8 @@ export const addItemToTable = (table, item) => async (dispatch) => {
     type: 'ADD_ITEM_TO_TABLE_REQUEST',
     payload: { table },
   })
+  console.log(table)
+  console.log(item)
   try {
     const response = 
       table === 'publicity' ? 
