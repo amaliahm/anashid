@@ -8,7 +8,8 @@ import {
     _addImage,
     _confirmDeleteCategory,
     _restoreCategory,
-    _trashCategory
+    _trashCategory, 
+    _deleteFileAttachment
 } from '../database/queries/category-queries.js'
 
 // s3
@@ -50,7 +51,13 @@ export default class CategoryRepo {
   }
 
   static async confirmDeleteCategory(id) {
+    const result = await this.findCategoryById(id)
+    if (!result) {
+      return { error: 'Category not found' }
+    }
+    await DataBaseRepo.queryDatabase(_deleteFileAttachment, [result[0].id_file])
     await DataBaseRepo.queryDatabase(_confirmDeleteCategory, [id])
+    return { message: 'Category deleted successfully' }
   }
 
   static async restoreCategory(id) {

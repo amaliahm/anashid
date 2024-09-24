@@ -1,8 +1,5 @@
 // s3
 import { uploadFileToS3 } from '../configs/aws-config.js'
-import { s3client } from '../configs/aws-config.js'
-import { GetObjectCommand } from '@aws-sdk/client-s3';
-import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
 // repos
 import ArtistRepo from "../repos/artist-repo.js";

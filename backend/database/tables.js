@@ -141,6 +141,16 @@ CREATE TABLE IF NOT EXISTS anasheedFavorite (
 );
 `;
 
+export const publicityTable = `
+CREATE TABLE IF NOT EXISTS publicity (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_file INT NOT NULL,
+    FOREIGN KEY (id_file) REFERENCES fileAttachment(id) ON DELETE CASCADE
+);
+`;
+
+// Triggers
+
 export const trigger_category_fileAttachment = `
     CREATE TRIGGER IF NOT EXISTS before_delete_category
     BEFORE DELETE ON category

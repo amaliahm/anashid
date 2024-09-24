@@ -19,7 +19,8 @@ import {
   anasheedPlaylistTable,
   anasheedFavoriteTable,
   trigger_category_fileAttachment,
-  trigger_artist_fileAttachment
+  trigger_artist_fileAttachment,
+  publicityTable
 } from "./tables.js";
 
 export default class DataBaseRepo {
@@ -57,6 +58,7 @@ export default class DataBaseRepo {
     await this.connection.query(listeningHistoryTable);
     await this.connection.query(anasheedPlaylistTable);
     await this.connection.query(anasheedFavoriteTable);
+    await this.connection.query(publicityTable);
 
     // triggers
     await this.connection.query(trigger_category_fileAttachment);

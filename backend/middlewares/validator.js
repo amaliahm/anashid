@@ -4,7 +4,6 @@ const validateRequest = (schema, source = "body")  =>
         abortEarly: false, //collect all validation errors
         stripUnknown: true, //remove any properties not defined in the schema
       });
-      console.log(value)
       if (error) {
         const errorMessage = error.details
         .map(detail => detail.message)

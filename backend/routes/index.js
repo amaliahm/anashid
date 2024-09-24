@@ -6,6 +6,8 @@ import usersRouter from "./users-router.js"
 import anasheedRouter from './anasheed-router.js'
 import artistRouter from './artist-router.js'
 import CategoryRouter from './category-router.js'
+import ProfileRouter from './profile-router.js'
+import PublicityRouter from './publicity-router.js'
 
 const router = Router();
 
@@ -18,5 +20,9 @@ router.use("/admin/anasheed", anasheedRouter);
 router.use("/admin/artists", artistRouter);
 
 router.use("/admin/categories", CategoryRouter);
+
+router.use("/admin/profile", ProfileRouter);
+
+router.use("/admin/publicity", PublicityRouter);
 
 export default router;

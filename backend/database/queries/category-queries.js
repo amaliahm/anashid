@@ -56,3 +56,7 @@ export const _addCategory = `
 export const _addImage = `
     INSERT INTO fileAttachment (packet_name, file_name, file_type, file_path, size, format) VALUES (?, ?, ?, ?, ?, ?);
 `;
+
+export const _deleteFileAttachment = `
+    DELETE FROM fileAttachment WHERE id = ?;
+`;

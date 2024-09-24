@@ -1,5 +1,8 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+
 
 // SEC STUFF
 import PrivateRoute from './pages/auth/PrivateRoute';
@@ -25,6 +28,8 @@ import AddCategory from './pages/add/AddCategory';
 import Trash from './pages/home/Trash';
 
 import Profile from './pages/home/Profile';
+
+import Settings from './pages/home/Settings';
 
 function App() {
   useAuthInit()
@@ -118,6 +123,14 @@ function App() {
             element={
               <PrivateRoute>
                 <Profile />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path='/admin/settings/:id' 
+            element={
+              <PrivateRoute>
+                <Settings />
               </PrivateRoute>
             } 
           />

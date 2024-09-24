@@ -8,7 +8,8 @@ import {
     _addImage,
     _confirmDeleteArtist,
     _restoreArtist,
-    _trashArtist
+    _trashArtist,
+    _deleteFileAttachment
 } from '../database/queries/artist-queries.js'
 
 // s3
@@ -50,7 +51,13 @@ export default class ArtistRepo {
   }
 
   static async confirmDeleteArtist(id) {
+    const result = await this.findArtistById(id)
+    if (!result) {
+      return { error: 'Artist not found' }
+    }
+    await DataBaseRepo.queryDatabase(_deleteFileAttachment, [result[0].id_file])
     await DataBaseRepo.queryDatabase(_confirmDeleteArtist, [id])
+    return { message: 'Artist deleted successfully' }
   }
 
   static async restoreArtist(id) {
