@@ -9,6 +9,7 @@ import Modal from "../../components/Modal.jsx"
 
 // SETTINGS COMPONENTS
 import Publicities from "../../components/settingCompo/Publicities.jsx"
+import Gender from "../../components/settingCompo/Gender.jsx"
 
 // ICONS
 import { bg } from "../../assets/images"
@@ -36,13 +37,14 @@ const Settings = () => {
 
     useEffect(() => {
         dispatch(fetchTableData('publicity'));
-        // dispatch(fetchTableData('gender'));
+        dispatch(fetchTableData('gender'));
         // dispatch(fetchTableData('theme'));
         // dispatch(fetchTableData('language'));
     }, [])
 
     const handleAdd = (table, item) => {
         dispatch(addItemToTable(table, item));
+        closeModal()
     }
 
     const handleDelete = async (table, id) => {
@@ -52,8 +54,6 @@ const Settings = () => {
         }, 1000)
         closeModal()
     }
-
-    console.log(selected)
 
     const elements = [
         {
@@ -72,7 +72,17 @@ const Settings = () => {
         },
         {
             name: 'gender',
-            component: ''
+            component:  <Gender 
+                          add_icon={add_icon}
+                          data={tables.tables.gender}
+                          handleAdd={handleAdd}
+                          modal={modal}
+                          openModal={openModal}
+                          onClose={closeModal}
+                          setSelected={setSelected}
+                          selected={selected}
+                          handleDelete={handleDelete}
+                        />
         },
         {
             name: 'theme',
@@ -88,7 +98,6 @@ const Settings = () => {
         },
     ]
 
-    console.log(tables.tables.publicity)
     return (
         <>
             <div className="flex">
@@ -106,7 +115,7 @@ const Settings = () => {
                                       className="text-xl lg:text-3xl capitalize font-semibold w-11/12 py-8 flex flex-col justify-center items-start"
                                       key={index}
                                     >
-                                        <div className="pl-2 mb-2 flex justify-between items-center">
+                                        <div className="pl-2 mb-6 flex justify-between items-center">
                                           {elem.name}
                                         </div>
                                         <div className="w-full">

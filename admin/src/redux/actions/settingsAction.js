@@ -7,7 +7,6 @@ export const fetchTableData = (table) => async (dispatch) => {
   });
   try {
     const response = await axios.get(`http://localhost:3000/admin/${table}`);
-    console.log(response.data)
     dispatch({
       type: 'FETCH_TABLE_DATA_SUCCESS',
       payload: { table, data: response.data },
@@ -26,7 +25,6 @@ export const addItemToTable = (table, item) => async (dispatch) => {
     type: 'ADD_ITEM_TO_TABLE_REQUEST',
     payload: { table },
   })
-  console.log(item)
   try {
     const response = 
       table === 'publicity' ? 
@@ -39,7 +37,10 @@ export const addItemToTable = (table, item) => async (dispatch) => {
           }
         }
       ) :  
-      await axios.post(`http://localhost:3000/admin/${table}/add`, item);
+      await axios.post(
+        `http://localhost:3000/admin/${table}/add`, 
+        {item: item}
+      );
     dispatch({
       type: 'ADD_ITEM_TO_TABLE_SUCCESS',
       payload: { table, item: response.data },

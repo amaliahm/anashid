@@ -8,6 +8,7 @@ import artistRouter from './artist-router.js'
 import CategoryRouter from './category-router.js'
 import ProfileRouter from './profile-router.js'
 import PublicityRouter from './publicity-router.js'
+import GenderRouter from './gender-router.js'
 
 const router = Router();
 
@@ -24,5 +25,7 @@ router.use("/admin/categories", CategoryRouter);
 router.use("/admin/profile", ProfileRouter);
 
 router.use("/admin/publicity", PublicityRouter);
+
+router.use('/admin/gender', GenderRouter);
 
 export default router;
