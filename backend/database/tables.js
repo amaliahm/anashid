@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS anasheed (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) UNIQUE NOT NULL,
     description TEXT DEFAULT NULL,
-    duration INT NOT NULL,
+    duration DECIMAL(10, 3) NOT NULL,
     release_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     is_deleted TINYINT(1) DEFAULT 0,
     id_image INT NOT NULL,

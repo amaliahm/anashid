@@ -8,6 +8,7 @@ import artistReducer from './reducer/artistsSlice';
 import trashReducer from './reducer/trashReducer';
 import profileReducer from './reducer/profileReducer';
 import settingsReducer from './reducer/settingsReducer';
+import anasheedSlice from './reducer/anasheedSlice';
 
 const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ const store = configureStore({
     trash: trashReducer,
     profile: profileReducer,
     settings: settingsReducer,
+    anasheed: anasheedSlice
   },
 });
 

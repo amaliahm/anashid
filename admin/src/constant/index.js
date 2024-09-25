@@ -114,7 +114,37 @@ const head_artists = [
     },
 ]
 
+const head_anasheed = [
+    {
+        name: 'title',
+    },
+    {
+        name: 'photo',
+    },
+    {
+        name: 'artist',
+    },
+    {
+        name: 'created at',
+    },
+    {
+        name: 'listened',
+    },
+    {
+        name: 'favorite',
+    },
+    {
+        name: 'playlist',
+    },
+    {
+        name: '',
+    },
+    {
+        name: '',
+    },
+]
+
 export {
     sidebar_element, 
-    head_users, head_categories, head_artists,
+    head_users, head_categories, head_artists, head_anasheed, 
 }

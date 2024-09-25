@@ -3,6 +3,7 @@ import { Router } from "express";
 // MIDDLEWARES
 import AsyncHandler from "../middlewares/async-handler.js";
 import validator from "../middlewares/validator.js";
+import upload from "../middlewares/upload.js";
 
 // SCHEMA
 import anasheedSchema from "../schemas/anasheed-schema.js";
@@ -19,20 +20,12 @@ router.get(
 
 router.post(
     "/add",
-    validator(anasheedSchema.addAudio),
+    upload.fields([
+        { name: 'photo', maxCount: 1 }, 
+        { name: 'audio', maxCount: 1 }
+    ]),
+    validator(anasheedSchema.addAnasheed),
     AsyncHandler(AnasheedController.addAnasheed)
-);
-
-router.put(
-    "/audio",
-    validator(anasheedSchema.updateAudio),
-    AsyncHandler(AnasheedController.updateAnasheed)
-);
-
-router.delete(
-    "/audio/:id",
-    validator(anasheedSchema.deleteAudio, 'params'),
-    AsyncHandler(AnasheedController.deleteAnasheed)
 );
 
 export default router;

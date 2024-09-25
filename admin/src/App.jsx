@@ -18,6 +18,7 @@ import ChangePassword from './pages/auth/ChangePassword';
 import Home from './pages/home/Home';
 
 import Anasheed from './pages/home/Anasheed';
+import AddAnasheed from './pages/add/AddAnasheed';
 
 import Artists from './pages/home/Artists';
 import AddArtist from './pages/add/AddArtist';
@@ -75,6 +76,14 @@ function App() {
             element={
               <PrivateRoute>
                 <Anasheed />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path='/admin/anasheed/add/:id' 
+            element={
+              <PrivateRoute>
+                <AddAnasheed />
               </PrivateRoute>
             } 
           />

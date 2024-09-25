@@ -1,18 +1,22 @@
 import joi from "joi";
 
 export default {
-  addAudio: joi.object({
-    id: joi.number().integer().required(),
+  addAnasheed: joi.object({
     title: joi.string().required(),
     description: joi.string().required(), 
-    audio: joi.any().meta({ swaggerType: 'file' }).required(), 
+    duration: joi.number().precision(3).positive().required(), 
+    id_artist: joi.number().integer().required(), 
+    id_language: joi.number().integer().required(), 
+    id_theme: joi.number().integer().required(), 
+    id_gender: joi.number().integer().required(), 
+    id_category: joi.number().integer().required(), 
   }),
-  updateAudio: joi.object({
+  updateAnasheed: joi.object({
     id: joi.number().integer().required(),
     title: joi.string().required(),
-    description: joi.string().required(),  
+    descritpion: joi.string().required(),  
   }),
-  deleteAudio: joi.object({
-    id: joi.number().integer().required(), 
+  deleteAnasheed: joi.object({
+    id: joi.number().integer().required(),
   }),
 };

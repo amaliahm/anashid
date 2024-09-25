@@ -10,6 +10,9 @@ export const s3client = new S3Client({
 });
 
 export const uploadFileToS3 = async (file, packet_name) => {
+  if (!file || !file.buffer) {
+    throw new Error("File is undefined or does not have a buffer");
+  }
     try {
       const upload = new Upload({
         client: s3client,
