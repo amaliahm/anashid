@@ -49,6 +49,7 @@ const Profile = () => {
         const intervalId = setInterval(dispatch(fetchCurrentUser(id)), 3600000);
        return () => clearInterval(intervalId);
     }, [])
+    console.log(user)
 
     return (
         <>
@@ -89,15 +90,14 @@ const Profile = () => {
                                 <input
                                     type="text"
                                     className="w-full py-2 px-4 mb-5 rounded-3xl border-[1px] border-[#AFAFAF] text-white placeholder-white bg-transparent opacity-50"
-                                    placeholder="Email"
-                                    required
+                                    placeholder={user.email || 'email'}
                                     disabled
                                 />
                                 <input
                                     type="text"
-                                    className="w-full capitalize py-2 px-4 mb-5 rounded-3xl border-[1px] border-[#AFAFAF] text-white placeholder-white bg-transparent opacity-50"
-                                    placeholder="username"
-                                    required
+                                    className="w-full py-2 px-4 mb-5 rounded-3xl border-[1px] border-[#AFAFAF] text-white placeholder-white bg-transparent opacity-50"
+                                    placeholder={user.username || "username"}
+                                    disabled
                                 />
                                 {edit && 
                                 <div>

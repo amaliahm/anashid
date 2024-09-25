@@ -12,7 +12,7 @@ export const _updateUser = `
 
 export const _getUserById = `
     SELECT 
-      u.id, u.username, u.id_file,
+      u.id, u.username, u.email, u.id_file,
       f.file_path, f.file_type, f.created_at
     FROM 
       user u

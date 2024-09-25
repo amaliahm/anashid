@@ -17,7 +17,7 @@ const Publicities = ({
 
     return (
         <div className="flex flex-col">
-            <div className="w-[100%] flex flex-wrap gap-6 justify-center items-center">
+            <div className="w-[100%] flex flex-wrap gap-6 justify-start items-center">
                 {Object.keys(data.data).map((elem, i) => (
                     <div 
                       className="h-40 w-64 rounded-3xl bg-cover bg-center hover:cursor-pointer hover:opacity-50 ease-in-out duration-200"

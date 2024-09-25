@@ -12,6 +12,7 @@ import Publicities from "../../components/settingCompo/Publicities.jsx"
 import Gender from "../../components/settingCompo/Gender.jsx"
 import Theme from "../../components/settingCompo/Theme.jsx"
 import Language from "../../components/settingCompo/Language.jsx"
+import SendEmail from "../../components/settingCompo/SendEmail.jsx"
 
 // ICONS
 import { bg } from "../../assets/images"
@@ -45,8 +46,6 @@ const Settings = () => {
     }, [])
 
     const handleAdd = (table, item) => {
-        console.log(table)
-        console.log(item)
         dispatch(addItemToTable(table, item));
         closeModal()
     }
@@ -118,7 +117,10 @@ const Settings = () => {
         },
         {
             name: 'send email',
-            component: ''
+            component:  <SendEmail 
+                          handleAdd={handleAdd}
+                          data={tables.tables.sendEmail}
+                        />
         },
     ]
 

@@ -25,8 +25,6 @@ export const addItemToTable = (table, item) => async (dispatch) => {
     type: 'ADD_ITEM_TO_TABLE_REQUEST',
     payload: { table },
   })
-  console.log(table)
-  console.log(item)
   try {
     const response = 
       table === 'publicity' ? 
@@ -39,6 +37,14 @@ export const addItemToTable = (table, item) => async (dispatch) => {
           }
         }
       ) :  
+      table === 'sendEmail' ?
+      await axios.post(
+        `http://localhost:3000/admin/${table}/${item.id}`, 
+        {
+          subject: item.subject,
+          content: item.content
+        }
+      ) :
       await axios.post(
         `http://localhost:3000/admin/${table}/add`, 
         {item: item}

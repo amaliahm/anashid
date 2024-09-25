@@ -12,6 +12,9 @@ const initialState = {
       language: {
         data: [], loading: false, error: false, success: false
       },
+      sendEmail: {
+        data: [], loading: false, error: false, success: false
+      }
     }
 };
 
