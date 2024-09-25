@@ -11,6 +11,7 @@ import Modal from "../../components/Modal.jsx"
 import Publicities from "../../components/settingCompo/Publicities.jsx"
 import Gender from "../../components/settingCompo/Gender.jsx"
 import Theme from "../../components/settingCompo/Theme.jsx"
+import Language from "../../components/settingCompo/Language.jsx"
 
 // ICONS
 import { bg } from "../../assets/images"
@@ -40,7 +41,7 @@ const Settings = () => {
         dispatch(fetchTableData('publicity'));
         dispatch(fetchTableData('gender'));
         dispatch(fetchTableData('theme'));
-        // dispatch(fetchTableData('language'));
+        dispatch(fetchTableData('language'));
     }, [])
 
     const handleAdd = (table, item) => {
@@ -103,7 +104,17 @@ const Settings = () => {
         },
         {
             name: 'language',
-            component: ''
+            component:  <Language 
+                          add_icon={add_icon}
+                          data={tables.tables.language}
+                          handleAdd={handleAdd}
+                          modal={modal}
+                          openModal={openModal}
+                          onClose={closeModal}
+                          setSelected={setSelected}
+                          selected={selected}
+                          handleDelete={handleDelete}
+                        />
         },
         {
             name: 'send email',

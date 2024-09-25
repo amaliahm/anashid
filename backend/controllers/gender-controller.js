@@ -5,7 +5,7 @@ export default class GenderController {
     static async getAllGender (req, res) {
         const gender = await GenderRepo.getAllGender();
         if (!gender) {
-            return res.status(404).json({ error: 'Failed to fetch publicities' });
+            return res.status(404).json({ error: 'Failed to fetch genders' });
         }
         res.status(200).json(gender);
     }

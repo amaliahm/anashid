@@ -10,6 +10,7 @@ import ProfileRouter from './profile-router.js'
 import PublicityRouter from './publicity-router.js'
 import GenderRouter from './gender-router.js'
 import ThemeRouter from './theme-router.js'
+import LanguageRouter from './language-router.js'
 
 const router = Router();
 
@@ -30,5 +31,7 @@ router.use("/admin/publicity", PublicityRouter);
 router.use('/admin/gender', GenderRouter);
 
 router.use('/admin/theme', ThemeRouter);
+
+router.use('/admin/language', LanguageRouter);
 
 export default router;
