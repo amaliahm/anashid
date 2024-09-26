@@ -3,7 +3,7 @@ import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, CartesianGrid } from 
 
 const PopulairAnasheed = ({popularAnashidData}) => {
     return (
-        <div className='rounded-3xl flex flex-col items-center min-w-[400px] bg-[var(--textColor)] hover:cursor-pointer'>
+        <div className='rounded-3xl flex flex-col items-center bg-[var(--textColor)] hover:cursor-pointer min-w-[400px] w-[500px]'>
             <div className="p-4 rounded-2xl w-full text-[var(--secondColor)] bg-white">
                 <h2 className="text-lg font-semibold mb-8 capitalize">
                     popular anashid (today)

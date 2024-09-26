@@ -31,7 +31,6 @@ const Dashboard = () => {
   const categoriesData = [
     { name: 'Madih', value: 15 },
     { name: "Du'a", value: 12 },
-    { name: 'Nasheed', value: 37 },
     { name: 'Children Nasheed', value: 23 },
     { name: 'Jihad Nasheed', value: 13 },
   ];
@@ -51,11 +50,11 @@ const Dashboard = () => {
   return (
     <div className="bg-gray-900 text-white p-6 min-h-screen">
       <Total />
-      <div className="flex flex-wrap justify-center items-center gap-10 mb-6 ">
+      <div className="flex flex-wrap justify-around items-center gap-10 mb-6">
         <NewUsers newUsersData={newUsersData} />
         <PopulairAnasheed popularAnashidData={popularAnashidData} />
       </div>
-      <div className="grid grid-cols-3 gap-4 mb-6">
+      <div className="flex flex-wrap justify-center gap-4 mb-6 bg-blue-500">
         <PopularCategories categoriesData={categoriesData} />
         <AnasheedInCategories categoriesData={categoriesData} />
         <ArtistsDashboard artistsData={artistsData} />

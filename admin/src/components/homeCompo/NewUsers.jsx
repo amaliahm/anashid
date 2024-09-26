@@ -6,7 +6,7 @@ import new_users_icon from '../../assets/icons/new_users_icon.svg';
 
 const NewUsers = ({newUsersData}) => {
     return (
-        <div className='rounded-3xl flex flex-col items-center min-w-[400px] bg-white hover:cursor-pointer'>
+        <div className='rounded-3xl flex flex-col items-center min-w-[400px] w-[500px] bg-white hover:cursor-pointer'>
           <div className="p-4 rounded-2xl w-full bg-[var(--textColor)]">
             <h2 className="text-lg font-semibold mb-8 capitalize">
                 new users this month
