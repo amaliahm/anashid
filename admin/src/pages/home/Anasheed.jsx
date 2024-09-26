@@ -86,24 +86,33 @@ const Anasheed = () => {
                     <tbody>
                       {anasheed.map((elem, index) => (
                         <tr key={index} className={`${elem.deleted_anasheed ? 'bg-[var(--redColor)] opacity-50' : ''} border-b border-gray-700`}>
-                          <td className="px-4 lg:px-20 py-4">
+                          <td className="px-4 lg:px-12 py-4">
                             {elem.name} 
                           </td>
-                          <td className="px-4 lg:px-20 py-4">
+                          <td className="px-4 lg:px-6 py-4">
                             <div 
                               className="h-16 w-32 bg-[var(--grayColor)] rounded-xl bg-cover bg-center " 
                               style={{ backgroundImage: `url('${elem.file_path}')`}}
                             >
                             </div>
                           </td>
-                          <td className="px-4 lg:px-20 py-4">
-                            {elem.bio}
+                          <td className="px-4 lg:px-6 py-4">
+                            {elem.artist_name}
                           </td>
                           <td className="px-4 lg:px-20 py-4">
+                            {elem.description}
+                          </td>
+                          <td className="px-4 lg:px-16 py-4">
                             {format(new Date(elem.created_at), 'yyyy-MM-dd')}
                           </td>
-                          <td className="px-4 lg:px-20 py-4">
-                            {elem.anasheed || 0}
+                          <td className="px-4 lg:px-2 py-4">
+                            {elem.listened || 0}
+                          </td>
+                          <td className="px-4 lg:px-2 py-4">
+                            {elem.favorite || 0}
+                          </td>
+                          <td className="px-4 lg:px-2 py-4">
+                            {elem.playlist || 0}
                           </td>
                           <td className="px-8 py-4">
                             <span

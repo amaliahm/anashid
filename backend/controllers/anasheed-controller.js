@@ -10,7 +10,8 @@ export default class AnasheedController {
     if (!anasheed) {
       return res.status(404).json({ message: 'No data to display' });
     }
-    return res.status(200).json({ message: 'Fetch anasheed successfully' });
+    const anasheed_with_urls = await AnasheedRepo.getUrl(anasheed);
+    return res.status(200).json(anasheed_with_urls);
   }
 
   static async addAnasheed(req, res) {
@@ -49,7 +50,7 @@ export default class AnasheedController {
   }
 
   static async deleteAnasheed(req, res) {
-      const { id } = req.body;
+      const { id } = req.params;
       await AnasheedRepo.deleteAnasheed(id);
       res.status(200).json({ message: 'Audio deleted successfully' });
   }
@@ -62,7 +63,18 @@ export default class AnasheedController {
   
   static async restoreAnasheed(req, res) {
       const { id } = req.params;
-      await AnasheedController.restoreAnasheed(id);
+      await AnasheedRepo.restoreAnasheed(id);
       res.status(200).json({ message: 'Anasheed restored successfully' });
   }
+
+  static async trashAnasheed(req, res) {
+    const result = await AnasheedRepo.trashAnasheed();
+    console.log('result')
+    console.log(result)
+    if (!result) {
+        return res.status(404).json({ error: 'Failed to fetch anasheed' });
+    }
+    const trash_anasheed = await AnasheedRepo.getUrl(result);
+    res.status(200).json(trash_anasheed);
+}
 }

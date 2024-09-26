@@ -7,7 +7,8 @@ import {
     _getAllAnasheed,
     _addAnasheed,
     _addFileAttachment,
-    _deleteFileAttachment
+    _deleteFileAttachment,
+    _trashAnasheed
 } from "../database/queries/anasheed-queries.js";
 
 // s3
@@ -67,6 +68,11 @@ export default class AnasheedRepo {
 
     static async restoreAnasheed(id) {
       await DataBaseRepo.queryDatabase(_restoreAnasheed, [id])
+    }
+
+    static async trashAnasheed() {
+      const rows = await DataBaseRepo.queryDatabase(_trashAnasheed, [])
+      return (rows === null || rows.length > 0) ? rows : null
     }
 
     static async getAllAnasheed() {

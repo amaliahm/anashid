@@ -16,7 +16,6 @@ export const trashReducer = (state = initialState, action) => {
                 loading: false,
             };
         case 'DONE_SUCCESS':
-            console.log(action)
             return {
                 ...state,
                 trashedItems: {

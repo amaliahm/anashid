@@ -50,3 +50,28 @@ export const _addFileAttachment = `
 export const _deleteFileAttachment = `
     DELETE FROM fileAttachment WHERE id = ?;
 `;
+
+export const _trashAnasheed = `
+    SELECT 
+      a.id, a.title AS name, a.description, a.is_deleted AS deleted_anasheed,
+      f.file_path, f.file_type, f.created_at,
+      artist.name AS artist_name
+    FROM 
+      anasheed a
+    JOIN 
+      fileAttachment f 
+    ON 
+      a.id_image = f.id 
+    JOIN
+      artist
+    ON
+      a.id_artist = artist.id
+    JOIN
+      fileAttachment file
+    ON
+      file.id = a.id_audio
+    WHERE 
+      f.file_type = 'image'
+    AND 
+      a.is_deleted = TRUE;
+`;

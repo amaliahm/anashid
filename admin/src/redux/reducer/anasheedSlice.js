@@ -77,6 +77,7 @@ export const addAnasheed = createAsyncThunk('anasheed/addAnasheed', async (formD
 });
 
 export const deleteAnasheed = createAsyncThunk('anasheed/deleteAnasheed', async (id, { rejectWithValue }) => {
+  console.log(id)
   try {
     const response = await axios.delete(`http://localhost:3000/admin/anasheed/${id}`);
     return response.data.id;

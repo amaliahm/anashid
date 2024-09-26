@@ -28,4 +28,27 @@ router.post(
     AsyncHandler(AnasheedController.addAnasheed)
 );
 
+router.delete(
+    "/:id",
+    validator(anasheedSchema.deleteAnasheed, 'params'),
+    AsyncHandler(AnasheedController.deleteAnasheed)
+);
+
+router.get(
+    "/trash",
+    AsyncHandler(AnasheedController.trashAnasheed)
+);
+
+router.delete(
+    "/delete/:id",
+    validator(anasheedSchema.deleteAnasheed, 'params'),
+    AsyncHandler(AnasheedController.confirmDeleteAnasheed)
+);
+
+router.delete(
+    "/restore/:id",
+    validator(anasheedSchema.deleteAnasheed, 'params'),
+    AsyncHandler(AnasheedController.restoreAnasheed)
+);
+
 export default router;
