@@ -22,9 +22,12 @@ import red_delete_icon from './red_delete_icon.svg'
 import green_edit_icon from './green_edit_icon.svg'
 import green_close_icon from './green_close_icon.svg'
 
+import new_user_icon from './new_users_icon.svg'
+
 export {
     home_icon, artist_icon, category_icon, delete_icon, nasheed_icon, user_icon, 
     home_clicked, artist_clicked, category_clicked, delete_clicked, nasheed_clicked, user_clicked, 
     logout, setting, loader, add_icon, red_delete_icon, close_icon, 
     green_edit_icon, green_close_icon, 
+    new_user_icon,
 }

@@ -81,3 +81,8 @@ textarea:focus {
 input[type=file] {
   display: none;
 }
+
+.custom-bar:hover {
+  fill: var(--firstColor) !important; /* Change the bar color on hover */
+  cursor: pointer;          /* Change cursor to pointer */
+}
