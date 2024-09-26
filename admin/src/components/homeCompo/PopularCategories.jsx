@@ -39,6 +39,7 @@ const renderActiveShape = (props, color) => {
         startAngle={startAngle}
         endAngle={endAngle}
         fill={color}
+        cursor='pointer'
       />
       <Sector
         cx={cx}

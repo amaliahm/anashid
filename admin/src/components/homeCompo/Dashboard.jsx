@@ -38,7 +38,7 @@ const Dashboard = () => {
   const artistsData = [
     { name: 'Sami Yusuf', value: 38, color: 'text-red-500' },
     { name: 'Maher Zain', value: 62, color: 'text-yellow-500' },
-    { name: "Artist's name", value: 29, color: 'text-blue-500' },
+    { name: "ahmed boukhatir", value: 29, color: 'text-blue-500' },
   ];
 
   const activeUsersData = [
