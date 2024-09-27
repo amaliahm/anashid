@@ -69,7 +69,10 @@ const Users = () => {
                             {user.username} 
                           </td>
                           <td className="px-8 py-4">
-                            <div className="h-16 w-32 bg-[var(--grayColor)] rounded-xl">
+                            <div 
+                              className="h-16 w-32 bg-[var(--grayColor)] rounded-xl bg-cover bg-center"
+                              style={{ backgroundImage: `url('${user.file_path}')`}}
+                            >
                             </div>
                           </td>
                           <td className="px-8 py-4">

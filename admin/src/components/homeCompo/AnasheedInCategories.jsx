@@ -3,7 +3,7 @@ import React from 'react';
 const AnasheedInCategories = ({categoriesData}) => {
     return (
       <>
-        <div className="bg-white text-[var(--textColor)] p-4 rounded-lg min-w-[300px]">
+        <div className="bg-white text-[var(--textColor)] p-4 rounded-3xl min-w-[300px]">
           <h2 className="text-lg font-semibold mb-8 capitalize">
             anashids in each category
           </h2>

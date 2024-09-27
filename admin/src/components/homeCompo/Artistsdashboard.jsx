@@ -51,8 +51,8 @@ const ArtistBar = ({ name, color, index }) => (
       color={color} 
       value={12 * (index + 2)} 
     />
-    <div className={`rounded-full text-[${color}] flex items-center justify-center mr-2 font-semibold text-6xl `}>
-      10
+    <div className={`rounded-full text-[${color}] flex items-center justify-center mx-4 mr-10 font-semibold text-6xl `}>
+      {12 * (index + 2)}
     </div>
     <div className="flex-grow">
       <div className="flex justify-between font-bold text-base text-[#434A5E] capitalize">
@@ -67,7 +67,7 @@ const ArtistBar = ({ name, color, index }) => (
 const ArtistsDashboard = ({artistsData}) => {
   return (
     <>
-      <div className="bg-gray-800 p-4 rounded-lg bg-white text-[var(--textColor)]">
+      <div className="bg-gray-800 p-4 rounded-3xl bg-white text-[var(--textColor)]">
         <h2 className="text-lg font-semibold capitalize mb-8">
           artists
         </h2>

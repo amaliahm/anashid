@@ -42,19 +42,19 @@ const Dashboard = () => {
   ];
 
   const activeUsersData = [
-    { range: '21-30', lastMonth: 30, lastWeek: 20, active: 50 },
-    { range: '11-20', lastMonth: 40, lastWeek: 30, active: 70 },
-    { range: '1-10', lastMonth: 20, lastWeek: 50, active: 60 },
+    { range: '21-30', lastMonth: 10, lastWeek: 15, active: 28 },
+    { range: '11-20', lastMonth: 20, lastWeek: 24, active: 23 },
+    { range: '1-10', lastMonth: 15, lastWeek: 30, active: 48 },
   ];
 
   return (
-    <div className="bg-gray-900 text-white p-6 min-h-screen">
+    <div className="text-white p-6 min-h-screen">
       <Total />
-      <div className="flex flex-wrap justify-around items-center gap-10 mb-6">
+      <div className="flex flex-wrap items-center gap-10 justify-center mb-6">
         <NewUsers newUsersData={newUsersData} />
         <PopulairAnasheed popularAnashidData={popularAnashidData} />
       </div>
-      <div className="flex flex-wrap justify-center gap-4 mb-6 bg-blue-500">
+      <div className="flex flex-wrap justify-center gap-4 mb-6">
         <PopularCategories categoriesData={categoriesData} />
         <AnasheedInCategories categoriesData={categoriesData} />
         <ArtistsDashboard artistsData={artistsData} />

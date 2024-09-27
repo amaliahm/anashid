@@ -8,7 +8,8 @@ export default class UsersController {
         if (!users) {
             return res.status(404).json({ error: 'Failed to fetch user' });
         }
-        res.status(200).json(users);
+        const users_with_urls = await UsersRepo.getUrl(users);
+        res.status(200).json(users_with_urls);
     }
 
     static async changeAccountType (req, res) {
