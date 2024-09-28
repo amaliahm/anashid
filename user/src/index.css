@@ -62,3 +62,11 @@ input:focus {
   box-shadow: -8px 4px 5px 0px rgba(0, 0, 0, 0.24);
   backdrop-filter: blur(26.5px);
 }
+
+::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+::-webkit-scrollbar-thumb {
+  background: white;
+}
