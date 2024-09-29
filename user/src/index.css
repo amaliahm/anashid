@@ -71,3 +71,28 @@ input:focus {
 ::-webkit-scrollbar-thumb {
   background: white;
 }
+
+.shadow-container-left,
+.shadow-container-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.shadow-container-left {
+  left: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.3), transparent);
+}
+
+.shadow-container-right {
+  right: 0;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.3), transparent);
+}
+
+.show {
+  opacity: 1;
+}
