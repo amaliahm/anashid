@@ -12,11 +12,19 @@ import { search_icon } from '../../assets/icons';
 
 const MainComponent = () => {
   return (
-    <div className='p-4 pr-8 w-4/5 lg:w-4/6 lg:pr-20'>
+    <div className='p-4 pr-8 w-4/5 lg:w-[63%] lg:pr-20'>
         {/* search */}
       <div className="flex justify-between items-center bg-[#1F1F1F] items-center mb-8 w-96 rounded-full px-3">
-          <img src={search_icon} alt='search' className='hover:cursor-pointer' />
-          <input type="text" placeholder="Search for Anasheed" className="w-full text-white rounded-full p-3 bg-transparent" />
+        <img 
+          src={search_icon} 
+          alt='search' 
+          className='hover:cursor-pointer' 
+        />
+        <input 
+          type="text" 
+          placeholder="Search for Anasheed" 
+          className="w-full text-white rounded-full p-3 bg-transparent"
+        />
       </div>
       {/* publicities */}
       <PublicityComponent />
@@ -28,9 +36,8 @@ const MainComponent = () => {
       <NewAnasheedSection />
       {/* trending anasheed */}
       <TrendingAnasheedComponent />
-
-      
     </div>
-  )};
+  )
+};
 
-  export default MainComponent
+export default MainComponent

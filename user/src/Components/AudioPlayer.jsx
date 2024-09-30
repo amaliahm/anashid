@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ReactHowler from 'react-howler';
-import raf from 'raf'; // requestAnimationFrame polyfill
+import raf from 'raf';
 
 const AudioPlayer = () => {
   const [playing, setPlaying] = useState(false);
@@ -22,8 +22,7 @@ const AudioPlayer = () => {
     } else {
       clearRAF();
     }
-
-    return () => clearRAF(); // Clean up when component unmounts
+    return () => clearRAF();
   }, [playing, isSeeking]);
 
   const clearRAF = () => {

@@ -22,6 +22,11 @@ import search_icon from './search_icon.svg'
 import left_arrow_icon from './left_arrow_icon.svg'
 import right_arrow_icon from './right_arrow_icon.svg'
 
+import loader from './loader.svg'
+
+import play_icon from './play_icon.svg'
+import pause_icon from './pause_icon.svg'
+
 
 
 export {
@@ -32,5 +37,7 @@ export {
     add_playlist_icon, 
     logout_icon, contact_us_icon, 
     search_icon, 
-    left_arrow_icon, right_arrow_icon
+    left_arrow_icon, right_arrow_icon,
+    loader ,
+    play_icon, pause_icon,
 }
