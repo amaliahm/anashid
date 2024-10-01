@@ -1,7 +1,6 @@
 import facebook from './facebook.svg'
 import google from './google.svg'
 
-
 import home_icon from './home_icon.svg'
 import category_icon from './category_icon.svg'
 import artist_icon from './artist_icon.svg'
@@ -27,7 +26,17 @@ import loader from './loader.svg'
 import play_icon from './play_icon.svg'
 import pause_icon from './pause_icon.svg'
 
+import next_icon from './next_icon.svg'
+import previous_icon from './previous_icon.svg'
 
+import repeate_one_icon from './repeate_one_icon.svg'
+import no_repeate_icon from './no_repeate_icon.svg'
+
+import shuffle_icon from './shuffle_icon.svg'
+import no_shuffle_icon from './no_shuffle_icon.svg'
+
+import favorite from './favorite.svg'
+import favorite__ from './favorite__.svg'
 
 export {
     facebook, google,
@@ -40,4 +49,8 @@ export {
     left_arrow_icon, right_arrow_icon,
     loader ,
     play_icon, pause_icon,
+    next_icon, previous_icon,
+    repeate_one_icon, no_repeate_icon,
+    shuffle_icon, no_shuffle_icon,
+    favorite, favorite__,
 }
