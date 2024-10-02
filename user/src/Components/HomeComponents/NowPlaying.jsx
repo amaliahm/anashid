@@ -96,7 +96,7 @@ const NowPlaying = () => {
 
   return (
     <>
-      <div className="pl-44 lg:pl-0 fixed bottom-0 right-0 w-full h-fit text-white flex items-center justify-center z-50 md:fixed md:top-0 md:right-0 md:w-96 md:h-5/6">
+      <div className="pl-44 lg:pl-0 fixed bottom-0 right-0 w-full h-fit text-white flex items-center justify-center z-50 lg:fixed lg:top-0 lg:right-0 lg:w-72 lg:h-5/12">
         <div className='bg-[rgba(217,217,217,0.11)] bg-opacity-30 backdrop-blur-md w-full h-full p-2 lg:p-0 lg:rounded-b-full rounded-t-xl'>
           <ReactHowler
             src={['sound.ogg', 'sound.mp3']}
@@ -110,7 +110,7 @@ const NowPlaying = () => {
             ref={playerRef}
           />
           {true ? 
-            <div className='flex w-full h-full justify-center space-x-8 items-center lg:flex-none lg:rounded-b-full lg:flex-col  lg:gap-4 lg:py-8  flex-wrap '>
+            <div className='flex w-full h-full justify-center space-x-8 lg:space-x-0 items-center lg:flex-none lg:rounded-b-full lg:flex-col lg:gap-4 flex-wrap'>
               <div className='order-1 lg:order-4 lg:hidden h-16 w-16 lg:w-44 lg:h-44 rounded-full bg-gray-500'></div>
               <div className='order-2 lg:order-1 capitalize font-semibold'>
                 <h1 className='text-lg'>
@@ -125,7 +125,7 @@ const NowPlaying = () => {
                 {' / '}
                 {duration ? duration.toFixed(2) : '100'}
               </p>
-              <div className='lg:hidden order-4 lg:order-5 seek flex items-center cursor-pointer'>
+              <div className='lg:hidden order-4 lg:order-5 seek flex items-center cursor-pointer '>
                 <label>
                   <input
                     type='range'
@@ -143,7 +143,7 @@ const NowPlaying = () => {
                   />
                 </label>
               </div>
-              <div className='order-5 lg:order-2 flex justify-center items-center gap-2 lg:w-full'>
+              <div className='order-5 lg:order-2 flex justify-center items-center gap-2'>
                 <button  onClick={() => setShuffle(!shuffle)}>
                   { shuffle ? <img src={shuffle_icon} alt='shuffle' /> : <img src={no_shuffle_icon} alt='no shuffle' /> }
                 </button>
@@ -161,7 +161,7 @@ const NowPlaying = () => {
                 </button>
               </div>
               <div 
-                className="hidden lg:block lg:order-6 relative w-full h-80 mb-4" 
+                className="hidden lg:block lg:order-6 relative w-full h-60 mb-4" 
                 ref={circleRef}
               >
                 <svg 

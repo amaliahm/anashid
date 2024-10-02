@@ -1,5 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 
+//ICONS
+import { right_arrow_icon } from '../../assets/icons';
+
 const ArtistsSection = () => {
   const [isScrollableLeft, setScrollableLeft] = useState(false);
   const [isScrollableRight, setScrollableRight] = useState(true); // Initially show right shadow
@@ -43,10 +46,17 @@ const ArtistsSection = () => {
 
   return (
     <div className='mb-14'>
-      <h2 className="text-xl lg:text-2xl font-semibold mb-6 capitalize">
-        popular 
-        <span className='text-[var(--mainColor)]'> artists </span>
-      </h2>
+      <div className='flex items-center justify-between mb-6'>
+        <h2 className="text-xl lg:text-2xl font-semibold capitalize">
+          popular 
+          <span className='text-[var(--mainColor)]'> artists </span>
+        </h2>
+        <img 
+          src={right_arrow_icon} 
+          alt='see more' 
+          className='h-6 hover:cursor-pointer'
+        />
+      </div>
       <div className='relative'>
         <div 
           className={`absolute left-0 top-0 h-full w-10 bg-gradient-to-r from-gray-900 pointer-events-none 

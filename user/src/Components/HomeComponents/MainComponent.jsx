@@ -12,7 +12,7 @@ import { search_icon } from '../../assets/icons';
 
 const MainComponent = () => {
   return (
-    <div className='p-4 pr-8 w-4/5 lg:w-[63%] lg:pr-20'>
+    <div className='p-4 pr-8 w-full lg:w-[88%] bg-[#2D2635] lg:pr-20'>
         {/* search */}
       <div className="flex justify-between items-center bg-[#1F1F1F] items-center mb-8 w-96 rounded-full px-3">
         <img 
