@@ -18,8 +18,12 @@ import facebook from './facebook.svg'
 import signup from './signup.svg'
 import line from './line.svg'
 
+import animated_bg_error from './animated_bg_error.svg'
+
 export {
     hero, circle, browseCircle, genre1, genre2, genre3, playIcon, heartCreate, playlistCreate,
     artist1, artist2, artist5, artistArrow, aboutUs, telegram, instagram, facebook, signup,
-    line
+    line, 
+
+    animated_bg_error, 
 }

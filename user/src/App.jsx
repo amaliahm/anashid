@@ -7,6 +7,8 @@ import VerifyEmail from './pages/auth/VerifyEmail';
 import PrivateRoute from './pages/auth/PrivateRoute';
 import ForgetPassword from './pages/auth/ForgetPassword';
 import ChangePassword from './pages/auth/ChangePassword';
+import ErrorBoundary from './pages/error/ErrorBoundary';
+import ErrorPage from './pages/error/ErrorPage';
 
 function App() {
 
@@ -44,6 +46,12 @@ function App() {
               <PrivateRoute>
                 <Home />
               </PrivateRoute>
+            } 
+          />
+          <Route 
+            path='*' 
+            element={
+              <ErrorPage />
             } 
           />
         </Routes>

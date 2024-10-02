@@ -4,6 +4,12 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+/* 
+---------------------------------------------
+var
+--------------------------------------------- 
+*/
+
 :root {
   font-family: "Plus Jakarta Sans", system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -76,52 +82,4 @@ input:focus {
   -webkit-appearance: none;
   width: 0;
   height: 0;
-}
-
-.range-slider {
-  appearance: none;
-  width: 100%;
-  height: 150px; /* Adjust height as needed */
-  background: transparent; /* Make the background transparent */
-  position: relative;
-  transform: rotate(-90deg); /* Rotate the slider */
-}
-
-/* Style for the thumb (to hide or modify the handle) */
-.range-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 0;
-  height: 0;
-  background: none;
-  border: none;
-}
-
-/* Range slider's progress bar, styled like a semi-circle */
-.range-slider::-webkit-slider-runnable-track {
-  background: none;
-  border: 4px solid #4a5568; /* Border color */
-  border-radius: 150px 150px 0 0; /* Half circle */
-  height: 150px; /* Adjust the height */
-  clip-path: polygon(0% 100%, 100% 100%, 50% 0%);
-}
-
-.range-slider::-moz-range-track {
-  background: none;
-  border: 4px solid #4a5568;
-  border-radius: 150px 150px 0 0;
-  height: 150px;
-  clip-path: polygon(0% 100%, 100% 100%, 50% 0%);
-}
-
-.range-slider::-ms-track {
-  background: none;
-  border: 4px solid #4a5568;
-  border-radius: 150px 150px 0 0;
-  height: 150px;
-  clip-path: polygon(0% 100%, 100% 100%, 50% 0%);
-}
-
-/* Clip path for a half-circle background */
-.clip-half-circle {
-  clip-path: polygon(0% 100%, 100% 100%, 50% 0%);
 }
