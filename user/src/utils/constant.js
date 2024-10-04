@@ -10,10 +10,10 @@ const sidebar_elements = [
     {
         title: 'menu',
         elements: [
-            { name: 'home', icon: home_icon, color: 'white', element: 1, to: 'user/home' },
+            { name: 'home', icon: home_icon, color: 'white', element: 1, to: '/user/home' }, //done
             { name: 'categories', icon: category_icon, color: 'white', element: 2, to: 'user/categories' },
             { name: 'artists', icon: artist_icon, color: 'white', element: 3, to: 'user/artists' },
-            { name: 'played now', icon: played_now_icon, color: 'white', element: 4, to: 'user/playednow' },
+            { name: 'played now', icon: played_now_icon, color: 'white', element: 4, to: '/user/playednow' },
         ]
     },
     {
@@ -27,7 +27,7 @@ const sidebar_elements = [
         elements: [
             { name: 'your favorite', icon: favorite_icon, color: 'white', element: 6, to: 'user/favorites' },
             { name: 'your playlist', icon: playlist_icon, color: 'white', element: 7, to: 'user/playlists' },
-            { name: 'add playlist', icon: add_playlist_icon, color: '#0E9EEF', element: 0, to: 'add playlist' },
+            { name: 'add playlist', icon: add_playlist_icon, color: '#0E9EEF', element: 0, to: 'modal add playlist' },
         ]
     },
     {

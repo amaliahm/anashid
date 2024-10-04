@@ -8,6 +8,7 @@ import PrivateRoute from './pages/auth/PrivateRoute';
 import ForgetPassword from './pages/auth/ForgetPassword';
 import ChangePassword from './pages/auth/ChangePassword';
 import ErrorPage from './pages/error/ErrorPage';
+import PlayedNow from './pages/PlayedNow';
 
 function App() {
 
@@ -44,6 +45,14 @@ function App() {
             element={
               <PrivateRoute>
                 <Home />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path='/user/playednow/:id' 
+            element={
+              <PrivateRoute>
+                <PlayedNow />
               </PrivateRoute>
             } 
           />

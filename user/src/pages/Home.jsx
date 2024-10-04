@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 // COMPONENTS
 import Sidebar from '../Components/SideBar';
@@ -8,16 +8,12 @@ import CategoriesSection from '../Components/HomeComponents/CategoriesSection';
 import ArtistsSection from '../Components/HomeComponents/ArtistsSection';
 import NewAnasheedSection from '../Components/HomeComponents/NewAnasheedSection';
 import TrendingAnasheedComponent from '../Components/HomeComponents/TrendingAnasheed';
+import SideBarMobile from '../Components/SideBarMobile';
 
 //ICONS
-import { search_icon, close_sidebar_icon, menu_bar_icon } from '../assets/icons';
+import { search_icon } from '../assets/icons';
 
 const Home = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
 
   return (
     <div className="flex h-screen m-0 p-0 bg-[#2D2635]">
@@ -29,26 +25,7 @@ const Home = () => {
           <div className="flex-grow w-full lg:w-[calc(100%-230px)] sm:w-full overflow-y-auto">
             <div className='p-4 pr-8 w-full overflow-y-auto'>
               <div className='flex mb-8 gap-6 items-center'>
-                <div className="lg:hidden">
-                  <button
-                    className="w-12 text-white p-2"
-                    onClick={toggleMenu}
-                  >
-                    {isMenuOpen ? (
-                      <img src={close_sidebar_icon} alt="close sidebar" />
-                    ) : (
-                      <img src={menu_bar_icon} alt="open sidebar" />
-                    )}
-                  </button>
-                  
-                  <div
-                    className={`absolute top-0 pt-16 left-0 pl-2 w-64 text-white z-10 transition-all duration-500 ease-in-out overflow-hidden h-screen w-screen bg-[#0c121F] bg-opacity-70 hover:cursor-pointer
-                    ${isMenuOpen ? 'opacity-100 block' : 'opacity-0 hidden'}`}
-                    onClick={toggleMenu}
-                  >
-                    <Sidebar elem={1} />
-                  </div>
-                </div>
+                <SideBarMobile elem={1}/>
                 <div className="flex justify-between items-center bg-[#1F1F1F] items-center h-fit w-96 rounded-full px-3">
                   <img 
                     src={search_icon} 
