@@ -96,8 +96,8 @@ const NowPlaying = () => {
 
   return (
     <>
-      <div className="pl-44 lg:pl-0 fixed bottom-0 right-0 w-full h-fit text-white flex items-center justify-center z-50 lg:fixed lg:top-0 lg:right-0 lg:w-72 lg:h-5/12">
-        <div className='bg-[rgba(217,217,217,0.11)] bg-opacity-30 backdrop-blur-md w-full h-full p-2 lg:p-0 lg:rounded-b-full rounded-t-xl'>
+      <div className="p-2">
+        <div className='bg-[rgba(217,217,217,0.11)] bg-opacity-30 backdrop-blur-md w-full h-full p-2 lg:p-0 lg:rounded-b-full rounded-xl'>
           <ReactHowler
             src={['sound.ogg', 'sound.mp3']}
             playing={playing}
@@ -110,9 +110,9 @@ const NowPlaying = () => {
             ref={playerRef}
           />
           {true ? 
-            <div className='flex w-full h-full justify-center space-x-8 lg:space-x-0 items-center lg:flex-none lg:rounded-b-full lg:flex-col lg:gap-4 flex-wrap'>
+            <div className='flex flex-col w-full h-16 lg:h-full justify-center space-x-8 lg:space-x-0 items-center lg:flex-none lg:rounded-b-full lg:flex-col lg:gap-4 flex-wrap'>
               <div className='order-1 lg:order-4 lg:hidden h-16 w-16 lg:w-44 lg:h-44 rounded-full bg-gray-500'></div>
-              <div className='order-2 lg:order-1 capitalize font-semibold'>
+              <div className='order-2 lg:order-1 capitalize font-semibold lg:py-8'>
                 <h1 className='text-lg'>
                   Title
                 </h1>
@@ -125,7 +125,8 @@ const NowPlaying = () => {
                 {' / '}
                 {duration ? duration.toFixed(2) : '100'}
               </p>
-              <div className='lg:hidden order-4 lg:order-5 seek flex items-center cursor-pointer '>
+              <div className='lg:hidden order-4 lg:order-5 flex items-center gap-4 lg:gap-0 cursor-pointer '>
+                  <p className='lg:hidden'>{progress.toFixed(2)}</p>
                 <label>
                   <input
                     type='range'
@@ -138,12 +139,14 @@ const NowPlaying = () => {
                     onMouseDown={handleMouseDownSeek}
                     onMouseUp={handleMouseUpSeek}
                     style={{
-                      background: `linear-gradient(to right, #C925A5 ${20}%, #AF96BC ${20}%)`,
+                      background: `linear-gradient(to right, #774F96 ${20}%, #AF96BC ${20}%)`,
                     }}
                   />
+
                 </label>
+                  <p className='lg:hidden'>{duration ? duration.toFixed(2) : '100'}</p>
               </div>
-              <div className='order-5 lg:order-2 flex justify-center items-center gap-2'>
+              <div className='order-5 lg:order-2 flex justify-center items-center gap-2 lg:pb-4'>
                 <button  onClick={() => setShuffle(!shuffle)}>
                   { shuffle ? <img src={shuffle_icon} alt='shuffle' /> : <img src={no_shuffle_icon} alt='no shuffle' /> }
                 </button>
@@ -181,7 +184,7 @@ const NowPlaying = () => {
                     cy="60" 
                     r="50" 
                     fill="none" 
-                    stroke="#C925A5" 
+                    stroke="#774F96" 
                     strokeWidth="4"
                     strokeDasharray={circumference}
                     strokeDashoffset={strokeDashoffset}

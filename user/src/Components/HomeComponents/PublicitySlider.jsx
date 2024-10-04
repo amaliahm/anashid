@@ -23,7 +23,7 @@ const PublicityComponent = () => {
   };
 
   return (
-    <div className="lg:mr-2/3 relative mb-14 lg:w-[78%]">
+    <div className="lg:mr-2/3 relative mb-14">
         <div className='flex gap-4 justify-center items-center'>
             <button
               className="p-2 rounded-full hover:opacity-100"

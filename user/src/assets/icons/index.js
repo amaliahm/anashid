@@ -38,6 +38,9 @@ import no_shuffle_icon from './no_shuffle_icon.svg'
 import favorite from './favorite.svg'
 import favorite__ from './favorite__.svg'
 
+import close_sidebar_icon from './close_sidebar_icon.svg'
+import menu_bar_icon from './menu_bar_icon.svg'
+
 export {
     facebook, google,
     home_icon, category_icon, artist_icon, played_now_icon, 
@@ -53,4 +56,5 @@ export {
     repeate_one_icon, no_repeate_icon,
     shuffle_icon, no_shuffle_icon,
     favorite, favorite__,
+    close_sidebar_icon, menu_bar_icon, 
 }

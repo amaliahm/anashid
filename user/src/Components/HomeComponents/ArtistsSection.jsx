@@ -1,12 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 
 //ICONS
 import { right_arrow_icon } from '../../assets/icons';
 
 const ArtistsSection = () => {
-  const [isScrollableLeft, setScrollableLeft] = useState(false);
-  const [isScrollableRight, setScrollableRight] = useState(true); // Initially show right shadow
-  const scrollRef = useRef(null);
 
   const artists = [
     {
@@ -32,18 +29,6 @@ const ArtistsSection = () => {
     },
   ];
 
-  const handleScroll = () => {
-    const scrollLeft = scrollRef.current.scrollLeft;
-    const maxScrollLeft =
-      scrollRef.current.scrollWidth - scrollRef.current.clientWidth;
-    setScrollableLeft(scrollLeft > 0);
-    setScrollableRight(scrollLeft < maxScrollLeft);
-  };
-
-  useEffect(() => {
-    handleScroll();
-  }, []);
-
   return (
     <div className='mb-14'>
       <div className='flex items-center justify-between mb-6'>
@@ -59,16 +44,6 @@ const ArtistsSection = () => {
       </div>
       <div className='relative'>
         <div 
-          className={`absolute left-0 top-0 h-full w-10 bg-gradient-to-r from-gray-900 pointer-events-none 
-          ${isScrollableLeft ? 'opacity-100' : 'opacity-0'}`}
-        />
-        <div 
-          className={`absolute right-0 top-0 h-full w-10 bg-gradient-to-l from-gray-900 pointer-events-none 
-          ${isScrollableRight ? 'opacity-100' : 'opacity-0'}`} 
-        />
-        <div 
-          ref={scrollRef} 
-          onScroll={handleScroll} 
           className='overflow-x-auto flex gap-4 pb-2'
         >
           {artists.map((card, index) => (
