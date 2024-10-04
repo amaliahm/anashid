@@ -1,12 +1,12 @@
-import Hero from "./Hero"
-import NavBarComponent from "./NavBar"
-import { hero, circle } from "../../assets/images"
-import Browse from "./Browse"
-import Genre from "./Genre"
-import CreateSection from "./CreateSection"
-import ArtistComponent from "./ArtistComponent"
-import AboutUs from "./AboutUs"
-import Footer from "../../Components/Footer"
+import Hero from "../Components/landingPageComponents/Hero"
+import NavBarComponent from "../Components/NavBar"
+import { hero, circle } from "../assets/images"
+import Browse from "../Components/landingPageComponents/Browse"
+import Genre from "../Components/landingPageComponents/Genre"
+import CreateSection from "../Components/landingPageComponents/CreateSection"
+import ArtistComponent from "../Components/landingPageComponents/ArtistComponent"
+import AboutUs from "../Components/landingPageComponents/AboutUs"
+import Footer from "../Components/Footer"
 
 const LandingPage = () => {
 

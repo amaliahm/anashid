@@ -1,4 +1,4 @@
-import Header from "../../Components/Header"
+import Header from "../Header"
 import { useNavigate } from "react-router-dom"
 
 const Hero = () => {

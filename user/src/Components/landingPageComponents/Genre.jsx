@@ -1,4 +1,4 @@
-import Header from "../../Components/Header"
+import Header from "../Header"
 import { useNavigate } from "react-router-dom"
 import { genre1, genre2, genre3, playIcon } from "../../assets/images"
 

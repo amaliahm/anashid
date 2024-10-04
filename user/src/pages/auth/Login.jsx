@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { loginReducer } from "../../redux/auth/authSlice"
+
+// REDUX
+import { loginReducer } from "../../services/authService.js"
+
+//COMPONENTS
 import Footer from "../../Components/Footer"
+
+//ICONS
 import { facebook, google } from "../../assets/icons"
 import { signup, line } from "../../assets/images"
 

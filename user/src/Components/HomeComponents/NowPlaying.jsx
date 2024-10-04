@@ -3,7 +3,7 @@ import ReactHowler from 'react-howler';
 import raf from 'raf';
 
 //COMPONENTS
-import Loading from '../Loading';
+import Loading from '../../pages/Loading';
 
 //ICONS
 import { 

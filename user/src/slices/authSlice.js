@@ -1,45 +1,7 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice } from '@reduxjs/toolkit';
 
-export const signupReducer = createAsyncThunk(
-  'auth/signup',
-  async (userData, { rejectWithValue }) => {
-    console.log('heyy')
-    try {
-      const response = await axios.post(
-        'http://localhost:3000/auth/signup',
-        userData
-      );
-      return response.data;
-    } catch (error) {
-      if (error.response && error.response.data) {
-        return rejectWithValue(error.response.data.message);
-      }
-      return rejectWithValue('Network error, please try again!');
-    }
-  }
-);
-
-
-export const loginReducer = createAsyncThunk(
-  'auth/login',
-  async (loginData, { rejectWithValue }) => {
-    try {
-      const response = await axios.post(
-        'http://localhost:3000/auth/login',
-        loginData,
-        { withCredentials: true }
-      );
-      localStorage.setItem('token', response.data.token);
-      return response.data;
-    } catch (error) {
-      if (error.response && error.response.data) {
-        return rejectWithValue(error.response.data.message);
-      }
-      return rejectWithValue('Network error, please try again!');
-    }
-  }
-);
+//authSlice.js
+import { signupReducer, loginReducer } from '../services/authService.js';
 
 const authSlice = createSlice({
   name: 'auth',

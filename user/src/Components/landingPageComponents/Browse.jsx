@@ -1,4 +1,4 @@
-import Header from "../../Components/Header"
+import Header from "../Header"
 import { browseCircle } from "../../assets/images"
 
 const Browse = () => {

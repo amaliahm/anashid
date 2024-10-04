@@ -1,9 +1,8 @@
 const CardComponent = ({
-    key, image = '', title, subTitle
+    image = '', title, subTitle
 }) => {
     return (
         <div
-          key={key}
           className="w-40 sm:w-48 md:w-64 p-3 rounded-xl bg-[#353141] flex flex-col items-start gap-2 hover:cursor-pointer capitalize"
         >
             <div 

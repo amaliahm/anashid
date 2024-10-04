@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { signup } from '../../assets/images';
 import { useNavigate } from 'react-router-dom';
+
+//ICONS
+import { signup } from '../../assets/images';
 
 const ChangePassword = () => {
   const navigate = useNavigate()

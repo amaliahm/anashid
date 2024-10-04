@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 
 // COMPONENTS
-import Sidebar from '../../Components/SideBar';
-import NowPlaying from '../../Components/HomeComponents/NowPlaying';
-import PublicityComponent from '../../Components/HomeComponents/PublicitySlider';
-import CategoriesSection from '../../Components/HomeComponents/CategoriesSection';
-import ArtistsSection from '../../Components/HomeComponents/ArtistsSection';
-import NewAnasheedSection from '../../Components/HomeComponents/NewAnasheedSection';
-import TrendingAnasheedComponent from '../../Components/HomeComponents/TrendingAnasheed';
+import Sidebar from '../Components/SideBar';
+import NowPlaying from '../Components/HomeComponents/NowPlaying';
+import PublicityComponent from '../Components/HomeComponents/PublicitySlider';
+import CategoriesSection from '../Components/HomeComponents/CategoriesSection';
+import ArtistsSection from '../Components/HomeComponents/ArtistsSection';
+import NewAnasheedSection from '../Components/HomeComponents/NewAnasheedSection';
+import TrendingAnasheedComponent from '../Components/HomeComponents/TrendingAnasheed';
 
 //ICONS
-import { search_icon, close_sidebar_icon, menu_bar_icon } from '../../assets/icons';
+import { search_icon, close_sidebar_icon, menu_bar_icon } from '../assets/icons';
 
 const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

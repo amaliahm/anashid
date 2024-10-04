@@ -1,13 +1,12 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import LandingPage from './pages/landing page/LandingPage'
+import LandingPage from './pages/LandingPage'
 import Signup from './pages/auth/Signup';
 import Login from './pages/auth/Login';
-import Home from './pages/home/home';
+import Home from './pages/Home';
 import VerifyEmail from './pages/auth/VerifyEmail';
 import PrivateRoute from './pages/auth/PrivateRoute';
 import ForgetPassword from './pages/auth/ForgetPassword';
 import ChangePassword from './pages/auth/ChangePassword';
-import ErrorBoundary from './pages/error/ErrorBoundary';
 import ErrorPage from './pages/error/ErrorPage';
 
 function App() {

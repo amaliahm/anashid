@@ -1,5 +1,5 @@
 import { browseCircle, playlistCreate, heartCreate } from "../../assets/images"
-import Header from "../../Components/Header"
+import Header from "../Header"
 
 const CreateSection = () => {
   return (
