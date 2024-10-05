@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 
 //ICONS
-import { play, pause, sound } from "../assets/icons"
+import { play, pause, sound, favorite, favorite__ } from "../assets/icons"
 
 const NasheedBar = ({
     nasheed = {
@@ -9,7 +9,8 @@ const NasheedBar = ({
         artists: 'artist',
         date: '05/10/2024',
         duration: '10:00'
-    }
+    },
+    favoriteBar = false
 }) => {
     const [isPlay, setIsPlay] = useState(false)
 
@@ -29,7 +30,7 @@ const NasheedBar = ({
             <p className="capitalize text-[var(--semanticThirdColor)] text-sm">{nasheed.date}</p>
           </div>
           <div className="flex items-center justify-evenly w-1/4 gap-2 flex-wrap min-w-32">
-            <img src={sound} alt="sound" />
+            {favoriteBar ? <img src={favorite__} alt="favorite" /> : <img src={sound} alt="sound" />}
             <img src={isPlay ? pause : play} alt={isPlay ? 'pause' : 'play'} onClick={togglePlay} className="hover:cursor-pointer w-6" />
             <p className="font-bold">{nasheed.duration}</p>
           </div>
