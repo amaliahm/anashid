@@ -11,9 +11,9 @@ const sidebar_elements = [
         title: 'menu',
         elements: [
             { name: 'home', icon: home_icon, color: 'white', element: 1, to: '/user/home' }, //done
-            { name: 'categories', icon: category_icon, color: 'white', element: 2, to: 'user/categories' },
-            { name: 'artists', icon: artist_icon, color: 'white', element: 3, to: 'user/artists' },
-            { name: 'played now', icon: played_now_icon, color: 'white', element: 4, to: '/user/playednow' },
+            { name: 'categories', icon: category_icon, color: 'white', element: 2, to: '/user/categories' }, //done
+            { name: 'artists', icon: artist_icon, color: 'white', element: 3, to: '/user/artists' }, //done
+            { name: 'played now', icon: played_now_icon, color: 'white', element: 4, to: '/user/playednow' },  //done
         ]
     },
     {

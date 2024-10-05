@@ -31,7 +31,7 @@ const ErrorPage = () => {
                         </p>
                     </div>
                     <a className="flex-center cursor-pointer rounded-full bg-[var(--mainColor)] px-6 py-4 text-[14px] font-semibold leading-[16px] text-white"
-                      href="/"
+                      href="/auth/login"
                     >
                         Go back to Homepage →
                     </a>

@@ -100,7 +100,7 @@ const Users = () => {
                               user.id == id ? 'opacity-50 cursor-not-allowed' : 'hover:cursor-pointer'
                             }
                             `}
-                            onClick={() => openModal(user)}
+                            onClick={() => user.id == id ? '' : openModal(user)}
                           >
                             {user.account_type}
                           </span>

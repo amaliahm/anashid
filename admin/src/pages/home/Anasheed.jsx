@@ -46,6 +46,8 @@ const Anasheed = () => {
     dispatch(fetchAnasheed())
   }, [dispatch])
 
+  console.log(anasheed)
+
     return (
         <>
           <div className="flex">
@@ -87,7 +89,7 @@ const Anasheed = () => {
                       {anasheed.map((elem, index) => (
                         <tr key={index} className={`${elem.deleted_anasheed ? 'bg-[var(--redColor)] opacity-50' : ''} border-b border-gray-700`}>
                           <td className="px-4 lg:px-12 py-4">
-                            {elem.name} 
+                            {elem.title} 
                           </td>
                           <td className="px-4 lg:px-6 py-4">
                             <div 

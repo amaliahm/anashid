@@ -9,6 +9,8 @@ import ForgetPassword from './pages/auth/ForgetPassword';
 import ChangePassword from './pages/auth/ChangePassword';
 import ErrorPage from './pages/error/ErrorPage';
 import PlayedNow from './pages/PlayedNow';
+import Categories from './pages/Categories';
+import Artists from './pages/Artists';
 
 function App() {
 
@@ -53,6 +55,22 @@ function App() {
             element={
               <PrivateRoute>
                 <PlayedNow />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path='/user/categories/:id' 
+            element={
+              <PrivateRoute>
+                <Categories />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path='/user/artists/:id' 
+            element={
+              <PrivateRoute>
+                <Artists />
               </PrivateRoute>
             } 
           />

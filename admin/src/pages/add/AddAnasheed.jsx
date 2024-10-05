@@ -193,7 +193,7 @@ const AddAnasheed = () => {
                             }
                             className={
                                 `border-[1px] capitalize my-5 border-[var(--greenColor)] rounded-3xl px-12 py-2 text-[var(--greenColor)] text-xl font-semibold 
-                                ${selectedValues.artist === null || selectedValues.category === null || selectedValues.gender === null || selectedValues.language === null || selectedValues.theme === null ||  musicDuration === null || musicFile === null || description.length === 0 || title.length === 0 || photo === null 
+                                ${loading || selectedValues.artist === null || selectedValues.category === null || selectedValues.gender === null || selectedValues.language === null || selectedValues.theme === null ||  musicDuration === null || musicFile === null || description.length === 0 || title.length === 0 || photo === null 
                                     ? 'hover:cursor-not-allowed opacity-50' 
                                     : 'hover:cusor-pointer'} mb-10`
                                 }
