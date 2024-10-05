@@ -26,14 +26,14 @@ const sidebar_elements = [
         title: 'playlist and favorite',
         elements: [
             { name: 'your favorite', icon: favorite_icon, color: 'white', element: 6, to: '/user/favorites' }, //done
-            { name: 'your playlist', icon: playlist_icon, color: 'white', element: 7, to: 'user/playlists' },
-            { name: 'add playlist', icon: add_playlist_icon, color: '#0E9EEF', element: 0, to: 'modal add playlist' },
+            { name: 'your playlist', icon: playlist_icon, color: 'white', element: 7, to: '/user/playlists' }, //done
+            { name: 'add playlist', icon: add_playlist_icon, color: '#0E9EEF', element: 8, to: '/user/add-playlist' },
         ]
     },
     {
         title: 'general',
         elements: [
-            { name: 'contact us', icon: contact_us_icon, color: 'white', element: 8, to: 'user/contact' },
+            { name: 'contact us', icon: contact_us_icon, color: 'white', element: 9, to: 'user/contact' },
             { name: 'logout', icon: logout_icon, color: '#F38BDC', element: 0, to: 'modal logout' },
         ]
     },

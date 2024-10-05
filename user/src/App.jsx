@@ -13,6 +13,8 @@ import Categories from './pages/Categories';
 import Artists from './pages/Artists';
 import RecentlyPlayed from './pages/RecentlyPlayed';
 import Favorites from './pages/Favorites';
+import Playlists from './pages/Playlists';
+import AddPlaylist from './pages/AddPlaylist';
 
 function App() {
 
@@ -89,6 +91,22 @@ function App() {
             element={
               <PrivateRoute>
                 <Favorites />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path='/user/playlists/:id' 
+            element={
+              <PrivateRoute>
+                <Playlists />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path='/user/add-playlist/:id' 
+            element={
+              <PrivateRoute>
+                <AddPlaylist />
               </PrivateRoute>
             } 
           />
