@@ -39,7 +39,7 @@ const Categories = () => {
                 <SideBarMobile elem={2}/>
               </div>
               <div className='mb-32'>
-                <h2 className='capitalize font-semibold text-2xl lg:text-3xl text-[#F38BDC] mb-8'>
+                <h2 className='capitalize font-semibold text-2xl lg:text-3xl text-[#F38BDC] mb-8 px-2'>
                   categories
                 </h2>
                 <div className='w-full h-full'> 

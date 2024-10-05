@@ -41,6 +41,10 @@ import favorite__ from './favorite__.svg'
 import close_sidebar_icon from './close_sidebar_icon.svg'
 import menu_bar_icon from './menu_bar_icon.svg'
 
+import play from './play.svg'
+import sound from './sound.svg'
+import pause from './pause.svg'
+
 export {
     facebook, google,
     home_icon, category_icon, artist_icon, played_now_icon, 
@@ -57,4 +61,5 @@ export {
     shuffle_icon, no_shuffle_icon,
     favorite, favorite__,
     close_sidebar_icon, menu_bar_icon, 
+    play, sound, pause, 
 }

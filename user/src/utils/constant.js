@@ -19,7 +19,7 @@ const sidebar_elements = [
     {
         title: 'library',
         elements: [
-            { name: 'recently played', icon: recently_played_icon, color: 'white', element: 5, to: 'user/history' },
+            { name: 'recently played', icon: recently_played_icon, color: 'white', element: 5, to: '/user/history' }, //done
         ]
     },
     {

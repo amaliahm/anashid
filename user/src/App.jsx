@@ -11,6 +11,7 @@ import ErrorPage from './pages/error/ErrorPage';
 import PlayedNow from './pages/PlayedNow';
 import Categories from './pages/Categories';
 import Artists from './pages/Artists';
+import RecentlyPlayed from './pages/RecentlyPlayed';
 
 function App() {
 
@@ -71,6 +72,14 @@ function App() {
             element={
               <PrivateRoute>
                 <Artists />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path='/user/history/:id' 
+            element={
+              <PrivateRoute>
+                <RecentlyPlayed />
               </PrivateRoute>
             } 
           />

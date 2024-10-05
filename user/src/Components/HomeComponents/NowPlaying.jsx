@@ -96,7 +96,7 @@ const NowPlaying = () => {
 
   return (
     <>
-      <div className="p-2">
+      <div className="p-2 lg:p-0">
         <div className='bg-[rgba(217,217,217,0.11)] bg-opacity-30 backdrop-blur-md w-full h-full p-2 lg:p-0 lg:rounded-b-full rounded-xl'>
           <ReactHowler
             src={['sound.ogg', 'sound.mp3']}
