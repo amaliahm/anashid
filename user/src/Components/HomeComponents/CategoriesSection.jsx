@@ -19,14 +19,6 @@ const CategoriesSection = () => {
     dispatch(fetchCategories())
   }, [])
 
-  console.log(categories)
-
-  if (categories) {
-    Object.keys(categories).map((e, i) => {
-      console.log(categories[e].name)
-    })
-  }
-
   return (
     <div className='mb-14'>
       <div className='flex items-center justify-between mb-6'>

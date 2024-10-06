@@ -14,31 +14,6 @@ const ArtistsSection = () => {
   useEffect(() => {
     dispatch(fetchArtists())
   }, [])
-  console.log(artists)
-
-  const data = [
-    {
-      artist: 'artist 1',
-    },
-    {
-      artist: 'artist 2',
-    },
-    {
-      artist: 'artist 3',
-    },
-    {
-      artist: 'artist 4',
-    },
-    {
-      artist: 'artist 5',
-    },
-    {
-      artist: 'artist 5',
-    },
-    {
-      artist: 'artist 6',
-    },
-  ];
 
   return (
     <div className='mb-14'>

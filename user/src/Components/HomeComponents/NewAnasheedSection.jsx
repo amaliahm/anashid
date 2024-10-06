@@ -1,4 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+//REDUX
+import { fetchAnasheed } from '../../services/anasheedServices';
 
 //COMPONENTS
 import CardComponent from '../Card';
@@ -7,40 +11,27 @@ import CardComponent from '../Card';
 import { right_arrow_icon } from '../../assets/icons';
 
 const NewAnasheedSection = () => {
+  const dispatch = useDispatch();
+  const { anasheed, error, loading } = useSelector((state) => state.anasheed);
 
-  const newAnasheed = [
-    {
-      nasheed: 'nasheed 1',
-      artist: 'artist name',
-    },
-    {
-      nasheed: 'nasheed 2',
-      artist: 'artist name',
-    },
-    {
-      nasheed: 'nasheed 3',
-      artist: 'artist name',
-    },
-    {
-      nasheed: 'nasheed 4',
-      artist: 'artist name',
-    },
-    {
-      nasheed: 'nasheed 5',
-      artist: 'artist name',
-    },
-    {
-      nasheed: 'nasheed 6',
-      artist: 'artist name',
-    },
-    {
-      nasheed: 'nasheed 7',
-      artist: 'artist name',
-    },
-  ];
+  const getNewAnasheed = (data) => {
+    if (data) {
+      const date = new Date()
+      date.setDate(date.getDate() - 10)
+  
+      const recentAnasheed = data.filter(nasheed => new Date(nasheed.created_at) >= date)
+      if (recentAnasheed > 0) {
+        return (recentAnasheed.sort((a, b) => b.created_at - a.created_at))
+      }
+      return recentAnasheed.sort((a, b) => b.id - a.id).slice(0, 10)
+    }
+  }
 
   useEffect(() => {
+    dispatch(fetchAnasheed());
   }, []);
+
+  const newAnasheed = getNewAnasheed(anasheed)
 
   return (
     <div className='mb-14'>
@@ -59,11 +50,12 @@ const NewAnasheedSection = () => {
         <div 
           className=' flex gap-2 sm:gap-4 pb-2 w-fit'
         >
-          {newAnasheed.map((card, index) => (
+          {newAnasheed && Object.keys(newAnasheed).map((card, index) => (
             <CardComponent 
               key={index} 
-              title={card.nasheed} 
-              subTitle={card.artist}
+              image={newAnasheed[card].file_path}
+              title={newAnasheed[card].title} 
+              subTitle={newAnasheed[card].artist_name}
             />
           ))}
         </div>

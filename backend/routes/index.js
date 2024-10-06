@@ -20,6 +20,7 @@ router.use("/auth", authRouter);
 router.use("/admin/users", usersRouter);
 
 router.use("/admin/anasheed", anasheedRouter);
+router.use("/user/anasheed", anasheedRouter);
 
 router.use("/admin/artists", artistRouter);
 router.use("/user/artists", artistRouter);
