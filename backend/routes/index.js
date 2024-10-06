@@ -28,6 +28,7 @@ router.use("/admin/categories", CategoryRouter);
 router.use("/admin/profile", ProfileRouter);
 
 router.use("/admin/publicity", PublicityRouter);
+router.use("/user/publicity", PublicityRouter);
 
 router.use('/admin/gender', GenderRouter);
 

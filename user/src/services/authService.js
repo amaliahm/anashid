@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
 import apiClient from './api.js';
 
 export const signupReducer = createAsyncThunk(
