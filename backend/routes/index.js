@@ -22,8 +22,10 @@ router.use("/admin/users", usersRouter);
 router.use("/admin/anasheed", anasheedRouter);
 
 router.use("/admin/artists", artistRouter);
+router.use("/user/artists", artistRouter);
 
 router.use("/admin/categories", CategoryRouter);
+router.use("/user/categories", CategoryRouter);
 
 router.use("/admin/profile", ProfileRouter);
 

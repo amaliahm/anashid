@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+//REDUX
+import { fetchCategories } from '../../services/categoriesService';
 
 //COMPONENTS
 import CardComponent from '../Card';
@@ -8,14 +12,20 @@ import { right_arrow_icon } from '../../assets/icons';
 
 const CategoriesSection = () => {
 
-  const categories = [
-    { category: 'Category 1', anasheed: '100 nasheed' },
-    { category: 'Category 2', anasheed: '100 nasheed' },
-    { category: 'Category 3', anasheed: '100 nasheed' },
-    { category: 'Category 4', anasheed: '100 nasheed' },
-    { category: 'Category 5', anasheed: '100 nasheed' },
-    { category: 'Category 6', anasheed: '100 nasheed' },
-  ];
+  const dispatch = useDispatch();
+  const {categories, error, loading} = useSelector(state => state.categories);
+
+  useEffect(() => {
+    dispatch(fetchCategories())
+  }, [])
+
+  console.log(categories)
+
+  if (categories) {
+    Object.keys(categories).map((e, i) => {
+      console.log(categories[e].name)
+    })
+  }
 
   return (
     <div className='mb-14'>
@@ -34,11 +44,12 @@ const CategoriesSection = () => {
         <div 
           className='flex gap-2 sm:gap-4 pb-2 w-fit'
         >
-          {categories.map((card, index) => (
+          {categories && Object.keys(categories).map((card, index) => (
             <CardComponent 
               key={index} 
-              title={card.category} 
-              subTitle={card.anasheed}
+              image={categories[card].file_path}
+              title={categories[card].name} 
+              subTitle={categories[card].anasheed || 0 + ' nasheed'}
             />
           ))}
         </div>

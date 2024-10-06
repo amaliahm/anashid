@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+//REDUX
+import { fetchArtists } from '../../services/artistsService';
 
 //ICONS
 import { right_arrow_icon } from '../../assets/icons';
 
 const ArtistsSection = () => {
+  const dispatch = useDispatch();
+  const {artists, error, loading} = useSelector(state => state.artists);
 
-  const artists = [
+  useEffect(() => {
+    dispatch(fetchArtists())
+  }, [])
+  console.log(artists)
+
+  const data = [
     {
       artist: 'artist 1',
     },
@@ -46,14 +57,14 @@ const ArtistsSection = () => {
         <div 
           className='overflow-x-auto flex gap-4 pb-2'
         >
-          {artists.map((card, index) => (
+          {artists && Object.keys(artists).map((card, index) => (
             <div 
               key={index}
-              className='w-fit p-1 flex flex-col items-center gap-2 hover:cursor-pointer bg-cover bg-center'
+              className='rounded-xl w-fit p-1 flex flex-col items-center gap-2 hover:cursor-pointer hover:bg-[#353141] hover:opacity-80 transition-all ease-in-out duration-300'
             >
-                <div className='bg-gray-500 h-32 w-32 rounded-full'></div>
-                <h3 className='text-lg font-semibold capitalize'>
-                  {card.artist}
+                <div className='bg-gray-500 h-32 w-32 rounded-full bg-cover bg-center' style={{ backgroundImage: `url('${artists && artists[card].file_path}')`}}></div>
+                <h3 className='text-lg text-center font-semibold capitalize'>
+                  {artists[card].name}
                 </h3>
             </div>
           ))}
