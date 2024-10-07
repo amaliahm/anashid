@@ -16,6 +16,7 @@ import Favorites from './pages/Favorites';
 import Playlists from './pages/Playlists';
 import AddPlaylist from './pages/add/AddPlaylist';
 import Category from './pages/details/Category';
+import Artist from './pages/details/Artist';
 
 function App() {
 
@@ -84,6 +85,14 @@ function App() {
             element={
               <PrivateRoute>
                 <Artists />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path='/user/artists/:id/:id' 
+            element={
+              <PrivateRoute>
+                <Artist />
               </PrivateRoute>
             } 
           />

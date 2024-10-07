@@ -46,11 +46,6 @@ const NewAnasheedSection = () => {
           new 
           <span className='text-[var(--mainColor)]'> anasheed </span>
         </h2>
-        <img 
-          src={right_arrow_icon} 
-          alt='see more' 
-          className='h-6 hover:cursor-pointer'
-        />
       </div>
       <div className='relative overflow-x-auto'>
         <div 

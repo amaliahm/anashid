@@ -8,6 +8,8 @@ import artistsSlice from '../slices/artistsSlice.js';
 import anasheedSlice from '../slices/anasheedSlice.js';
 
 import itemCategorySlice from '../slices/itemCategorySlice.js';
+import itemArtistSlice from '../slices/ItemArtistSlice.js';
+// item anasheed
 
 export const rootReducer = combineReducers({
     auth: authReducer,
@@ -15,5 +17,7 @@ export const rootReducer = combineReducers({
     categories: categoriesSlice,
     artists: artistsSlice,
     anasheed: anasheedSlice,
+    
     itemCategory: itemCategorySlice,
+    itemArtist: itemArtistSlice,
 });

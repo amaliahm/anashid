@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 //REDUX
 import { fetchArtists } from '../../services/artistsService';
+import { setItemArtist, clearItemArtist } from '../../slices/ItemArtistSlice';
+
+//COMPONENTS
+import Loading from '../../pages/Loading';
 
 //ICONS
 import { right_arrow_icon } from '../../assets/icons';
@@ -10,10 +16,18 @@ import { right_arrow_icon } from '../../assets/icons';
 const ArtistsSection = () => {
   const dispatch = useDispatch();
   const {artists, error, loading} = useSelector(state => state.artists);
+  const navigate = useNavigate()
+  const { id } = useParams()
 
   useEffect(() => {
     dispatch(fetchArtists())
   }, [])
+
+  const handleItemArtist = (artist) => {
+    dispatch(clearItemArtist())
+    dispatch(setItemArtist(artist))
+    navigate(`/user/artists/${id}/${artist.id}`)
+  }
 
   return (
     <div className='mb-14'>
@@ -25,26 +39,35 @@ const ArtistsSection = () => {
         <img 
           src={right_arrow_icon} 
           alt='see more' 
+          onClick={() => navigate(`/user/artists/${id}`)}
           className='h-6 hover:cursor-pointer'
         />
       </div>
-      <div className='relative'>
-        <div 
-          className='overflow-x-auto flex gap-4 pb-2'
-        >
-          {artists && Object.keys(artists).map((card, index) => (
-            <div 
-              key={index}
-              className='rounded-xl w-fit p-1 flex flex-col items-center gap-2 hover:cursor-pointer hover:bg-[#353141] hover:opacity-80 transition-all ease-in-out duration-300'
-            >
-                <div className='bg-gray-500 h-32 w-32 rounded-full bg-cover bg-center' style={{ backgroundImage: `url('${artists && artists[card].file_path}')`}}></div>
-                <h3 className='text-lg text-center font-semibold capitalize'>
-                  {artists[card].name}
-                </h3>
-            </div>
-          ))}
-        </div>
-      </div>
+      {artists ?
+        <div className='relative'>
+          <div 
+            className='overflow-x-auto flex gap-4 pb-2'
+          >
+            {Object.keys(artists).map((card, index) => (
+              <div 
+                key={index}
+                onClick={() => handleItemArtist(artists[card])}
+                className='rounded-xl w-fit p-1 flex flex-col items-center gap-2 hover:cursor-pointer hover:bg-[#353141] hover:opacity-80 transition-all ease-in-out duration-300'
+              >
+                  <div 
+                    className='bg-gray-500 h-32 w-32 rounded-full bg-cover bg-center' 
+                    style={{ backgroundImage: `url('${artists[card].file_path}')`}}
+                  ></div>
+                  <h3 className='text-lg text-center font-semibold capitalize'>
+                    {artists[card].name}
+                  </h3>
+              </div>
+            ))}
+          </div>
+        </div> :
+          loading ? 
+            <Loading /> :
+              error && <Loading title="No data available"/>}
     </div>
   );
 };

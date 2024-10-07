@@ -1,22 +1,37 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+
+//REEDUX
+import { fetchArtists } from '../services/artistsService.js';
+import { setItemArtist, clearItemArtist } from '../slices/ItemArtistSlice.js';
 
 // COMPONENTS
 import Sidebar from '../Components/SideBar';
 import SideBarMobile from '../Components/SideBarMobile';
 import CardComponent from '../Components/Card';
 import NowPlayingWrapper from '../Components/NowPlayingWrapper';
+import Loading from './Loading';
 
 const Artists = () => {
 
+  const { artists, loading, error } = useSelector(state => state.artists)
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
+  const { id } = useParams()
 
-  const artists = [
-    { name: 'Artist 1', anasheed: '100 nasheed' },
-    { name: 'Artist 2', anasheed: '100 nasheed' },
-    { name: 'Artist 3', anasheed: '100 nasheed' },
-    { name: 'Artist 4', anasheed: '100 nasheed' },
-    { name: 'Artist 5', anasheed: '100 nasheed' },
-    { name: 'Artist 6', anasheed: '100 nasheed' },
-  ];
+  useEffect(() => {
+    dispatch(fetchArtists())
+  }, [])
+
+  const handleItemArtist = (artist) => {
+    dispatch(clearItemArtist())
+    dispatch(setItemArtist(artist))
+    navigate(`/user/artists/${id}/${artist.id}`)
+  }
+
+  console.log(artists)
 
   return (
     <div className="flex h-screen m-0 p-0 bg-[#2D2635]">
@@ -34,19 +49,28 @@ const Artists = () => {
                 <h2 className='capitalize font-semibold text-2xl lg:text-3xl text-[#F38BDC] mb-8 px-2'>
                   artists
                 </h2>
-                <div className='w-full h-full'> 
-                  <div 
-                    className='flex flex-wrap justify-center items-center gap-2 sm:gap-4 pb-2 w-fit'
-                  >
-                    {artists.map((card, index) => (
-                      <CardComponent 
-                        key={index} 
-                        title={card.name} 
-                        subTitle={card.anasheed}
-                      />
-                    ))}
-                  </div>
-                </div>
+                {artists ?
+                  <div className='w-full h-full'> 
+                    <div 
+                      className='flex flex-wrap justify-center items-center gap-2 sm:gap-4 pb-2 w-fit'
+                    >
+                      {Object.keys(artists).map((card, index) => (
+                        <div
+                          key={index} 
+                          onClick={() => handleItemArtist(artists[card])}
+                        >
+                          <CardComponent 
+                            image={artists[card].file_path}
+                            title={artists[card].name} 
+                            subTitle={artists[card].bio}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div> : 
+                    loading ? 
+                      <Loading /> : 
+                        error && <Loading title="No data available"/>}
               </div>
             </div>
           </div>
