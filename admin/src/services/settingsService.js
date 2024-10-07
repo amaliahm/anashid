@@ -1,4 +1,4 @@
-import axios from 'axios';
+import apiClient from './api';
 
 export const fetchTableData = (table) => async (dispatch) => {
   dispatch({
@@ -6,7 +6,7 @@ export const fetchTableData = (table) => async (dispatch) => {
     payload: { table },
   });
   try {
-    const response = await axios.get(`http://localhost:3000/admin/${table}`);
+    const response = await apiClient.get(`/admin/${table}`);
     dispatch({
       type: 'FETCH_TABLE_DATA_SUCCESS',
       payload: { table, data: response.data },
@@ -28,8 +28,8 @@ export const addItemToTable = (table, item) => async (dispatch) => {
   try {
     const response = 
       table === 'publicity' ? 
-      await axios.post(
-        `http://localhost:3000/admin/${table}/add`, 
+      await apiClient.post(
+        `/admin/${table}/add`, 
         item,
         {
           headers: {
@@ -38,15 +38,15 @@ export const addItemToTable = (table, item) => async (dispatch) => {
         }
       ) :  
       table === 'sendEmail' ?
-      await axios.post(
-        `http://localhost:3000/admin/${table}/${item.id}`, 
+      await apiClient.post(
+        `/admin/${table}/${item.id}`, 
         {
           subject: item.subject,
           content: item.content
         }
       ) :
-      await axios.post(
-        `http://localhost:3000/admin/${table}/add`, 
+      await apiClient.post(
+        `/admin/${table}/add`, 
         {item: item}
       );
     dispatch({
@@ -68,7 +68,7 @@ export const deleteItemFromTable = (table, id) => async (dispatch) => {
     payload: { table },
   })
   try {
-    await axios.delete(`http://localhost:3000/admin/${table}/${id}`);
+    await apiClient.delete(`/admin/${table}/${id}`);
     dispatch({
       type: 'DELETE_ITEM_FROM_TABLE_SUCCESS',
       payload: { table, id },

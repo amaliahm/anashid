@@ -1,5 +1,6 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice } from '@reduxjs/toolkit';
+
+import { fetchArtists, addArtist, deleteArtist } from '../services/artistsService';
 
 const initialState = {
   artists: [],
@@ -7,11 +8,6 @@ const initialState = {
   error: null,
   successMessage: null,
 };
-
-export const fetchArtists = createAsyncThunk('artists/fetchArtists', async () => {
-  const response = await axios.get('http://localhost:3000/admin/artists');
-  return response.data; 
-});
 
 const artistSlice = createSlice({
   name: 'artists',
@@ -57,32 +53,6 @@ const artistSlice = createSlice({
         state.error = action.payload;
       });
   },
-});
-
-export const addArtist = createAsyncThunk('artists/addArtist', async (formData) => {
-    try {
-        const response = await axios.post(
-            'http://localhost:3000/admin/artists/add', 
-            formData,
-            {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                }
-            }
-        );
-        return response.data;
-    } catch (e) {
-        return rejectWithValue(e.response.data);
-    }
-});
-
-export const deleteArtist = createAsyncThunk('artists/deleteArtist', async (id, { rejectWithValue }) => {
-  try {
-    const response = await axios.delete(`http://localhost:3000/admin/artists/${id}`);
-    return response.data.id;
-  } catch (e) {
-    return rejectWithValue(e.response.data);
-  }
 });
 
 export default artistSlice.reducer;

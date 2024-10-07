@@ -1,5 +1,6 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice } from '@reduxjs/toolkit';
+
+import { fetchCurrentUser, addProfilePhoto } from '../services/profileService';
 
 const initialState = {
   user: [],
@@ -7,15 +8,6 @@ const initialState = {
   error: null,
   successMessage: null,
 };
-
-export const fetchCurrentUser = createAsyncThunk('currentUser/getCurrentUser', async (id) => {
-    try {
-        const response = await axios.get(`http://localhost:3000/admin/profile/${id}`);
-        return response.data; 
-    } catch (e) {
-        return []
-    }
-});
 
 const userSlice = createSlice({
   name: 'user',
@@ -49,24 +41,6 @@ const userSlice = createSlice({
         state.error = action.payload;
       });
   },
-});
-
-export const addProfilePhoto = createAsyncThunk('currentUser/addProfilePhoto', async (formData) => {
-    try {
-        const response = await axios.post(
-            `http://localhost:3000/admin/profile/add/${formData.id}`, 
-            formData,
-            {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-                withCredentials: true,
-            }
-        );
-        return response.data;
-    } catch (e) {
-        return rejectWithValue(e.response.data);
-    }
 });
 
 export default userSlice.reducer;

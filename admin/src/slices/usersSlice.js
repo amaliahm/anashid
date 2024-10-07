@@ -2,7 +2,7 @@ import {
     FETCH_USERS_REQUEST,
     FETCH_USERS_SUCCESS,
     FETCH_USERS_FAILURE,
-  } from '../actions/usersActions'
+  } from '../services/usersService'
   
   const initialState = {
     loading: false,

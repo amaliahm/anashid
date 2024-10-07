@@ -1,16 +1,11 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice } from '@reduxjs/toolkit';
+import { fetchCategories, addCategory, deleteCategory } from '../services/categoriesService';
 
 const initialState = {
   categories: [],
   loading: false,
   error: null,
 };
-
-export const fetchCategories = createAsyncThunk('categories/fetchCategories', async () => {
-  const response = await axios.get('http://localhost:3000/admin/categories');
-  return response.data; 
-});
 
 const categorySlice = createSlice({
   name: 'categories',
@@ -54,33 +49,6 @@ const categorySlice = createSlice({
         state.error = action.payload;
       });
   },
-});
-
-export const addCategory = createAsyncThunk('categories/addCategory', async (formData) => {
-    try {
-      console.log(formData)
-        const response = await axios.post(
-            'http://localhost:3000/admin/categories/add', 
-            formData,
-            {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                }
-            }
-        );
-        return response.data;
-    } catch (e) {
-        return rejectWithValue(e.response.data);
-    }
-});
-
-export const deleteCategory = createAsyncThunk('categories/deleteCategory', async (id, { rejectWithValue }) => {
-  try {
-    const response = await axios.delete(`http://localhost:3000/admin/categories/${id}`);
-    return response.data;
-  } catch (e) {
-    return rejectWithValue(e.response.data);
-  }
 });
 
 export default categorySlice.reducer;

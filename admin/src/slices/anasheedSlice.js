@@ -1,5 +1,6 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice } from '@reduxjs/toolkit';
+
+import { fetchAnasheed, addAnasheed, deleteAnasheed } from '../services/anasheedService';
 
 const initialState = {
   anasheed: [],
@@ -7,11 +8,6 @@ const initialState = {
   error: null,
   successMessage: null,
 };
-
-export const fetchAnasheed = createAsyncThunk('anasheed/fetchAnasheed', async () => {
-  const response = await axios.get('http://localhost:3000/admin/anasheed');
-  return response.data; 
-});
 
 const anasheedSlice = createSlice({
   name: 'anasheed',
@@ -57,33 +53,6 @@ const anasheedSlice = createSlice({
         state.error = action.payload;
       });
   },
-});
-
-export const addAnasheed = createAsyncThunk('anasheed/addAnasheed', async (formData) => {
-    try {
-        const response = await axios.post(
-            'http://localhost:3000/admin/anasheed/add', 
-            formData,
-            {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                }
-            }
-        );
-        return response.data;
-    } catch (e) {
-        return rejectWithValue(e.response.data);
-    }
-});
-
-export const deleteAnasheed = createAsyncThunk('anasheed/deleteAnasheed', async (id, { rejectWithValue }) => {
-  console.log(id)
-  try {
-    const response = await axios.delete(`http://localhost:3000/admin/anasheed/${id}`);
-    return response.data.id;
-  } catch (e) {
-    return rejectWithValue(e.response.data);
-  }
 });
 
 export default anasheedSlice.reducer;

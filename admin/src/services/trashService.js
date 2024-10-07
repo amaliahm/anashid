@@ -1,8 +1,9 @@
 import axios from 'axios';
+import apiClient from './api.js';
 
 export const fetchTrashedItems = (table) => async (dispatch) => {
     try {
-        const response = await axios.get(`http://localhost:3000/admin/${table}/trash`);
+        const response = await apiClient.get(`/admin/${table}/trash`);
         dispatch({
             type: 'FETCH_TRASHED_ITEMS_SUCCESS',
             payload: { table, data: response.data }
@@ -17,7 +18,7 @@ export const fetchTrashedItems = (table) => async (dispatch) => {
 
 export const restoreOrDelete = (table, id, operation) => async (dispatch) => {
     try {
-        await axios.delete(`http://localhost:3000/admin/${table}/${operation}/${id}`);
+        await apiClient.delete(`/admin/${table}/${operation}/${id}`);
         dispatch({ type: 'DONE_SUCCESS', payload: { table, id } });
     } catch (error) {
         dispatch({ type: 'ERROR', payload: error.message });

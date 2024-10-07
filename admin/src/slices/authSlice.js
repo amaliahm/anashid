@@ -1,7 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
-
-axios.defaults.withCredentials = true;
 
 const initialState = {
   isAuthenticated: false,
@@ -53,36 +50,4 @@ const authSlice = createSlice({
 });
 
 export const { loginRequest, loginSuccess, loginFailure, logoutRequest, logoutSuccess, logoutFailure, loadUserFromLocalStorage } = authSlice.actions;
-
-export const loginAdmin = (loginData) => async (dispatch) => {
-  try {
-    dispatch(loginRequest());
-    const response = await axios.post(
-      'http://localhost:3000/auth/login',
-      loginData,
-      { withCredentials: true, }
-    );
-    if (response.data.user.account_type === 'admin') {
-      dispatch(loginSuccess(response.data.user));
-    } else {
-      dispatch(loginFailure('Unauthorized access'));
-    }
-  } catch (error) {
-    dispatch(loginFailure(error.response ? error.response.data.message : 'Network error'));
-  }
-};
-
-export const logoutAdmin = (id) => async (dispatch) => {
-  try {
-    dispatch(logoutRequest());
-    await axios.get(
-      `http://localhost:3000/auth/logout/${id}`, 
-      { withCredentials: true }
-    );
-    dispatch(logoutSuccess());
-  } catch (error) {
-    dispatch(logoutFailure(error.response ? error.response.data.message : 'Network error during logout'));
-  }
-}
-
 export default authSlice.reducer;
