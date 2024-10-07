@@ -1,13 +1,17 @@
 import React, { useEffect, useState} from "react";
-import SideBarComponent from "../../components/SideBar";
-import NavBarComponent from "../../components/NavBar";
-import { head_users } from "../../constant";
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchUsers } from "../../redux/actions/usersActions";
-import Loading from "../../components/Loading";
 import { useParams } from "react-router-dom";
 import { format } from 'date-fns';
+
+//COMPONENTS
+import SideBarComponent from "../../components/SideBar";
+import NavBarComponent from "../../components/NavBar";
+import { head_users } from "../../utils/constant.js";
+import Loading from "../../components/Loading";
 import AdminModal from "../../components/AdminModal";
+
+//REDUX
+import { fetchUsers } from "../../services/usersService.js";
 
 const Users = () => {
   const { id } = useParams()

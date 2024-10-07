@@ -1,4 +1,6 @@
 import React from 'react';
+
+//ICONS
 import { loader } from '../assets/icons';
 
 const Loading = ({ title }) => (

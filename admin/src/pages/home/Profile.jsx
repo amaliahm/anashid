@@ -12,7 +12,7 @@ import { bg } from "../../assets/images"
 import { green_edit_icon } from "../../assets/icons"
 
 // REDUX
-import { addProfilePhoto, fetchCurrentUser } from "../../redux/reducer/profileReducer.js"
+import { addProfilePhoto, fetchCurrentUser } from "../../services/profileService.js"
 
 const Profile = () => {
     const { id } = useParams()

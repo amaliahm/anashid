@@ -12,10 +12,10 @@ import UploadMusic from '../../components/UploadMusic'
 import { add_icon, close_icon } from "../../assets/icons";
 
 // REDUX
-import { fetchCategories } from "../../redux/reducer/categoriesSlice";
-import { fetchTableData } from "../../redux/actions/settingsAction";
-import { fetchArtists } from "../../redux/reducer/artistsSlice";
-import { addAnasheed } from "../../redux/reducer/anasheedSlice";
+import { fetchCategories } from "../../services/categoriesService.js";
+import { fetchTableData } from "../../services/settingsService.js";
+import { fetchArtists } from "../../services/artistsService.js";
+import { addAnasheed } from "../../services/anasheedService.js";
 
 const AddAnasheed = () => {
   const { id } = useParams()

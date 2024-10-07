@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { format } from 'date-fns';
 
 // REDUX
-import { fetchArtists, deleteArtist } from "../../redux/reducer/artistsSlice";
+import { fetchArtists, deleteArtist } from "../../services/artistsService.js";
 
 // COMPONENTS
 import SideBarComponent from "../../components/SideBar";
 import NavBarComponent from "../../components/NavBar";
 import Loading from "../../components/Loading";
-import { head_artists } from "../../constant";
+import { head_artists } from "../../utils/constant.js";
 import Modal from "../../components/Modal";
 
 // ICONS

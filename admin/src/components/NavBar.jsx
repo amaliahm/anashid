@@ -9,7 +9,7 @@ import { logout, setting } from "../assets/icons"
 import LogoutModal from './LogoutModal'
 
 // REDUX
-import { fetchCurrentUser } from '../redux/reducer/profileReducer'
+import { fetchCurrentUser } from '../services/profileService.js'
 
 const NavBarComponent = ({ id }) => {
   const [ modal, setModal ] = useState(false)

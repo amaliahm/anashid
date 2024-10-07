@@ -7,11 +7,11 @@ import { format } from 'date-fns';
 import SideBarComponent from "../../components/SideBar";
 import NavBarComponent from "../../components/NavBar";
 import Loading from "../../components/Loading";
-import { head_anasheed } from "../../constant";
+import { head_anasheed } from "../../utils/constant.js";
 import Modal from "../../components/Modal";
 
 // REDUX
-import { fetchAnasheed, deleteAnasheed } from "../../redux/reducer/anasheedSlice";
+import { fetchAnasheed, deleteAnasheed } from "../../services/anasheedService.js";
 
 // ICONS
 import { red_delete_icon, add_icon, green_edit_icon } from "../../assets/icons";

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+
+import apiClient from '../services/api.js';
 
 const AdminModal = ({ isOpen, onClose, user, adminId }) => {
   const [password, setPassword] = useState('');
@@ -10,8 +11,8 @@ const AdminModal = ({ isOpen, onClose, user, adminId }) => {
   const handleSubmit = async () => {
     setIsLoading(true);
     try {
-        const response = await axios.post(
-            `http://localhost:3000/admin/users/${adminId}`,
+        const response = await apiClient.post(
+            `/admin/users/${adminId}`,
             {
                 password,
                 userId: user.id,

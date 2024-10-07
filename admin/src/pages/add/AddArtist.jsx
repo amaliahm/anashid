@@ -11,7 +11,7 @@ import Notification from "../../components/Notification";
 import { add_icon, close_icon } from "../../assets/icons";
 
 // REDUX
-import { addArtist } from "../../redux/reducer/artistsSlice";
+import { addArtist } from "../../services/artistsService.js";
 
 const AddArtist = () => {
   const { id } = useParams()

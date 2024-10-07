@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { format } from 'date-fns';
+
+//COMPONENTS
 import SideBarComponent from "../../components/SideBar";
 import NavBarComponent from "../../components/NavBar";
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchTrashedItems, restoreOrDelete } from "../../redux/actions/trashActions";
 import Loading from "../../components/Loading";
-import { head_artists, head_categories, head_anasheed } from "../../constant";
-import { format } from 'date-fns';
-import { green_close_icon, red_delete_icon } from "../../assets/icons";
+import { head_artists, head_categories, head_anasheed } from "../../utils/constant.js";
 import Modal from "../../components/Modal";
+
+//REDUX
+import { fetchTrashedItems, restoreOrDelete } from "../../services/trashService.js";
+
+//ICONS
+import { green_close_icon, red_delete_icon } from "../../assets/icons";
 
 const Trash = () => {
   const { id } = useParams()

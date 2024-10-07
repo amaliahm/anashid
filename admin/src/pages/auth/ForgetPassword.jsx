@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
+
+//ICONS
 import { bg } from '../../assets/images';
-import axios from 'axios';
+
+import apiClient from '../../services/api';
 
 const ForgetPassword = () => {
   const [error, setError] = useState(false)
@@ -10,7 +13,7 @@ const ForgetPassword = () => {
   const handleResetPw = async (e) => {
     e.preventDefault();
     try {
-        await axios.post('http://localhost:3000/forget-password', { email });
+        await apiClient.post('/forget-password', { email });
         setDone(true);
         setError(false);
       } catch (error) {

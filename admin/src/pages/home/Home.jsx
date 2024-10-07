@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from "react";
+import { useParams } from "react-router-dom";
+
+//COMPONENTS
 import SideBarComponent from "../../components/SideBar";
 import NavBarComponent from "../../components/NavBar";
 import Loading from "../../components/Loading";
-import { useParams } from "react-router-dom";
 import Dashboard from "../../components/homeCompo/Dashboard";
 
 const Home = () => {

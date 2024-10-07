@@ -1,8 +1,12 @@
 import React from "react";
-import { sidebar } from '../assets/images/index'
-import { sidebar_element } from "../constant";
 import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router-dom";
+
+//COMPONENTS
+import { sidebar_element } from "../utils/constant.js";
+
+//ICONS
+import { sidebar } from '../assets/images/index.js'
 
 const SideBarComponent = ({ele}) => {
   const navigate = useNavigate()

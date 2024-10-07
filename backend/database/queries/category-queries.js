@@ -42,12 +42,14 @@ export const _getAllCategory = `
       fileAttachment f 
     ON 
       c.id_file = f.id 
-    JOIN 
+    LEFT JOIN 
       anasheed a
     ON 
       a.id_category = c.id
     WHERE 
-      f.file_type = 'image';
+      f.file_type = 'image'
+    GROUP BY 
+      c.id, f.id;
 `;
 
 export const _updateCategory = `

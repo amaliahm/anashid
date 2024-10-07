@@ -1,17 +1,17 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
 // REDUCERS
-import authReducer from '../redux/auth/authSlice';
-import { userReducer } from '../redux/reducer/usersReducer';
-import categoryReducer from '../redux/reducer/categoriesSlice';
-import artistReducer from '../redux/reducer/artistsSlice';
-import trashReducer from '../redux/reducer/trashReducer';
-import profileReducer from '../redux/reducer/profileReducer';
-import settingsReducer from '../redux/reducer/settingsReducer';
-import anasheedSlice from '../redux/reducer/anasheedSlice';
+import authSlice from '../slices/authSlice.js';
+import { userReducer } from '../slices/usersSlice.js';
+import categoryReducer from '../slices/categoriesSlice.js';
+import artistReducer from '../slices/artistsSlice.js';
+import trashReducer from '../slices/trashSlice.js';
+import profileReducer from '../slices/profileSlice.js';
+import settingsReducer from '../slices/settingsSlice.js';
+import anasheedSlice from '../slices/anasheedSlice.js';
 
-const rootReducer = combineReducers({
-  auth: authReducer,
+export const rootReducer = combineReducers({
+  auth: authSlice,
   users: userReducer,
   categories: categoryReducer,
   artists: artistReducer,
@@ -20,5 +20,3 @@ const rootReducer = combineReducers({
   settings: settingsReducer,
   anasheed: anasheedSlice
 });
-
-export default rootReducer;

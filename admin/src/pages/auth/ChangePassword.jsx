@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import { bg } from '../../assets/images';
 import { useNavigate } from 'react-router-dom';
+
+import apiClient from '../../services/api';
+
+//ICONS
+import { bg } from '../../assets/images';
 
 const ChangePassword = () => {
   const navigate = useNavigate()
@@ -19,8 +22,8 @@ const ChangePassword = () => {
         setDone(false)
         return;
       }
-      await axios.post(
-        `http://localhost:3000/auth/reset-password/${token}`,
+      await apiClient.post(
+        `/auth/reset-password/${token}`,
         { newPassword }
       );
       setDone(true)

@@ -1,6 +1,8 @@
-import { useDispatch } from 'react-redux';
-import { loginSuccess } from '../../redux/auth/authSlice';
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
+//REDUX
+import { loginSuccess } from '../../slices/authSlice.js';
 
 const useAuthInit = () => {
   const dispatch = useDispatch();

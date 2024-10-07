@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+//ICONS
 import { bg } from '../../assets/images';
 import { useNavigate } from 'react-router-dom';
-import { loginAdmin } from '../../redux/auth/authSlice';
+
+//REDUX
+import { loginAdmin } from '../../services/authService.js';
 
 const Login = () => {
   const navigate = useNavigate()

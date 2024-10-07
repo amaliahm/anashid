@@ -19,7 +19,7 @@ import { bg } from "../../assets/images"
 import {  add_icon } from "../../assets/icons"
 
 // REDUX
-import { fetchTableData, addItemToTable, deleteItemFromTable} from "../../redux/actions/settingsAction.js"
+import { fetchTableData, addItemToTable, deleteItemFromTable} from "../../services/settingsService.js"
 
 const Settings = () => {
     const { id } = useParams()

@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { format, isValid } from 'date-fns';
+import { format } from 'date-fns';
 
 // REDUX
-import { fetchCategories } from "../../redux/reducer/categoriesSlice";
-import { deleteCategory } from "../../redux/reducer/categoriesSlice";
+import { deleteCategory, fetchCategories } from "../../services/categoriesService.js";
 
 // COMPONENTS
 import SideBarComponent from "../../components/SideBar";
 import NavBarComponent from "../../components/NavBar";
 import Loading from "../../components/Loading";
-import { head_categories } from "../../constant";
+import { head_categories } from "../../utils/constant.js";
 import Modal from "../../components/Modal";
 
 // ICONS
@@ -46,6 +45,8 @@ const Categories = () => {
   useEffect(() => {
     dispatch(fetchCategories())
   }, [dispatch])
+
+  console.log(categories)
 
     return (
         <>
@@ -101,7 +102,7 @@ const Categories = () => {
                             </div>
                           </td>
                           <td className="px-4 lg:px-32 py-4">
-                            {elem.anasheed || 0}
+                            {elem.anasheed_count || 0}
                           </td>
                           <td className="px-4 lg:px-32 py-4">
                             {format(new Date(elem.created_at), 'yyyy-MM-dd')}

@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { logoutAdmin } from '../redux/auth/authSlice';
+
+//REDUX
+import { logoutAdmin } from '../services/authService.js';
 
 const LogoutModal = ({ isOpen, onClose, id }) => {
   const dispatch = useDispatch();

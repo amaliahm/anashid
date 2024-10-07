@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 
 const ModalAdd = ({ table, value, setValue, loading, error, handleAdd, isOpen, onClose }) => {
   if (!isOpen) return null;

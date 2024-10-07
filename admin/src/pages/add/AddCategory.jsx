@@ -11,7 +11,7 @@ import Notification from "../../components/Notification";
 import { add_icon, close_icon } from "../../assets/icons";
 
 // REDUX
-import { addCategory } from "../../redux/reducer/categoriesSlice";
+import { addCategory } from "../../services/categoriesService.js";
 
 const AddCategory = () => {
   const { id } = useParams()
