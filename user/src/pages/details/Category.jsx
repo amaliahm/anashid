@@ -1,36 +1,39 @@
-import React from 'react';
+import React from "react"
+import { useSelector } from "react-redux"
 
-// COMPONENTS
-import Sidebar from '../Components/SideBar';
-import SideBarMobile from '../Components/SideBarMobile';
-import NasheedBar from '../Components/NasheedBar';
-import NowPlayingWrapper from '../Components/NowPlayingWrapper';
+//COMPONENTS
+import SideBarMobile from "../../Components/SideBarMobile"
+import Sidebar from "../../Components/SideBar"
+import NasheedBar from "../../Components/NasheedBar"
+import NowPlayingWrapper from "../../Components/NowPlayingWrapper"
 
-const Favorites = () => {
-  const anasheed = [ {}, {}, {}, {}, {}, {}, {} ];
+const Category = () => {
 
-  return (
-    <div className="flex h-screen m-0 p-0 bg-[#2D2635]">
+    //get anasheed of this category
+
+    const { itemCategory } = useSelector(state => state.itemCategory)
+
+    return (
+        <div className="flex h-screen m-0 p-0 bg-[#2D2635]">
       <div className="hidden lg:block w-64 text-white ml-64">
-        <Sidebar elem={6}/>
+        <Sidebar elem={2}/>
       </div>
       <div className="w-full">
         <div className="flex flex-col lg:flex-row gap-4 h-full relative lg:w-[calc(100vw-256px)]">
           <div className="flex-grow w-full lg:w-[calc(100%-230px)] sm:w-full overflow-y-auto">
             <div className='p-4 pr-8 w-full overflow-y-auto'>
               <div className='flex mb-8 gap-6 items-center'>
-                <SideBarMobile elem={6}/>
+                <SideBarMobile elem={2}/>
               </div>
               <div className='mb-32'>
-                <h2 className="text-xl lg:text-2xl font-bold capitalize mb-8 px-2">
-                  your 
-                  <span className='text-[var(--mainColor)]'> favorite </span>
+                <h2 className="text-xl lg:text-2xl font-bold text-[var(--mainColor)] capitalize mb-8 px-2">
+                  {itemCategory.name}
                 </h2>
                 <div className='w-full h-full'> 
                   <div 
                     className='flex flex-col justify-center items-center gap-2 sm:gap-4 pb-2 w-full'
                   >
-                    {anasheed.map((nasheed, index) => (
+                    {[''].map((nasheed, index) => (
                       <NasheedBar 
                         key={index} 
                         favoriteBar={true}
@@ -47,7 +50,7 @@ const Favorites = () => {
         </div>
       </div>
     </div>
-  );
-};
+    )
+}
 
-export default Favorites;
+export default Category

@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ReactHowler from 'react-howler';
 import raf from 'raf';
+import { useDispatch, useSelector } from 'react-redux';
+import ReactAudioPlayer from 'react-audio-player';
+
+//REDUX
+import { fetchAnasheed } from '../../services/anasheedServices';
 
 //COMPONENTS
 import Loading from '../../pages/Loading';
@@ -9,11 +14,17 @@ import Loading from '../../pages/Loading';
 import { 
   play_icon, pause_icon, 
   next_icon, previous_icon,
-  repeate_one_icon, no_repeate_icon,
-  shuffle_icon, no_shuffle_icon,
 } from '../../assets/icons';
 
-const NowPlaying = () => {
+const NowPlaying = ({ currentTrack }) => {
+
+  function formatDuration(duration) {
+    const totalSeconds = Math.floor(duration);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+    return `${minutes}:${formattedSeconds}`;
+}
 
   const [progress, setProgress] = useState(0);
   const circleRef = useRef(null);
@@ -25,63 +36,64 @@ const NowPlaying = () => {
     const centerY = rect.top + rect.height / 2;
 
     const angle = Math.atan2(e.clientY - centerY, e.clientX - centerX);
-    let newProgress = (angle + Math.PI) / (2 * Math.PI) * 100;
-    newProgress = (newProgress + 75) % 100;
+    let newProgress = (angle + Math.PI) / (2 * Math.PI) * Math.floor(currentTrack.duration);
+    newProgress = (newProgress + 250) % Math.floor(currentTrack.duration);
 
     setProgress(newProgress);
   };
 
   const circumference = 2 * Math.PI * 50;
-  const strokeDashoffset = circumference - (progress / 100) * circumference;
+  const strokeDashoffset = circumference - (progress / Math.floor(currentTrack.duration)) * circumference;
 
   const [playing, setPlaying] = useState(false);
+  const [error, setError] = useState(true)
+  
   const [loaded, setLoaded] = useState(false);
   const [seek, setSeek] = useState(0.0);
   const [isSeeking, setIsSeeking] = useState(false);
-  const [duration, setDuration] = useState(null);
-  const [repeat, setRepeat] = useState(false)
-  const [shuffle, setShuffle] = useState(false)
 
   const playerRef = useRef(null);
-  const rafRef = useRef(null);
 
-  useEffect(() => {
-    if (playing && !isSeeking) {
-      rafRef.current = raf(renderSeekPos);
-    } else {
-      clearRAF();
-    }
-    return () => clearRAF(); 
-  }, [playing, isSeeking]);
+  // useEffect(() => {
+  //   // if (playing && !isSeeking) {
+  //   //   rafRef.current = raf(renderSeekPos);
+  //   // } else {
+  //   //   clearRAF();
+  //   // }
+  //   // return () => clearRAF(); 
+  // }, [playing, isSeeking]);
+
 
   const clearRAF = () => {
-    raf.cancel(rafRef.current);
+    raf.cancel(playerRef.current);
   };
 
   const renderSeekPos = () => {
     if (!isSeeking && playerRef.current) {
       setSeek(playerRef.current.seek());
     }
-    if (playing) {
-      rafRef.current = raf(renderSeekPos);
-    }
+    // if (playing) {
+    //   playerRef.current = raf(renderSeekPos);
+    // }
   };
 
   const handleOnLoad = () => {
+    console.log('loaded')
     if (playerRef.current) {
       setLoaded(true);
-      setDuration(playerRef.current.duration());
     }
   };
 
   const handleOnPlay = () => {
+    console.log('Audio Playing');
     setPlaying(true);
-    renderSeekPos();
+    // renderSeekPos();
   };
 
   const handleOnEnd = () => {
+    console.log('Audio Ended');
     setPlaying(false);
-    clearRAF();
+    // clearRAF();
   };
 
   const handleMouseDownSeek = () => setIsSeeking(true);
@@ -94,73 +106,76 @@ const NowPlaying = () => {
 
   const handleSeekingChange = (e) => setSeek(parseFloat(e.target.value));
 
+  const handleOnLoadError = (id, message) => {
+    setError(true)
+    console.error(`Error loading audio with ID: ${id}. Message: ${message}`);
+  };
+
   return (
     <>
       <div className="p-2 lg:p-0">
         <div className='bg-[rgba(217,217,217,0.11)] bg-opacity-30 backdrop-blur-md w-full h-full p-2 lg:p-0 lg:rounded-b-full rounded-xl'>
-          <ReactHowler
-            src={['sound.ogg', 'sound.mp3']}
-            playing={playing}
+          {/* <ReactHowler
+            src={currentTrack.audio_path}
+            playing={true}
+            controls
+            autoPlay={false}
             onLoad={handleOnLoad}
-            onPlay={handleOnPlay}
-            onEnd={handleOnEnd}
+            // onPlay={handleOnPlay}
+            // onEnd={handleOnEnd}
+            onLoadError={handleOnLoadError}
             loop={true}
             mute={false}
-            volume={1.0}
-            ref={playerRef}
-          />
-          {true ? 
+            volume={1}
+          /> */}
+
+          <ReactAudioPlayer src={currentTrack.audio_path} controls autoPlay={false} />
+          {currentTrack  ? 
             <div className='flex flex-col w-full h-16 lg:h-full justify-center space-x-8 lg:space-x-0 items-center lg:flex-none lg:rounded-b-full lg:flex-col lg:gap-4 flex-wrap'>
-              <div className='order-1 lg:order-4 lg:hidden h-16 w-16 lg:w-44 lg:h-44 rounded-full bg-gray-500'></div>
-              <div className='order-2 lg:order-1 capitalize font-semibold lg:py-8'>
+              <div className='order-1 lg:order-4 lg:hidden h-16 w-16 lg:w-44 lg:h-44 rounded-full bg-gray-500 bg-cover bg-center' style={{backgroundImage: `url('${currentTrack.file_path}')`}}></div>
+              <div className='order-2 lg:order-1 capitalize font-semibold lg:py-8 text-center'>
                 <h1 className='text-lg'>
-                  Title
+                  {currentTrack.title}
                 </h1>
                 <p className='text-sm text-gray-500'>
-                  artist
+                  {currentTrack.artist_name}
                 </p>
               </div>
               <p className='hidden lg:order-3 lg:block'>
-                {progress.toFixed(2)}
+                {formatDuration(progress)}
                 {' / '}
-                {duration ? duration.toFixed(2) : '100'}
+                {formatDuration(currentTrack.duration)}
               </p>
               <div className='lg:hidden order-4 lg:order-5 flex items-center gap-4 lg:gap-0 cursor-pointer '>
-                  <p className='lg:hidden'>{progress.toFixed(2)}</p>
+                  <p className='lg:hidden'>{formatDuration(progress)}</p>
                 <label>
                   <input
                     type='range'
                     className='appearance-none w-full h-1 rounded-full  transition-all duration-100 hover:cursor-pointer'
                     min='0'
-                    max={duration ? duration.toFixed(2) : 0}
+                    max={formatDuration(currentTrack.duration)}
                     step='.01'
                     value={seek}
                     onChange={handleSeekingChange}
                     onMouseDown={handleMouseDownSeek}
                     onMouseUp={handleMouseUpSeek}
                     style={{
-                      background: `linear-gradient(to right, #774F96 ${20}%, #AF96BC ${20}%)`,
+                      background: `linear-gradient(to right, #774F96 ${progress}%, #AF96BC ${progress}%)`,
                     }}
                   />
 
                 </label>
-                  <p className='lg:hidden'>{duration ? duration.toFixed(2) : '100'}</p>
+                  <p className='lg:hidden'>{formatDuration(currentTrack.duration)}</p>
               </div>
               <div className='order-5 lg:order-2 flex justify-center items-center gap-2 lg:pb-4'>
-                <button  onClick={() => setShuffle(!shuffle)}>
-                  { shuffle ? <img src={shuffle_icon} alt='shuffle' /> : <img src={no_shuffle_icon} alt='no shuffle' /> }
-                </button>
                 <button className='lg:pl-4' onClick={() => {}}>
                   <img src={previous_icon} alt='previous' />
                 </button>
                 <button onClick={() => setPlaying(!playing)}>
-                  {playing ? <img src={pause_icon} alt='pause' /> : <img src={play_icon} alt='play' /> }
+                  {playing ? <img src={pause_icon} alt='pause' onClick={handleOnEnd} /> : <img src={play_icon} alt='play' onClick={handleOnPlay} /> }
                 </button>
                 <button className='lg:pr-4' onClick={() => {}}>
                   <img src={next_icon} alt='next' />
-                </button>
-                <button  onClick={() => setRepeat(!repeat)}>
-                  {repeat ? <img src={repeate_one_icon} alt='repeat' /> : <img src={no_repeate_icon} alt='no repeat' /> }
                 </button>
               </div>
               <div 
@@ -190,11 +205,19 @@ const NowPlaying = () => {
                     strokeDashoffset={strokeDashoffset}
                     transform="rotate(-90 60 60)"
                   />
-                  <circle 
-                    cx="60" 
-                    cy="60" 
-                    r="40" 
-                    fill="gray"
+                  <defs>
+                    <clipPath id="circleClip">
+                      <circle cx="60" cy="60" r="40" />
+                    </clipPath>
+                  </defs>
+                  <image 
+                    href={currentTrack.file_path} 
+                    x="20" 
+                    y="20" 
+                    width="80" 
+                    height="80" 
+                    clipPath="url(#circleClip)" 
+                    preserveAspectRatio="xMidYMid slice" 
                   />
                 </svg>
                 <div 

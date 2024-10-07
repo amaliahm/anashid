@@ -13,7 +13,12 @@ export default class CategoryController {
             return res.status(404).json({ error: 'Failed to fetch categories' });
         }
         const categories_with_urls = await CategoryRepo.getUrl(categories);
-        res.status(200).json(categories_with_urls);
+        const sanitized_categories = categories_with_urls.map(category => ({
+            ...category,
+            id: Number(category.id),
+            anasheed_count: Number(category.anasheed_count)
+        }))
+        res.status(200).json(sanitized_categories);
     }
 
     static async addCategory(req, res) {

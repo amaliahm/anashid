@@ -1,8 +1,8 @@
 import React from 'react';
 
 //COMPONENTE 
-import Sidebar from '../Components/SideBar';
-import SideBarMobile from '../Components/SideBarMobile';
+import Sidebar from '../../Components/SideBar';
+import SideBarMobile from '../../Components/SideBarMobile';
 
 const Card = ({
     image = '', title

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
 // COMPONENTS
-import Sidebar from '../Components/SideBar';
-import NowPlaying from '../Components/HomeComponents/NowPlaying';
-import SideBarMobile from '../Components/SideBarMobile';
+import Sidebar from '../../Components/SideBar';
+import SideBarMobile from '../../Components/SideBarMobile';
+import NowPlayingWrapper from '../../Components/NowPlayingWrapper';
 
 //ICONS
-import { add_playlist_icon } from '../assets/icons';
+import { add_playlist_icon } from '../../assets/icons';
 
 const AddPlaylist = () => {
     const [ name, setName ] = useState('')
@@ -96,7 +96,7 @@ const AddPlaylist = () => {
             </div>
           </div>
           <div className="w-full lg:w-[230px] fixed bottom-0 lg:relative lg:bottom-auto">
-            <NowPlaying />
+            <NowPlayingWrapper />
           </div>
         </div>
       </div>

@@ -16,9 +16,13 @@ export const _restoreAnasheed = `
 
 export const _getAllAnasheed = `
     SELECT 
-      a.id, a.title, a.description, a.is_deleted AS deleted_anasheed,
+      a.id, a.title, a.description, a.is_deleted AS deleted_anasheed, a.duration,
       f.file_path, f.file_type, f.created_at,
-      artist.name AS artist_name
+      artist.name AS artist_name,
+      file.file_path AS audio_path,
+      (SELECT value FROM gender WHERE id = a.id_gender) AS gender_value,
+      (SELECT value FROM language WHERE id = a.id_language) AS language_value,
+      (SELECT value FROM theme WHERE id = a.id_theme) AS theme_value
     FROM 
       anasheed a
     JOIN 
@@ -34,7 +38,19 @@ export const _getAllAnasheed = `
     ON
       file.id = a.id_audio
     WHERE 
-    f.file_type = 'image'
+      f.file_type = 'image'
+    AND 
+      EXISTS (
+        SELECT 1 FROM gender WHERE id = a.id_gender
+      )
+    AND 
+      EXISTS (
+        SELECT 1 FROM language WHERE id = a.id_language
+      )
+    AND 
+      EXISTS (
+        SELECT 1 FROM theme WHERE id = a.id_theme
+      )
     ORDER BY id;
 `;
 

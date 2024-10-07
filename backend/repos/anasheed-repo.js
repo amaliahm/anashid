@@ -95,4 +95,20 @@ export default class AnasheedRepo {
         }));
         return url
     }
+
+    static async getAudioUrl(result) {
+      const url = await Promise.all(result.map(async (elem) => {
+        const url = await getSignedUrl(s3client, new GetObjectCommand({
+            Bucket: process.env.BUCKET_NAME,
+            Key: elem.audio_path,
+        }), {
+            expiresIn: 3600
+        })
+        return {
+            ...elem,
+            audio_path: url,
+        };
+      }));
+      return url
+  }
 }

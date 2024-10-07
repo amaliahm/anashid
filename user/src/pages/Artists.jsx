@@ -2,9 +2,9 @@ import React from 'react';
 
 // COMPONENTS
 import Sidebar from '../Components/SideBar';
-import NowPlaying from '../Components/HomeComponents/NowPlaying';
 import SideBarMobile from '../Components/SideBarMobile';
 import CardComponent from '../Components/Card';
+import NowPlayingWrapper from '../Components/NowPlayingWrapper';
 
 const Artists = () => {
 
@@ -50,10 +50,8 @@ const Artists = () => {
               </div>
             </div>
           </div>
-
-
           <div className="w-full lg:w-[230px] fixed bottom-0 lg:relative lg:bottom-auto">
-            <NowPlaying />
+            <NowPlayingWrapper />
           </div>
         </div>
       </div>

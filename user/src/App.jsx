@@ -8,13 +8,14 @@ import PrivateRoute from './pages/auth/PrivateRoute';
 import ForgetPassword from './pages/auth/ForgetPassword';
 import ChangePassword from './pages/auth/ChangePassword';
 import ErrorPage from './pages/error/ErrorPage';
-import PlayedNow from './pages/PlayedNow';
+import PlayedNow from './pages/details/PlayedNow';
 import Categories from './pages/Categories';
 import Artists from './pages/Artists';
 import RecentlyPlayed from './pages/RecentlyPlayed';
 import Favorites from './pages/Favorites';
 import Playlists from './pages/Playlists';
-import AddPlaylist from './pages/AddPlaylist';
+import AddPlaylist from './pages/add/AddPlaylist';
+import Category from './pages/details/Category';
 
 function App() {
 
@@ -67,6 +68,14 @@ function App() {
             element={
               <PrivateRoute>
                 <Categories />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path='/user/categories/:id/:id' 
+            element={
+              <PrivateRoute>
+                <Category />
               </PrivateRoute>
             } 
           />

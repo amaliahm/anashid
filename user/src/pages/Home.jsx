@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 // COMPONENTS
 import Sidebar from '../Components/SideBar';
-import NowPlaying from '../Components/HomeComponents/NowPlaying';
 import PublicityComponent from '../Components/HomeComponents/PublicitySlider';
 import CategoriesSection from '../Components/HomeComponents/CategoriesSection';
 import ArtistsSection from '../Components/HomeComponents/ArtistsSection';
 import NewAnasheedSection from '../Components/HomeComponents/NewAnasheedSection';
 import TrendingAnasheedComponent from '../Components/HomeComponents/TrendingAnasheed';
 import SideBarMobile from '../Components/SideBarMobile';
+import NowPlayingWrapper from '../Components/NowPlayingWrapper';
 
 //ICONS
 import { search_icon } from '../assets/icons';
@@ -51,7 +51,7 @@ const Home = () => {
             </div>
           </div>
           <div className="w-full lg:w-[230px] fixed bottom-0 lg:relative lg:bottom-auto">
-            <NowPlaying />
+            <NowPlayingWrapper />
           </div>
         </div>
       </div>

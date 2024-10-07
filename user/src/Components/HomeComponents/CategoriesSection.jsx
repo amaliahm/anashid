@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 //REDUX
@@ -41,7 +41,7 @@ const CategoriesSection = () => {
               key={index} 
               image={categories[card].file_path}
               title={categories[card].name} 
-              subTitle={categories[card].anasheed || 0 + ' nasheed'}
+              subTitle={(categories[card].anasheed_count || 0) + ' nasheed'}
             />
           ))}
         </div>

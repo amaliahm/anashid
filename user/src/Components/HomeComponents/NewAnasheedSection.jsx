@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 //REDUX
 import { fetchAnasheed } from '../../services/anasheedServices';
@@ -13,6 +15,10 @@ import { right_arrow_icon } from '../../assets/icons';
 const NewAnasheedSection = () => {
   const dispatch = useDispatch();
   const { anasheed, error, loading } = useSelector((state) => state.anasheed);
+  const navigate = useNavigate()
+  const { id } = useParams()
+
+  console.log(id)
 
   const getNewAnasheed = (data) => {
     if (data) {
@@ -51,12 +57,19 @@ const NewAnasheedSection = () => {
           className=' flex gap-2 sm:gap-4 pb-2 w-fit'
         >
           {newAnasheed && Object.keys(newAnasheed).map((card, index) => (
-            <CardComponent 
+            <div 
               key={index} 
-              image={newAnasheed[card].file_path}
-              title={newAnasheed[card].title} 
-              subTitle={newAnasheed[card].artist_name}
-            />
+              onClick={() => {
+                navigate(`/user/playednow/${id}`)
+                localStorage.setItem('currentAnasheed', JSON.stringify(newAnasheed[card]))
+              }}
+            >
+              <CardComponent 
+                image={newAnasheed[card].file_path}
+                title={newAnasheed[card].title} 
+                subTitle={newAnasheed[card].artist_name}
+              />
+            </div>
           ))}
         </div>
       </div>

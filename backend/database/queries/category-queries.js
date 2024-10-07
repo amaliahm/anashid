@@ -34,13 +34,18 @@ export const _trashCategory = `
 export const _getAllCategory = `
     SELECT 
       c.id, c.name, c.is_deleted AS deleted_category,
-      f.file_path, f.file_type, f.created_at
+      f.file_path, f.file_type, f.created_at, 
+      COUNT(a.id) AS anasheed_count
     FROM 
       category c
     JOIN 
       fileAttachment f 
     ON 
       c.id_file = f.id 
+    JOIN 
+      anasheed a
+    ON 
+      a.id_category = c.id
     WHERE 
       f.file_type = 'image';
 `;
