@@ -1,5 +1,6 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect} from "react";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 //COMPONENTS
 import SideBarComponent from "../../components/SideBar";
@@ -7,15 +8,17 @@ import NavBarComponent from "../../components/NavBar";
 import Loading from "../../components/Loading";
 import Dashboard from "../../components/homeCompo/Dashboard";
 
+//REDUX
+import { fetchData } from "../../services/homeService.js";
+
 const Home = () => {
-  const [loading, setLoading] = useState(true)
   const { id } = useParams()
+  const dispatch = useDispatch()
+  const { data, loading, error } = useSelector((state) => state.home)
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false)
-    }, 2000)
-  }, [loading])
+    dispatch(fetchData())
+  }, [])
 
   return (
     <>
@@ -31,7 +34,7 @@ const Home = () => {
             </div>
             {loading ? 
               <Loading /> 
-              : <Dashboard />
+              : <Dashboard data={data} />
             }
           </div>
         </div>

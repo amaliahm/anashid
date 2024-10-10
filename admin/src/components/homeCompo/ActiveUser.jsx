@@ -1,44 +1,35 @@
 import React from 'react';
 
-const ActiveUsersBar = ({ range, lastMonth, lastWeek, active }) => (
+const ActiveUsersBar = ({ title, color, value, total }) => (
   <>
     <div className="flex justify-between text-sm mb-1 font-semibold capitalize">
-      <span className='w-20'>
-        {range}
+      <span className='w-fit'>
+        {title}
       </span>
       <span className='w-fit text-nowrap' >
-        rest: {100 - lastMonth - lastWeek - active}%
+        {value * 100 / total}% ({value})
       </span>
     </div>
     <div className="flex h-2 rounded-full overflow-hidden bg-[#F3F6FF]">
       <div 
-        className="bg-red-500 h-full rounded-full" 
-        style={{ width: `${lastMonth}%` }}
+        className={`" h-full rounded-full`}
+        style={{ width: `${value * 100 / total}%`, backgroundColor: `${color}`}}
       ></div>
-      <div 
-        className="bg-yellow-500 h-full rounded-full" 
-        style={{ width: `${lastWeek}%` }}
-      ></div>
-      <div 
-        className="bg-green-500 h-full rounded-full" 
-        style={{ width: `${active}%` }}
-      ></div>
-    </div>
-    <div className='flex justify-between w-3/4 mx-auto mt-1 font-semibold capitalize'>
-      <span className='text-[var(--redColor)] '>
-        {lastMonth }%
-      </span>
-      <span className='text-[var(--yellowColor)]'>
-        {lastWeek }%
-      </span>
-      <span className='text-[var(--greenColor)]'>
-        {active}%
-      </span>
     </div>
   </>
 );
 
 const ActiveUser = ({activeUsersData}) => {
+  console.log(activeUsersData)
+  let total = 0
+  if (
+    activeUsersData && activeUsersData.logged_in_last_month && activeUsersData.logged_in_last_two_months && activeUsersData.logged_in_last_week && activeUsersData.logged_in_today
+  ) {
+
+    total = parseInt(activeUsersData.logged_in_last_month, 10) + parseInt(activeUsersData.logged_in_last_two_months, 10) + parseInt(activeUsersData.logged_in_last_week, 10) + parseInt(activeUsersData.logged_in_today, 10)
+  }
+  console.log(total)
+
   return (
     <>
       <div className="bg-white text-[var(--textColor)] p-4 rounded-3xl ml-2">
@@ -47,28 +38,16 @@ const ActiveUser = ({activeUsersData}) => {
             Active Users
           </h2>
           <span className="rounded px-4 py-1 bg-[#F3F6FF] capitalize font-semibold">
-            may
+            last 2 months
           </span>
         </div>
-        <div className="space-y-4">
-          {activeUsersData.map((data) => (
-            <ActiveUsersBar key={data.range} {...data} />
-          ))}
-        </div>
-        <div className="flex justify-between text-sm mt-4 mt-8 font-semibold capitalize">
-          <div className="flex items-center">
-            <div className="w-4 h-4 bg-red-500 rounded-full mr-2"></div>
-            Last Login Month Ago
-          </div>
-          <div className="flex items-center">
-            <div className="w-4 h-4 bg-yellow-500 rounded-full mr-2"></div>
-            Last Login Week Ago
-          </div>
-          <div className="flex items-center">
-            <div className="w-4 h-4 bg-green-500 rounded-full mr-2"></div>
-            Active User
-          </div>
-        </div>
+        {activeUsersData && <div className="space-y-4">
+            {activeUsersData.logged_in_today  && <ActiveUsersBar title="active users" color='var(--greenColor)' value={activeUsersData.logged_in_today } total={total} />}
+            {activeUsersData.logged_in_last_week && <ActiveUsersBar title="last login week ago" color='green' value={activeUsersData.logged_in_last_week} total={total}  />}
+            {activeUsersData.logged_in_last_month && <ActiveUsersBar title="last login month ago" color='#356CF9' value={activeUsersData.logged_in_last_month} total={total} />}
+            {activeUsersData.logged_in_last_two_months && <ActiveUsersBar title="last login 2 months ago" color='var(--redColor)' value={activeUsersData.logged_in_last_two_months} total={total} />}
+          
+        </div>}
       </div>
     </>
   )

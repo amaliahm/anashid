@@ -8,13 +8,19 @@ const StatCard = ({ title, value }) => (
   );
 
 
-const Total = () => {
+const Total = ({
+  total_users, total_anasheed, total_categories
+}) => {
+
+  function padNumber(num) {
+    return num.toString().padStart(4, '0');
+  }
     return (
         <>
          <div className="flex flex-wrap gap-4 justify-center mb-6">
-           <StatCard title="Total Users" value="0000" />
-           <StatCard title="Total Anashids" value="0000" />
-           <StatCard title="Total Categories" value="0000" />
+           {total_users && <StatCard title="Total Users" value={padNumber(total_users)} />}
+           {total_anasheed && <StatCard title="Total Anashids" value={padNumber(total_anasheed)} />}
+           {total_categories && <StatCard title="Total Categories" value={padNumber(total_categories)} />}
          </div>
         </>
     )

@@ -9,6 +9,7 @@ import trashReducer from '../slices/trashSlice.js';
 import profileReducer from '../slices/profileSlice.js';
 import settingsReducer from '../slices/settingsSlice.js';
 import anasheedSlice from '../slices/anasheedSlice.js';
+import homeReducer from '../slices/homeSlice.js';
 
 export const rootReducer = combineReducers({
   auth: authSlice,
@@ -18,5 +19,6 @@ export const rootReducer = combineReducers({
   trash: trashReducer,
   profile: profileReducer,
   settings: settingsReducer,
-  anasheed: anasheedSlice
+  anasheed: anasheedSlice,
+  home: homeReducer,
 });

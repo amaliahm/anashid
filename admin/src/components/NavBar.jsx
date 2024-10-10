@@ -35,7 +35,7 @@ const NavBarComponent = ({ id }) => {
   }, [])
 
   return (
-    <div className="flex justify-end items-center py-2 pr-4 pl-24 w-screen border-b-[1px]">
+    <div className="flex justify-end flex-wrap items-center py-2 pr-4 pl-24 w-screen border-b-[1px]">
       <div className="flex items-center space-x-2 flex-wrap">
         <div className="bg-white p-2 rounded-xl flex justify-center items-center">
           <img 

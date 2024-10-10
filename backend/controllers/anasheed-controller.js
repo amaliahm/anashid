@@ -70,8 +70,6 @@ export default class AnasheedController {
 
   static async trashAnasheed(req, res) {
     const result = await AnasheedRepo.trashAnasheed();
-    console.log('result')
-    console.log(result)
     if (!result) {
         return res.status(404).json({ error: 'Failed to fetch anasheed' });
     }

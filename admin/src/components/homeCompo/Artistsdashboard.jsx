@@ -45,14 +45,14 @@ const ProgressCircle = ({ color = 'blue', value = 0 }) => {
 
 
 
-const ArtistBar = ({ name, color, index }) => (
+const ArtistBar = ({ name, color, index, total }) => (
   <div className="flex items-center ">
     <ProgressCircle 
       color={color} 
-      value={12 * (index + 2)} 
+      value={index * 100 / total} 
     />
     <div className={`rounded-full text-[${color}] flex items-center justify-center mx-4 mr-10 font-semibold text-6xl `}>
-      {12 * (index + 2)}
+      {index}
     </div>
     <div className="flex-grow">
       <div className="flex justify-between font-bold text-base text-[#434A5E] capitalize">
@@ -65,19 +65,25 @@ const ArtistBar = ({ name, color, index }) => (
 );
 
 const ArtistsDashboard = ({artistsData}) => {
+  let totalAnasheed = 0
+  if (artistsData) {
+    totalAnasheed = artistsData.reduce((acc, curr) => acc + curr.anasheed_count, 0);
+  }
+
   return (
     <>
-      <div className="bg-gray-800 p-4 rounded-3xl bg-white text-[var(--textColor)]">
+      <div className="bg-gray-800 p-4 rounded-3xl bg-white text-[var(--textColor)] h-[420px] overflow-y-auto">
         <h2 className="text-lg font-semibold capitalize mb-8">
           artists
         </h2>
         <div className="space-y-4">
-          {artistsData.map((artist, index) => (
+          {artistsData && Object.keys(artistsData).map((artist, index) => (
             <ArtistBar 
-              key={artist.name} 
-              name={artist.name} 
+              key={index} 
+              name={artistsData[artist].name} 
               color={colors[index]} 
-              index={index}
+              index={artistsData[artist].anasheed_count}
+              total={totalAnasheed}
             />
           ))}
         </div>

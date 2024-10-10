@@ -12,10 +12,13 @@ import GenderRouter from './gender-router.js'
 import ThemeRouter from './theme-router.js'
 import LanguageRouter from './language-router.js'
 import SendEmailRouter from './sendEmail-router.js'
+import AdminHomeRouter from './admin-home-router.js'
 
 const router = Router();
 
 router.use("/auth", authRouter);
+
+router.use("/admin/home", AdminHomeRouter);
 
 router.use("/admin/users", usersRouter);
 
