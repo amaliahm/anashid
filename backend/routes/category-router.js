@@ -24,11 +24,11 @@ router.post(
     AsyncHandler(CategoryController.addCategory)
 );
 
-// router.put(
-//     "/:id",
-//     validator(categorySchema.updateCategory),
-//     AsyncHandler(CategoryController.updateCategory)
-// );
+router.put(
+    "/:id",
+    validator(categorySchema.updateCategory),
+    AsyncHandler(CategoryController.updateCategory)
+);
 
 router.delete(
     "/:id",

@@ -7,8 +7,6 @@ export const fetchCategories = createAsyncThunk('categories/fetchCategories', as
     return response.data; 
 });
 
-
-
 export const addCategory = createAsyncThunk('categories/addCategory', async (formData) => {
     try {
         const response = await apiClient.post(
@@ -33,4 +31,16 @@ export const deleteCategory = createAsyncThunk('categories/deleteCategory', asyn
   } catch (e) {
     return rejectWithValue(e.response.data);
   }
+});
+
+export const updateCategory = createAsyncThunk('categories/updateCategory', async (formData) => {
+    try {
+        const response = await apiClient.put(
+            '/admin/categories/update', 
+            formData,
+        );
+        return response.data;
+    } catch (e) {
+        return rejectWithValue(e.response.data);
+    }
 });

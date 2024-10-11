@@ -44,4 +44,4 @@ export const updateArtist = createAsyncThunk('artists/updateArtist', async (form
     } catch (e) {
         return rejectWithValue(e.response.data);
     }
-  });
+});

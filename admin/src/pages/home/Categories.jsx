@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { format } from 'date-fns';
 
 // REDUX
-import { deleteCategory, fetchCategories } from "../../services/categoriesService.js";
+import { deleteCategory, fetchCategories, updateCategory } from "../../services/categoriesService.js";
 
 // COMPONENTS
 import SideBarComponent from "../../components/SideBar";
@@ -12,6 +12,7 @@ import NavBarComponent from "../../components/NavBar";
 import Loading from "../../components/Loading";
 import { head_categories } from "../../utils/constant.js";
 import Modal from "../../components/Modal";
+import ModalUpdate from "../../components/ModalUpdate.jsx";
 
 // ICONS
 import { red_delete_icon, add_icon, green_edit_icon } from "../../assets/icons";
@@ -22,6 +23,7 @@ const Categories = () => {
   const { categories, loading, error } = useSelector((state) => state.categories)
   const naviagte = useNavigate()
   const [modal, setModal] = useState(false)
+  const [update, setUpdate] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   const openModal = (elem) => {
@@ -35,6 +37,7 @@ const Categories = () => {
       dispatch(fetchCategories())
     }, 1000)
     setModal(false);
+    setUpdate(false)
   };
 
   const handleDelete = async () => {
@@ -42,11 +45,14 @@ const Categories = () => {
     closeModal()
   }
 
+  const handleUpdate = async (values) => {
+    dispatch(updateCategory(values))
+    closeModal()
+  }
+
   useEffect(() => {
     dispatch(fetchCategories())
   }, [dispatch])
-
-  console.log(categories)
 
     return (
         <>
@@ -114,7 +120,10 @@ const Categories = () => {
                             >
                               {!elem.deleted_category && <img 
                                 src={green_edit_icon}
-                                // onClick={() => openModal(elem)}
+                                onClick={() => {
+                                  setSelectedCategory(elem)
+                                  setUpdate(true)
+                                }}
                               />}
                             </span>
                           </td>
@@ -141,6 +150,20 @@ const Categories = () => {
                     id={selectedCategory.id} 
                     name={selectedCategory.name} 
                     handleDelete={handleDelete}
+                    loading={loading}
+                    error={error}
+                  />}
+                {update && 
+                  <ModalUpdate 
+                    title={selectedCategory.name} 
+                    isOpen={update} 
+                    onClose={closeModal} 
+                    id={selectedCategory.id} 
+                    name={selectedCategory.name} 
+                    oldValues={{
+                      name: selectedCategory.name
+                    }}
+                    handleUpdate={handleUpdate}
                     loading={loading}
                     error={error}
                   />}

@@ -74,8 +74,8 @@ export default class CategoryRepo {
     return (rows === null || rows.length > 0) ? rows : null
   }
 
-  static async updateCategory(name, id) {
-    await DataBaseRepo.queryDatabase(_updateCategory, [name, bio, id])
+  static async updateCategory(id, name) {
+    await DataBaseRepo.queryDatabase(_updateCategory, [name, id])
   }
 
   static async getUrl(result) {
