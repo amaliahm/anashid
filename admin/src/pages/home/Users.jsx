@@ -38,16 +38,16 @@ const Users = () => {
   
     return (
         <>
-          <div className="flex">
+          <div className="flex w-screen">
             <SideBarComponent ele={1} />
-            <div className="flex-1">
+            <div className="flex-1 f-full">
               <NavBarComponent id={id} />
               <div className="ml-24 p-1">
                 <div className="pl-4 pr-24 lg:pl-10 lg:pr-0 pt-10 w-[65%] lg:w-full h-2/6 overflow-scroll">
                   <div className="text-xl lg:text-3xl capitalize font-semibold pl-2 mb-2">
                     users
                   </div>
-                  <div className="overflow-scroll w-11/12 lg:w-full h-[470px]">
+                  <div className="overflow-scroll w-10/12 lg:w-full h-[470px] oveflow-x-auto">
                     {
                       loading ? 
                       <Loading /> : 

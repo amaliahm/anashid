@@ -65,6 +65,7 @@ const Artists = () => {
                       />
                     </div>
                   </div>
+                  <div className="overflow-scroll w-11/12 lg:w-full h-[470px] oveflow-x-auto">
                     {
                       loading ? 
                       <Loading /> : 
@@ -129,6 +130,7 @@ const Artists = () => {
                     ))}
                   </tbody>
                 </table>}
+                  </div>
                 {modal && 
                   <Modal 
                     title='Delete'

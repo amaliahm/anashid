@@ -8,7 +8,8 @@ import {
     _addAnasheed,
     _addFileAttachment,
     _deleteFileAttachment,
-    _trashAnasheed
+    _trashAnasheed,
+    _updateAnasheed
 } from "../database/queries/anasheed-queries.js";
 
 // s3
@@ -110,5 +111,9 @@ export default class AnasheedRepo {
         };
       }));
       return url
+  }
+
+  static async updateAnasheed(id, title, description) {
+    await DataBaseRepo.queryDatabase(_updateAnasheed, [title, description, id])
   }
 }

@@ -14,7 +14,7 @@ export default {
   updateAnasheed: joi.object({
     id: joi.number().integer().required(),
     title: joi.string().required(),
-    descritpion: joi.string().required(),  
+    description: joi.string().required(),  
   }),
   deleteAnasheed: joi.object({
     id: joi.number().integer().required(),

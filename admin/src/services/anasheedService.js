@@ -31,3 +31,15 @@ export const deleteAnasheed = createAsyncThunk('anasheed/deleteAnasheed', async 
     return rejectWithValue(e.response.data);
   }
 });
+
+export const updateAnasheed = createAsyncThunk('anasheed/updateAnasheed', async (formData) => {
+  try {
+      const response = await apiClient.post(
+          '/admin/anasheed/update', 
+          formData,
+      );
+      return response.data;
+  } catch (e) {
+      return rejectWithValue(e.response.data);
+  }
+});

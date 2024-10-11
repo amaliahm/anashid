@@ -91,3 +91,7 @@ export const _trashAnasheed = `
     AND 
       a.is_deleted = TRUE;
 `;
+
+export const _updateAnasheed = `
+    UPDATE anasheed SET title = ?, description = ? WHERE id = ?;
+`;

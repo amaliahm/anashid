@@ -9,9 +9,10 @@ import NavBarComponent from "../../components/NavBar";
 import Loading from "../../components/Loading";
 import { head_anasheed } from "../../utils/constant.js";
 import Modal from "../../components/Modal";
+import ModalUpdate from "../../components/ModalUpdate.jsx";
 
 // REDUX
-import { fetchAnasheed, deleteAnasheed } from "../../services/anasheedService.js";
+import { fetchAnasheed, deleteAnasheed, updateAnasheed } from "../../services/anasheedService.js";
 
 // ICONS
 import { red_delete_icon, add_icon, green_edit_icon } from "../../assets/icons";
@@ -22,6 +23,7 @@ const Anasheed = () => {
   const { anasheed, loading, error } = useSelector((state) => state.anasheed)
   const navigate = useNavigate()
   const [modal, setModal] = useState(false)
+  const [update, setUpdate] = useState(false)
   const [selectedAnasheed, setSelectedAnasheeed] = useState(null);
 
   const openModal = (elem) => {
@@ -35,7 +37,13 @@ const Anasheed = () => {
       dispatch(fetchAnasheed())
     }, 1000)
     setModal(false);
+    setUpdate(false)
   };
+
+  const handleUpdate = async (values) => {
+    dispatch(updateAnasheed(values))
+    closeModal()
+  }
 
   const handleDelete = async () => {
     dispatch(deleteAnasheed(selectedAnasheed.id));
@@ -46,13 +54,11 @@ const Anasheed = () => {
     dispatch(fetchAnasheed())
   }, [dispatch])
 
-  console.log(anasheed)
-
     return (
         <>
-          <div className="flex">
+          <div className="flex w-screen">
             <SideBarComponent ele={2} />
-            <div className="flex-1">
+            <div className="flex-1 w-full">
               <NavBarComponent id={id} />
               <div className="ml-24 p-1">
                 <div className="px-4 lg:pl-10 pt-10 w-full h-2/6 overflow-scroll">
@@ -67,6 +73,7 @@ const Anasheed = () => {
                       />
                     </div>
                   </div>
+                  <div className="overflow-scroll w-full h-[470px] oveflow-x-auto">
                     {
                       loading ? 
                       <Loading /> : 
@@ -122,7 +129,10 @@ const Anasheed = () => {
                             >
                               {!elem.deleted_anasheed && <img 
                                 src={green_edit_icon}
-                                // onClick={() => openModal(elem)}
+                                onClick= {() => {
+                                  setSelectedAnasheeed(elem);
+                                  setUpdate(true)
+                                }}
                               />}
                             </span>
                           </td>
@@ -140,6 +150,7 @@ const Anasheed = () => {
                     ))}
                   </tbody>
                 </table>}
+                  </div>
                 {modal && 
                   <Modal 
                     title='Delete'
@@ -148,6 +159,21 @@ const Anasheed = () => {
                     id={selectedAnasheed.id} 
                     name={selectedAnasheed.name} 
                     handleDelete={handleDelete}
+                    loading={loading}
+                    error={error}
+                  />}
+                {update && 
+                  <ModalUpdate 
+                    title={selectedAnasheed.name} 
+                    isOpen={update} 
+                    onClose={closeModal} 
+                    id={selectedAnasheed.id} 
+                    name={selectedAnasheed.name} 
+                    oldValues={{
+                      title: selectedAnasheed.title,
+                      description: selectedAnasheed.description
+                    }}
+                    handleUpdate={handleUpdate}
                     loading={loading}
                     error={error}
                   />}

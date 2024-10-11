@@ -50,9 +50,9 @@ const Categories = () => {
 
     return (
         <>
-          <div className="flex">
+          <div className="flex w-screen">
             <SideBarComponent ele={4} />
-            <div className="flex-1">
+            <div className="flex-1 w-full">
               <NavBarComponent id={id} />
               <div className="ml-24 p-1">
                 <div className="px-4 lg:pl-10 pt-10 w-full h-2/6 overflow-scroll">
@@ -67,6 +67,7 @@ const Categories = () => {
                       />
                     </div>
                   </div>
+                  <div className="overflow-scroll w-11/12 lg:w-full h-[470px] oveflow-x-auto">
                     {
                       loading ? 
                       <Loading /> : 
@@ -131,6 +132,7 @@ const Categories = () => {
                     ))}
                   </tbody>
                 </table>}
+                  </div>
                 {modal && 
                   <Modal 
                     title='Delete'

@@ -28,6 +28,12 @@ router.post(
     AsyncHandler(AnasheedController.addAnasheed)
 );
 
+router.post(
+    "/update",
+    validator(anasheedSchema.updateAnasheed),
+    AsyncHandler(AnasheedController.updateAnasheed)
+);
+
 router.delete(
     "/:id",
     validator(anasheedSchema.deleteAnasheed, 'params'),
