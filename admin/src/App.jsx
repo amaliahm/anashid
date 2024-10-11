@@ -1,8 +1,5 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-
 
 // SEC STUFF
 import PrivateRoute from './pages/auth/PrivateRoute';

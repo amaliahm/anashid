@@ -20,7 +20,11 @@ const authSlice = createSlice({
       state.token = null;
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-    }
+    },
+    setUser: (state, action) => {
+      state.user = action.payload;
+      state.token = localStorage.getItem('token');
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -33,6 +37,13 @@ const authSlice = createSlice({
         state.status = 'succeeded';
         state.successMessage = action.payload.message;
         state.user = action.payload.user || null;
+        state.token = action.payload.token || null;
+        if (action.payload.token) {
+          localStorage.setItem('token', action.payload.token);
+        }
+        if (action.payload.user) {
+          localStorage.setItem('user', JSON.stringify(action.payload.user));
+        }
       })
       .addCase(signupReducer.rejected, (state, action) => {
         state.status = 'failed';
@@ -49,6 +60,7 @@ const authSlice = createSlice({
         state.successMessage = action.payload.message;
         state.user = action.payload.user;
         state.token = action.payload.token;
+        localStorage.setItem('token', action.payload.token);
         localStorage.setItem('user', JSON.stringify(action.payload.user));
       })
       .addCase(loginReducer.rejected, (state, action) => {
@@ -58,4 +70,5 @@ const authSlice = createSlice({
   },
 });
 
+export const { logout, setUser } = authSlice.actions;
 export default authSlice.reducer;

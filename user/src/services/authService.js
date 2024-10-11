@@ -4,7 +4,6 @@ import apiClient from './api.js';
 export const signupReducer = createAsyncThunk(
   'auth/signup',
   async (userData, { rejectWithValue }) => {
-    console.log('heyy')
     try {
       const response = await apiClient.post('/auth/signup', userData);
       return response.data;
@@ -23,6 +22,7 @@ export const loginReducer = createAsyncThunk(
     try {
       const response = await apiClient.post('/auth/login', loginData, { withCredentials: true });
       localStorage.setItem('token', response.data.token);
+      localStorage.setItem('user', JSON.stringify(response.data.user))
       return response.data;
     } catch (error) {
       if (error.response && error.response.data) {

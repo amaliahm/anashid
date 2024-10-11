@@ -1,24 +1,40 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+
+// SEC STUFF
+import PrivateRoute from './pages/auth/PrivateRoute';
+import useAuthInit from './pages/auth/AuthInit';
+
+//PAGES
 import LandingPage from './pages/LandingPage'
+
 import Signup from './pages/auth/Signup';
 import Login from './pages/auth/Login';
-import Home from './pages/Home';
 import VerifyEmail from './pages/auth/VerifyEmail';
-import PrivateRoute from './pages/auth/PrivateRoute';
 import ForgetPassword from './pages/auth/ForgetPassword';
 import ChangePassword from './pages/auth/ChangePassword';
+
+import Home from './pages/Home';
+
 import ErrorPage from './pages/error/ErrorPage';
+
 import PlayedNow from './pages/details/PlayedNow';
+
 import Categories from './pages/Categories';
-import Artists from './pages/Artists';
-import RecentlyPlayed from './pages/RecentlyPlayed';
-import Favorites from './pages/Favorites';
-import Playlists from './pages/Playlists';
-import AddPlaylist from './pages/add/AddPlaylist';
 import Category from './pages/details/Category';
+
+import Artists from './pages/Artists';
 import Artist from './pages/details/Artist';
 
+import RecentlyPlayed from './pages/RecentlyPlayed';
+
+import Favorites from './pages/Favorites';
+
+import Playlists from './pages/Playlists';
+import AddPlaylist from './pages/add/AddPlaylist';
+
+
 function App() {
+  useAuthInit()
 
   return (
     <>
