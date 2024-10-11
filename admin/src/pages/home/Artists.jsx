@@ -4,13 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { format } from 'date-fns';
 
 // REDUX
-import { fetchArtists, deleteArtist } from "../../services/artistsService.js";
+import { fetchArtists, deleteArtist, updateArtist } from "../../services/artistsService.js";
 
 // COMPONENTS
 import SideBarComponent from "../../components/SideBar";
 import NavBarComponent from "../../components/NavBar";
 import Loading from "../../components/Loading";
 import { head_artists } from "../../utils/constant.js";
+import ModalUpdate from "../../components/ModalUpdate.jsx";
 import Modal from "../../components/Modal";
 
 // ICONS
@@ -22,6 +23,7 @@ const Artists = () => {
   const { artists, loading, error } = useSelector((state) => state.artists)
   const naviagte = useNavigate()
   const [modal, setModal] = useState(false)
+  const [update, setUpdate] = useState(false)
   const [selectedArtist, setSelectedArtist] = useState(null);
 
   const openModal = (elem) => {
@@ -35,12 +37,18 @@ const Artists = () => {
       dispatch(fetchArtists())
     }, 1000)
     setModal(false);
+    setUpdate(false)
   };
 
   const handleDelete = async () => {
     dispatch(deleteArtist(selectedArtist.id));
     closeModal()
   };
+
+  const handleUpdate = async (values) => {
+    dispatch(updateArtist(values))
+    closeModal()
+  }
 
   useEffect(() => {
     dispatch(fetchArtists())
@@ -65,7 +73,7 @@ const Artists = () => {
                       />
                     </div>
                   </div>
-                  <div className="overflow-scroll w-11/12 lg:w-full h-[470px] oveflow-x-auto">
+                  <div className="overflow-scroll w-10/12 lg:w-full h-[470px] oveflow-x-auto">
                     {
                       loading ? 
                       <Loading /> : 
@@ -113,6 +121,10 @@ const Artists = () => {
                               {!elem.deleted_artist && <img 
                                 src={green_edit_icon}
                                 // onClick={() => openModal(elem)}
+                                onClick = {() => {
+                                  setSelectedArtist(elem)
+                                  setUpdate(true)
+                                }}
                               />}
                             </span>
                           </td>
@@ -139,6 +151,21 @@ const Artists = () => {
                     id={selectedArtist.id} 
                     name={selectedArtist.name} 
                     handleDelete={handleDelete}
+                    loading={loading}
+                    error={error}
+                  />}
+                {update && 
+                  <ModalUpdate 
+                    title={selectedArtist.name} 
+                    isOpen={update} 
+                    onClose={closeModal} 
+                    id={selectedArtist.id} 
+                    name={selectedArtist.name} 
+                    oldValues={{
+                      name: selectedArtist.name,
+                      bio: selectedArtist.bio
+                    }}
+                    handleUpdate={handleUpdate}
                     loading={loading}
                     error={error}
                   />}

@@ -34,7 +34,7 @@ export const deleteAnasheed = createAsyncThunk('anasheed/deleteAnasheed', async 
 
 export const updateAnasheed = createAsyncThunk('anasheed/updateAnasheed', async (formData) => {
   try {
-      const response = await apiClient.post(
+      const response = await apiClient.put(
           '/admin/anasheed/update', 
           formData,
       );

@@ -24,11 +24,11 @@ router.post(
     AsyncHandler(ArtistController.addArtist)
 );
 
-// router.put(
-//     "/:id",
-//     validator(artistSchema.updateArtist),
-//     AsyncHandler(ArtistController.updateArtist)
-// );
+router.put(
+    "/:id",
+    validator(artistSchema.updateArtist),
+    AsyncHandler(ArtistController.updateArtist)
+);
 
 router.delete(
     "/:id",

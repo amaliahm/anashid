@@ -74,7 +74,7 @@ export default class ArtistRepo {
     return (rows === null || rows.length > 0) ? rows : null
   }
 
-  static async updateArtist(name, bio, id) {
+  static async updateArtist(id, name, bio) {
     await DataBaseRepo.queryDatabase(_updateArtist, [name, bio, id])
   }
 

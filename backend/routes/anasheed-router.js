@@ -28,7 +28,7 @@ router.post(
     AsyncHandler(AnasheedController.addAnasheed)
 );
 
-router.post(
+router.put(
     "/update",
     validator(anasheedSchema.updateAnasheed),
     AsyncHandler(AnasheedController.updateAnasheed)

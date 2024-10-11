@@ -33,3 +33,15 @@ export const deleteArtist = createAsyncThunk('artists/deleteArtist', async (id, 
     return rejectWithValue(e.response.data);
   }
 });
+
+export const updateArtist = createAsyncThunk('artists/updateArtist', async (formData) => {
+    try {
+        const response = await apiClient.put(
+            '/admin/artists/update', 
+            formData,
+        );
+        return response.data;
+    } catch (e) {
+        return rejectWithValue(e.response.data);
+    }
+  });
