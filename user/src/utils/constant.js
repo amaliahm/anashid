@@ -4,6 +4,7 @@ import {
     favorite_icon, playlist_icon,
     add_playlist_icon, 
     contact_us_icon, logout_icon, 
+    profile_icon,
 } from "../assets/icons"
 
 const sidebar_elements = [
@@ -34,6 +35,7 @@ const sidebar_elements = [
         title: 'general',
         elements: [
             { name: 'contact us', icon: contact_us_icon, color: 'white', element: 9, to: 'user/contact' },
+            { name: 'profile', icon: profile_icon, color: 'white', element: 10, to: '/user/profile' },
             { name: 'logout', icon: logout_icon, color: '#F38BDC', element: 0, to: 'modal logout' },
         ]
     },

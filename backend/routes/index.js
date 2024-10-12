@@ -32,6 +32,7 @@ router.use("/admin/categories", CategoryRouter);
 router.use("/user/categories", CategoryRouter);
 
 router.use("/admin/profile", ProfileRouter);
+router.use("/user/profile", ProfileRouter);
 
 router.use("/admin/publicity", PublicityRouter);
 router.use("/user/publicity", PublicityRouter);

@@ -32,6 +32,8 @@ import Favorites from './pages/Favorites';
 import Playlists from './pages/Playlists';
 import AddPlaylist from './pages/add/AddPlaylist';
 
+import Profile from './pages/Profile';
+
 
 function App() {
   useAuthInit()
@@ -141,6 +143,14 @@ function App() {
             element={
               <PrivateRoute>
                 <AddPlaylist />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path='/user/profile/:id' 
+            element={
+              <PrivateRoute>
+                <Profile />
               </PrivateRoute>
             } 
           />

@@ -45,6 +45,9 @@ import play from './play.svg'
 import sound from './sound.svg'
 import pause from './pause.svg'
 
+import profile_icon from './profile_icon.svg'
+import { green_edit_icon } from '../../../../admin/src/assets/icons'
+
 export {
     facebook, google,
     home_icon, category_icon, artist_icon, played_now_icon, 
@@ -62,4 +65,5 @@ export {
     favorite, favorite__,
     close_sidebar_icon, menu_bar_icon, 
     play, sound, pause, 
+    profile_icon, green_edit_icon, 
 }
