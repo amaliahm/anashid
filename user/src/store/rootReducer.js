@@ -7,6 +7,7 @@ import categoriesSlice from '../slices/categoriesSlice.js';
 import artistsSlice from '../slices/artistsSlice.js';
 import anasheedSlice from '../slices/anasheedSlice.js';
 import profoleSlice from '../slices/profileSlice.js'
+import favoriteAnasheedSlice from '../slices/favoriteSlice.js';
 
 import itemCategorySlice from '../slices/itemCategorySlice.js';
 import itemArtistSlice from '../slices/ItemArtistSlice.js';
@@ -19,6 +20,7 @@ export const rootReducer = combineReducers({
     artists: artistsSlice,
     anasheed: anasheedSlice,
     profile: profoleSlice,
+    favorite: favoriteAnasheedSlice,
     
     itemCategory: itemCategorySlice,
     itemArtist: itemArtistSlice,

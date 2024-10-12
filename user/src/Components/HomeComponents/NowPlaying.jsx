@@ -24,7 +24,7 @@ const NowPlaying = ({ currentTrack }) => {
     const seconds = totalSeconds % 60;
     const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
     return `${minutes}:${formattedSeconds}`;
-}
+  }
 
   const [progress, setProgress] = useState(0);
   const circleRef = useRef(null);

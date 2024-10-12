@@ -134,9 +134,9 @@ CREATE TABLE IF NOT EXISTS anasheedPlaylist (
 export const anasheedFavoriteTable = `
 CREATE TABLE IF NOT EXISTS anasheedFavorite (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    id_ansheed INT NOT NULL,
+    id_anasheed INT NOT NULL,
     id_user INT NOT NULL,
-    FOREIGN KEY (id_ansheed) REFERENCES anasheed(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_anasheed) REFERENCES anasheed(id) ON DELETE CASCADE,
     FOREIGN KEY (id_user) REFERENCES user(id) ON DELETE CASCADE
 );
 `;

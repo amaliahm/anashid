@@ -13,6 +13,7 @@ import ThemeRouter from './theme-router.js'
 import LanguageRouter from './language-router.js'
 import SendEmailRouter from './sendEmail-router.js'
 import AdminHomeRouter from './admin-home-router.js'
+import FavoriteRouter from './favorite-router.js'
 
 const router = Router();
 
@@ -44,5 +45,7 @@ router.use('/admin/theme', ThemeRouter);
 router.use('/admin/language', LanguageRouter);
 
 router.use("/admin/sendEmail", SendEmailRouter);
+
+router.use("/user/favorites", FavoriteRouter);
 
 export default router;

@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 // COMPONENTS
 import Sidebar from '../Components/SideBar';
@@ -6,8 +8,19 @@ import SideBarMobile from '../Components/SideBarMobile';
 import NasheedBar from '../Components/NasheedBar';
 import NowPlayingWrapper from '../Components/NowPlayingWrapper';
 
+// REDUX
+import { fetchFavoriteAnasheed } from '../services/favoriteService';
+import Loading from './Loading';
+
 const Favorites = () => {
   const anasheed = [ {}, {}, {}, {}, {}, {}, {} ];
+  const dispatch = useDispatch()
+  const { id } = useParams()
+  const { favoriteAnasheed, loading, error, success } = useSelector(state => state.favorite)
+
+  useEffect(() => {
+    dispatch(fetchFavoriteAnasheed(id))
+  }, [])
 
   return (
     <div className="flex h-screen m-0 p-0 bg-[#2D2635]">
@@ -30,12 +43,22 @@ const Favorites = () => {
                   <div 
                     className='flex flex-col justify-center items-center gap-2 sm:gap-4 pb-2 w-full'
                   >
-                    {anasheed.map((nasheed, index) => (
-                      <NasheedBar 
-                        key={index} 
-                        favoriteBar={true}
-                      />
-                    ))}
+                    {loading 
+                      ? <Loading /> 
+                        : error 
+                          ? <Loading title='Error, please try again!' /> 
+                            : favoriteAnasheed 
+                              ? <div>
+                                  {Object.keys(favoriteAnasheed).map((nasheed, index) => (
+                                    <NasheedBar 
+                                      key={index} 
+                                      favoriteBar={true}
+                                      title={favoriteAnasheed[nasheed].title}
+                                      duration={favoriteAnasheed[nasheed].duration}
+                                    />
+                                  ))}
+                                </div>
+                                : <Loading title='No data available' /> }
                   </div>
                 </div>
               </div>
