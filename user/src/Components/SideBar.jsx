@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 import { sidebar_elements } from "../utils/constant";
 
+import Logout from "./Logout";
+
 const Sidebar = ({elem}) => {
   const navigate = useNavigate()
+  const [logout, setLogout] = useState(false)
   const { id } = useParams()
 
   return (
@@ -27,7 +30,7 @@ const Sidebar = ({elem}) => {
                 <li 
                   key={i} 
                   className={`mb-4 capitalize font-semibold flex gap-1 lg:gap-3 items-center text-[${el.color}] ${el.element === elem ? 'bg-[#774F96] text-sm lg:text-xl' : ''} h-12 lg:h-14 w-40 lg:w-56 pl-2 rounded-xl hover:cursor-pointer `}
-                  onClick={() => !el.to.toString().includes('modal') && navigate(`${el.to}/${id}`)}
+                  onClick={() => el.element === 0 ? setLogout(true) : navigate(`${el.to}/${id}`)}
                 >
                   <img 
                     src={el.icon} 
@@ -41,6 +44,8 @@ const Sidebar = ({elem}) => {
           </div>
         ))}
       </div>
+      {logout && <Logout isOpen={logout} onClose={() => setLogout(false)} id={id}/>}
+
     </div>
   )
 }

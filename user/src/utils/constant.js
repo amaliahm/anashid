@@ -35,7 +35,7 @@ const sidebar_elements = [
         title: 'general',
         elements: [
             { name: 'contact us', icon: contact_us_icon, color: 'white', element: 9, to: 'user/contact' },
-            { name: 'profile', icon: profile_icon, color: 'white', element: 10, to: '/user/profile' },
+            { name: 'profile', icon: profile_icon, color: 'white', element: 10, to: '/user/profile' }, //done
             { name: 'logout', icon: logout_icon, color: '#F38BDC', element: 0, to: 'modal logout' },
         ]
     },

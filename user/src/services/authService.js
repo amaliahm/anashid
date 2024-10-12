@@ -32,3 +32,20 @@ export const loginReducer = createAsyncThunk(
     }
   }
 );
+
+export const logoutReducer = createAsyncThunk(
+  'auth/logout',
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await apiClient.get(`/auth/logout/${id}`);
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      return response.data;
+    } catch (error) {
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data.message);
+      }
+      return rejectWithValue('Network error, please try again!');
+    }
+  }
+);

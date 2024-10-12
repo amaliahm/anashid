@@ -49,7 +49,6 @@ const Profile = () => {
         const intervalId = setInterval(dispatch(fetchCurrentUser(id)), 3600000);
        return () => clearInterval(intervalId);
     }, [])
-    console.log(user)
 
     return (
         <>
