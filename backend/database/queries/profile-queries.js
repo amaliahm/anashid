@@ -16,12 +16,12 @@ export const _getUserById = `
       f.file_path, f.file_type, f.created_at
     FROM 
       user u
-    JOIN
+    LEFT JOIN
       fileAttachment f
     ON
       u.id_file = f.id
     WHERE 
       u.id = ?
     AND
-      f.file_type = 'image';
+      (f.file_type = 'image' OR f.file_type IS NULL);
 `

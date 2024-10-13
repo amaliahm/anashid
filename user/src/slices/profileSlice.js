@@ -33,7 +33,6 @@ const userSlice = createSlice({
       })
       .addCase(addProfilePhoto.fulfilled, (state, action) => {
         state.loading = false;
-        state.user.push(action.payload);
         state.successMessage = 'Profile photo added successfully!';
       })
       .addCase(addProfilePhoto.rejected, (state, action) => {

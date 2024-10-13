@@ -8,7 +8,7 @@ import ProfileRepo from '../repos/profile-repo.js';
 export default class ProfileController {
 
     static async addProfilePhoto(req, res) {
-        const { id } = req.body;
+        const { id } = req.params;
         const file = req.file
         
         const packet_name = 'user'
@@ -20,7 +20,7 @@ export default class ProfileController {
         const imageUrl = await uploadFileToS3(file, packet_name)
 
         const user = await ProfileRepo.findUserById(id);
-        if (!user) {
+        if (!user[0].id_file) {
             const result = await ProfileRepo.addImage(packet_name, file_name, file_type, file_path, file_size, file_format, id);
             return res.json(result);
         }
@@ -34,6 +34,9 @@ export default class ProfileController {
         const user = await ProfileRepo.findUserById(id);
         if (!user) {
             return res.status(404).json({ error: 'Failed to fetch artists' });
+        }
+        if (!user[0].id_file) {
+            res.status(200).json(user[0]);
         }
         const user_with_url = await ProfileRepo.getUrl(user);
         res.status(200).json(user_with_url);

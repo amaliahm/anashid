@@ -16,6 +16,7 @@ const router = Router();
 router.post(
     "/add/:id",
     upload.single('photo'),
+    validator(profileSchema.addPhoto, 'params'),
     AsyncHandler(ProfileController.addProfilePhoto)
 );
 

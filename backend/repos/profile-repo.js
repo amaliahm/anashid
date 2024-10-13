@@ -17,13 +17,13 @@ export default class ProfileRepo {
         packet_name, file_name, file_type, file_path, file_size, file_format
       ]
     )
-    const result = await DataBaseRepo.getInsertedId(_updateImage, [image.id, id])
-    return (result === null || result.length > 0) ? result : null
+    const result = await DataBaseRepo.getInsertedId(_updateUser, [image.id, id])
+    return result
   }
 
   static async findUserById(id) {
     const rows = await DataBaseRepo.queryDatabase(_getUserById, [id])
-    return (rows === null || rows.length > 0) ? rows : null
+    return rows
   }
 
   static async getUrl(result) {

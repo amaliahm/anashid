@@ -106,7 +106,8 @@ const Profile = () => {
                                 <div>
                                   <button
                                     type="submit"
-                                    className='capitalize border-[1px] border-[var(--greenColor)] text-[var(--greenColor)] font-medium px-8 py-2 my-6 rounded-3xl cursor-pointer'
+                                    disabled={!photoPreview}
+                                    className={`capitalize border-[1px] border-[var(--greenColor)] text-[var(--greenColor)] font-medium px-8 py-2 my-6 rounded-3xl ${!photoPreview ? 'opacity-50 cursor-not-allowed': 'cursor-pointer'}`}
                                     onClick={handleSubmit}
                                   >
                                     {loading ? 'Adding...' : 'Add Photo'}
