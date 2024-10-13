@@ -9,7 +9,8 @@ import {
     _addFileAttachment,
     _deleteFileAttachment,
     _trashAnasheed,
-    _updateAnasheed
+    _updateAnasheed,
+    _getCategoryAnasheed
 } from "../database/queries/anasheed-queries.js";
 
 // s3
@@ -115,5 +116,10 @@ export default class AnasheedRepo {
 
   static async updateAnasheed(id, title, description) {
     await DataBaseRepo.queryDatabase(_updateAnasheed, [title, description, id])
+  }
+
+  static async getCategoryAnasheed(id) {
+    const rows = await DataBaseRepo.queryDatabase(_getCategoryAnasheed, [id])
+    return rows
   }
 }

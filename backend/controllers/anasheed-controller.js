@@ -75,5 +75,16 @@ export default class AnasheedController {
     }
     const trash_anasheed = await AnasheedRepo.getUrl(result);
     res.status(200).json(trash_anasheed);
-}
+  }
+
+  static async getCategoryAnasheed(req, res) {
+    const { id } = req.params
+    const anasheed = await AnasheedRepo.getCategoryAnasheed(id);
+    if (!anasheed) {
+      return res.status(404).json({ message: 'No data to display' });
+    }
+    const anasheed_with_urls = await AnasheedRepo.getUrl(anasheed);
+    const anasheed_with_audios = await AnasheedRepo.getAudioUrl(anasheed_with_urls);
+    return res.status(200).json(anasheed_with_audios);
+  }
 }

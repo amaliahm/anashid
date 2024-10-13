@@ -22,7 +22,8 @@ export const _getAllAnasheed = `
       file.file_path AS audio_path,
       (SELECT value FROM gender WHERE id = a.id_gender) AS gender_value,
       (SELECT value FROM language WHERE id = a.id_language) AS language_value,
-      (SELECT value FROM theme WHERE id = a.id_theme) AS theme_value
+      (SELECT value FROM theme WHERE id = a.id_theme) AS theme_value,
+      (SELECT name FROM category WHERE id = a.id_category) AS category_name
     FROM 
       anasheed a
     JOIN 
@@ -50,6 +51,10 @@ export const _getAllAnasheed = `
     AND 
       EXISTS (
         SELECT 1 FROM theme WHERE id = a.id_theme
+      )
+    AND 
+      EXISTS (
+        SELECT 1 FROM category WHERE id = a.id_category
       )
     ORDER BY id;
 `;
@@ -95,3 +100,50 @@ export const _trashAnasheed = `
 export const _updateAnasheed = `
     UPDATE anasheed SET title = ?, description = ? WHERE id = ?;
 `;
+
+export const _getCategoryAnasheed = `
+  SELECT 
+      a.id, a.title, a.description, a.is_deleted AS deleted_anasheed, a.duration,
+      f.file_path, f.file_type, f.created_at,
+      artist.name AS artist_name,
+      file.file_path AS audio_path,
+      (SELECT value FROM gender WHERE id = a.id_gender) AS gender_value,
+      (SELECT value FROM language WHERE id = a.id_language) AS language_value,
+      (SELECT value FROM theme WHERE id = a.id_theme) AS theme_value,
+      (SELECT name FROM category WHERE id = a.id_category) AS category_name
+    FROM 
+      anasheed a
+    JOIN 
+      fileAttachment f 
+    ON 
+      a.id_image = f.id 
+    JOIN
+      artist
+    ON
+      a.id_artist = artist.id
+    JOIN
+      fileAttachment file
+    ON
+      file.id = a.id_audio
+    WHERE 
+      f.file_type = 'image'
+    AND
+      a.id_category = ?
+    AND 
+      EXISTS (
+        SELECT 1 FROM gender WHERE id = a.id_gender
+      )
+    AND 
+      EXISTS (
+        SELECT 1 FROM language WHERE id = a.id_language
+      )
+    AND 
+      EXISTS (
+        SELECT 1 FROM theme WHERE id = a.id_theme
+      )
+    AND 
+      EXISTS (
+        SELECT 1 FROM category WHERE id = a.id_category
+      )
+    ORDER BY id;
+`

@@ -19,4 +19,7 @@ export default {
   deleteAnasheed: joi.object({
     id: joi.number().integer().required(),
   }),
+  getCategoryAnasheed: joi.object({
+    id: joi.number().integer().required(),
+  }),
 };

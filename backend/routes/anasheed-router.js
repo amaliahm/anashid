@@ -18,6 +18,12 @@ router.get(
     AsyncHandler(AnasheedController.getAllAnasheed)
 );
 
+router.get(
+    "/category/:id",
+    validator(anasheedSchema.getCategoryAnasheed, 'params'),
+    AsyncHandler(AnasheedController.getCategoryAnasheed)
+);
+
 router.post(
     "/add",
     upload.fields([

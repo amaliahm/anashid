@@ -1,5 +1,5 @@
-import React from "react"
-import { useSelector } from "react-redux"
+import React, { useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
 
 //COMPONENTS
 import SideBarMobile from "../../Components/SideBarMobile"
@@ -7,14 +7,22 @@ import Sidebar from "../../Components/SideBar"
 import NasheedBar from "../../Components/NasheedBar"
 import NowPlayingWrapper from "../../Components/NowPlayingWrapper"
 
+//REDUX
+import { getCategoryAnasheed } from "../../services/anasheedServices"
+import Loading from "../Loading"
+
 const Category = () => {
 
-    //get anasheed of this category
+  const { itemCategory } = useSelector(state => state.itemCategory)
+  const { anasheed, loading, error } = useSelector(state => state.anasheed)
+  const dispatch = useDispatch()
 
-    const { itemCategory } = useSelector(state => state.itemCategory)
-
-    return (
-        <div className="flex h-screen m-0 p-0 bg-[#2D2635]">
+  useEffect(() => {
+    dispatch(getCategoryAnasheed(itemCategory.id))
+  }, [])
+  
+  return (
+    <div className="flex h-screen m-0 p-0 bg-[#2D2635]">
       <div className="hidden lg:block w-64 text-white ml-64">
         <Sidebar elem={2}/>
       </div>
@@ -30,16 +38,21 @@ const Category = () => {
                   {itemCategory.name}
                 </h2>
                 <div className='w-full h-full'> 
-                  <div 
+                  {loading ? <Loading /> : error ? <Loading title='no data available' /> : <div 
                     className='flex flex-col justify-center items-center gap-2 sm:gap-4 pb-2 w-full'
                   >
-                    {[''].map((nasheed, index) => (
+                    {Object.keys(anasheed).map((nasheed, index) => (
                       <NasheedBar 
                         key={index} 
-                        favoriteBar={true}
+                        favoriteBar={false}
+                        duration={anasheed[nasheed].duration}
+                        title={anasheed[nasheed].title}
+                        image={anasheed[nasheed].file_path}
+                        date={anasheed[nasheed].created_at}
+                        artist={anasheed[nasheed].artist_name}
                       />
                     ))}
-                  </div>
+                  </div>}
                 </div>
               </div>
             </div>
@@ -50,7 +63,7 @@ const Category = () => {
         </div>
       </div>
     </div>
-    )
+  )
 }
 
 export default Category
