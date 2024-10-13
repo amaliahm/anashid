@@ -35,3 +35,21 @@ export const getCategoryAnasheed = (id) => async (dispatch) =>  {
     });
   }
 }
+
+export const getArtistAnasheed = (id) => async (dispatch) =>  {
+  dispatch({
+    type: 'FETCH_ARTIST_ANASHEED_REQUEST',
+  });
+  try {
+    const response = await apiClient.get(`/user/anasheed/artist/${id}`);
+    dispatch({
+      type: 'FETCH_ARTIST_ANASHEED_SUCCESS',
+      payload: response.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: 'FETCH_ARTIST_ANASHEED_FAILURE',
+      payload: error.message,
+    });
+  }
+}

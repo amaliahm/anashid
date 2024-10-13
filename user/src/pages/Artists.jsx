@@ -31,8 +31,6 @@ const Artists = () => {
     navigate(`/user/artists/${id}/${artist.id}`)
   }
 
-  console.log(artists)
-
   return (
     <div className="flex h-screen m-0 p-0 bg-[#2D2635]">
       <div className="hidden lg:block w-64 text-white ml-64">

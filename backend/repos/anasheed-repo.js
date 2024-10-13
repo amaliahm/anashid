@@ -10,7 +10,8 @@ import {
     _deleteFileAttachment,
     _trashAnasheed,
     _updateAnasheed,
-    _getCategoryAnasheed
+    _getCategoryAnasheed,
+    _getArtistAnasheed
 } from "../database/queries/anasheed-queries.js";
 
 // s3
@@ -120,6 +121,11 @@ export default class AnasheedRepo {
 
   static async getCategoryAnasheed(id) {
     const rows = await DataBaseRepo.queryDatabase(_getCategoryAnasheed, [id])
+    return rows
+  }
+
+  static async getArtistAnasheed(id) {
+    const rows = await DataBaseRepo.queryDatabase(_getArtistAnasheed, [id])
     return rows
   }
 }

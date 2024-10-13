@@ -6,10 +6,10 @@ import SideBarMobile from "../../Components/SideBarMobile"
 import Sidebar from "../../Components/SideBar"
 import NasheedBar from "../../Components/NasheedBar"
 import NowPlayingWrapper from "../../Components/NowPlayingWrapper"
+import Loading from "../Loading"
 
 //REDUX
 import { getCategoryAnasheed } from "../../services/anasheedServices"
-import Loading from "../Loading"
 
 const Category = () => {
 

@@ -26,7 +26,6 @@ const anasheedSlice = (state = initialState, action) => {
                 success: false,
                 error: true,
             };
-        
         case 'FETCH_CATEGORY_ANASHEED_REQUEST':
             return {
                 loading: true,
@@ -41,6 +40,25 @@ const anasheedSlice = (state = initialState, action) => {
                 success: true,
             };
         case 'FETCH_CATEGORY_ANASHEED_FAILURE':
+            return {
+                loading: false,
+                success: false,
+                error: true,
+            };
+        case 'FETCH_ARTIST_ANASHEED_REQUEST':
+            return {
+                loading: true,
+                error: false,
+                success: false,
+            };
+        case 'FETCH_ARTIST_ANASHEED_SUCCESS':
+            return {
+                anasheed: action.payload,
+                loading: false,
+                error: false,
+                success: true,
+            };
+        case 'FETCH_ARTIST_ANASHEED_FAILURE':
             return {
                 loading: false,
                 success: false,

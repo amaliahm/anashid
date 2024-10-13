@@ -24,6 +24,12 @@ router.get(
     AsyncHandler(AnasheedController.getCategoryAnasheed)
 );
 
+router.get(
+    "/artist/:id",
+    validator(anasheedSchema.getArtistAnasheed, 'params'),
+    AsyncHandler(AnasheedController.getArtistAnasheed)
+);
+
 router.post(
     "/add",
     upload.fields([
