@@ -11,7 +11,10 @@ import PublicityRouter from './publicity-router.js'
 import GenderRouter from './gender-router.js'
 import ThemeRouter from './theme-router.js'
 import LanguageRouter from './language-router.js'
+
 import SendEmailRouter from './sendEmail-router.js'
+import ConactRouter from './contact-router.js'
+
 import AdminHomeRouter from './admin-home-router.js'
 import FavoriteRouter from './favorite-router.js'
 
@@ -45,6 +48,7 @@ router.use('/admin/theme', ThemeRouter);
 router.use('/admin/language', LanguageRouter);
 
 router.use("/admin/sendEmail", SendEmailRouter);
+router.use("/user/sendEmail", ConactRouter);
 
 router.use("/user/favorites", FavoriteRouter);
 

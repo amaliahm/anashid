@@ -22,4 +22,24 @@ export default class SendEmailController {
         return res.status(200).json({ message: 'Emails have been send successfully', table: 'sendEmail' });
     }
 
+    static async contactEmail (req, res) {
+        const { id } = req.params;
+        const { subject, content } = req.body;
+        const email = await SendEmailRepo.getUserEmail(id);
+        if (!email) {
+            return res.status(404).json({ error: 'Failed to send email' });
+        }
+
+        const message = {
+            to: process.env.EMAIL_USER, 
+            from: process.env.EMAIL_USER, 
+            subject: subject,
+            text: `You have received a new email from ${email[0].email}:\n\n${content}`,
+            html: `<p> You have received a new email from <strong> ${email[0].email} </strong>: </p> <p> ${content} </p>`, 
+        };
+
+        await EmailRepo.contactEmail( message);
+        return res.status(200).json({ message: 'Email has been send successfully' });
+    }
+
 }

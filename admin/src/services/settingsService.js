@@ -19,7 +19,6 @@ export const fetchTableData = (table) => async (dispatch) => {
   }
 };
 
-
 export const addItemToTable = (table, item) => async (dispatch) => {
   dispatch({
     type: 'ADD_ITEM_TO_TABLE_REQUEST',

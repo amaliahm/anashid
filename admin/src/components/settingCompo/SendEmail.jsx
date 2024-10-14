@@ -7,7 +7,7 @@ const SendEmail = ({
     const [subject, setSubject] = useState('')
     const [content, setContent] = useState('')
     const { id } = useParams()
-
+    
     return (
         <>
           <div className="my-2 px-16 py-2 flex flex-col justify-between items-center text-base">

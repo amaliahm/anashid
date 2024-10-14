@@ -16,11 +16,15 @@ export default class EmailRepo {
 
   static async sendEmail(to, subject, message, html) {
     this.transporter.sendMail({
-      from: "a.ghandouz@esi-sba.dz",
+      from: process.env.EMAIL_USER,
       to,
       subject,
       text: message,
       html,
     });
+  }
+
+  static async contactEmail( message ) {
+    this.transporter.sendMail(message);
   }
 }
