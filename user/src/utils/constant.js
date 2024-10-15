@@ -28,7 +28,7 @@ const sidebar_elements = [
         elements: [
             { name: 'your favorite', icon: favorite_icon, color: 'white', element: 6, to: '/user/favorites' }, //done
             { name: 'your playlist', icon: playlist_icon, color: 'white', element: 7, to: '/user/playlists' }, //done
-            { name: 'add playlist', icon: add_playlist_icon, color: '#0E9EEF', element: 8, to: 'user/add-playlist' },
+            { name: 'add playlist', icon: add_playlist_icon, color: '#0E9EEF', element: 8, to: '/user/add-playlist' },
         ]
     },
     {

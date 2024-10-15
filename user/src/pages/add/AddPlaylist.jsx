@@ -1,17 +1,25 @@
 import React, { useState } from 'react';
+import { useParams, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
 import Sidebar from '../../Components/SideBar';
 import SideBarMobile from '../../Components/SideBarMobile';
 import NowPlayingWrapper from '../../Components/NowPlayingWrapper';
 
+//REDUX
+import { addPlaylist } from '../../services/playlistService';
+
 //ICONS
-import { add_playlist_icon } from '../../assets/icons';
+import { add_playlist_icon, close_sidebar_icon } from '../../assets/icons';
 
 const AddPlaylist = () => {
+    const { id } = useParams()
+    const dispatch = useDispatch()
     const [ name, setName ] = useState('')
     const [ photo, setPhoto ] = useState(null)
     const [photoPreview, setPhotoPreview] = useState(null)
+    const { loading, success, error } = useSelector((state) => state.playlists)
 
     const handlePhoto = (e) => {
       const file = e.target.files[0];
@@ -22,7 +30,14 @@ const AddPlaylist = () => {
       }
     }
 
-    const handleSubmit = (e) => {}
+    const handleSubmit = (e) => {
+      e.preventDefault()
+      dispatch(addPlaylist({
+        id: id,
+        name: name,
+        photo: photo,
+      }))
+    }
 
   return (
     <div className="flex h-screen m-0 p-0 bg-[#2D2635]">
@@ -80,14 +95,13 @@ const AddPlaylist = () => {
                         />
                         <button 
                           type="submit" 
-                         //  disabled={loading}
-                          className="border-[1px] border-[var(--greenColor)] rounded-3xl px-12 py-2 text-[var(--greenColor)] text-xl font-semibold hover:cusor-pointer mb-10"
+                          disabled={loading || !name || !photo}
+                          className={`border-[1px] border-[var(--greenColor)] rounded-3xl px-12 py-2 text-[var(--greenColor)] text-xl font-semibold hover:cusor-pointer mb-10 ${loading || !name || !photo ? 'hover:cursor-not-allowed opacity-50' : 'hover:cusor-pointer'} `}
                         >
-                          {/* {loading ? 'Adding...' : 'Add '} */}
-                          Add
+                          {loading ? 'Adding...' : 'Add '}
                         </button>
-                        {/* {error && <p className="text-[var(--redColor)]" >please try again</p>} */}
-                        <p className="text-red-500" >please try again</p>
+                        {error && <p className="text-red-500">{error}</p>}
+                        {success && <p className="text-green-500" >{success}</p>}
                       </div>
                     </form>
                   </div>

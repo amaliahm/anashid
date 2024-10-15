@@ -3,10 +3,17 @@ import { Router } from "express";
 // ROUTES
 import authRouter from "./auth-router.js";
 import usersRouter from "./users-router.js"
-import anasheedRouter from './anasheed-router.js'
+
 import artistRouter from './artist-router.js'
+
+import anasheedRouter from './anasheed-router.js'
 import CategoryRouter from './category-router.js'
+import FavoriteRouter from './favorite-router.js'
+import PlaylistRouter from './playlist-router.js'
+
 import ProfileRouter from './profile-router.js'
+import AdminHomeRouter from './admin-home-router.js'
+
 import PublicityRouter from './publicity-router.js'
 import GenderRouter from './gender-router.js'
 import ThemeRouter from './theme-router.js'
@@ -15,8 +22,6 @@ import LanguageRouter from './language-router.js'
 import SendEmailRouter from './sendEmail-router.js'
 import ConactRouter from './contact-router.js'
 
-import AdminHomeRouter from './admin-home-router.js'
-import FavoriteRouter from './favorite-router.js'
 
 const router = Router();
 
@@ -28,6 +33,8 @@ router.use("/admin/users", usersRouter);
 
 router.use("/admin/anasheed", anasheedRouter);
 router.use("/user/anasheed", anasheedRouter);
+
+router.use("/user/playlists", PlaylistRouter);
 
 router.use("/admin/artists", artistRouter);
 router.use("/user/artists", artistRouter);

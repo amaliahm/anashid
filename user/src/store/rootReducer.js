@@ -17,6 +17,8 @@ import favoriteAnasheedSlice from '../slices/favoriteSlice.js';
 
 import contactSlice from '../slices/contactSlice.js';
 
+import playlistSlice from '../slices/playlistSlice.js';
+
 // item anasheed
 
 export const rootReducer = combineReducers({
@@ -35,4 +37,6 @@ export const rootReducer = combineReducers({
     favorite: favoriteAnasheedSlice,
 
     contact: contactSlice,
+
+    playlists: playlistSlice,
 });
