@@ -21,8 +21,13 @@ export default {
   }),
   getCategoryAnasheed: joi.object({
     id: joi.number().integer().required(),
+    user: joi.number().integer().required(),
   }),
   getArtistAnasheed: joi.object({
     id: joi.number().integer().required(),
+    user: joi.number().integer().required(),
   }),
+  favoriteAnasheed: joi.object({
+    id: joi.number().integer().required(),
+  })
 };

@@ -24,7 +24,7 @@ router.post(
     AsyncHandler(FavoriteController.addToFavorite)
 );
 
-router.delete(
+router.put(
     "/remove",
     validator(favoriteSchema.removeFromFavorite),
     AsyncHandler(FavoriteController.removeFromFavorite)

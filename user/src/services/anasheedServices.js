@@ -1,11 +1,11 @@
 import apiClient from './api.js';
 
-export const fetchAnasheed = () => async (dispatch) =>  {
+export const fetchAnasheed = (id) => async (dispatch) =>  {
     dispatch({
       type: 'FETCH_ANASHEED_REQUEST',
     });
     try {
-      const response = await apiClient.get('/user/anasheed');
+      const response = await apiClient.get(`/user/anasheed/${id}`);
       dispatch({
         type: 'FETCH_ANASHEED_SUCCESS',
         payload: response.data,
@@ -18,12 +18,12 @@ export const fetchAnasheed = () => async (dispatch) =>  {
     }
 }
 
-export const getCategoryAnasheed = (id) => async (dispatch) =>  {
+export const getCategoryAnasheed = (id, user) => async (dispatch) =>  {
   dispatch({
     type: 'FETCH_CATEGORY_ANASHEED_REQUEST',
   });
   try {
-    const response = await apiClient.get(`/user/anasheed/category/${id}`);
+    const response = await apiClient.get(`/user/anasheed/category/${id}/${user}`);
     dispatch({
       type: 'FETCH_CATEGORY_ANASHEED_SUCCESS',
       payload: response.data,
@@ -36,12 +36,12 @@ export const getCategoryAnasheed = (id) => async (dispatch) =>  {
   }
 }
 
-export const getArtistAnasheed = (id) => async (dispatch) =>  {
+export const getArtistAnasheed = (id, user) => async (dispatch) =>  {
   dispatch({
     type: 'FETCH_ARTIST_ANASHEED_REQUEST',
   });
   try {
-    const response = await apiClient.get(`/user/anasheed/artist/${id}`);
+    const response = await apiClient.get(`/user/anasheed/artist/${id}/${user}`);
     dispatch({
       type: 'FETCH_ARTIST_ANASHEED_SUCCESS',
       payload: response.data,

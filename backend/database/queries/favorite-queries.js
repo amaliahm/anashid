@@ -1,15 +1,32 @@
 export const _getFavorite = `
-    SELECT 
-      a.id, a.id_user, a.id_anasheed,
-      n.id AS nasheed_id, n.title, n.duration
-    FROM 
-      anasheedFavorite a
-    JOIN
-      anasheed n
-    ON
-      a.id_anasheed = n.id
-    WHERE 
-      id_user = ?;
+  SELECT 
+    a.id, a.title, a.description, a.is_deleted AS deleted_anasheed, a.duration,
+    f.file_path, f.file_type, f.created_at,
+    artist.name AS artist_name,
+    file.file_path AS audio_path,
+    1 AS is_favorite
+  FROM 
+      anasheed a
+  JOIN 
+      fileAttachment f 
+  ON 
+      a.id_image = f.id 
+  JOIN
+      artist
+  ON
+      a.id_artist = artist.id
+  JOIN
+      fileAttachment file
+  ON
+      file.id = a.id_audio
+  INNER JOIN 
+      anasheedFavorite af
+  ON 
+      a.id = af.id_anasheed AND af.id_user = ?
+  WHERE 
+      f.file_type = 'image'
+  ORDER BY 
+      a.id;
 `;
 
 export const _addToFavorite = `

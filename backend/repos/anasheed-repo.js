@@ -11,7 +11,8 @@ import {
     _trashAnasheed,
     _updateAnasheed,
     _getCategoryAnasheed,
-    _getArtistAnasheed
+    _getArtistAnasheed,
+    _getFavorite
 } from "../database/queries/anasheed-queries.js";
 
 // s3
@@ -127,5 +128,22 @@ export default class AnasheedRepo {
   static async getArtistAnasheed(id) {
     const rows = await DataBaseRepo.queryDatabase(_getArtistAnasheed, [id])
     return rows
+  }
+
+  static async getWithFavorite(id_user, data) {
+    const favorites = await DataBaseRepo.queryDatabase(_getFavorite, [id_user])
+    if (!favorites) {
+      const anasheed_with_favorite = data.map(nasheed => ({
+        ...nasheed,
+        is_favorite: false
+      }))
+      return anasheed_with_favorite
+    }
+    const favoriteIds = new Set(Object.keys(favorites).map(fav => favorites[fav].id_anasheed));
+    const anasheed_with_favorite = data.map(nasheed => ({
+      ...nasheed,
+      is_favorite: favoriteIds.has(nasheed.id)
+    }))
+    return anasheed_with_favorite
   }
 }

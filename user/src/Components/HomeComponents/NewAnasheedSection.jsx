@@ -9,16 +9,11 @@ import { fetchAnasheed } from '../../services/anasheedServices';
 //COMPONENTS
 import CardComponent from '../Card';
 
-//ICONS
-import { right_arrow_icon } from '../../assets/icons';
-
 const NewAnasheedSection = () => {
   const dispatch = useDispatch();
   const { anasheed, error, loading } = useSelector((state) => state.anasheed);
   const navigate = useNavigate()
   const { id } = useParams()
-
-  console.log(id)
 
   const getNewAnasheed = (data) => {
     if (data) {
@@ -34,7 +29,7 @@ const NewAnasheedSection = () => {
   }
 
   useEffect(() => {
-    dispatch(fetchAnasheed());
+    dispatch(fetchAnasheed(id));
   }, []);
 
   const newAnasheed = getNewAnasheed(anasheed)

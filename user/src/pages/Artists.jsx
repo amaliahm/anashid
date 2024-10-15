@@ -28,7 +28,7 @@ const Artists = () => {
   const handleItemArtist = (artist) => {
     dispatch(clearItemArtist())
     dispatch(setItemArtist(artist))
-    navigate(`/user/artists/${id}/${artist.id}`)
+    navigate(`/user/artists/artist/${id}`)
   }
 
   return (

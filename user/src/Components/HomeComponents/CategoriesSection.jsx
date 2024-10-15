@@ -28,7 +28,7 @@ const CategoriesSection = () => {
   const handleItemCategory = (category) => {
     dispatch(clearItemCategory())
     dispatch(setItemCategory(category))
-    navigate(`/user/categories/${id}/${category.id}`)
+    navigate(`/user/categories/category/${id}`)
   }
 
   return (

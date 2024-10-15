@@ -40,16 +40,14 @@ export const addFavoriteAnasheed = (id_user, id_anasheed) => async (dispatch) =>
 }
 
 export const removeFavoriteAnasheed = (id_user, id_anasheed) => async (dispatch) =>  {
+  const data = {id_user, id_anasheed}
     dispatch({
       type: 'REMOVE_FAVORITE_ANASHEED_REQUEST',
     });
     try {
-      const response = await apiClient.delete(
+      const response = await apiClient.put(
         '/user/favorites/remove', 
-        {
-          id_user, 
-          id_anasheed
-        }
+        {id_user, id_anasheed} 
       );
       dispatch({
         type: 'REMOVE_FAVORITE_ANASHEED_SUCCESS',

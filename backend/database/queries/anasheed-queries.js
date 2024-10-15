@@ -194,3 +194,7 @@ export const _getArtistAnasheed = `
       )
     ORDER BY id;
 `;
+
+export const _getFavorite = `
+  SELECT id, id_anasheed FROM anasheedFavorite WHERE id_user = ?;
+`

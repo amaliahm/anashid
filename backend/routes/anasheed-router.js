@@ -14,18 +14,19 @@ import AnasheedController from "../controllers/anasheed-controller.js";
 const router = Router();
 
 router.get(
-    "/",
+    "/:id",
+    validator(anasheedSchema.favoriteAnasheed, 'params'),
     AsyncHandler(AnasheedController.getAllAnasheed)
 );
 
 router.get(
-    "/category/:id",
+    "/category/:id/:user",
     validator(anasheedSchema.getCategoryAnasheed, 'params'),
     AsyncHandler(AnasheedController.getCategoryAnasheed)
 );
 
 router.get(
-    "/artist/:id",
+    "/artist/:id/:user",
     validator(anasheedSchema.getArtistAnasheed, 'params'),
     AsyncHandler(AnasheedController.getArtistAnasheed)
 );

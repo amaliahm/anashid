@@ -9,8 +9,11 @@ import played_now_icon from './played_now_icon.svg'
 import recently_played_icon from './recently_played_icon.svg'
 
 import favorite_icon from './favorite_icon.svg'
-import playlist_icon from './playlist_icon.svg'
+import favorite from './favorite.svg'
+import favorite__ from './favorite__.svg'
+import heart_icon from './heart_icon.svg'
 
+import playlist_icon from './playlist_icon.svg'
 import add_playlist_icon from './add_playlist_icon.svg'
 
 import logout_icon from './logout_icon.svg'
@@ -35,8 +38,7 @@ import no_repeate_icon from './no_repeate_icon.svg'
 import shuffle_icon from './shuffle_icon.svg'
 import no_shuffle_icon from './no_shuffle_icon.svg'
 
-import favorite from './favorite.svg'
-import favorite__ from './favorite__.svg'
+
 
 import close_sidebar_icon from './close_sidebar_icon.svg'
 import menu_bar_icon from './menu_bar_icon.svg'
@@ -52,8 +54,8 @@ export {
     facebook, google,
     home_icon, category_icon, artist_icon, played_now_icon, 
     recently_played_icon, 
-    favorite_icon, playlist_icon, 
-    add_playlist_icon, 
+    favorite_icon, favorite, favorite__, heart_icon,
+    playlist_icon, add_playlist_icon, 
     logout_icon, contact_us_icon, 
     search_icon, 
     left_arrow_icon, right_arrow_icon,
@@ -62,7 +64,6 @@ export {
     next_icon, previous_icon,
     repeate_one_icon, no_repeate_icon,
     shuffle_icon, no_shuffle_icon,
-    favorite, favorite__,
     close_sidebar_icon, menu_bar_icon, 
     play, sound, pause, 
     profile_icon, green_edit_icon, 

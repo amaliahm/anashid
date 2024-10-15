@@ -1,5 +1,6 @@
 import React, { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import { useParams } from "react-router-dom"
 
 //COMPONENTS
 import SideBarMobile from "../../Components/SideBarMobile"
@@ -10,17 +11,18 @@ import Loading from "../Loading"
 
 //REDUX
 import { getArtistAnasheed } from "../../services/anasheedServices"
+import { addFavoriteAnasheed, removeFavoriteAnasheed } from "../../services/favoriteService"
 
 const Artist = () => {
-
-    //get anasheed of this artist
 
     const { itemArtist } = useSelector(state => state.itemArtist)
     const { anasheed, loading, error } = useSelector(state => state.anasheed)
     const dispatch = useDispatch()
+    const { id } = useParams()
 
     useEffect(() => {
-      dispatch(getArtistAnasheed(itemArtist.id))
+      const user = id
+      dispatch(getArtistAnasheed(itemArtist.id, user))
     }, [])
 
     return (
@@ -55,12 +57,22 @@ const Artist = () => {
                     {Object.keys(anasheed).map((nasheed, index) => (
                       <NasheedBar 
                         key={index} 
-                        favoriteBar={false}
                         duration={anasheed[nasheed].duration}
                         title={anasheed[nasheed].title}
                         image={anasheed[nasheed].file_path}
                         date={anasheed[nasheed].created_at}
                         artist={anasheed[nasheed].artist_name}
+                        is_favorite={anasheed[nasheed].is_favorite}
+                        handleRemoveFavorite={() => {
+                          const user = id
+                          dispatch(removeFavoriteAnasheed(id, anasheed[nasheed].id))
+                          dispatch(getArtistAnasheed(itemArtist.id, user))
+                        }}
+                        handleAddFavorite={() => {
+                          const user = id
+                          dispatch(addFavoriteAnasheed(id, anasheed[nasheed].id))
+                          dispatch(getArtistAnasheed(itemArtist.id, user))
+                        }}
                       />
                     ))}
                   </div>}

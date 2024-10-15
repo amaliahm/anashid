@@ -6,11 +6,13 @@ import { uploadFileToS3 } from '../configs/aws-config.js'
 export default class AnasheedController {
 
   static async getAllAnasheed(req, res) {
+    const { id } = req.params
     const anasheed = await AnasheedRepo.getAllAnasheed();
     if (!anasheed) {
       return res.status(404).json({ message: 'No data to display' });
     }
-    const anasheed_with_urls = await AnasheedRepo.getUrl(anasheed);
+    const anasheed_with_favorites = await AnasheedRepo.getWithFavorite(id, anasheed);
+    const anasheed_with_urls = await AnasheedRepo.getUrl(anasheed_with_favorites);
     const anasheed_with_audios = await AnasheedRepo.getAudioUrl(anasheed_with_urls);
     return res.status(200).json(anasheed_with_audios);
   }
@@ -78,23 +80,25 @@ export default class AnasheedController {
   }
 
   static async getCategoryAnasheed(req, res) {
-    const { id } = req.params
+    const { id, user } = req.params
     const anasheed = await AnasheedRepo.getCategoryAnasheed(id);
     if (!anasheed) {
       return res.status(404).json({ message: 'No data to display' });
     }
-    const anasheed_with_urls = await AnasheedRepo.getUrl(anasheed);
+    const anasheed_with_favorites = await AnasheedRepo.getWithFavorite(user, anasheed);
+    const anasheed_with_urls = await AnasheedRepo.getUrl(anasheed_with_favorites);
     const anasheed_with_audios = await AnasheedRepo.getAudioUrl(anasheed_with_urls);
     return res.status(200).json(anasheed_with_audios);
   }
 
   static async getArtistAnasheed(req, res) {
-    const { id } = req.params
+    const { id, user } = req.params
     const anasheed = await AnasheedRepo.getArtistAnasheed(id);
     if (!anasheed) {
       return res.status(404).json({ message: 'No data to display' });
     }
-    const anasheed_with_urls = await AnasheedRepo.getUrl(anasheed);
+    const anasheed_with_favorites = await AnasheedRepo.getWithFavorite(user, anasheed);
+    const anasheed_with_urls = await AnasheedRepo.getUrl(anasheed_with_favorites);
     const anasheed_with_audios = await AnasheedRepo.getAudioUrl(anasheed_with_urls);
     return res.status(200).json(anasheed_with_audios);
   }

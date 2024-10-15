@@ -6,7 +6,12 @@ export default class FavoriteController {
     static async getFavorite (req, res) {
         const { id_user } = req.params
         const favoriteAnasheed = await FavoriteRepo.getFavorite(id_user);
-        res.status(200).json(favoriteAnasheed);
+        if (!favoriteAnasheed) {
+            return res.status(404).json({ message: 'No data to display' });
+        }
+        const anasheed_with_urls = await FavoriteRepo.getUrl(favoriteAnasheed);
+        const anasheed_with_audios = await FavoriteRepo.getAudioUrl(anasheed_with_urls);
+        res.status(200).json(anasheed_with_audios);
     }
   
     static async addToFavorite(req, res) {

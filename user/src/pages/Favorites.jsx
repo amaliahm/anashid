@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -7,13 +7,13 @@ import Sidebar from '../Components/SideBar';
 import SideBarMobile from '../Components/SideBarMobile';
 import NasheedBar from '../Components/NasheedBar';
 import NowPlayingWrapper from '../Components/NowPlayingWrapper';
+import Loading from './Loading';
 
 // REDUX
 import { fetchFavoriteAnasheed } from '../services/favoriteService';
-import Loading from './Loading';
+import { addFavoriteAnasheed, removeFavoriteAnasheed } from '../services/favoriteService';
 
 const Favorites = () => {
-  const anasheed = [ {}, {}, {}, {}, {}, {}, {} ];
   const dispatch = useDispatch()
   const { id } = useParams()
   const { favoriteAnasheed, loading, error, success } = useSelector(state => state.favorite)
@@ -46,15 +46,26 @@ const Favorites = () => {
                     {loading 
                       ? <Loading /> 
                         : error 
-                          ? <Loading title='Error, please try again!' /> 
-                            : favoriteAnasheed 
+                          ? <Loading title='No data available' /> 
+                            : success && favoriteAnasheed
                               ? <div>
                                   {Object.keys(favoriteAnasheed).map((nasheed, index) => (
                                     <NasheedBar 
                                       key={index} 
-                                      favoriteBar={true}
                                       title={favoriteAnasheed[nasheed].title}
                                       duration={favoriteAnasheed[nasheed].duration}
+                                      artist={favoriteAnasheed[nasheed].artist_name}
+                                      date={favoriteAnasheed[nasheed].created_at}
+                                      image={favoriteAnasheed[nasheed].file_path}
+                                      is_favorite={favoriteAnasheed[nasheed].is_favorite}
+                                      handleRemoveFavorite={() => {
+                                        dispatch(removeFavoriteAnasheed(id, favoriteAnasheed[nasheed].id))
+                                        dispatch(fetchFavoriteAnasheed(id))
+                                      }}
+                                      handleAddFavorite={() => {
+                                        dispatch(addFavoriteAnasheed(id, favoriteAnasheed[nasheed].id))
+                                        dispatch(fetchFavoriteAnasheed(id))
+                                      }}
                                     />
                                   ))}
                                 </div>

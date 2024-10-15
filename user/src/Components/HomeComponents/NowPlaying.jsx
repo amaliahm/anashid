@@ -1,11 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import ReactHowler from 'react-howler';
 import raf from 'raf';
-import { useDispatch, useSelector } from 'react-redux';
 import ReactAudioPlayer from 'react-audio-player';
-
-//REDUX
-import { fetchAnasheed } from '../../services/anasheedServices';
 
 //COMPONENTS
 import Loading from '../../pages/Loading';

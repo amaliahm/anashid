@@ -92,7 +92,7 @@ function App() {
             } 
           />
           <Route 
-            path='/user/categories/:id/:id' 
+            path='/user/categories/category/:id' 
             element={
               <PrivateRoute>
                 <Category />
@@ -108,7 +108,7 @@ function App() {
             } 
           />
           <Route 
-            path='/user/artists/:id/:id' 
+            path='/user/artists/artist/:id' 
             element={
               <PrivateRoute>
                 <Artist />
