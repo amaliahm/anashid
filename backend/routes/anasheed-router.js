@@ -31,6 +31,12 @@ router.get(
     AsyncHandler(AnasheedController.getArtistAnasheed)
 );
 
+router.get(
+    "/playlist/:id/:id_playlist",
+    validator(anasheedSchema.getPlaylistAnasheed, 'params'),
+    AsyncHandler(AnasheedController.getPlaylistAnasheed)
+);
+
 router.post(
     "/add",
     upload.fields([

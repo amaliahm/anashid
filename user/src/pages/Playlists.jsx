@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 //REDUX
 import { fetchPlaylists } from '../services/playlistService';
+import { setItemPlaylist, clearItemPlaylist } from '../slices/itemPlaylistSlice';
 
 // COMPONENTS
 import Sidebar from '../Components/SideBar';
@@ -17,10 +19,17 @@ const Playlists = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { playlists, loading, error, success } = useSelector(state => state.playlists);
+  const navigate = useNavigate()
   
   useEffect(() => {
     dispatch(fetchPlaylists(id));
   }, [])
+
+  const handleItemPlaylist = (playlist) => {
+    dispatch(clearItemPlaylist())
+    dispatch(setItemPlaylist(playlist))
+    navigate(`/user/playlists/playlist/${id}`)
+  }
 
   return (
     <div className="flex h-screen m-0 p-0 bg-[#2D2635]">
@@ -39,7 +48,7 @@ const Playlists = () => {
                   your 
                   <span className='text-[var(--mainColor)]'> playlists </span>
                 </h2>
-                {playlists ? 
+                {success ? 
                   <div className='w-full h-full'> 
                     <div 
                       className='flex flex-wrap justify-center items-center gap-2 sm:gap-4 pb-2 w-fit'
@@ -47,7 +56,7 @@ const Playlists = () => {
                       {Object.keys(playlists).map((card, index) => (
                         <div 
                           key={index} 
-                          onClick={() => handleItemCategory(playlists[card])}
+                          onClick={() => handleItemPlaylist(playlists[card])}
                         > 
                           <CardComponent 
                             image={playlists[card].file_path}
@@ -60,7 +69,7 @@ const Playlists = () => {
                   </div> : 
                     loading ? 
                       <Loading /> : 
-                        error && <Loading title="No data available"/>
+                        error ? <Loading title="No data available"/> : <Loading title="No data available"/> 
                 }
               </div>
             </div>

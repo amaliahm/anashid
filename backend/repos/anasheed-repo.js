@@ -12,7 +12,8 @@ import {
     _updateAnasheed,
     _getCategoryAnasheed,
     _getArtistAnasheed,
-    _getFavorite
+    _getFavorite,
+    _getPlaylistAnasheed
 } from "../database/queries/anasheed-queries.js";
 
 // s3
@@ -145,5 +146,10 @@ export default class AnasheedRepo {
       is_favorite: favoriteIds.has(nasheed.id)
     }))
     return anasheed_with_favorite
+  }
+
+  static async getPlaylistAnasheed(id, id_playlist) {
+    const rows = await DataBaseRepo.queryDatabase(_getPlaylistAnasheed, [id, id_playlist])
+    return rows
   }
 }

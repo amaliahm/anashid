@@ -31,6 +31,7 @@ import Favorites from './pages/Favorites';
 
 import Playlists from './pages/Playlists';
 import AddPlaylist from './pages/add/AddPlaylist';
+import Playlist from './pages/details/Playlist';
 
 import Profile from './pages/Profile';
 
@@ -43,6 +44,8 @@ function App() {
     <>
       <Router>
         <Routes>
+
+          {/* auth */}
           <Route 
             path='/' 
             element={<LandingPage />} 
@@ -67,6 +70,8 @@ function App() {
             path='/auth/reset-password/:token' 
             element={<ChangePassword />} 
           />
+
+          {/* home */}
           <Route 
             path='/user/home/:id' 
             element={
@@ -75,43 +80,13 @@ function App() {
               </PrivateRoute>
             } 
           />
+
+          {/* anasheed */}
           <Route 
             path='/user/playednow/:id' 
             element={
               <PrivateRoute>
                 <PlayedNow />
-              </PrivateRoute>
-            } 
-          />
-          <Route 
-            path='/user/categories/:id' 
-            element={
-              <PrivateRoute>
-                <Categories />
-              </PrivateRoute>
-            } 
-          />
-          <Route 
-            path='/user/categories/category/:id' 
-            element={
-              <PrivateRoute>
-                <Category />
-              </PrivateRoute>
-            } 
-          />
-          <Route 
-            path='/user/artists/:id' 
-            element={
-              <PrivateRoute>
-                <Artists />
-              </PrivateRoute>
-            } 
-          />
-          <Route 
-            path='/user/artists/artist/:id' 
-            element={
-              <PrivateRoute>
-                <Artist />
               </PrivateRoute>
             } 
           />
@@ -131,6 +106,44 @@ function App() {
               </PrivateRoute>
             } 
           />
+
+          {/* categories */}
+          <Route 
+            path='/user/categories/:id' 
+            element={
+              <PrivateRoute>
+                <Categories />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path='/user/categories/category/:id' 
+            element={
+              <PrivateRoute>
+                <Category />
+              </PrivateRoute>
+            } 
+          />
+
+          {/* artists */}
+          <Route 
+            path='/user/artists/:id' 
+            element={
+              <PrivateRoute>
+                <Artists />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path='/user/artists/artist/:id' 
+            element={
+              <PrivateRoute>
+                <Artist />
+              </PrivateRoute>
+            } 
+          />
+
+          {/* playlists */}
           <Route 
             path='/user/playlists/:id' 
             element={
@@ -148,6 +161,16 @@ function App() {
             } 
           />
           <Route 
+            path='/user/playlists/playlist/:id' 
+            element={
+              <PrivateRoute>
+                <Playlist />
+              </PrivateRoute>
+            } 
+          />
+
+          {/* settings */}
+          <Route 
             path='/user/profile/:id' 
             element={
               <PrivateRoute>
@@ -163,6 +186,8 @@ function App() {
               </PrivateRoute>
             } 
           />
+
+          {/* else */}
           <Route 
             path='*' 
             element={

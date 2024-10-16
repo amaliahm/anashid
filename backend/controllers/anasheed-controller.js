@@ -102,4 +102,16 @@ export default class AnasheedController {
     const anasheed_with_audios = await AnasheedRepo.getAudioUrl(anasheed_with_urls);
     return res.status(200).json(anasheed_with_audios);
   }
+
+  static async getPlaylistAnasheed(req, res) {
+    const { id, id_playlist } = req.params
+    const anasheed = await AnasheedRepo.getPlaylistAnasheed(id, id_playlist);
+    if (!anasheed) {
+      return res.status(404).json({ message: 'No data to display' });
+    }
+    const anasheed_with_favorites = await AnasheedRepo.getWithFavorite(id, anasheed);
+    const anasheed_with_urls = await AnasheedRepo.getUrl(anasheed_with_favorites);
+    const anasheed_with_audios = await AnasheedRepo.getAudioUrl(anasheed_with_urls);
+    return res.status(200).json(anasheed_with_audios);
+  }
 }

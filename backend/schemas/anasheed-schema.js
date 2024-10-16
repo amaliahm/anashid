@@ -29,5 +29,9 @@ export default {
   }),
   favoriteAnasheed: joi.object({
     id: joi.number().integer().required(),
-  })
+  }),
+  getPlaylistAnasheed: joi.object({
+    id: joi.number().integer().required(),
+    id_playlist: joi.number().integer().required(),
+  }),
 };

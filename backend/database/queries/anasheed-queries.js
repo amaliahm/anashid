@@ -198,3 +198,38 @@ export const _getArtistAnasheed = `
 export const _getFavorite = `
   SELECT id, id_anasheed FROM anasheedFavorite WHERE id_user = ?;
 `
+
+export const _getPlaylistAnasheed = `
+  SELECT 
+    p.id AS id_playlist, p.name,
+    a.id, a.title, a.description, a.is_deleted AS deleted_anasheed, a.duration,
+    f.file_path, f.file_type, f.created_at,
+    file.file_path AS audio_path
+  FROM 
+    playlist p
+  LEFT JOIN
+    anasheedPlaylist ap 
+  ON
+    p.id = ap.id_playlist
+  JOIN
+    anasheed a
+  ON
+    ap.id_anasheed = a.id
+  JOIN
+    fileAttachment f 
+  ON 
+    a.id_image = f.id
+  JOIN
+    fileAttachment file
+  ON
+    file.id = a.id_audio
+  WHERE 
+    f.file_type = 'image'
+  AND
+    file.file_type = 'audio'
+  AND
+    p.id_user = ?
+  AND
+    p.id = ?
+  ORDER BY a.id;
+`
