@@ -11,7 +11,6 @@ import Loading from "../Loading"
 
 //REDUX
 import { getCategoryAnasheed } from "../../services/anasheedServices"
-import { addFavoriteAnasheed, removeFavoriteAnasheed } from "../../services/favoriteService"
 
 const Category = () => {
 
@@ -24,7 +23,7 @@ const Category = () => {
     const user = id
     dispatch(getCategoryAnasheed(itemCategory.id, user))
   }, [])
-  
+
   return (
     <div className="flex h-screen m-0 p-0 bg-[#2D2635]">
       <div className="hidden lg:block w-64 text-white ml-64">
@@ -54,16 +53,12 @@ const Category = () => {
                         date={anasheed[nasheed].created_at}
                         artist={anasheed[nasheed].artist_name}
                         is_favorite={anasheed[nasheed].is_favorite}
-                        handleRemoveFavorite={() => {
+                        id={id}
+                        get_data={() => {
                           const user = id
-                          dispatch(removeFavoriteAnasheed(id, anasheed[nasheed].id))
                           dispatch(getCategoryAnasheed(itemCategory.id, user))
                         }}
-                        handleAddFavorite={() => {
-                          const user = id
-                          dispatch(addFavoriteAnasheed(id, anasheed[nasheed].id))
-                          dispatch(getCategoryAnasheed(itemCategory.id, user))}
-                        }
+                        id_nasheed={anasheed[nasheed].id}
                       />
                     ))}
                   </div>}

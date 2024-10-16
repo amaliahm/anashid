@@ -11,7 +11,6 @@ import Loading from './Loading';
 
 // REDUX
 import { fetchFavoriteAnasheed } from '../services/favoriteService';
-import { addFavoriteAnasheed, removeFavoriteAnasheed } from '../services/favoriteService';
 
 const Favorites = () => {
   const dispatch = useDispatch()
@@ -58,14 +57,11 @@ const Favorites = () => {
                                       date={favoriteAnasheed[nasheed].created_at}
                                       image={favoriteAnasheed[nasheed].file_path}
                                       is_favorite={favoriteAnasheed[nasheed].is_favorite}
-                                      handleRemoveFavorite={() => {
-                                        dispatch(removeFavoriteAnasheed(id, favoriteAnasheed[nasheed].id))
+                                      id={id}
+                                      get_data={() => {
                                         dispatch(fetchFavoriteAnasheed(id))
                                       }}
-                                      handleAddFavorite={() => {
-                                        dispatch(addFavoriteAnasheed(id, favoriteAnasheed[nasheed].id))
-                                        dispatch(fetchFavoriteAnasheed(id))
-                                      }}
+                                      id_nasheed={favoriteAnasheed[nasheed].id}
                                     />
                                   ))}
                                 </div>
