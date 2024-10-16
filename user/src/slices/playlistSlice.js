@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchPlaylists, addPlaylist, deletePlaylist } from '../services/playlistService';
+import { fetchPlaylists, addPlaylist, deletePlaylist, addToPlaylist } from '../services/playlistService';
 
 const initialState = {
   playlists: [],
   loading: false,
   error: null,
-  success: null
+  success: null,
+  added: null
 };
 
 const playlistSlice = createSlice({
@@ -60,6 +61,22 @@ const playlistSlice = createSlice({
       .addCase(deletePlaylist.rejected, (state, action) => {
         state.loading = false;
         state.success= null;
+        state.error = 'Error, please try again!';
+      })
+      .addCase(addToPlaylist.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+        state.added = null;
+      })
+      .addCase(addToPlaylist.fulfilled, (state, action) => {
+        state.loading = false;
+        state.playlists = state.playlists.filter((playlist) => playlist.id !== action.payload);
+        state.error = null;
+        state.added= 'Nasheed added successfully'
+      })
+      .addCase(addToPlaylist.rejected, (state, action) => {
+        state.loading = false;
+        state.added= null;
         state.error = 'Error, please try again!';
       });
   },

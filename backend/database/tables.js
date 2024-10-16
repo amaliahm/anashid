@@ -124,9 +124,9 @@ CREATE TABLE IF NOT EXISTS listeningHistory (
 export const anasheedPlaylistTable = `
 CREATE TABLE IF NOT EXISTS anasheedPlaylist (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    id_ansheed INT NOT NULL,
+    id_anasheed INT NOT NULL,
     id_playlist INT NOT NULL,
-    FOREIGN KEY (id_ansheed) REFERENCES anasheed(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_anasheed) REFERENCES anasheed(id) ON DELETE CASCADE,
     FOREIGN KEY (id_playlist) REFERENCES playlist(id) ON DELETE CASCADE
 );
 `;

@@ -1,13 +1,15 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 //REDUX
 import { addFavoriteAnasheed, removeFavoriteAnasheed } from "../services/favoriteService"
-
-import Logout from "./Logout"
+import { fetchPlaylists } from "../services/playlistService"
 
 //ICONS
 import { play, pause, favorite__, heart_icon, add_playlist_icon } from "../assets/icons"
+
+//COMPONNETS
+import AddToPlaylistModal from "./AddToPlaylistModal"
 
 const NasheedBar = ({
   title= 'title',
@@ -21,19 +23,21 @@ const NasheedBar = ({
   id_nasheed,
 }) => {
 
-  const dispatch = useDispatch()
+    const dispatch = useDispatch()
+    const { playlists, loading, error, success } = useSelector(state => state.playlists);
 
-  const handleRemoveFavorite = () => {
-    dispatch(removeFavoriteAnasheed(id, id_nasheed))
-    get_data()
-  }
+    const handleRemoveFavorite = () => {
+      dispatch(removeFavoriteAnasheed(id, id_nasheed))
+      get_data()
+    }
 
-  const handleAddFavorite = () => {
-    dispatch(addFavoriteAnasheed(id, id_nasheed))
-    get_data()
-  }
+    const handleAddFavorite = () => {
+      dispatch(addFavoriteAnasheed(id, id_nasheed))
+      get_data()
+    }
 
     const [isPlay, setIsPlay] = useState(false)
+    const [add, setAdd] = useState(false)
     const togglePlay = () => setIsPlay(!isPlay)
 
     function formatDuration(duration) {
@@ -51,6 +55,10 @@ const NasheedBar = ({
       const year = date.getFullYear();
       return `${day}-${month}-${year}`;
     }
+
+    useEffect(() => {
+      dispatch(fetchPlaylists(id))
+    }, [])
 
     return (
       <div className="w-full flex justify-between items-center gap-2 mb-3">
@@ -81,9 +89,17 @@ const NasheedBar = ({
             </p>
           </div>
         </div>
-        <div className="h-16 w-16 rounded-xl bg-white flex justify-center items-center hover:cursor-pointer">
-          <img src={add_playlist_icon} alt="add to playlist" className="w-7"/>
+        <div 
+          className="h-16 w-16 rounded-xl bg-white flex justify-center items-center hover:cursor-pointer"
+          onClick={() => setAdd(true)}
+        >
+          <img 
+            src={add_playlist_icon} 
+            alt="add to playlist" 
+            className="w-7"
+          />
         </div>
+        {add && <AddToPlaylistModal isOpen={add} onClose={() => setAdd(false)} id={id} id_nasheed={id_nasheed} playlists={playlists} />}
       </div>
     )
 }

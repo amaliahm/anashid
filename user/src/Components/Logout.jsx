@@ -23,7 +23,7 @@ const Logout = ({ isOpen, onClose, id }) => {
         <h2 className="text-2xl text-center font-bold mb-16 tracking-wider">
           Logout!
         </h2>
-        {error && <p className="text-[var(--redColor)] mb-4">{error}</p>}
+        {error && <p className="text-red-500 mb-4">{error}</p>}
         <div className='flex justify-evenly items-center w-full'>
         <button
           onClick={handleLogout}

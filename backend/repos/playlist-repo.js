@@ -1,5 +1,5 @@
 import DataBaseRepo from '../database/index.js'
-import { _addImage, _addPlaylist, _deleteFileAttachment, _deletePlaylist, _findPlaylistById, _getPlaylist } from '../database/queries/playlist-queries.js';
+import { _addImage, _addPlaylist, _deleteFileAttachment, _deletePlaylist, _findPlaylistById, _getPlaylist, _addToPlaylist, _getAnasheedFromPlaylist } from '../database/queries/playlist-queries.js';
 
 // s3
 import { s3client } from '../configs/aws-config.js'
@@ -64,5 +64,14 @@ export default class PlaylistRepo {
       };
     }));
     return url
+  }
+
+  static async addToPlaylist(id_playlist, id_anasheed) {
+    const data = await DataBaseRepo.queryDatabase(_getAnasheedFromPlaylist, [id_anasheed, id_playlist])
+    if (!data) {
+      const rows = await DataBaseRepo.queryDatabase(_addToPlaylist, [id_anasheed, id_playlist])
+      return rows
+    }
+    return data
   }
 }

@@ -12,4 +12,8 @@ export default {
   deletePlaylist: joi.object({
     id: joi.number().integer().required(), 
   }),
+  addToPlaylist: joi.object({
+    id: joi.number().integer().required(), 
+    id_nasheed: joi.number().integer().required(), 
+  }),
 };

@@ -25,6 +25,12 @@ router.post(
     AsyncHandler(PlaylistController.addPlaylist)
 );
 
+router.post(
+    "/nasheed/add",
+    validator(playlistSchema.addToPlaylist),
+    AsyncHandler(PlaylistController.addToPlaylist)
+);
+
 router.delete(
     "/:id",
     validator(playlistSchema.deletePlaylist, 'params'),

@@ -8,7 +8,6 @@ export const fetchPlaylists = createAsyncThunk('playlists/fetchPlaylists', async
 });
 
 export const addPlaylist = createAsyncThunk('playlists/addPlaylist', async (formData) => {
-    console.log(formData)
     try {
         const response = await apiClient.post(
             '/user/playlists/add', 
@@ -28,6 +27,18 @@ export const addPlaylist = createAsyncThunk('playlists/addPlaylist', async (form
 export const deletePlaylist = createAsyncThunk('playlists/deletePlaylist', async (id, { rejectWithValue }) => {
   try {
     const response = await apiClient.delete(`/user/playlists/${id}`);
+    return response.data;
+  } catch (e) {
+    return rejectWithValue(e.response.data);
+  }
+});
+
+export const addToPlaylist = createAsyncThunk('playlists/addToPlaylist', async (data) => {
+  try {
+    const response = await apiClient.post(
+        `/user/playlists/nasheed/add`, 
+        data
+    );
     return response.data;
   } catch (e) {
     return rejectWithValue(e.response.data);

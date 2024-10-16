@@ -40,3 +40,11 @@ export const _addImage = `
 export const _deleteFileAttachment = `
     DELETE FROM fileAttachment WHERE id = ?;
 `;
+
+export const _addToPlaylist = `
+    INSERT INTO anasheedPlaylist (id_anasheed, id_playlist) VALUES (?,?);
+`
+
+export const _getAnasheedFromPlaylist = `
+    SELECT * FROM anasheedPlaylist WHERE id_anasheed = ? AND id_playlist = ?;
+`
