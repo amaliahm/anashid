@@ -1,6 +1,7 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 //COMPONENTS
 import SideBarMobile from "../../Components/SideBarMobile"
@@ -8,9 +9,13 @@ import Sidebar from "../../Components/SideBar"
 import NasheedBar from "../../Components/NasheedBar"
 import NowPlayingWrapper from "../../Components/NowPlayingWrapper"
 import Loading from "../Loading"
+import RemovePlaylist from "../../Components/RemovePlaylist"
 
 //REDUX
 import { getPlaylistAnasheed } from "../../services/anasheedServices"
+
+//ICONS
+import { delete_icon } from "../../assets/icons"
 
 
 const Playlist = () => {
@@ -18,7 +23,9 @@ const Playlist = () => {
   const { itemPlaylist } = useSelector(state => state.itemPlaylist)
   const { anasheed, loading, error } = useSelector(state => state.anasheed)
   const dispatch = useDispatch()
+  const [handleDelete, setHandleDelete] = useState(false)
   const { id } = useParams()
+  const navigate = useNavigate()
 
   useEffect(() => {
     dispatch(getPlaylistAnasheed(itemPlaylist.id, id))
@@ -37,9 +44,12 @@ const Playlist = () => {
                 <SideBarMobile elem={7}/>
               </div>
               <div className='mb-32'>
-                <h2 className="text-xl lg:text-2xl font-bold text-[var(--mainColor)] capitalize mb-8 px-2">
-                  {itemPlaylist.name}
-                </h2>
+                <div className="w-full bg-red-500 mb-8 flex justify-between items-center">
+                  <h2 className="text-xl lg:text-2xl font-bold text-[var(--mainColor)] capitalize px-2">
+                    {itemPlaylist.name}
+                  </h2>
+                  <img src={delete_icon} alt="delete playlist" className="cursor-pointer" onClick={() => setHandleDelete(true)} />
+                </div>
                 <div className='w-full h-full'> 
                   {loading ? <Loading /> : error ? <Loading title='no data available' /> : <div 
                     className='flex flex-col justify-center items-center gap-2 sm:gap-4 pb-2 w-full'
@@ -72,6 +82,7 @@ const Playlist = () => {
           </div>
         </div>
       </div>
+      {handleDelete && <RemovePlaylist id={itemPlaylist.id} name={itemPlaylist.name} isOpen={handleDelete} onClose={() => setHandleDelete(false)} navigate={() => navigate(`/user/playlists/${id}`)} />}
     </div>
   )
 }

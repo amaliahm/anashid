@@ -9,7 +9,7 @@ import { fetchPlaylists } from "../services/playlistService"
 import { play, pause, favorite__, heart_icon, add_playlist_icon, delete_icon } from "../assets/icons"
 
 //COMPONNETS
-import AddToPlaylistModal from "./AddToPlaylistModal"
+import AddToPlaylistModal from "./HandleAnasheedPlaylist"
 
 const NasheedBar = ({
   title= 'title',
