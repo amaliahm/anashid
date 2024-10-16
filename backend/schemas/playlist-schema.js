@@ -16,4 +16,7 @@ export default {
     id: joi.number().integer().required(), 
     id_nasheed: joi.number().integer().required(), 
   }),
+  removeFromPlaylist: joi.object({
+    anasheed_playlist_id: joi.number().integer().required(),
+  }),
 };

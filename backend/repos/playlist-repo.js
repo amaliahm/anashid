@@ -1,5 +1,5 @@
 import DataBaseRepo from '../database/index.js'
-import { _addImage, _addPlaylist, _deleteFileAttachment, _deletePlaylist, _findPlaylistById, _getPlaylist, _addToPlaylist, _getAnasheedFromPlaylist } from '../database/queries/playlist-queries.js';
+import { _addImage, _addPlaylist, _deleteFileAttachment, _deletePlaylist, _findPlaylistById, _getPlaylist, _addToPlaylist, _getAnasheedFromPlaylist, _removeFromPlaylist } from '../database/queries/playlist-queries.js';
 
 // s3
 import { s3client } from '../configs/aws-config.js'
@@ -73,5 +73,9 @@ export default class PlaylistRepo {
       return rows
     }
     return data
+  }
+
+  static async removeFromPlaylist(anasheed_playlist_id) {
+    await DataBaseRepo.queryDatabase(_removeFromPlaylist, [anasheed_playlist_id])
   }
 }

@@ -54,6 +54,8 @@ const Playlist = () => {
                         artist={anasheed[nasheed].artist_name}
                         is_favorite={anasheed[nasheed].is_favorite}
                         id={id}
+                        anasheed_playlist_id={anasheed[nasheed].anasheed_playlist_id}
+                        is_in_playlist={true}
                         get_data={() => {
                           dispatch(getPlaylistAnasheed(itemPlaylist.id, id))
                         }}

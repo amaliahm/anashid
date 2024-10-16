@@ -49,4 +49,10 @@ export default class PlaylistController {
         await PlaylistRepo.addToPlaylist(id, id_nasheed);
         res.status(200).json({ message: 'Nasheed added to playlist successfully' });
     }
+
+    static async removeFromPlaylist (req, res) {
+        const { anasheed_playlist_id } = req.params
+        await PlaylistRepo.removeFromPlaylist(anasheed_playlist_id);
+        res.status(200).json({ message: 'Nasheed removed from playlist successfully' });
+    }
 }

@@ -15,6 +15,7 @@ import heart_icon from './heart_icon.svg'
 
 import playlist_icon from './playlist_icon.svg'
 import add_playlist_icon from './add_playlist_icon.svg'
+import delete_icon from './delete_icon.svg'
 
 import logout_icon from './logout_icon.svg'
 import contact_us_icon from './contact_us_icon.svg'
@@ -38,8 +39,6 @@ import no_repeate_icon from './no_repeate_icon.svg'
 import shuffle_icon from './shuffle_icon.svg'
 import no_shuffle_icon from './no_shuffle_icon.svg'
 
-
-
 import close_sidebar_icon from './close_sidebar_icon.svg'
 import menu_bar_icon from './menu_bar_icon.svg'
 
@@ -55,7 +54,7 @@ export {
     home_icon, category_icon, artist_icon, played_now_icon, 
     recently_played_icon, 
     favorite_icon, favorite, favorite__, heart_icon,
-    playlist_icon, add_playlist_icon, 
+    playlist_icon, add_playlist_icon, delete_icon,
     logout_icon, contact_us_icon, 
     search_icon, 
     left_arrow_icon, right_arrow_icon,

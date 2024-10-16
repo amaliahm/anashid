@@ -44,3 +44,14 @@ export const addToPlaylist = createAsyncThunk('playlists/addToPlaylist', async (
     return rejectWithValue(e.response.data);
   }
 });
+
+export const removeFromPlaylist = createAsyncThunk('playlists/removeFromPlaylist', async (anasheed_playlist_id) => {
+  try {
+    const response = await apiClient.post(
+        `/user/playlists/nasheed/remove/${anasheed_playlist_id}`, 
+    );
+    return response.data;
+  } catch (e) {
+    return rejectWithValue(e.response.data);
+  }
+});

@@ -31,6 +31,12 @@ router.post(
     AsyncHandler(PlaylistController.addToPlaylist)
 );
 
+router.post(
+    "/nasheed/remove/:anasheed_playlist_id",
+    validator(playlistSchema.removeFromPlaylist, 'params'),
+    AsyncHandler(PlaylistController.removeFromPlaylist)
+);
+
 router.delete(
     "/:id",
     validator(playlistSchema.deletePlaylist, 'params'),

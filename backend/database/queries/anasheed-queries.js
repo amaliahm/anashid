@@ -204,7 +204,8 @@ export const _getPlaylistAnasheed = `
     p.id AS id_playlist, p.name,
     a.id, a.title, a.description, a.is_deleted AS deleted_anasheed, a.duration,
     f.file_path, f.file_type, f.created_at,
-    file.file_path AS audio_path
+    file.file_path AS audio_path,
+    ap.id as anasheed_playlist_id
   FROM 
     playlist p
   LEFT JOIN

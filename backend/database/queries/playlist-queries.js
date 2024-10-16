@@ -48,3 +48,7 @@ export const _addToPlaylist = `
 export const _getAnasheedFromPlaylist = `
     SELECT * FROM anasheedPlaylist WHERE id_anasheed = ? AND id_playlist = ?;
 `
+
+export const _removeFromPlaylist = `
+    DELETE FROM anasheedPlaylist WHERE id = ?;
+`

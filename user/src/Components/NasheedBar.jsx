@@ -6,7 +6,7 @@ import { addFavoriteAnasheed, removeFavoriteAnasheed } from "../services/favorit
 import { fetchPlaylists } from "../services/playlistService"
 
 //ICONS
-import { play, pause, favorite__, heart_icon, add_playlist_icon } from "../assets/icons"
+import { play, pause, favorite__, heart_icon, add_playlist_icon, delete_icon } from "../assets/icons"
 
 //COMPONNETS
 import AddToPlaylistModal from "./AddToPlaylistModal"
@@ -21,6 +21,8 @@ const NasheedBar = ({
   id,
   get_data,
   id_nasheed,
+  is_in_playlist = false,
+  anasheed_playlist_id = null
 }) => {
 
     const dispatch = useDispatch()
@@ -90,16 +92,18 @@ const NasheedBar = ({
           </div>
         </div>
         <div 
-          className="h-16 w-16 rounded-xl bg-white flex justify-center items-center hover:cursor-pointer"
+          className={`h-16 w-16 rounded-xl ${is_in_playlist ? 'bg-[#0F1422] border-[1px] border-[#713C96]' : 'bg-white'} flex justify-center items-center hover:cursor-pointer`}
           onClick={() => setAdd(true)}
         >
           <img 
-            src={add_playlist_icon} 
+            src={is_in_playlist ? delete_icon : add_playlist_icon} 
             alt="add to playlist" 
             className="w-7"
           />
         </div>
-        {add && <AddToPlaylistModal isOpen={add} onClose={() => setAdd(false)} id={id} id_nasheed={id_nasheed} playlists={playlists} />}
+        {add && <AddToPlaylistModal isOpen={add} onClose={() => {
+          setAdd(false) 
+          get_data()}} id={id} id_nasheed={id_nasheed} playlists={playlists} is_in_playlist={is_in_playlist} anasheed_playlist_id={anasheed_playlist_id} />}
       </div>
     )
 }
