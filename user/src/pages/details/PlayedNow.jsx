@@ -19,7 +19,7 @@ const PlayedNow = () => {
     return (
         <>
           <div className='flex h-screen m-0 p-0'>
-            <div className="hidden lg:block w-64 text-white ml-64">
+            <div className="hidden lg:block w-64 text-white ml-64 ">
               <Sidebar elem={4}/>
             </div>
             <div className="w-full">

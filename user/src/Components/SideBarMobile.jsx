@@ -3,8 +3,6 @@ import React, { useState } from 'react';
 // COMPONENTS
 import Sidebar from '../Components/SideBar';
 
-import Logout from './Logout';
-
 //ICONS
 import { close_sidebar_icon, menu_bar_icon } from '../assets/icons';
 

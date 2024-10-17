@@ -14,9 +14,14 @@ import AnasheedController from "../controllers/anasheed-controller.js";
 const router = Router();
 
 router.get(
+    "/",
+    AsyncHandler(AnasheedController.getAllAnasheed)
+);
+
+router.get(
     "/:id",
     validator(anasheedSchema.favoriteAnasheed, 'params'),
-    AsyncHandler(AnasheedController.getAllAnasheed)
+    AsyncHandler(AnasheedController.getAllAnasheedWithFavorite)
 );
 
 router.get(

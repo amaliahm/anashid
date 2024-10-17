@@ -1,15 +1,22 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+//REDUX
+import { logoutReducer } from "../services/authService";
 
 import { sidebar_elements } from "../utils/constant";
 
-import Logout from "./Logout";
 
 const Sidebar = ({elem}) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate()
-  const [logout, setLogout] = useState(false)
+  const { loading, error } = useSelector((state) => state.auth);
   const { id } = useParams()
+
+  const handleLogout = async () => {
+    dispatch(logoutReducer(id));
+    navigate('/auth/login')
+  };
 
   return (
     <div className="w-44 lg:w-64 bg-[#2D2635] lg:bg-[rgba(217,217,217,0.11)] text-white py-8 flex flex-col h-2/3 lg:h-screen fixed lg:left-0 overflow-y-auto rounded-2xl lg:rounded-none lg:opacity-95">
@@ -30,7 +37,7 @@ const Sidebar = ({elem}) => {
                 <li 
                   key={i} 
                   className={`mb-4 capitalize font-semibold flex gap-1 lg:gap-3 items-center text-[${el.color}] ${el.element === elem ? 'bg-[#774F96] text-sm lg:text-xl' : ''} h-12 lg:h-14 w-40 lg:w-56 pl-2 rounded-xl hover:cursor-pointer `}
-                  onClick={() => el.element === 0 ? setLogout(true) : navigate(`${el.to}/${id}`)}
+                  onClick={() => el.element === 0 ? handleLogout() : navigate(`${el.to}/${id}`)}
                 >
                   <img 
                     src={el.icon} 
@@ -43,9 +50,10 @@ const Sidebar = ({elem}) => {
             </ul>
           </div>
         ))}
+        {error && <p className="text-red-500">Error, please try again!</p>}
+        {loading && <p className="text-green-500">Processing...</p>}
       </div>
-      {logout && <Logout isOpen={logout} onClose={() => setLogout(false)} id={id}/>}
-
+      
     </div>
   )
 }
