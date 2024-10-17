@@ -14,7 +14,7 @@ import { signup, line } from "../../assets/images"
 
 const Signup = () => {
   const navigate = useNavigate()
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const { errorMessage, successMessage, status } = useSelector((state) => state.auth);
   const [form, setForm] = useState({
     email: '',

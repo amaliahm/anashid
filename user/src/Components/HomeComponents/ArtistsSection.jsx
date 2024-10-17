@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
 
 //REDUX
 import { fetchArtists } from '../../services/artistsService';
@@ -13,11 +12,14 @@ import Loading from '../../pages/Loading';
 //ICONS
 import { right_arrow_icon } from '../../assets/icons';
 
+//CONTEXT
+import { useUserContext } from '../../hooks/userContext';
+
 const ArtistsSection = () => {
   const dispatch = useDispatch();
   const {artists, error, loading} = useSelector(state => state.artists);
   const navigate = useNavigate()
-  const { id } = useParams()
+  const { loggedinUser } = useUserContext()
 
   useEffect(() => {
     dispatch(fetchArtists())
@@ -26,7 +28,7 @@ const ArtistsSection = () => {
   const handleItemArtist = (artist) => {
     dispatch(clearItemArtist())
     dispatch(setItemArtist(artist))
-    navigate(`/user/artists/artist/${id}`)
+    navigate(`/user/artists/artist/${loggedinUser}`)
   }
 
   return (
@@ -39,7 +41,7 @@ const ArtistsSection = () => {
         <img 
           src={right_arrow_icon} 
           alt='see more' 
-          onClick={() => navigate(`/user/artists/${id}`)}
+          onClick={() => navigate(`/user/artists/${loggedinUser}`)}
           className='h-6 hover:cursor-pointer'
         />
       </div>

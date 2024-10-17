@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
 
 //REDUX
 import { fetchAnasheed } from '../../services/anasheedServices';
@@ -9,11 +8,14 @@ import { fetchAnasheed } from '../../services/anasheedServices';
 //COMPONENTS
 import CardComponent from '../Card';
 
+//CONTEXT
+import { useUserContext } from '../../hooks/userContext';
+
 const NewAnasheedSection = () => {
   const dispatch = useDispatch();
   const { anasheed, error, loading } = useSelector((state) => state.anasheed);
   const navigate = useNavigate()
-  const { id } = useParams()
+  const { loggedinUser } = useUserContext()
 
   const getNewAnasheed = (data) => {
     if (data) {
@@ -29,7 +31,7 @@ const NewAnasheedSection = () => {
   }
 
   useEffect(() => {
-    dispatch(fetchAnasheed(id));
+    dispatch(fetchAnasheed(loggedinUser));
   }, []);
 
   const newAnasheed = getNewAnasheed(anasheed)
@@ -50,7 +52,7 @@ const NewAnasheedSection = () => {
             <div 
               key={index} 
               onClick={() => {
-                navigate(`/user/playednow/${id}`)
+                navigate(`/user/playednow/${loggedinUser}`)
                 localStorage.setItem('currentAnasheed', JSON.stringify(newAnasheed[card]))
               }}
             >

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
 
 //REDUX
 import { fetchCategories } from '../../services/categoriesService';
@@ -14,12 +13,15 @@ import Loading from '../../pages/Loading';
 //ICONS
 import { right_arrow_icon } from '../../assets/icons';
 
+//CONTEXT
+import { useUserContext } from '../../hooks/userContext';
+
 const CategoriesSection = () => {
 
   const dispatch = useDispatch();
   const {categories, error, loading} = useSelector(state => state.categories);
   const navigate = useNavigate()
-  const { id } = useParams()
+  const { loggedinUser } = useUserContext()
 
   useEffect(() => {
     dispatch(fetchCategories())
@@ -28,7 +30,7 @@ const CategoriesSection = () => {
   const handleItemCategory = (category) => {
     dispatch(clearItemCategory())
     dispatch(setItemCategory(category))
-    navigate(`/user/categories/category/${id}`)
+    navigate(`/user/categories/category/${loggedinUser}`)
   }
 
   return (
@@ -41,7 +43,7 @@ const CategoriesSection = () => {
         <img 
           src={right_arrow_icon} 
           alt='see more' 
-          onClick={() => navigate(`/user/categories/${id}`)}
+          onClick={() => navigate(`/user/categories/${loggedinUser}`)}
           className='h-6 hover:cursor-pointer'
         />
       </div>

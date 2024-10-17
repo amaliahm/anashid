@@ -1,20 +1,24 @@
-import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
 //REDUX
 import { logoutReducer } from "../services/authService";
 
+//elements
 import { sidebar_elements } from "../utils/constant";
 
+//CONTEXT
+import { useUserContext } from "../hooks/userContext";
 
 const Sidebar = ({elem}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const { loading, error } = useSelector((state) => state.auth);
-  const { id } = useParams()
+  const { loggedinUser } = useUserContext()
 
   const handleLogout = async () => {
-    dispatch(logoutReducer(id));
+    dispatch(logoutReducer(loggedinUser));
     navigate('/auth/login')
   };
 
@@ -37,7 +41,7 @@ const Sidebar = ({elem}) => {
                 <li 
                   key={i} 
                   className={`mb-4 capitalize font-semibold flex gap-1 lg:gap-3 items-center text-[${el.color}] ${el.element === elem ? 'bg-[#774F96] text-sm lg:text-xl' : ''} h-12 lg:h-14 w-40 lg:w-56 pl-2 rounded-xl hover:cursor-pointer `}
-                  onClick={() => el.element === 0 ? handleLogout() : navigate(`${el.to}/${id}`)}
+                  onClick={() => el.element === 0 ? handleLogout() : navigate(`${el.to}/${loggedinUser}`)}
                 >
                   <img 
                     src={el.icon} 

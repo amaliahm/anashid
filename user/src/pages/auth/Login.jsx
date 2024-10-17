@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 
 // REDUX
 import { loginReducer } from "../../services/authService.js"
+import { useUserContext } from "../../hooks/userContext"
 
 //COMPONENTS
 import Footer from "../../Components/Footer"
@@ -15,6 +16,7 @@ import { signup, line } from "../../assets/images"
 const Login = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch();
+  const { setLoggedinUser } = useUserContext()
   const { errorMessage, successMessage, status } = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(false)
   const [form, setForm] = useState({

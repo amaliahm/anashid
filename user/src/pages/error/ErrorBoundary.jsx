@@ -1,6 +1,5 @@
 import React from 'react';
 import Loading from '../../pages/Loading';
-import { useParams } from 'react-router-dom';
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
