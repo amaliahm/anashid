@@ -1,0 +1,13 @@
+import joi from "joi";
+
+export default {
+  getListening: joi.object({
+    id_user: joi.number().integer().required(),
+    id_anasheed: joi.number().integer().required(),
+  }),
+  addListening: joi.object({
+    position: joi.number().integer().required(),
+    id_user: joi.number().integer().required(),
+    id_anasheed: joi.number().integer().required(),
+  }),
+};

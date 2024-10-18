@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
 
 //REDUX
 import { addFavoriteAnasheed, removeFavoriteAnasheed } from "../services/favoriteService"
@@ -11,12 +12,15 @@ import { play, pause, favorite__, heart_icon, add_playlist_icon, delete_icon } f
 //COMPONNETS
 import AddToPlaylistModal from "./HandleAnasheedPlaylist"
 
+//CONTEXT
+import { useUserContext } from "../hooks/userContext"
+
 const NasheedBar = ({
-  title= 'title',
-  artist= 'artist',
-  date= '05/10/2024',
-  duration= '10:00',
-  image = '',
+  title,
+  artist,
+  date,
+  duration,
+  image,
   is_favorite,
   id,
   get_data,
@@ -26,6 +30,8 @@ const NasheedBar = ({
 }) => {
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const { loggedinUser } = useUserContext()
     const { playlists, loading, error, success } = useSelector(state => state.playlists);
 
     const handleRemoveFavorite = () => {
@@ -64,16 +70,21 @@ const NasheedBar = ({
 
     return (
       <div className="w-full flex justify-between items-center gap-2 mb-3">
-        <div className="px-4 py-2 rounded-3xl w-full flex flex-wrap justify-evenly items-center gap-4 border-[1px] border-[#713C96] bg-[#0F1422] hover:cursor-pointer">
+        <div 
+          className="px-4 py-2 rounded-3xl w-full flex flex-wrap justify-evenly items-center gap-4 border-[1px] border-[#713C96] bg-[#0F1422] hover:cursor-pointer" 
+          onClick={() => {
+            navigate(`/user/playednow/${loggedinUser}`)
+          }}
+        >
           <div className="flex items-center justify-between min-w-2/5 gap-2">
             <div className="w-16 h-16 lg:w-20 lg:h-20 bg-gray-500 rounded-full bg-cover bg-center" style={{ backgroundImage: `url('${image}')`}}></div>
             <h2 className="capitalize font-semibold text-xl lg:text-2xl text-wrap">
-              {title}
+              {title || 'nasheed title'}
             </h2>
           </div>
           <div className="flex items-center justify-evenly w-1/4 flex-wrap min-w-32">
-            <p className="capitalize text-[var(--semanticThirdColor)] text-sm">{artist}</p>
-            <p className="capitalize text-[var(--semanticThirdColor)] text-sm">{formatDate(date)}</p>
+            <p className="capitalize text-[var(--semanticThirdColor)] text-sm">{artist || 'artist name'}</p>
+            <p className="capitalize text-[var(--semanticThirdColor)] text-sm">{formatDate(date) || 'added at'}</p>
           </div>
           <div className="flex items-center justify-evenly w-1/4 flex-wrap min-w-32">
             {is_favorite 
@@ -87,7 +98,7 @@ const NasheedBar = ({
               className="hover:cursor-pointer w-6" 
             />
             <p className="font-bold">
-              {formatDuration(duration)}
+              {formatDuration(duration) || '00:00'}
             </p>
           </div>
         </div>

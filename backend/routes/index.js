@@ -22,6 +22,8 @@ import LanguageRouter from './language-router.js'
 import SendEmailRouter from './sendEmail-router.js'
 import ConactRouter from './contact-router.js'
 
+import PlayedNowRouter from './played-now-router.js'
+
 
 const router = Router();
 
@@ -58,5 +60,7 @@ router.use("/admin/sendEmail", SendEmailRouter);
 router.use("/user/sendEmail", ConactRouter);
 
 router.use("/user/favorites", FavoriteRouter);
+
+router.use("/user/playednow", PlayedNowRouter);
 
 export default router;

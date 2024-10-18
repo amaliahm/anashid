@@ -10,6 +10,7 @@ import CardComponent from '../Card';
 
 //CONTEXT
 import { useUserContext } from '../../hooks/userContext';
+import Loading from '../../pages/Loading';
 
 const NewAnasheedSection = () => {
   const dispatch = useDispatch();
@@ -48,12 +49,13 @@ const NewAnasheedSection = () => {
         <div 
           className=' flex gap-2 sm:gap-4 pb-2 w-fit'
         >
-          {newAnasheed && Object.keys(newAnasheed).map((card, index) => (
+          {newAnasheed ? Object.keys(newAnasheed).map((card, index) => (
             <div 
               key={index} 
               onClick={() => {
-                navigate(`/user/playednow/${loggedinUser}`)
-                localStorage.setItem('currentAnasheed', JSON.stringify(newAnasheed[card]))
+                console.log(newAnasheed[card])
+                // navigate(`/user/playednow/${loggedinUser}`)
+                // localStorage.setItem('currentAnasheed', JSON.stringify(newAnasheed[card]))
               }}
             >
               <CardComponent 
@@ -62,7 +64,7 @@ const NewAnasheedSection = () => {
                 subTitle={newAnasheed[card].artist_name}
               />
             </div>
-          ))}
+          )) : loading ? <Loading /> : <Loading title='no data available' />}
         </div>
       </div>
     </div>

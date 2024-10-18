@@ -117,7 +117,8 @@ CREATE TABLE IF NOT EXISTS listeningHistory (
     id_user INT NOT NULL,
     id_anasheed INT NOT NULL,
     FOREIGN KEY (id_user) REFERENCES user(id) ON DELETE CASCADE,
-    FOREIGN KEY (id_anasheed) REFERENCES anasheed(id) ON DELETE CASCADE
+    FOREIGN KEY (id_anasheed) REFERENCES anasheed(id) ON DELETE CASCADE,
+    UNIQUE KEY unique_user_anasheed (id_user, id_anasheed)
 );
 `;
 
