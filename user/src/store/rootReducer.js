@@ -20,6 +20,8 @@ import contactSlice from '../slices/contactSlice.js';
 import playlistSlice from '../slices/playlistSlice.js';
 import itemPlaylistSlice from '../slices/itemPlaylistSlice.js';
 
+import playedNowSlice from '../slices/playedNowSlice.js'
+
 // item anasheed
 
 export const rootReducer = combineReducers({
@@ -41,4 +43,5 @@ export const rootReducer = combineReducers({
 
     playlists: playlistSlice,
     itemPlaylist: itemPlaylistSlice,
+    playedNow: playedNowSlice,
 });

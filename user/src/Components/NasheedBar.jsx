@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom"
 //REDUX
 import { addFavoriteAnasheed, removeFavoriteAnasheed } from "../services/favoriteService"
 import { fetchPlaylists } from "../services/playlistService"
+import { addListening } from "../services/playedNowService"
 
 //ICONS
 import { play, pause, favorite__, heart_icon, add_playlist_icon, delete_icon } from "../assets/icons"
@@ -73,7 +74,8 @@ const NasheedBar = ({
         <div 
           className="px-4 py-2 rounded-3xl w-full flex flex-wrap justify-evenly items-center gap-4 border-[1px] border-[#713C96] bg-[#0F1422] hover:cursor-pointer" 
           onClick={() => {
-            navigate(`/user/playednow/${loggedinUser}`)
+            dispatch( addListening({ id_user: loggedinUser, id_anasheed: id_nasheed, position:0 }));
+            // navigate(`/user/playednow/${loggedinUser}`)
           }}
         >
           <div className="flex items-center justify-between min-w-2/5 gap-2">

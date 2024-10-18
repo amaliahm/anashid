@@ -8,9 +8,9 @@ const initialState = {
   isRepeat: false,
   isShuffle: false,
   isMute: false,
-  error: false,
-  loading: false,
-  success:false,
+  errorPlayedNow: false,
+  loadingPlayedNow: false,
+  successPlayedNow:false,
 };
 
 const playedNowSlice = createSlice({
@@ -36,53 +36,52 @@ const playedNowSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchHistory.pending, (state) => {
-        state.loading = true;
-        state.error = false;
-        state.success = false;
+        state.loadingPlayedNow = true;
+        state.errorPlayedNow = false;
+        state.successPlayedNow = false;
       })
       .addCase(fetchHistory.fulfilled, (state, action) => {
-        state.loading = false;
+        state.loadingPlayedNow = false;
         state.history = action.payload;
-        state.error = false;
-        state.success= true
+        state.errorPlayedNow = false;
+        state.successPlayedNow= true
       })
       .addCase(fetchHistory.rejected, (state, action) => {
-        state.loading = false;
-        state.success= false;
-        state.error = true;
+        state.loadingPlayedNow = false;
+        state.successPlayedNow= false;
+        state.errorPlayedNow = true;
       })
-    builder
       .addCase(fetchPlayedNow.pending, (state) => {
-        state.loading = true;
-        state.error = false;
-        state.success = false;
+        state.loadingPlayedNow = true;
+        state.errorPlayedNow = false;
+        state.successPlayedNow = false;
       })
       .addCase(fetchPlayedNow.fulfilled, (state, action) => {
-        state.loading = false;
+        state.loadingPlayedNow = false;
         state.anasheed = action.payload;
         state.currentTrack = action.payload[0];
-        state.error = false;
-        state.success= true
+        state.errorPlayedNow = false;
+        state.successPlayedNow= true
       })
       .addCase(fetchPlayedNow.rejected, (state, action) => {
-        state.loading = false;
-        state.success= false;
-        state.error = true;
+        state.loadingPlayedNow = false;
+        state.successPlayedNow= false;
+        state.errorPlayedNow = true;
       })
       .addCase(addListening.pending, (state) => {
-        state.loading = true;
-        state.error = false;
-        state.success = false;
+        state.loadingPlayedNow = true;
+        state.errorPlayedNow = false;
+        state.successPlayedNow = false;
       })
       .addCase(addListening.fulfilled, (state, action) => {
-        state.loading = false;
-        state.error = false;
-        state.success= true
+        state.loadingPlayedNow = false;
+        state.errorPlayedNow = false;
+        state.successPlayedNow= true
       })
       .addCase(addListening.rejected, (state, action) => {
-        state.loading = false;
-        state.success= false;
-        state.error = true;
+        state.loadingPlayedNow = false;
+        state.successPlayedNow= false;
+        state.errorPlayedNow = true;
       });
   }
 });
