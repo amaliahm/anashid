@@ -1,5 +1,6 @@
 import React, { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
 
 //COMPONENTS
 import NasheedBar from "../../Components/NasheedBar"
@@ -17,8 +18,14 @@ const Artist = () => {
     const { anasheed, loading, error } = useSelector(state => state.anasheed)
     const dispatch = useDispatch()
     const { loggedinUser } = useUserContext()
-
+    const navigate = useNavigate()
+    
+    
     useEffect(() => {
+      if (itemArtist === null) {
+        navigate(`/user/artists/${loggedinUser}`)
+        return
+      }
       const user = loggedinUser
       dispatch(getArtistAnasheed(itemArtist.id, user))
     }, [])
@@ -28,14 +35,14 @@ const Artist = () => {
         <div className="flex justify-start items-center mb-8">
           <div 
             className="bg-gray-500 w-20 h-20 rounded-full bg-cover bg-center" 
-            style={{backgroundImage: `url('${itemArtist.file_path}')`}}
+            style={{backgroundImage: `url('${itemArtist?.file_path || ''}')`}}
           ></div>
           <h2 className="text-xl lg:text-2xl font-bold text-[var(--mainColor)] capitalize pl-4">
-            {itemArtist.name}
+            {itemArtist?.name || ''}
           </h2>
         </div>
         <h2 className="text-xl lg:text-2xl font-semibold text-gray-500 mb-8 px-2 capitalize">
-          {itemArtist.bio}
+          {itemArtist?.bio || ''}
         </h2>
         <div className='w-full h-full'> 
           {loading ? <Loading /> : error ? <Loading title='no data available' /> : <div 
@@ -53,7 +60,7 @@ const Artist = () => {
                 id={loggedinUser}
                 get_data={() => {
                   const user = loggedinUser
-                  dispatch(getArtistAnasheed(itemArtist.id, user))
+                  dispatch(getArtistAnasheed(itemArtist?.id, user))
                 }}
                 id_nasheed={anasheed[nasheed].id}
               />

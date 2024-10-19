@@ -24,7 +24,12 @@ const Playlist = () => {
   const { loggedinUser } = useUserContext()
   const navigate = useNavigate()
 
+  
   useEffect(() => {
+    if (itemPlaylist === null) {
+      navigate(`/user/playlists/${loggedinUser}`)
+      return
+    }
     dispatch(getPlaylistAnasheed(itemPlaylist.id, loggedinUser))
   }, [])
 
@@ -32,7 +37,7 @@ const Playlist = () => {
     <div className='mb-32'>
       <div className="w-full bg-red-500 mb-8 flex justify-between items-center">
         <h2 className="text-xl lg:text-2xl font-bold text-[var(--mainColor)] capitalize px-2">
-          {itemPlaylist.name}
+          {itemPlaylist?.name}
         </h2>
         <img src={delete_icon} alt="delete playlist" className="cursor-pointer" onClick={() => setHandleDelete(true)} />
       </div>

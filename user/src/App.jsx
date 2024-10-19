@@ -1,4 +1,6 @@
+import React, { useEffect } from 'react';
 import { Route, BrowserRouter as Router, Routes, useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 // SEC STUFF
 import PrivateRoute from './pages/auth/PrivateRoute';
@@ -42,7 +44,21 @@ import Contact from './pages/Contact';
 import SideBarMobile from './Components/SideBarMobile';
 import Sidebar from './Components/SideBar';
 
+//CONTEXT
+import { useUserContext } from './hooks/userContext';
+
+//REDUX
+import { fetchPlayedNow } from './services/playedNowService';
+
 const AppLayout = () => {
+  const { itemNasheed } = useSelector((state) => state.itemNasheed)
+  const { loggedinUser } = useUserContext()
+  const { currentTrack } = useSelector((state) => state.playedNow)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchPlayedNow(loggedinUser))
+  }, [])
   
   const getActiveElement = () => {
     const location = useLocation();
@@ -75,7 +91,6 @@ const AppLayout = () => {
   };
   
   const activeElement = getActiveElement();
-  const activeSong = { title: 'Sample Song' };
 
   return (
     <div className="flex h-screen m-0 p-0 bg-[#2D2635]">
@@ -217,13 +232,9 @@ const AppLayout = () => {
               </Routes>
             </div>
           </div>
-          {activeSong?.title && (
-            <div className="absolute h-28 bottom-0 left-0 right-0 flex animate-slideup bg-gradient-to-br from-white/10 to-[#2a2a80] backdrop-blur-lg rounded-t-3xl z-10">
-              {/* <MusicPlayer /> */}
-              <NowPlayingWrapper />
-            </div>
-          )}
-          {/* w-full lg:w-[230px] fixed bottom-0 lg:relative lg:bottom-auto */}
+          <div className="">
+            <NowPlayingWrapper />
+          </div>
         </div>
       </div>
     </div>

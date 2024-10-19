@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 //REDUX
 import { fetchAnasheed } from '../../services/anasheedServices';
 import { addListening } from '../../services/playedNowService';
+import { setItemNasheed } from '../../slices/itemNasheedSlice';
 
 //COMPONENTS
 import CardComponent from '../Card';
@@ -54,12 +55,11 @@ const NewAnasheedSection = () => {
             <div 
               key={index} 
               onClick={() => {
-                console.log(newAnasheed[card])
+                dispatch(setItemNasheed({ id: newAnasheed[card].id, title: newAnasheed[card].title, artist: newAnasheed[card].artist_name, image: newAnasheed[card].file_path, duration: newAnasheed[card].duration }))
                 dispatch( addListening(
                   { id_user: loggedinUser, id_anasheed: newAnasheed[card].id, position:0 }
                 ));
-                // navigate(`/user/playednow/${loggedinUser}`)
-                // localStorage.setItem('currentAnasheed', JSON.stringify(newAnasheed[card]))
+                navigate(`/user/playednow/${loggedinUser}`)
               }}
             >
               <CardComponent 

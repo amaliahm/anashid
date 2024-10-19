@@ -1,5 +1,6 @@
 import React, { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
 
 //COMPONENTS
 import NasheedBar from "../../Components/NasheedBar"
@@ -10,6 +11,7 @@ import { getCategoryAnasheed } from "../../services/anasheedServices"
 
 //CONTEXT
 import { useUserContext } from "../../hooks/userContext"
+import { Navigate } from "react-router-dom"
 
 const Category = () => {
 
@@ -17,8 +19,14 @@ const Category = () => {
   const { anasheed, loading, error } = useSelector(state => state.anasheed)
   const dispatch = useDispatch()
   const { loggedinUser } = useUserContext()
+  const navigate = useNavigate()
 
+  
   useEffect(() => {
+    if (itemCategory === null) {
+      navigate(`/user/categories/${loggedinUser}`)
+      return 
+    }
     const user = loggedinUser
     dispatch(getCategoryAnasheed(itemCategory.id, user))
   }, [])
@@ -26,7 +34,7 @@ const Category = () => {
   return (
     <div className='mb-32'>
       <h2 className="text-xl lg:text-2xl font-bold text-[var(--mainColor)] capitalize mb-8 px-2">
-        {itemCategory.name}
+        {itemCategory?.name || ''}
       </h2>
       <div className='w-full h-full'> 
         {loading ? <Loading /> : error ? <Loading title='no data available' /> : <div 

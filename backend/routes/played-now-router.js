@@ -14,15 +14,15 @@ import PlayedNowController from "../controllers/played-now-controller.js";
 const router = Router();
 
 router.get(
-    "/:id_user/:id_anasheed",
-    validator(playedNowSchema.getListening, 'params'),
-    AsyncHandler(PlayedNowController.getAllListening)
+    "/:id_user",
+    validator(playedNowSchema.getLastListening, 'params'),
+    AsyncHandler(PlayedNowController.getLastListening)
 );
 
 router.get(
-    "/last/:id_user/:id_anasheed",
+    "/:id_user/:id_anasheed",
     validator(playedNowSchema.getListening, 'params'),
-    AsyncHandler(PlayedNowController.getLastListening)
+    AsyncHandler(PlayedNowController.getAllListening)
 );
 
 router.post(

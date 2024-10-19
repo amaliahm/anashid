@@ -5,9 +5,11 @@ const initialState = {
   history: null,
   currentTrack: null,
   anasheed: [],
+  isPlaying: true,
   isRepeat: false,
   isShuffle: false,
   isMute: false,
+  is_favorite: false,
   errorPlayedNow: false,
   loadingPlayedNow: false,
   successPlayedNow:false,
@@ -19,6 +21,7 @@ const playedNowSlice = createSlice({
   reducers: {
     setCurrentTrack: (state, action) => {
       state.currentTrack = action.payload;
+      state.is_favorite = action.payload.is_favorite;
     },
     setAnasheed: (state, action) => {
       state.anasheed = action.payload;
@@ -32,6 +35,12 @@ const playedNowSlice = createSlice({
     toggleMute: (state) => {
       state.isMute = !state.isMute;
     },
+    togglePlay: (state) => {
+      state.isPlaying = !state.isPlaying;
+    },
+    toggleFavorite: (state) => {
+      state.is_favorite = !state.is_favorite;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -86,6 +95,6 @@ const playedNowSlice = createSlice({
   }
 });
 
-export const { setCurrentTrack, setAnasheed, toggleRepeat, toggleShuffle, toggleMute } = playedNowSlice.actions;
+export const { setCurrentTrack, setAnasheed, toggleRepeat, toggleShuffle, toggleMute, togglePlay, toggleFavorite } = playedNowSlice.actions;
 
 export default playedNowSlice.reducer;

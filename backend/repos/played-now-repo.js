@@ -1,5 +1,5 @@
 import DataBaseRepo from '../database/index.js'
-import { _addListening, _getListeningNasheed, _getFavorite } from '../database/queries/played-now-queries.js';
+import { _addListening, _getListeningNasheed, _getFavorite, _getAllListeningNasheed } from '../database/queries/played-now-queries.js';
 
 // s3
 import { s3client } from '../configs/aws-config.js'
@@ -13,27 +13,27 @@ export default class PlayedNowRepo {
     return result
   }
 
-  static async getLastListening(id_user, id_anasheed) {
-    const rows = await DataBaseRepo.queryDatabase(_getListeningNasheed, [id_user, id_anasheed])
-    return rows ? rows[0] : null
-  }
-
-  static async getListening(id_user, id_anasheed) {
-    const rows = await DataBaseRepo.queryDatabase(_getListeningNasheed, [id_user, id_anasheed])
+  static async getLastListening(id_user) {
+    const rows = await DataBaseRepo.queryDatabase(_getListeningNasheed, [id_user])
     return rows
   }
 
-  static async getUrl(result) {
+  static async getListening(id_user, id_anasheed) {
+    const rows = await DataBaseRepo.queryDatabase(_getAllListeningNasheed, [id_user, id_anasheed])
+    return rows
+  }
+
+  static async getUrl(result, file_path) {
       const url = await Promise.all(result.map(async (elem) => {
         const url = await getSignedUrl(s3client, new GetObjectCommand({
             Bucket: process.env.BUCKET_NAME,
-            Key: elem.file_path,
+            Key: elem[file_path],
         }), {
             expiresIn: 3600
         })
         return {
             ...elem,
-            file_path: url,
+            [file_path]: url,
         };
       }));
       return url
