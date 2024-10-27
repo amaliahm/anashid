@@ -20,7 +20,6 @@ const ActiveUsersBar = ({ title, color, value, total }) => (
 );
 
 const ActiveUser = ({activeUsersData}) => {
-  console.log(activeUsersData)
   let total = 0
   if (
     activeUsersData && activeUsersData.logged_in_last_month && activeUsersData.logged_in_last_two_months && activeUsersData.logged_in_last_week && activeUsersData.logged_in_today
@@ -28,7 +27,6 @@ const ActiveUser = ({activeUsersData}) => {
 
     total = parseInt(activeUsersData.logged_in_last_month, 10) + parseInt(activeUsersData.logged_in_last_two_months, 10) + parseInt(activeUsersData.logged_in_last_week, 10) + parseInt(activeUsersData.logged_in_today, 10)
   }
-  console.log(total)
 
   return (
     <>

@@ -28,6 +28,7 @@ const renderActiveShape = (props, color) => {
         dy={8} 
         textAnchor="middle" 
         fill='#999'
+        style={{ textTransform: 'capitalize' }}
       >
         {payload.name}
       </text>
@@ -66,15 +67,20 @@ const PopularCategories = ({categoriesData}) => {
   const onPieEnter = (_, index) => {
     setActiveIndex(index);
   };
+
+  const maxCategory = categoriesData.reduce((max, category) => 
+    category.value > max.value ? category : max, categoriesData[0]
+  )
+
     return (
       <div className='bg-white w-[450px] min-w-[400px] rounded-3xl'>
         <div className="p-4 rounded-lg">
           <h2 className="text-lg font-semibold capitalize mb-8 text-[var(--textColor)]">
-            popular categories
+            top 5 categories 
           </h2>
           <ResponsiveContainer 
             width="100%" 
-            height={250}
+            height={260}
           >
             <PieChart 
               width={400} 
@@ -104,7 +110,7 @@ const PopularCategories = ({categoriesData}) => {
           </ResponsiveContainer>
         </div>
         <div className='text-xl font-semibold text-[var(--textColor)] text-center capitalize my-6'>
-          children nasheed
+          {maxCategory.name}
         </div>
       </div>
     )

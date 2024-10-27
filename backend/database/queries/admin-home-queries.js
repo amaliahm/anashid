@@ -19,9 +19,39 @@ export const _newUsers = `
 `;
 
 export const _popularAnasheed = `
+  SELECT 
+    a.id, a.title, SUM(l.duration) AS duration 
+  FROM 
+    anasheed a 
+  JOIN 
+    listeningHistory l 
+  ON 
+    l.id_anasheed = a.id
+  GROUP BY 
+    a.id, a.title 
+  DESC 
+  LIMIT 
+    5;
 `;
 
 export const _popularCategories = `
+  SELECT 
+    c.id, c.name, SUM(l.duration) AS duration 
+  FROM 
+    category c 
+  JOIN 
+    anasheed a 
+  ON 
+    a.id_category = c.id 
+  JOIN
+    listeningHistory l 
+  ON 
+    l.id_anasheed = a.id 
+  GROUP BY 
+    c.id, a.id 
+  DESC 
+  LIMIT 
+    5;
 `;
 
 export const _anasheedIntoCategories = `

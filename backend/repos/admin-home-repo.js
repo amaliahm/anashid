@@ -1,5 +1,5 @@
 import DataBaseRepo from "../database/index.js";
-import { _activeUsers, _anasheedIntoCategories, _artists, _newUsers, _totalAnasheed, _totalCategories, _totalUsers } from "../database/queries/admin-home-queries.js";
+import { _activeUsers, _anasheedIntoCategories, _artists, _newUsers, _totalAnasheed, _totalCategories, _totalUsers, _popularCategories, _popularAnasheed } from "../database/queries/admin-home-queries.js";
 
 // s3
 import { s3client } from '../configs/aws-config.js'
@@ -34,6 +34,26 @@ export default class AdminHomeRepo {
       const sanitized_rows = rows.map(elem => ({
         ...elem,
         total_categories: Number(elem.total_categories)
+      }))
+      return sanitized_rows
+    }
+
+    static async popularCategories() {
+      const rows = await DataBaseRepo.queryDatabase(_popularCategories, [])
+      if (rows === null ) return null
+      const sanitized_rows = rows.map(elem => ({
+        ...elem,
+        value: Number(elem.duration)
+      }))
+      return sanitized_rows
+    }
+
+    static async popularAnasheed() {
+      const rows = await DataBaseRepo.queryDatabase(_popularAnasheed, [])
+      if (rows === null ) return null
+      const sanitized_rows = rows.map(elem => ({
+        ...elem,
+        value: Number(elem.duration)
       }))
       return sanitized_rows
     }

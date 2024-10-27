@@ -52,8 +52,6 @@ const Profile = () => {
        return () => clearInterval(intervalId);
     }, [])
 
-    console.log(successMessage)
-
     return (
         <>
             <div className="flex">
