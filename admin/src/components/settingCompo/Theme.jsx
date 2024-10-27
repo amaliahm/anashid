@@ -1,15 +1,9 @@
-import React, { useState } from "react";
-
-//COMPONENTS
-import Modal from '../../components/Modal'
-import ModalAdd from "../ModalAdd";
+import React from "react";
 
 const Theme = ({
     // props
-    add_icon, data, handleAdd, modal, onClose, setSelected, selected, handleDelete, openModal
+    add_icon, data, openModal, setAdd, setTable
 }) => {
-    const [add, setAdd] = useState(false)
-    const [value, setValue] = useState('')
 
 
     return (
@@ -20,7 +14,7 @@ const Theme = ({
                       className="rounded-3xl bg-cover bg-center hover:cursor-pointer hover:opacity-50 ease-in-out duration-200 border-[1px] px-5 py-2 bg-[var(--greenColor)] border-[var(--greenColor)]"
                         onClick={() => {
                             openModal(data.data[elem])
-                            setSelected(data.data[elem])
+                            setTable('theme')
                         }}
                     >
                         {data.data[elem].value}
@@ -29,6 +23,7 @@ const Theme = ({
                 <div 
                   className="bg-[white] p-4 rounded-xl bg-cover bg-center hover:cursor-pointer flex justify-center items-center  hover:opacity-50 ease-in-out duration-200"
                   onClick={() => {
+                    setTable('theme')
                     setAdd(true)
                   }}
                 >
@@ -39,35 +34,6 @@ const Theme = ({
                     />
                 </div>
             </div>
-            {add && 
-              <ModalAdd 
-                table='theme'
-                value={value}
-                setValue={setValue}
-                loading={data.loading}
-                error={data.error}
-                handleAdd={() => {
-                    handleAdd('theme', value)
-                    setTimeout(() => {
-                        setAdd(false)
-                    })
-                }}
-                isOpen={add}
-                onClose={() => setAdd(false)}
-              />
-            }
-            {modal && 
-              <Modal 
-                title='Delete'
-                isOpen={modal}
-                onClose={onClose}
-                id={selected.id}
-                name={selected.value}
-                handleDelete={() => handleDelete('theme', selected.id)}
-                loading={data.loading}
-                error={data.error}
-              />
-            }
         </div>
     );
 }

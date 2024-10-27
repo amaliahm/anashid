@@ -62,7 +62,7 @@ const Artists = () => {
               <NavBarComponent id={id} />
               <div className="ml-24 p-1">
                 <div className="px-4 lg:pl-10 pt-10 w-full h-2/6 overflow-scroll">
-                  <div className="text-xl lg:text-3xl capitalize font-semibold pl-2 mb-2 flex justify-between items-center">
+                  <div className="text-xl lg:text-3xl capitalize font-semibold pl-2 mb-2 flex justify-between items-center w-9/12 lg:w-full">
                     artists
                     <div className="bg-white p-2 rounded-xl flex justify-center items-center">
                       <img 
@@ -73,7 +73,7 @@ const Artists = () => {
                       />
                     </div>
                   </div>
-                  <div className="overflow-scroll w-10/12 lg:w-full h-[470px] oveflow-x-auto">
+                  <div className="overflow-scroll w-9/12 lg:w-full h-[470px] oveflow-x-auto">
                     {
                       loading ? 
                       <Loading /> : 

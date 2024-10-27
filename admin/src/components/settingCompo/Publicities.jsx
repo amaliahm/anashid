@@ -1,13 +1,9 @@
 import React, { useState } from "react";
 
-//COMPONENTS
-import Modal from '../../components/Modal'
-
 const Publicities = ({
     // props
-    add_icon, data, handleAdd, modal, onClose, setSelected, selected, handleDelete, openModal
+    add_icon, data, handleAdd, openModal, setAdd, setTable
 }) => {
-    const [add, setAdd] = useState(false)
     const [ photo, setPhoto ] = useState(null)
 
     const handlePhoto = (e) => {
@@ -24,7 +20,7 @@ const Publicities = ({
                         style={{ backgroundImage: `url('${data.data[elem].file_path}')`}}
                         onClick={() => {
                             openModal(data.data[elem])
-                            setSelected(data.data[elem])
+                            setTable('publicity')
                         }}
                     >
                     </div>
@@ -32,7 +28,8 @@ const Publicities = ({
                 <div 
                   className="bg-[white] p-4 rounded-xl bg-cover bg-center hover:cursor-pointer flex justify-center items-center  hover:opacity-50 ease-in-out duration-200"
                   onClick={() => {
-                    setAdd(!add)
+                    setAdd(true)
+                    setTable('publicity')
                   }}
                 >
                     <label for='images'>
@@ -70,18 +67,6 @@ const Publicities = ({
             }
             {data.error && 
               <p className="text-[var(--redColor)]">please try again</p>
-            }
-            {modal && 
-              <Modal 
-                title='Delete'
-                isOpen={modal}
-                onClose={onClose}
-                id={selected.id}
-                name='this publicity'
-                handleDelete={() => handleDelete('publicity', selected.id)}
-                loading={data.loading}
-                error={data.error}
-              />
             }
         </div>
     );

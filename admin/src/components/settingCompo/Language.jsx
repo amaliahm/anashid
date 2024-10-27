@@ -1,17 +1,10 @@
-import React, { useState } from "react";
-
-//COMPONENTS
-import Modal from '../../components/Modal'
-import ModalAdd from "../ModalAdd";
+import React from "react";
 
 const Language = ({
     // props
-    add_icon, data, handleAdd, modal, onClose, setSelected, selected, handleDelete, openModal
+    add_icon, data, openModal, setAdd, setTable
 }) => {
-    const [add, setAdd] = useState(false)
-    const [value, setValue] = useState('')
-
-
+  
     return (
         <div className="flex flex-col">
             <div className="w-[100%] flex flex-wrap gap-6 justify-start items-center">
@@ -20,7 +13,7 @@ const Language = ({
                       className="rounded-3xl bg-cover bg-center hover:cursor-pointer hover:opacity-50 ease-in-out duration-200 border-[1px] px-5 py-2 bg-[var(--greenColor)] border-[var(--greenColor)]"
                         onClick={() => {
                             openModal(data.data[elem])
-                            setSelected(data.data[elem])
+                            setTable('language')
                         }}
                     >
                         {data.data[elem].value}
@@ -29,6 +22,7 @@ const Language = ({
                 <div 
                   className="bg-[white] p-4 rounded-xl bg-cover bg-center hover:cursor-pointer flex justify-center items-center  hover:opacity-50 ease-in-out duration-200"
                   onClick={() => {
+                    setTable('language')
                     setAdd(true)
                   }}
                 >
@@ -39,35 +33,6 @@ const Language = ({
                     />
                 </div>
             </div>
-            {add && 
-              <ModalAdd 
-                table='language'
-                value={value}
-                setValue={setValue}
-                loading={data.loading}
-                error={data.error}
-                handleAdd={() => {
-                  handleAdd('language', value)
-                  setTimeout(() => {
-                    setAdd(false)
-                  })
-                }}
-                isOpen={add}
-                onClose={() => setAdd(false)}
-              />
-            }
-            {modal && 
-              <Modal 
-                title='Delete'
-                isOpen={modal}
-                onClose={onClose}
-                id={selected.id}
-                name={selected.value}
-                handleDelete={() => handleDelete('language', selected.id)}
-                loading={data.loading}
-                error={data.error}
-              />
-            }
         </div>
     );
 }

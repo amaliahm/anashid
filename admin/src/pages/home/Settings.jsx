@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 import SideBarComponent from "../../components/SideBar"
 import NavBarComponent from "../../components/NavBar"
 import Modal from "../../components/Modal.jsx"
+import ModalAdd from "../../components/ModalAdd.jsx"
 
 // SETTINGS COMPONENTS
 import Publicities from "../../components/settingCompo/Publicities.jsx"
@@ -27,6 +28,9 @@ const Settings = () => {
     const tables = useSelector((state) => state.settings)
     const [modal, setModal] = useState(false)
     const [selected, setSelected] = useState(null)
+    const [value, setValue] = useState('')
+    const [add, setAdd] = useState(false)
+    const [table, setTable] = useState('')
 
     const openModal = (elem) => {
         setSelected(elem)
@@ -65,12 +69,9 @@ const Settings = () => {
                           add_icon={add_icon}
                           data={tables.tables.publicity}
                           handleAdd={handleAdd}
-                          modal={modal}
                           openModal={openModal}
-                          onClose={closeModal}
-                          setSelected={setSelected}
-                          selected={selected}
-                          handleDelete={handleDelete}
+                          setAdd={setAdd}
+                          setTable={setTable}
                         />
         },
         {
@@ -78,13 +79,9 @@ const Settings = () => {
             component:  <Gender 
                           add_icon={add_icon}
                           data={tables.tables.gender}
-                          handleAdd={handleAdd}
-                          modal={modal}
                           openModal={openModal}
-                          onClose={closeModal}
-                          setSelected={setSelected}
-                          selected={selected}
-                          handleDelete={handleDelete}
+                          setAdd={setAdd}
+                          setTable={setTable}
                         />
         },
         {
@@ -92,13 +89,9 @@ const Settings = () => {
             component:  <Theme 
                           add_icon={add_icon}
                           data={tables.tables.theme}
-                          handleAdd={handleAdd}
-                          modal={modal}
                           openModal={openModal}
-                          onClose={closeModal}
-                          setSelected={setSelected}
-                          selected={selected}
-                          handleDelete={handleDelete}
+                          setAdd={setAdd}
+                          setTable={setTable}
                         />
         },
         {
@@ -106,13 +99,9 @@ const Settings = () => {
             component:  <Language 
                           add_icon={add_icon}
                           data={tables.tables.language}
-                          handleAdd={handleAdd}
-                          modal={modal}
                           openModal={openModal}
-                          onClose={closeModal}
-                          setSelected={setSelected}
-                          selected={selected}
-                          handleDelete={handleDelete}
+                          setAdd={setAdd}
+                          setTable={setTable}
                         />
         },
         {
@@ -154,6 +143,35 @@ const Settings = () => {
                     </div>
                 </div>
             </div>
+            {add && table !== 'publicity' && 
+              <ModalAdd 
+                table={table} 
+                value={value} 
+                setValue={setValue} 
+                loading={tables.tables[table].loading} 
+                error={tables.tables[table].error} 
+                handleAdd={() => {
+                  handleAdd(table, value)
+                  setTimeout(() => {
+                    setAdd(false)
+                  })
+                }} 
+                isOpen={add} 
+                onClose={() => setAdd(false)} 
+              />
+            }
+            {modal && 
+              <Modal 
+                title='Delete' 
+                isOpen={modal} 
+                onClose={closeModal} 
+                id={selected.id} 
+                name={table === 'publicity' ? 'this publicity' : selected.value} 
+                handleDelete={() => handleDelete(table, selected.id)} 
+                loading={tables.tables[table].loading} 
+                error={tables.tables[table].error} 
+              />
+            }
         </>
     )
 }
