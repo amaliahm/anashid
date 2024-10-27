@@ -63,7 +63,6 @@ const AppLayout = () => {
   const getActiveElement = () => {
     const location = useLocation();
     const { pathname } = location
-    const idPattern = /^\/user\/[a-zA-Z-]+\/\d+$/; // Pattern for dynamic routes
     switch (true) {
       case pathname.startsWith('/user/home/'):
         return 1;

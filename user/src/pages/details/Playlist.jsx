@@ -35,7 +35,7 @@ const Playlist = () => {
 
   return (
     <div className='mb-32'>
-      <div className="w-full bg-red-500 mb-8 flex justify-between items-center">
+      <div className="w-full mb-8 flex justify-between items-center">
         <h2 className="text-xl lg:text-2xl font-bold text-[var(--mainColor)] capitalize px-2">
           {itemPlaylist?.name}
         </h2>
