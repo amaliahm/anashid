@@ -37,7 +37,7 @@ const Users = () => {
   useEffect(() => {
     dispatch(fetchUsers(id))
   }, [dispatch])
-  
+
     return (
         <>
           <div className="flex w-screen">
@@ -91,10 +91,10 @@ const Users = () => {
                             {user.email}
                           </td>
                           <td className="px-8 py-4">
-                            {user.listenedAnasheed || '00'}
+                            {user.listening_anasheed.toString().padStart(2, '0')}
                           </td>
                           <td className="px-8 py-4">
-                            {user.playlist || '00'}
+                            {user.playlist.toString().padStart(2, '0')}
                           </td>
                           <td className="px-8 py-4">
                           <span

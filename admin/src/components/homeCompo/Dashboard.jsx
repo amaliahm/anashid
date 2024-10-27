@@ -13,15 +13,6 @@ const Dashboard = ({
   data
 }) => {
 
-
-  const popularAnashidData = [
-    { name: 'Nasheed1', value: 400 },
-    { name: 'Nasheed2', value: 500 },
-    { name: 'Nasheed3', value: 550 },
-    { name: 'Nasheed4', value: 700 },
-    { name: 'Nasheed5', value: 900 },
-  ];
-
   return (
     <div className="text-white p-6 min-h-screen">
       <Total total_users={data.total_users} total_anasheed={data.total_anasheed} total_categories={data.total_categories} />

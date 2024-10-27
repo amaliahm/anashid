@@ -12,12 +12,18 @@ export default class UsersRepo {
 
     static async getAllUsers() {
         const users = await DataBaseRepo.queryDatabase(_getAllUsers, [])
-        return (users === null || users.length > 0) ? users : null
+        if (users === null ) return null
+        const sanitized_users = users.map(elem => ({
+          ...elem,
+          playlist: Number(elem.playlist),
+          listening_anasheed: Number(elem.listening_anasheed)
+        }))
+        return sanitized_users
     }
 
     static async findUserById(adminId) {
         const user = await DataBaseRepo.queryDatabase(_findUserById, [adminId])
-        return (user === null || user.length > 0) ? user[0] : null
+        return (user !== null) ? user[0] : null
     }
 
     static async updateUserAccountType(account_type, userId) {

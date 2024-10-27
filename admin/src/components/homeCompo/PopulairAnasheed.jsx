@@ -3,14 +3,11 @@ import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, CartesianGrid, Toolti
 
 const PopulairAnasheed = ({popularAnashidData}) => {
 
-  console.log(popularAnashidData)
-
   const maxNasheed = popularAnashidData.reduce((max, nasheed) => 
     nasheed.duration > max.duration ? nasheed : max, popularAnashidData[0]
   )
 
-
-    return (
+  return (
         <div className='rounded-3xl flex flex-col items-center bg-[var(--textColor)] hover:cursor-pointer min-w-[400px] w-[500px]'>
             <div className="p-4 rounded-2xl w-full text-[var(--secondColor)] bg-white">
                 <h2 className="text-lg font-semibold mb-8 capitalize">
