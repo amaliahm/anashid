@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 import { format } from 'date-fns';
 
 //COMPONENTS
@@ -16,8 +15,11 @@ import { fetchTrashedItems, restoreOrDelete } from "../../services/trashService.
 //ICONS
 import { green_close_icon, red_delete_icon } from "../../assets/icons";
 
+// CONTEXT
+import { useAdminContext } from "../../hooks/adminContext.jsx";
+
 const Trash = () => {
-  const { id } = useParams()
+  const { id } = useAdminContext()
   const dispatch = useDispatch()
   const { trashedItems, loading, error} = useSelector((state) => state.trash)
   const tables = ['artists', 'categories', 'anasheed' ]

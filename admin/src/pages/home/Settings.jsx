@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 
 // COMPONENTS
@@ -19,11 +18,14 @@ import SendEmail from "../../components/settingCompo/SendEmail.jsx"
 import { bg } from "../../assets/images"
 import {  add_icon } from "../../assets/icons"
 
+// CONTEXT
+import { useAdminContext } from "../../hooks/adminContext.jsx"
+
 // REDUX
 import { fetchTableData, addItemToTable, deleteItemFromTable} from "../../services/settingsService.js"
 
 const Settings = () => {
-    const { id } = useParams()
+    const { id } = useAdminContext()
     const dispatch = useDispatch()
     const tables = useSelector((state) => state.settings)
     const [modal, setModal] = useState(false)

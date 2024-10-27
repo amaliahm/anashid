@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
@@ -17,8 +17,11 @@ import { fetchTableData } from "../../services/settingsService.js";
 import { fetchArtists } from "../../services/artistsService.js";
 import { addAnasheed } from "../../services/anasheedService.js";
 
+// CONTEXT
+import { useAdminContext } from "../../hooks/adminContext.jsx";
+
 const AddAnasheed = () => {
-  const { id } = useParams()
+  const { id } = useAdminContext()
 
   const dispatch = useDispatch()
   const navigate = useNavigate()

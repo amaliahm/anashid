@@ -1,6 +1,5 @@
 import React, { useEffect, useState} from "react";
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from "react-router-dom";
 import { format } from 'date-fns';
 
 //COMPONENTS
@@ -13,8 +12,11 @@ import AdminModal from "../../components/AdminModal";
 //REDUX
 import { fetchUsers } from "../../services/usersService.js";
 
+// CONTEXT
+import { useAdminContext } from "../../hooks/adminContext.jsx";
+
 const Users = () => {
-  const { id } = useParams()
+  const { id } = useAdminContext()
   const [modal, setModal] = useState(false)
   const [selectedUser, setSelectedUser] = useState(null);
   const dispatch = useDispatch()

@@ -4,7 +4,6 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [loggedinUser, setLoggedinUser] = useState(null);
-  // setLoggedinUser(storedUser.id)
   
   useEffect(() => {
     const storedUser = localStorage.getItem('user')

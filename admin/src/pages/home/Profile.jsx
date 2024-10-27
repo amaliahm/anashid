@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 
 // COMPONENTS
@@ -14,8 +13,11 @@ import { green_edit_icon } from "../../assets/icons"
 // REDUX
 import { addProfilePhoto, fetchCurrentUser } from "../../services/profileService.js"
 
+// CONTEXT
+import { useAdminContext } from "../../hooks/adminContext.jsx"
+
 const Profile = () => {
-    const { id } = useParams()
+    const { id } = useAdminContext()
     const [ edit, setEdit ] = useState(false)
     const [ photo, setPhoto ] = useState(null)
     const dispatch = useDispatch()
@@ -49,6 +51,8 @@ const Profile = () => {
         const intervalId = setInterval(dispatch(fetchCurrentUser(id)), 3600000);
        return () => clearInterval(intervalId);
     }, [])
+
+    console.log(successMessage)
 
     return (
         <>
@@ -99,15 +103,16 @@ const Profile = () => {
                                     disabled
                                 />
                                 {edit && 
-                                <div>
+                                <div className="flex flex-col items-center">
                                     <button
                                         type="submit"
-                                        className='capitalize border-[1px] border-[var(--greenColor)] text-[var(--greenColor)] font-medium px-8 py-2 my-6 rounded-3xl cursor-pointer'
+                                        disabled={!photoPreview}
+                                        className={`capitalize border-[1px] border-[var(--greenColor)] text-[var(--greenColor)] font-medium px-8 py-2 my-6 rounded-3xl ${!photoPreview ? 'opacity-50 cursor-not-allowed': 'cursor-pointer'}`}
                                         onClick={handleSubmit}
                                     >
                                         {loading ? 'Adding...' : 'Add Photo'}
                                     </button>
-                                    {error && <p className="text-[var(--redColor)]" >Error, please try again</p>}
+                                    {error && <p className="text-[var(--redColor)]" >{error}</p>}
                                     {successMessage && <p className="text-[var(--greenColor)]" >{successMessage}</p>}
                                 </div>
                                 }

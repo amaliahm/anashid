@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+
+// CONTEXT
+import { useAdminContext } from "../../hooks/adminContext";
 
 const SendEmail = ({
     handleAdd, data
 }) => {
+    const { id } = useAdminContext()
     const [subject, setSubject] = useState('')
     const [content, setContent] = useState('')
-    const { id } = useParams()
     
     return (
         <>

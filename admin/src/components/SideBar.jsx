@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
-import { useParams } from "react-router-dom";
 
 //COMPONENTS
 import { sidebar_element } from "../utils/constant.js";
@@ -8,12 +7,15 @@ import { sidebar_element } from "../utils/constant.js";
 //ICONS
 import { sidebar } from '../assets/images/index.js'
 
+// CONTEXT
+import { useAdminContext } from "../hooks/adminContext.jsx";
+
 const SideBarComponent = ({ele}) => {
   const navigate = useNavigate()
-  const params = useParams()
+  const { id } = useAdminContext()
 
   function handleElement (i, url) {
-    navigate(`${url}/${params.id}`)
+    navigate(`${url}/${id}`)
   }
     return (
       <div className="h-screen w-fit lg:w-32 lg:max-w-32 text-white flex flex-col items-start justify-start py-6 px-0 space-y-6 fixed bg-[var(--backgroundColor)]">

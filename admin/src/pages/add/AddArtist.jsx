@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
@@ -13,8 +13,11 @@ import { add_icon, close_icon } from "../../assets/icons";
 // REDUX
 import { addArtist } from "../../services/artistsService.js";
 
+// CONTEXT
+import { useAdminContext } from "../../hooks/adminContext.jsx";
+
 const AddArtist = () => {
-  const { id } = useParams()
+  const { id } = useAdminContext()
   const dispatch = useDispatch()
   const [ name, setName ] = useState('')
   const [bio, setBio] = useState('')

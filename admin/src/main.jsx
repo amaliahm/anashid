@@ -10,12 +10,17 @@ import ErrorBoundary from './pages/errorBoundary/ErrorBoundary.jsx';
 //STYLES
 import './style/index.css'
 
+// PROVIDER
+import { AdminProvider } from './hooks/adminContext.jsx';
+
 createRoot(document.getElementById('root')).render(
   <Provider store={anasheedStore}>
     <StrictMode>
-      <ErrorBoundary>
-        <App />
-      </ErrorBoundary>
+      <AdminProvider >
+        <ErrorBoundary>
+          <App />
+        </ErrorBoundary>
+      </AdminProvider>
     </StrictMode>
   </Provider>
 )

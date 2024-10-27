@@ -17,6 +17,7 @@ const userSlice = createSlice({
     builder
       .addCase(fetchCurrentUser.pending, (state) => {
         state.loading = true;
+        state.successMessage = null;
         state.error = null;
       })
       .addCase(fetchCurrentUser.fulfilled, (state, action) => {
@@ -29,16 +30,19 @@ const userSlice = createSlice({
       })
       .addCase(addProfilePhoto.pending, (state) => {
         state.loading = true;
+        state.successMessage = null;
         state.error = null;
       })
       .addCase(addProfilePhoto.fulfilled, (state, action) => {
         state.loading = false;
-        state.user.push(action.payload);
+        state.user = action.payload;
         state.successMessage = 'Profile photo added successfully!';
+        state.error = null;
       })
       .addCase(addProfilePhoto.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.successMessage = null;
+        state.error = 'Error, please try again!';
       });
   },
 });

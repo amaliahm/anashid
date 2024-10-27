@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { format } from 'date-fns';
 
@@ -17,8 +17,11 @@ import Modal from "../../components/Modal";
 // ICONS
 import { red_delete_icon, add_icon, green_edit_icon } from "../../assets/icons";
 
+// CONTEXT
+import { useAdminContext } from "../../hooks/adminContext.jsx";
+
 const Artists = () => {
-  const { id } = useParams()
+  const { id } = useAdminContext()
   const dispatch = useDispatch()
   const { artists, loading, error } = useSelector((state) => state.artists)
   const naviagte = useNavigate()

@@ -1,5 +1,4 @@
-import React, {useEffect} from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 //COMPONENTS
@@ -11,8 +10,11 @@ import Dashboard from "../../components/homeCompo/Dashboard";
 //REDUX
 import { fetchData } from "../../services/homeService.js";
 
+// CONTEXT
+import { useAdminContext } from "../../hooks/adminContext.jsx";
+
 const Home = () => {
-  const { id } = useParams()
+  const { id } = useAdminContext()
   const dispatch = useDispatch()
   const { data, loading, error } = useSelector((state) => state.home)
 

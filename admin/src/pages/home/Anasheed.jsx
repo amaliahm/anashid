@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { format } from 'date-fns';
 
@@ -17,8 +17,11 @@ import { fetchAnasheed, deleteAnasheed, updateAnasheed } from "../../services/an
 // ICONS
 import { red_delete_icon, add_icon, green_edit_icon } from "../../assets/icons";
 
+// CONTEXT
+import { useAdminContext } from "../../hooks/adminContext.jsx";
+
 const Anasheed = () => {
-  const { id } = useParams()
+  const { id } = useAdminContext()
   const dispatch = useDispatch()
   const { anasheed, loading, error } = useSelector((state) => state.anasheed)
   const navigate = useNavigate()
