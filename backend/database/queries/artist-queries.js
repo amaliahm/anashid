@@ -33,15 +33,22 @@ export const _trashArtist = `
 export const _getAllArtist = `
     SELECT 
       a.id, a.name, a.is_deleted AS deleted_artist, a.bio,
-      f.file_path, f.file_type, f.created_at
+      f.file_path, f.file_type, f.created_at,
+      COUNT(DISTINCT n.id) AS anasheed
     FROM 
-    artist a
+      artist a
     JOIN 
-    fileAttachment f 
+      fileAttachment f 
     ON 
-    a.id_file = f.id 
+      a.id_file = f.id 
+    JOIN
+      anasheed n
+    ON 
+      a.id = n.id_artist
     WHERE 
-    f.file_type = 'image';
+      f.file_type = 'image'
+    GROUP BY
+      a.id;
 `;
 
 export const _updateArtist = `

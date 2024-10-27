@@ -115,7 +115,7 @@ const Artists = () => {
                             {format(new Date(elem.created_at), 'yyyy-MM-dd')}
                           </td>
                           <td className="px-4 lg:px-20 py-4">
-                            {elem.anasheed || 0}
+                            {elem.anasheed.toString().padStart(2, '0')}
                           </td>
                           <td className="px-8 py-4">
                             <span
@@ -123,7 +123,6 @@ const Artists = () => {
                             >
                               {!elem.deleted_artist && <img 
                                 src={green_edit_icon}
-                                // onClick={() => openModal(elem)}
                                 onClick = {() => {
                                   setSelectedArtist(elem)
                                   setUpdate(true)

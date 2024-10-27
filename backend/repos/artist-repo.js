@@ -71,7 +71,12 @@ export default class ArtistRepo {
 
   static async getAllArtist() {
     const rows = await DataBaseRepo.queryDatabase(_getAllArtist)
-    return (rows === null || rows.length > 0) ? rows : null
+    if (rows === null ) return null
+    const sanitized_rows = rows.map(elem => ({
+      ...elem,
+      anasheed: Number(elem.anasheed),
+    }))
+    return sanitized_rows
   }
 
   static async updateArtist(id, name, bio) {
