@@ -118,13 +118,10 @@ const Anasheed = () => {
                             {format(new Date(elem.created_at), 'yyyy-MM-dd')}
                           </td>
                           <td className="px-4 lg:px-2 py-4">
-                            {elem.listened || 0}
+                            {elem.listening_anasheed.toString().padStart(2, '0')}
                           </td>
                           <td className="px-4 lg:px-2 py-4">
-                            {elem.favorite || 0}
-                          </td>
-                          <td className="px-4 lg:px-2 py-4">
-                            {elem.playlist || 0}
+                            {elem.favorite_anasheed.toString().padStart(2, '0')}
                           </td>
                           <td className="px-8 py-4">
                             <span

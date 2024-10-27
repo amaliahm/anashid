@@ -15,48 +15,39 @@ export const _restoreAnasheed = `
 `;
 
 export const _getAllAnasheed = `
-    SELECT 
-      a.id, a.title, a.description, a.is_deleted AS deleted_anasheed, a.duration,
-      f.file_path, f.file_type, f.created_at,
-      artist.name AS artist_name,
-      file.file_path AS audio_path,
-      (SELECT value FROM gender WHERE id = a.id_gender) AS gender_value,
-      (SELECT value FROM language WHERE id = a.id_language) AS language_value,
-      (SELECT value FROM theme WHERE id = a.id_theme) AS theme_value,
-      (SELECT name FROM category WHERE id = a.id_category) AS category_name
-    FROM 
-      anasheed a
-    JOIN 
-      fileAttachment f 
-    ON 
-      a.id_image = f.id 
-    JOIN
-      artist
-    ON
-      a.id_artist = artist.id
-    JOIN
-      fileAttachment file
-    ON
-      file.id = a.id_audio
-    WHERE 
-      f.file_type = 'image'
-    AND 
-      EXISTS (
-        SELECT 1 FROM gender WHERE id = a.id_gender
-      )
-    AND 
-      EXISTS (
-        SELECT 1 FROM language WHERE id = a.id_language
-      )
-    AND 
-      EXISTS (
-        SELECT 1 FROM theme WHERE id = a.id_theme
-      )
-    AND 
-      EXISTS (
-        SELECT 1 FROM category WHERE id = a.id_category
-      )
-    ORDER BY id;
+  SELECT 
+    a.id, a.title, a.description, a.is_deleted AS deleted_anasheed, a.duration,
+    f.file_path, f.file_type, f.created_at,
+    artist.name AS artist_name,
+    file.file_path AS audio_path,
+    (SELECT value FROM gender WHERE id = a.id_gender) AS gender_value,
+    (SELECT value FROM language WHERE id = a.id_language) AS language_value,
+    (SELECT value FROM theme WHERE id = a.id_theme) AS theme_value,
+    (SELECT name FROM category WHERE id = a.id_category) AS category_name,
+    COUNT(DISTINCT l.id) AS listening_anasheed,
+    COUNT(DISTINCT af.id) AS favorite_anasheed
+  FROM 
+    anasheed a
+  JOIN 
+    fileAttachment f ON a.id_image = f.id 
+  JOIN 
+    artist ON a.id_artist = artist.id
+  JOIN 
+    fileAttachment file ON file.id = a.id_audio
+  LEFT JOIN 
+    listeningHistory l ON l.id_anasheed = a.id
+  LEFT JOIN 
+    anasheedFavorite af ON af.id_anasheed = a.id
+  WHERE 
+    f.file_type = 'image'
+    AND EXISTS (SELECT 1 FROM gender WHERE id = a.id_gender)
+    AND EXISTS (SELECT 1 FROM language WHERE id = a.id_language)
+    AND EXISTS (SELECT 1 FROM theme WHERE id = a.id_theme)
+    AND EXISTS (SELECT 1 FROM category WHERE id = a.id_category)
+  GROUP BY 
+    a.id, f.file_path, f.file_type, artist.name, file.file_path
+  ORDER BY 
+    a.id;
 `;
 
 

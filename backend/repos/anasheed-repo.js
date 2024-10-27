@@ -53,7 +53,7 @@ export default class AnasheedRepo {
 
     static async findAnasheedById(id) {
       const rows = await DataBaseRepo.queryDatabase(_findAnasheedById, [id])
-      return (rows === null || rows.length > 0) ? rows : null
+      return (rows !== null) ? rows : null
     }
 
     static async deleteAnasheed(id) {
@@ -77,12 +77,18 @@ export default class AnasheedRepo {
 
     static async trashAnasheed() {
       const rows = await DataBaseRepo.queryDatabase(_trashAnasheed, [])
-      return (rows === null || rows.length > 0) ? rows : null
+      return (rows !== null) ? rows : null
     }
 
     static async getAllAnasheed() {
       const rows = await DataBaseRepo.queryDatabase(_getAllAnasheed)
-      return rows
+      if (rows === null ) return null
+      const sanitized_rows = rows.map(elem => ({
+        ...elem,
+        listening_anasheed: Number(elem.listening_anasheed),
+        favorite_anasheed: Number(elem.favorite_anasheed)
+      }))
+      return sanitized_rows
     }
 
     static async getUrl(result) {

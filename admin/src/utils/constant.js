@@ -137,9 +137,6 @@ const head_anasheed = [
         name: 'favorite',
     },
     {
-        name: 'playlist',
-    },
-    {
         name: '',
     },
     {
