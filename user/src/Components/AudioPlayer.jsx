@@ -116,6 +116,7 @@ const AudioPlayer = () => {
     const currentIndex = anasheed.findIndex((track) => track.id === currentTrack.id);
     if (!isRepeat) {
       dispatch(setCurrentTrack(anasheed[currentIndex]));
+      audioRef.current.play();
     } else {
       const nextIndex = isShuffle
         ? Math.floor(Math.random() * anasheed.length)
@@ -125,6 +126,7 @@ const AudioPlayer = () => {
     }
     audioRef.current.currentTime = 0;
     setValue(0);
+    audioRef.current.play();
   };
 
   const handlePrevTrack = () => {
@@ -140,6 +142,7 @@ const AudioPlayer = () => {
     }
     audioRef.current.currentTime = 0;
     setValue(0);
+    audioRef.current.play();
   };
 
   const handleToggleShuffle = () => {

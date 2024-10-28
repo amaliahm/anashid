@@ -42,6 +42,16 @@ router.get(
     AsyncHandler(AnasheedController.getPlaylistAnasheed)
 );
 
+router.get(
+    "/anasheed/new",
+    AsyncHandler(AnasheedController.getNewAnasheed)
+);
+
+router.get(
+    "/anasheed/trending",
+    AsyncHandler(AnasheedController.getTrendingAnasheed)
+);
+
 router.post(
     "/add",
     upload.fields([

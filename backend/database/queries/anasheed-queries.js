@@ -214,3 +214,34 @@ export const _getPlaylistAnasheed = `
     p.id = ?
   ORDER BY a.id;
 `
+
+export const _newAnasheed = `
+  SELECT 
+    a.id, a.title, 
+    f.file_path,
+    artist.name
+  FROM 
+    anasheed a 
+  JOIN fileAttachment f ON  f.id = a.id_image
+  JOIN artist ON artist.id = a.id_artist
+  GROUP BY a.id, a.title 
+  DESC LIMIT 5;
+`;
+
+export const _trendingAnasheed = `
+  SELECT 
+    a.id, a.title, a.duration, a.release_date,
+    f.file_path,
+    artist.name,
+    c.name AS category_name,
+    SUM(l.duration) AS listening_duration
+  FROM 
+    anasheed a 
+  JOIN fileAttachment f ON f.id = a.id_image
+  JOIN artist ON artist.id = a.id_artist
+  JOIN category c ON c.id = a.id_category
+  JOIN listeningHistory l ON l.id_anasheed = a.id
+  GROUP BY a.id, a.title, a.duration, a.release_date, f.file_path, artist.name, c.name
+  ORDER BY listening_duration DESC
+  LIMIT 5;
+`;

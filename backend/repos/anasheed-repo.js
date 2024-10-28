@@ -13,7 +13,9 @@ import {
     _getCategoryAnasheed,
     _getArtistAnasheed,
     _getFavorite,
-    _getPlaylistAnasheed
+    _getPlaylistAnasheed,
+    _newAnasheed,
+    _trendingAnasheed
 } from "../database/queries/anasheed-queries.js";
 
 // s3
@@ -157,5 +159,20 @@ export default class AnasheedRepo {
   static async getPlaylistAnasheed(id, id_playlist) {
     const rows = await DataBaseRepo.queryDatabase(_getPlaylistAnasheed, [id, id_playlist])
     return rows
+  }
+
+  static async getNewAnasheed() {
+    const rows = await DataBaseRepo.queryDatabase(_newAnasheed, [])
+    return rows
+  }
+
+  static async getTrendingAnasheed() {
+    const rows = await DataBaseRepo.queryDatabase(_trendingAnasheed, [])
+    if (rows === null ) return null
+      const sanitized_rows = rows.map(elem => ({
+        ...elem,
+        listening_duration: Number(elem.listening_duration)
+      }))
+      return sanitized_rows
   }
 }

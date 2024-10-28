@@ -83,6 +83,44 @@ const anasheedSlice = (state = initialState, action) => {
                 success: false,
                 error: true,
             };
+        case 'FETCH_NEW_ANASHEED_REQUEST':
+            return {
+                loading: true,
+                error: false,
+                success: false,
+            };
+        case 'FETCH_NEW_ANASHEED_SUCCESS':
+            return {
+                anasheed: action.payload,
+                loading: false,
+                error: false,
+                success: true,
+            };
+        case 'FETCH_NEW_ANASHEED_FAILURE':
+            return {
+                loading: false,
+                success: false,
+                error: true,
+            };
+        case 'FETCH_TRENDING_ANASHEED_REQUEST':
+            return {
+                loading: true,
+                error: false,
+                success: false,
+            };
+        case 'FETCH_TRENDING_ANASHEED_SUCCESS':
+            return {
+                anasheed: action.payload,
+                loading: false,
+                error: false,
+                success: true,
+            };
+        case 'FETCH_TRENDING_ANASHEED_FAILURE':
+            return {
+                loading: false,
+                success: false,
+                error: true,
+            };
         default:
             return state;
     }

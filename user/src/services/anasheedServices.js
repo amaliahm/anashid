@@ -71,3 +71,39 @@ export const getPlaylistAnasheed = (id_playlist, id) => async (dispatch) =>  {
     });
   }
 }
+
+export const getNewAnasheed = () => async (dispatch) =>  {
+  dispatch({
+    type: 'FETCH_NEW_ANASHEED_REQUEST',
+  });
+  try {
+    const response = await apiClient.get(`/user/anasheed/anasheed/new`);
+    dispatch({
+      type: 'FETCH_NEW_ANASHEED_SUCCESS',
+      payload: response.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: 'FETCH_NEW_ANASHEED_FAILURE',
+      payload: error.message,
+    });
+  }
+}
+
+export const getTrendingAnasheed = () => async (dispatch) =>  {
+  dispatch({
+    type: 'FETCH_TRENDING_ANASHEED_REQUEST',
+  });
+  try {
+    const response = await apiClient.get(`/user/anasheed/anasheed/trending`);
+    dispatch({
+      type: 'FETCH_TRENDING_ANASHEED_SUCCESS',
+      payload: response.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: 'FETCH_TRENDING_ANASHEED_FAILURE',
+      payload: error.message,
+    });
+  }
+}

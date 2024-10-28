@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 //REDUX
-import { fetchAnasheed } from '../../services/anasheedServices';
+import { getNewAnasheed } from '../../services/anasheedServices';
 import { addListening } from '../../services/playedNowService';
 import { setItemNasheed } from '../../slices/itemNasheedSlice';
 
@@ -12,7 +12,6 @@ import CardComponent from '../Card';
 
 //CONTEXT
 import { useUserContext } from '../../hooks/userContext';
-import Loading from '../../pages/Loading';
 
 const NewAnasheedSection = () => {
   const dispatch = useDispatch();
@@ -20,57 +19,47 @@ const NewAnasheedSection = () => {
   const navigate = useNavigate()
   const { loggedinUser } = useUserContext()
 
-  const getNewAnasheed = (data) => {
-    if (data) {
-      const date = new Date()
-      date.setDate(date.getDate() - 10)
-  
-      const recentAnasheed = data.filter(nasheed => new Date(nasheed.created_at) >= date)
-      if (recentAnasheed > 0) {
-        return (recentAnasheed.sort((a, b) => b.created_at - a.created_at))
-      }
-      return recentAnasheed.sort((a, b) => b.id - a.id).slice(0, 10)
-    }
-  }
-
   useEffect(() => {
-    dispatch(fetchAnasheed(loggedinUser));
+    dispatch(getNewAnasheed());
   }, []);
 
-  const newAnasheed = getNewAnasheed(anasheed)
 
   return (
     <div className='mb-14'>
-      <div className='flex items-center justify-between mb-6'>
-        <h2 className="text-xl sm:text-2xl lg:text-2xl font-semibold capitalize">
-          new 
-          <span className='text-[var(--mainColor)]'> anasheed </span>
-        </h2>
-      </div>
-      <div className='relative overflow-x-auto'>
-        <div 
-          className=' flex gap-2 sm:gap-4 pb-2 w-fit'
-        >
-          {newAnasheed ? Object.keys(newAnasheed).map((card, index) => (
+      {anasheed && 
+        <>
+          <div className='flex items-center justify-between mb-6'>
+            <h2 className="text-xl sm:text-2xl lg:text-2xl font-semibold capitalize">
+              new 
+              <span className='text-[var(--mainColor)]'> anasheed </span>
+            </h2>
+          </div>
+          <div className='relative overflow-x-auto'>
             <div 
-              key={index} 
-              onClick={() => {
-                dispatch(setItemNasheed({ id: newAnasheed[card].id, title: newAnasheed[card].title, artist: newAnasheed[card].artist_name, image: newAnasheed[card].file_path, duration: newAnasheed[card].duration }))
-                dispatch( addListening(
-                  { id_user: loggedinUser, id_anasheed: newAnasheed[card].id, position:0 }
-                ));
-                navigate(`/user/playednow/${loggedinUser}`)
-              }}
+              className=' flex gap-2 sm:gap-4 pb-2 w-fit'
             >
-              <CardComponent 
-                image={newAnasheed[card].file_path}
-                title={newAnasheed[card].title} 
-                subTitle={newAnasheed[card].artist_name}
-              />
+              {Object.keys(anasheed).map((card, index) => (
+                <div 
+                  key={index} 
+                  onClick={() => {
+                    dispatch(setItemNasheed({ id: anasheed[card].id, title: anasheed[card].title, artist: anasheed[card].artist_name, image: anasheed[card].file_path }))
+                    dispatch( addListening(
+                      { id_user: loggedinUser, id_anasheed: anasheed[card].id, position:0 }
+                    ));
+                    navigate(`/user/playednow/${loggedinUser}`)
+                  }}
+                >
+                  <CardComponent 
+                    image={anasheed[card].file_path}
+                    title={anasheed[card].title} 
+                    subTitle={anasheed[card].artist_name}
+                  />
+                </div>
+              ))}
             </div>
-          )) : loading ? <Loading /> : <Loading title='no data available' />}
-        </div>
-      </div>
+          </div>
+        </>
+      }
     </div>
   );
 };
