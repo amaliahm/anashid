@@ -18,8 +18,8 @@ export default class PlayedNowRepo {
     return rows
   }
 
-  static async getListening(id_user, id_anasheed) {
-    const rows = await DataBaseRepo.queryDatabase(_getAllListeningNasheed, [id_user, id_anasheed])
+  static async getListening(id_user) {
+    const rows = await DataBaseRepo.queryDatabase(_getAllListeningNasheed, [id_user])
     return rows
   }
 

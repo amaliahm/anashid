@@ -13,6 +13,9 @@ const initialState = {
   errorPlayedNow: false,
   loadingPlayedNow: false,
   successPlayedNow:false,
+  error: false, 
+  success: false,
+  loading: false,
 };
 
 const playedNowSlice = createSlice({
@@ -48,17 +51,26 @@ const playedNowSlice = createSlice({
         state.loadingPlayedNow = true;
         state.errorPlayedNow = false;
         state.successPlayedNow = false;
+        state.error = false;
+        state.success = false;
+        state.loading = true;
       })
       .addCase(fetchHistory.fulfilled, (state, action) => {
         state.loadingPlayedNow = false;
         state.history = action.payload;
         state.errorPlayedNow = false;
-        state.successPlayedNow= true
+        state.successPlayedNow= true;
+        state.error = false;
+        state.success = true;
+        state.loading = false;
       })
       .addCase(fetchHistory.rejected, (state, action) => {
         state.loadingPlayedNow = false;
         state.successPlayedNow= false;
         state.errorPlayedNow = true;
+        state.error = true;
+        state.success = false;
+        state.loading = false;
       })
       .addCase(fetchPlayedNow.pending, (state) => {
         state.loadingPlayedNow = true;

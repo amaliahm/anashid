@@ -15,12 +15,12 @@ const router = Router();
 
 router.get(
     "/:id_user",
-    validator(playedNowSchema.getLastListening, 'params'),
+    validator(playedNowSchema.getListening, 'params'),
     AsyncHandler(PlayedNowController.getLastListening)
 );
 
 router.get(
-    "/:id_user/:id_anasheed",
+    "/history/:id_user",
     validator(playedNowSchema.getListening, 'params'),
     AsyncHandler(PlayedNowController.getAllListening)
 );
