@@ -7,6 +7,7 @@ import { addFavoriteAnasheed, removeFavoriteAnasheed } from "../services/favorit
 import { fetchPlaylists } from "../services/playlistService"
 import { addListening } from "../services/playedNowService"
 import { setItemNasheed } from "../slices/itemNasheedSlice"
+import { fetchPlayedNow } from "../services/playedNowService"
 
 //ICONS
 import { play, pause, favorite__, heart_icon, add_playlist_icon, delete_icon } from "../assets/icons"
@@ -35,6 +36,7 @@ const NasheedBar = ({
     const navigate = useNavigate()
     const { loggedinUser } = useUserContext()
     const { playlists, loading, error, success } = useSelector(state => state.playlists);
+    const { currentTrack, currentPosition } = useSelector((state) => state.playedNow)
 
     const handleRemoveFavorite = () => {
       dispatch(removeFavoriteAnasheed(id, id_nasheed))
@@ -48,9 +50,6 @@ const NasheedBar = ({
 
     const [isPlay, setIsPlay] = useState(false)
     const [add, setAdd] = useState(false)
-    const togglePlay = () => {
-      
-    }
 
     function formatDuration(duration) {
       const totalSeconds = Math.floor(duration);
@@ -70,6 +69,7 @@ const NasheedBar = ({
 
     useEffect(() => {
       dispatch(fetchPlaylists(id))
+      dispatch(fetchPlayedNow(loggedinUser))
     }, [])
 
     return (
@@ -98,6 +98,7 @@ const NasheedBar = ({
               onClick={() => {
                 setIsPlay(!isPlay)
                 dispatch(setItemNasheed({ id: id_nasheed, title, artist, image, duration }))
+                dispatch( addListening({ id_user: loggedinUser, id_anasheed: currentTrack.id, position:Math.floor(currentPosition) }));
                 dispatch( addListening({ id_user: loggedinUser, id_anasheed: id_nasheed, position:0 }));
                 navigate(`/user/playednow/${loggedinUser}`)
               }} 

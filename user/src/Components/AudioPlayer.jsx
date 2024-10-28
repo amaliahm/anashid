@@ -11,7 +11,8 @@ import {
   toggleRepeat, 
   toggleShuffle, 
   toggleMute,
-  toggleFavorite
+  toggleFavorite,
+  setCurrentPosition
 } from '../slices/playedNowSlice';
 import { addFavoriteAnasheed, removeFavoriteAnasheed } from '../services/favoriteService';
 
@@ -188,9 +189,14 @@ const AudioPlayer = () => {
   const circumference = 2 * Math.PI * 50;
   const strokeDashoffset = circumference - (value / Math.floor(currentTrack.duration)) * circumference;
 
+  const handleTimeUpdate = (event) => {
+    const currentPosition = event.target.currentTime;
+    dispatch(setCurrentPosition(currentPosition));
+  };
+
   return (
     <div className="text-white">
-      <audio ref={audioRef} src={currentTrack.audio_path} />
+      <audio ref={audioRef} src={currentTrack.audio_path} onTimeUpdate={handleTimeUpdate}/>
       <div className='lg:hidden flex justify-between items-center flex-wrap'>
         <img src={currentTrack.file_path} alt={currentTrack.title} className="w-16 h-16 object-cover rounded-full" />
         <div className='flex flex-col justify-center items-center gap-2 capitalize'>

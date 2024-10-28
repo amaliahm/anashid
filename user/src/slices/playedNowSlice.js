@@ -4,6 +4,7 @@ import { fetchPlayedNow, addListening, fetchHistory } from '../services/playedNo
 const initialState = {
   history: null,
   currentTrack: null,
+  currentPosition: 0,
   anasheed: [],
   isPlaying: true,
   isRepeat: false,
@@ -13,6 +14,7 @@ const initialState = {
   errorPlayedNow: false,
   loadingPlayedNow: false,
   successPlayedNow:false,
+  position: 0,
   error: false, 
   success: false,
   loading: false,
@@ -28,6 +30,9 @@ const playedNowSlice = createSlice({
     },
     setAnasheed: (state, action) => {
       state.anasheed = action.payload;
+    },
+    setCurrentPosition: (state, action) => { 
+      state.currentPosition = action.payload;
     },
     toggleRepeat: (state) => {
       state.isRepeat = !state.isRepeat;
@@ -107,6 +112,6 @@ const playedNowSlice = createSlice({
   }
 });
 
-export const { setCurrentTrack, setAnasheed, toggleRepeat, toggleShuffle, toggleMute, togglePlay, toggleFavorite } = playedNowSlice.actions;
+export const { setCurrentTrack, setAnasheed, toggleRepeat, toggleShuffle, toggleMute, togglePlay, toggleFavorite, setCurrentPosition } = playedNowSlice.actions;
 
 export default playedNowSlice.reducer;
