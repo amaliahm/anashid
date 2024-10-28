@@ -41,7 +41,7 @@ export const _getAllArtist = `
       fileAttachment f 
     ON 
       a.id_file = f.id 
-    JOIN
+    LEFT JOIN
       anasheed n
     ON 
       a.id = n.id_artist

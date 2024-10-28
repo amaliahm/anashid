@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
@@ -109,29 +109,6 @@ const Signup = () => {
               >
                 {status === 'loading' ? 'loading...' : 'sign up'}
               </button>
-              <div className="flex justify-center lg:justify-between items-center flex-nowrap text-[#4D4D4D] capitalize font-lg font-semibold m-2 lg:px-6 overflow-hidden">
-                <img 
-                  src={line} 
-                  alt="line"
-                  className="px-3"
-                />
-                or
-                <img 
-                  src={line} 
-                  alt="line"
-                  className=" px-3"
-                />
-              </div>
-              <div className="flex justify-center items-center gap-6">
-                <img 
-                  src={google} 
-                  className="w-8 lg:w-12 hover:cursor-pointer" 
-                />
-                <img 
-                  src={facebook} 
-                  className="w-8 lg:w-12 hover:cursor-pointer"
-                />
-              </div>
               <div className="mt-16 flex justify-center items-center capitalize font-semibold gap-4">
                 already registered?
                 <span 

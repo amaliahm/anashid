@@ -4,6 +4,8 @@ import axios from 'axios';
 //ICONS
 import { signup } from '../../assets/images';
 
+import apiClient from '../../services/api';
+
 const ForgetPassword = () => {
   const [error, setError] = useState(false)
   const [done, setDone] = useState(false)
@@ -12,7 +14,7 @@ const ForgetPassword = () => {
   const handleResetPw = async (e) => {
     e.preventDefault();
     try {
-        await axios.post('http://localhost:3000/forget-password', { email });
+        await apiClient.post('/forget-password', { email });
         setDone(true);
         setError(false);
       } catch (error) {

@@ -6,6 +6,9 @@ import { useNavigate } from 'react-router-dom';
 //ICONS
 import { signup } from '../../assets/images';
 
+// api
+import apiClient from '../../services/api';
+
 const VerifyEmail = () => {
   const navigate = useNavigate()
   const { email } = useParams();
@@ -14,7 +17,7 @@ const VerifyEmail = () => {
   useEffect(() => {
     const verifyEmail = async () => {
       try {
-        const response = await axios.post('http://localhost:3000/auth/verify-email', { email });
+        const response = await apiClient.post('/auth/verify-email', { email });
         setVerificationStatus('success');
       } catch (error) {
         setVerificationStatus('error');
