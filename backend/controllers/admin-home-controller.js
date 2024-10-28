@@ -27,6 +27,9 @@ export default class AdminHomeController {
         ) {
             return res.status(404).json({ error: 'Failed to fetch data' });
         }
+        const maxCategory = popularCategories.reduce((max, category) => 
+            category.value > max.value ? category : max, popularCategories[0]
+        )
         const data = {
             total_users: total_users[0].total_users,
             total_anasheed: total_anasheed[0].total_anasheed,
@@ -36,6 +39,7 @@ export default class AdminHomeController {
             artists,
             popularCategories: popularCategories,
             popularAnasheed: popularAnasheed,
+            maxCategory: maxCategory,
             active_users: active_users[0]
         }
         res.status(200).json(data);

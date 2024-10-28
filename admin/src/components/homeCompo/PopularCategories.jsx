@@ -60,17 +60,12 @@ const renderActiveShape = (props, color) => {
   );
 };
 
-
-const PopularCategories = ({categoriesData}) => {
+const PopularCategories = ({categoriesData, maxCategory}) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const onPieEnter = (_, index) => {
     setActiveIndex(index);
   };
-
-  const maxCategory = categoriesData.reduce((max, category) => 
-    category.value > max.value ? category : max, categoriesData[0]
-  )
 
     return (
       <div className='bg-white w-[450px] min-w-[400px] rounded-3xl'>

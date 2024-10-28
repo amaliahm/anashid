@@ -85,6 +85,7 @@ const playedNowSlice = createSlice({
       .addCase(fetchPlayedNow.fulfilled, (state, action) => {
         state.loadingPlayedNow = false;
         state.anasheed = action.payload;
+        console.log(action.payload[0])
         state.currentTrack = action.payload[0];
         state.errorPlayedNow = false;
         state.successPlayedNow= true

@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom"
 //REDUX
 import { addFavoriteAnasheed, removeFavoriteAnasheed } from "../services/favoriteService"
 import { fetchPlaylists } from "../services/playlistService"
-import { addListening } from "../services/playedNowService"
+import { addListening, fetchPlayedNow } from "../services/playedNowService"
 import { setItemNasheed } from "../slices/itemNasheedSlice"
-import { fetchPlayedNow } from "../services/playedNowService"
+import { setCurrentTrack, setAnasheed } from "../slices/playedNowSlice"
 
 //ICONS
 import { play, pause, favorite__, heart_icon, add_playlist_icon, delete_icon } from "../assets/icons"
@@ -97,8 +97,10 @@ const NasheedBar = ({
               alt={isPlay ? 'pause' : 'play'} 
               onClick={() => {
                 setIsPlay(!isPlay)
-                dispatch(setItemNasheed({ id: id_nasheed, title, artist, image, duration }))
-                dispatch( addListening({ id_user: loggedinUser, id_anasheed: currentTrack.id, position:Math.floor(currentPosition) }));
+                dispatch( setAnasheed([{ id: id_nasheed, title, artist, image, duration }]))
+                dispatch( setCurrentTrack({ id: id_nasheed, title, artist, image, duration }))
+                // dispatch( setItemNasheed({ id: id_nasheed, title, artist, image, duration }))
+                // dispatch( addListening({ id_user: loggedinUser, id_anasheed: currentTrack.id, position:Math.floor(currentPosition) }));
                 dispatch( addListening({ id_user: loggedinUser, id_anasheed: id_nasheed, position:0 }));
                 navigate(`/user/playednow/${loggedinUser}`)
               }} 

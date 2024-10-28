@@ -15,6 +15,7 @@ import {
   setCurrentPosition
 } from '../slices/playedNowSlice';
 import { addFavoriteAnasheed, removeFavoriteAnasheed } from '../services/favoriteService';
+import { addListening } from '../services/playedNowService';
 
 //ICONS
 import { Volume2, VolumeX } from 'lucide-react';
@@ -43,7 +44,8 @@ const AudioPlayer = () => {
     isRepeat, 
     isShuffle, 
     isMute,
-    is_favorite
+    is_favorite,
+    currentPosition
   } = useSelector((state) => state.playedNow);
   const { loggedinUser } = useUserContext()
 
@@ -117,12 +119,14 @@ const AudioPlayer = () => {
     const currentIndex = anasheed.findIndex((track) => track.id === currentTrack.id);
     if (!isRepeat) {
       dispatch(setCurrentTrack(anasheed[currentIndex]));
-      audioRef.current.play();
+      dispatch( addListening({ id_user: loggedinUser, id_anasheed: currentTrack.id, position:Math.floor(currentPosition) }));
     } else {
       const nextIndex = isShuffle
-        ? Math.floor(Math.random() * anasheed.length)
-        : (currentIndex + 1) % anasheed.length;
+      ? Math.floor(Math.random() * anasheed.length)
+      : (currentIndex + 1) % anasheed.length;
       dispatch(setCurrentTrack(anasheed[nextIndex])); 
+      dispatch( addListening({ id_user: loggedinUser, id_anasheed: currentTrack.id, position:Math.floor(currentPosition) }));
+      dispatch( addListening({ id_user: loggedinUser, id_anasheed: anasheed[nextIndex].id, position:0 }));
       audioRef.currentSrc = anasheed[nextIndex].audio_path
     }
     audioRef.current.currentTime = 0;
@@ -134,11 +138,14 @@ const AudioPlayer = () => {
     const currentIndex = anasheed.findIndex((track) => track.id === currentTrack.id);
     if (!isRepeat) {
       dispatch(setCurrentTrack(anasheed[currentIndex]));
+      dispatch( addListening({ id_user: loggedinUser, id_anasheed: currentTrack.id, position:Math.floor(currentPosition) }));
     } else {
       const prevIndex = isShuffle
         ? Math.floor(Math.random() * anasheed.length)
         : (currentIndex - 1 + anasheed.length) % anasheed.length;
         dispatch(setCurrentTrack(anasheed[prevIndex]));
+        dispatch( addListening({ id_user: loggedinUser, id_anasheed: currentTrack.id, position:Math.floor(currentPosition) }));
+        dispatch( addListening({ id_user: loggedinUser, id_anasheed: anasheed[prevIndex].id, position:0 }));
         audioRef.currentSrc = anasheed[prevIndex].audio_path
     }
     audioRef.current.currentTime = 0;
@@ -193,7 +200,7 @@ const AudioPlayer = () => {
     const currentPosition = event.target.currentTime;
     dispatch(setCurrentPosition(currentPosition));
   };
-
+  
   return (
     <div className="text-white">
       <audio ref={audioRef} src={currentTrack.audio_path} onTimeUpdate={handleTimeUpdate}/>
@@ -201,7 +208,7 @@ const AudioPlayer = () => {
         <img src={currentTrack.file_path} alt={currentTrack.title} className="w-16 h-16 object-cover rounded-full" />
         <div className='flex flex-col justify-center items-center gap-2 capitalize'>
           <p className='capitalize'> 
-            {currentTrack.nasheed_title}
+            {currentTrack.nasheed_title || currentTrack.title}
             <span className="mx-4 text-sm text-gray-400">{currentTrack.artist_name}</span>
           </p>
           <div className="flex flex-wrap items-center space-x-4">

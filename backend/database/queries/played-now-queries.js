@@ -1,7 +1,7 @@
 export const _getListeningNasheed = `
     SELECT 
       lh.id AS listening_id, lh.listening_position, lh.last_listening,
-      a.id, a.title AS nasheed_title, a.description, a.duration,
+      a.id, a.title, a.description, a.duration,
       f.file_path, f.file_type, f.created_at,
       artist.name AS artist_name,
       artist_file.file_path AS artist_image,
