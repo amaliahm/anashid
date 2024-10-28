@@ -48,7 +48,9 @@ const NasheedBar = ({
 
     const [isPlay, setIsPlay] = useState(false)
     const [add, setAdd] = useState(false)
-    const togglePlay = () => setIsPlay(!isPlay)
+    const togglePlay = () => {
+      
+    }
 
     function formatDuration(duration) {
       const totalSeconds = Math.floor(duration);
@@ -74,16 +76,11 @@ const NasheedBar = ({
       <div className="w-full flex justify-between items-center gap-2 mb-3">
         <div 
           className="px-4 py-2 rounded-3xl w-full flex flex-wrap justify-evenly items-center gap-4 border-[1px] border-[#713C96] bg-[#0F1422] hover:cursor-pointer" 
-          onClick={() => {
-            dispatch(setItemNasheed({ id: id_nasheed, title, artist, image, duration }))
-            dispatch( addListening({ id_user: loggedinUser, id_anasheed: id_nasheed, position:0 }));
-            navigate(`/user/playednow/${loggedinUser}`)
-          }}
         >
           <div className="flex items-center justify-between min-w-2/5 gap-2">
             <div className="w-16 h-16 lg:w-20 lg:h-20 bg-gray-500 rounded-full bg-cover bg-center" style={{ backgroundImage: `url('${image}')`}}></div>
             <h2 className="capitalize font-semibold text-xl lg:text-2xl text-wrap">
-              {title || 'nasheed title'}
+              {title}
             </h2>
           </div>
           <div className="flex items-center justify-evenly w-1/4 flex-wrap min-w-32">
@@ -98,7 +95,12 @@ const NasheedBar = ({
             <img 
               src={isPlay ? pause : play} 
               alt={isPlay ? 'pause' : 'play'} 
-              onClick={togglePlay} 
+              onClick={() => {
+                setIsPlay(!isPlay)
+                dispatch(setItemNasheed({ id: id_nasheed, title, artist, image, duration }))
+                dispatch( addListening({ id_user: loggedinUser, id_anasheed: id_nasheed, position:0 }));
+                navigate(`/user/playednow/${loggedinUser}`)
+              }} 
               className="hover:cursor-pointer w-6" 
             />
             <p className="font-bold">

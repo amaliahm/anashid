@@ -32,7 +32,7 @@ const RemovePlaylist = ({ id, onClose, isOpen, name, navigate }) => {
           disabled={loading}
           className={`capitalize border-[1px] bg-white text-[var(--backgroundColor)] font-medium px-8 py-2 my-6 rounded-2xl 
             ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:cursor-pointer'}
-            `}
+          `}
         >
           {loading ? 'Processing...' : 'Delete '}
         </button>

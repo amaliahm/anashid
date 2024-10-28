@@ -28,16 +28,11 @@ export const _getAllAnasheed = `
     COUNT(DISTINCT af.id) AS favorite_anasheed
   FROM 
     anasheed a
-  JOIN 
-    fileAttachment f ON a.id_image = f.id 
-  JOIN 
-    artist ON a.id_artist = artist.id
-  JOIN 
-    fileAttachment file ON file.id = a.id_audio
-  LEFT JOIN 
-    listeningHistory l ON l.id_anasheed = a.id
-  LEFT JOIN 
-    anasheedFavorite af ON af.id_anasheed = a.id
+  JOIN fileAttachment f ON a.id_image = f.id 
+  JOIN artist ON a.id_artist = artist.id
+  JOIN fileAttachment file ON file.id = a.id_audio
+  LEFT JOIN listeningHistory l ON l.id_anasheed = a.id
+  LEFT JOIN anasheedFavorite af ON af.id_anasheed = a.id
   WHERE 
     f.file_type = 'image'
     AND EXISTS (SELECT 1 FROM gender WHERE id = a.id_gender)
@@ -70,22 +65,11 @@ export const _trashAnasheed = `
       artist.name AS artist_name
     FROM 
       anasheed a
-    JOIN 
-      fileAttachment f 
-    ON 
-      a.id_image = f.id 
-    JOIN
-      artist
-    ON
-      a.id_artist = artist.id
-    JOIN
-      fileAttachment file
-    ON
-      file.id = a.id_audio
+    JOIN fileAttachment f ON a.id_image = f.id 
+    JOIN artist ON a.id_artist = artist.id
+    JOIN fileAttachment file ON file.id = a.id_audio
     WHERE 
-      f.file_type = 'image'
-    AND 
-      a.is_deleted = TRUE;
+      f.file_type = 'image' AND  a.is_deleted = TRUE;
 `;
 
 export const _updateAnasheed = `
@@ -196,7 +180,8 @@ export const _getPlaylistAnasheed = `
     a.id, a.title, a.description, a.is_deleted AS deleted_anasheed, a.duration,
     f.file_path, f.file_type, f.created_at,
     file.file_path AS audio_path,
-    ap.id as anasheed_playlist_id
+    ap.id as anasheed_playlist_id,
+    artist.name AS artist_name
   FROM 
     playlist p
   LEFT JOIN
@@ -207,6 +192,10 @@ export const _getPlaylistAnasheed = `
     anasheed a
   ON
     ap.id_anasheed = a.id
+  JOIN 
+    artist
+  ON
+    artist.id = a.id_artist
   JOIN
     fileAttachment f 
   ON 
