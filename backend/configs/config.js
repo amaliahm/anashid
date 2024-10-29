@@ -21,3 +21,4 @@ export const SMTP = {
 }
 
 export const SENDGRID_EMAIL = process.env.SENDGRID_EMAIL
+export const CURRENT_URL = process.env.CURRENT_URL
