@@ -11,12 +11,6 @@ import anasheedSchema from "../schemas/anasheed-schema.js";
 // CONTROLLERS
 import AnasheedController from "../controllers/anasheed-controller.js";
 
-/**
- * @swagger
- * /user/anasheed/anasheed/trending:
- *   get:
-*/
-
 const router = Router();
 
 router.get(

@@ -13,6 +13,16 @@ import DataBaseRepo from "../database/index.js";
 import { register_with_email } from "../database/queries/auth-queries.js";
 
 export default class AuthController {
+  
+  /**
+   * authenticates user/admin with email and password, returns token if successful
+   *
+   * @param {Object} req - the HTTP request object, containing email and password in the body
+   * @param {Object} res - the HTTP response object.
+   * @param {Function} next - the next middleware function.
+   * @returns {Promise<void>} - resolves when login process completes.
+  */
+
   static async login(req, res, next) {
     passport.authenticate('local', async (err, user, info) => {
         if (err) {
@@ -35,6 +45,17 @@ export default class AuthController {
         });
       })(req, res, next);
   }
+
+  /**
+   * register new user with the provided email, username and password.
+   *
+   * @param {Object} req - the HTTP request object, containing the user data in the request body.
+   * @param {string} email - the email address of the new user.
+   * @param {string} password - the password for the new user.
+   * @param {string} username - the username for the new user.
+   * @param {Object} res - the HTTP response object.
+   * @returns {Promise<void>} - resolves when the user registration process completes.
+  */
 
   static async signup(req, res) {
       const data = req.body;
@@ -84,6 +105,7 @@ export default class AuthController {
        `You are receiving this because you (or someone else) requested a password reset for your account. Please click on the following link to reset your password: ${verificationLink}`,
        `<p>You are receiving this because you (or someone else) requested a password reset for your account. Please click on the following link to reset your password: <a href="${verificationLink}">Verify Email</a></p>`
     );
+    return res.status(200).json({ message: 'Password reset email sent' });
   }
 
   static async resetPassword(req, res) {

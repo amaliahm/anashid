@@ -26,7 +26,6 @@ import PlayedNowRouter from './played-now-router.js'
 
 import SearchRouter from './search-router.js'
 
-
 const router = Router();
 
 router.use("/auth", authRouter);
