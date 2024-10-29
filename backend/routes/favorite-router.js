@@ -12,6 +12,13 @@ import FavoriteController from "../controllers/favorite-controller.js";
 
 const router = Router();
 
+/**
+ * @swagger
+ * tags:
+ *   name: Favorite
+ *   description: Favorite routes
+*/
+
 router.get(
     "/:id_user",
     validator(favoriteSchema.getFavoriteAnasheed, 'params'),

@@ -13,6 +13,13 @@ import ProfileController from "../controllers/profile-controller.js";
 
 const router = Router();
 
+/**
+ * @swagger
+ * tags:
+ *   name: Profile
+ *   description: Profile routes
+*/
+
 router.post(
     "/add/:id",
     upload.single('photo'),

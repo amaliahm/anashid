@@ -12,6 +12,13 @@ import LanguageController from "../controllers/language-controller.js";
 
 const router = Router();
 
+/**
+ * @swagger
+ * tags:
+ *   name: Language
+ *   description: Language routes
+*/
+
 router.get(
     "/",
     AsyncHandler(LanguageController.getAllLanguage)

@@ -13,6 +13,13 @@ import ThemeController from "../controllers/theme-controller.js";
 
 const router = Router();
 
+/**
+ * @swagger
+ * tags:
+ *   name: Theme
+ *   description: Theme routes
+*/
+
 router.get(
     "/",
     AsyncHandler(ThemeController.getAllTheme)

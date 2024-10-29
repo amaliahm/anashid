@@ -13,6 +13,13 @@ import AnasheedController from "../controllers/anasheed-controller.js";
 
 const router = Router();
 
+/**
+ * @swagger
+ * tags:
+ *   name: Anasheed
+ *   description: Anasheed routes
+*/
+
 router.get(
     "/",
     AsyncHandler(AnasheedController.getAllAnasheed)

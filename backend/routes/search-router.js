@@ -13,6 +13,13 @@ import SearchController from "../controllers/search-controller.js";
 
 const router = Router();
 
+/**
+ * @swagger
+ * tags:
+ *   name: Search/Filter
+ *   description: Search/Filter routes
+*/
+
 router.put(
     "/",
     validator(searchSchema.search),

@@ -13,6 +13,13 @@ import PlayedNowController from "../controllers/played-now-controller.js";
 
 const router = Router();
 
+/**
+ * @swagger
+ * tags:
+ *   name: Listening History
+ *   description: Listening History routes
+*/
+
 router.get(
     "/:id_user",
     validator(playedNowSchema.getListening, 'params'),

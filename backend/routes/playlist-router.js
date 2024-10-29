@@ -13,6 +13,13 @@ import PlaylistController from "../controllers/playlist-controller.js";
 
 const router = Router();
 
+/**
+ * @swagger
+ * tags:
+ *   name: Playlist
+ *   description: Playlist routes
+*/
+
 router.get(
     "/:id",
     validator(playlistSchema.getPlaylist, 'params'),

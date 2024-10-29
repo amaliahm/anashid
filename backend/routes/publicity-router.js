@@ -13,6 +13,13 @@ import PublicityController from "../controllers/publicity-controller.js";
 
 const router = Router();
 
+/**
+ * @swagger
+ * tags:
+ *   name: Publicity
+ *   description: Publicity routes
+*/
+
 router.get(
     "/",
     AsyncHandler(PublicityController.getAllPublicity)

@@ -13,6 +13,13 @@ import GenderController from "../controllers/gender-controller.js";
 
 const router = Router();
 
+/**
+ * @swagger
+ * tags:
+ *   name: Gender
+ *   description: Gender routes
+*/
+
 router.get(
     "/",
     AsyncHandler(GenderController.getAllGender)

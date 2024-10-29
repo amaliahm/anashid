@@ -16,7 +16,7 @@ export default class UsersController {
         const { password, userId, account_type, adminId } = req.body;
         const user = await UsersRepo.findUserById(adminId);
         if (!user) {
-          return { success: false, message: 'User not found' };
+          return res.status(404).json({ success: false, message: 'User not found' });
         }
         const match = await bcrypt.compare(password, user.password);
         if (!match) {

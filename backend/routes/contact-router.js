@@ -12,6 +12,13 @@ import SendEmailController from "../controllers/sendEmail-controller.js";
 
 const router = Router();
 
+/**
+ * @swagger
+ * tags:
+ *   name: Contact
+ *   description: Contact routes
+*/
+
 router.post(
     "/:id",
     validator(sendEmailSchema.sendEmail, 'params'),

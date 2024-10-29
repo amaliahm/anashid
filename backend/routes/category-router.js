@@ -13,6 +13,13 @@ import CategoryController from "../controllers/category-controller.js";
 
 const router = Router();
 
+/**
+ * @swagger
+ * tags:
+ *   name: Category
+ *   description: Category routes
+*/
+
 router.get(
     "/",
     AsyncHandler(CategoryController.getAllCategories)

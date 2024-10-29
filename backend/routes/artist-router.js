@@ -13,6 +13,13 @@ import ArtistController from "../controllers/artist-controller.js";
 
 const router = Router();
 
+/**
+ * @swagger
+ * tags:
+ *   name: Artist
+ *   description: Artist routes
+*/
+
 router.get(
     "/",
     AsyncHandler(ArtistController.getAllArtists)
