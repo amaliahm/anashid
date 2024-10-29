@@ -231,7 +231,7 @@ const AppLayout = () => {
               </Routes>
             </div>
           </div>
-          <div className="">
+          <div className="overflow-y-auto">
             <NowPlayingWrapper />
           </div>
         </div>

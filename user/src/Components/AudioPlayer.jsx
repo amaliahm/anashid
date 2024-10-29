@@ -266,10 +266,16 @@ const AudioPlayer = () => {
       </div>
       <div className='hidden lg:block w-full p-2'>
         <div className='w-full flex flex-col justify-center items-center'>
-          <p className='pt-8 pb-2 capitalize w-fit mx-auto'> {currentTrack.nasheed_title} </p>
+          <p className='pt-8 pb-2 capitalize w-fit mx-auto'> {currentTrack.nasheed_title || currentTrack.title} </p>
           <p className="text-sm text-gray-400 capitalize w-fit mx-auto">{currentTrack.artist_name}</p>
-          <p className='py-12'> {formatDuration(value)} / {formatDuration(currentTrack.duration)} </p>
-          <div className="flex items-center space-x-2">
+          <p className='py-6'> {formatDuration(value)} / {formatDuration(currentTrack.duration)} </p>
+          <div className="flex items-center space-x-6 mb-6">
+            {is_favorite ? <img src={favorite__} alt='favorite' onClick={() => handleRemoveFavorite(currentTrack.id)} className='mx-auto hover:cursor-pointer' /> : <img src={heart_icon} alt='no favorite' onClick={() => handleAddFavorite(currentTrack.id)} className='mx-auto hover:cursor-pointer' />}
+            <button onClick={handleMute} className="p-2">
+              {isMute ? <VolumeX size={20} /> : <Volume2 size={20} />}
+            </button>
+          </div>
+          <div className="flex items-center space-x-2 mb-6">
             <button onClick={handleToggleShuffle} className={`p-2 ${isShuffle ? 'text-green-500' : ''}`}>
               {isShuffle ? <img src={no_shuffle_icon} alt='no shuffle' /> : <img src={shuffle_icon} alt='shuffle' />}
             </button>
@@ -286,7 +292,31 @@ const AudioPlayer = () => {
               {isRepeat ? <img src={no_repeate_icon} alt='no repeat' /> : <img src={repeate_one_icon} alt='repeat' />}
             </button>
           </div>
-          <svg className="w-full h-full" viewBox="0 0 120 120"  ref={circleRef}>
+          <Slider
+            aria-label="Always visible"
+            value={value}
+            max={Math.floor(currentTrack.duration)}
+            step={1}
+            onChangeCommitted={handleChange}
+            sx={{
+              width: '90%',
+              '& .MuiSlider-track': {
+                color: '#774F96',
+              },
+              '& .MuiSlider-rail': {
+                color: '#AF96BC',
+              },
+              '& .MuiSlider-thumb': {
+                width: 16,
+                height: 16,
+                backgroundColor: '#774F96',
+                '&:hover': {
+                  boxShadow: '0 0 0 8px rgba(255, 0, 0, 0.16)',
+                },
+              },
+            }}
+          />
+          {/* <svg className="w-full h-full" viewBox="0 0 120 120"  ref={circleRef}>
             <circle cx="60" cy="60" r="50" fill="none" stroke="#AF96BC" strokeWidth="3"></circle>
             <circle cx="60" cy="60" r="50" fill="none" stroke="#774F96" strokeWidth="3" strokeDasharray={circumference} strokeDashoffset={strokeDashoffset} transform="rotate(-90 60 60)"></circle>
             <defs>
@@ -300,7 +330,15 @@ const AudioPlayer = () => {
             className="absolute inset-0 cursor-pointer"
             onMouseDown={handleProgressChange}
             onMouseMove={(e) => e.buttons === 1 && handleProgressChange(e)}
-          ></div>
+          ></div> */}
+          <svg className="w-full h-full" viewBox="0 0 120 120">
+            <defs>
+              <clipPath id="circleClip">
+                <circle cx="60" cy="60" r="40" />
+              </clipPath>
+            </defs>
+            <image href={currentTrack.file_path} x='20' y='20' width='80' height='80' clipPath="url(#circleClip)" preserveAspectRatio="xMidYMid slice" />
+          </svg>
         </div>
       </div>
     </div>

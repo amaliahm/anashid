@@ -2,7 +2,8 @@ const initialState = {
     anasheed: [], 
     loading: false, 
     error: false, 
-    success: false
+    success: false,
+    trending: []
 };
 
 const anasheedSlice = (state = initialState, action) => {
@@ -110,7 +111,7 @@ const anasheedSlice = (state = initialState, action) => {
             };
         case 'FETCH_TRENDING_ANASHEED_SUCCESS':
             return {
-                anasheed: action.payload,
+                trending: action.payload,
                 loading: false,
                 error: false,
                 success: true,

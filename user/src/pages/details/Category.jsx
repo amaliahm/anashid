@@ -61,7 +61,7 @@ const Category = () => {
             {loading ? <Loading /> : error ? <Loading title='no data available' /> : <div 
               className='flex flex-col justify-center items-center gap-2 sm:gap-4 pb-2 w-full'
             >
-              {Object.keys(anasheed).map((nasheed, index) => (
+              {anasheed && Object.keys(anasheed).map((nasheed, index) => (
                 <NasheedBar 
                   key={index} 
                   duration={anasheed[nasheed].duration}

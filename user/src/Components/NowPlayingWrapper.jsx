@@ -32,12 +32,11 @@ const NowPlayingWrapper = () => {
 
   return (
     <div className='w-full lg:w-[230px] fixed bottom-0 lg:relative lg:bottom-auto'>
-
-    <div className='p-2 lg:p-0'>
-      <div className='bg-[rgba(217,217,217,0.11)] bg-opacity-30 backdrop-blur-md w-full h-full p-2 lg:p-0 lg:rounded-b-full rounded-xl'>
-        <AudioPlayer />
+      <div className='p-2 lg:p-0'>
+        <div className='bg-[rgba(217,217,217,0.11)] bg-opacity-30 backdrop-blur-md w-full h-full p-2 lg:p-0 lg:rounded-b-full rounded-xl'>
+          <AudioPlayer />
+        </div>
       </div>
-    </div>
     </div>
   );
 };

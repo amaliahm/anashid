@@ -16,6 +16,7 @@
     "@radix-ui/react-slider": "^1.2.1",
     "@reduxjs/toolkit": "^2.3.0",
     "axios": "^1.7.7",
+    "date-fns": "^4.1.0",
     "howler": "^2.2.4",
     "lucide-react": "^0.446.0",
     "raf": "^3.4.1",

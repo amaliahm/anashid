@@ -81,7 +81,7 @@ export const _getAllListeningNasheed = `
   WHERE 
     f.file_type = 'image'
   AND
-    lh.id_user = ?
+    lh.id_user = 1
   GROUP BY 
     listening_date, lh.id, a.id 
   ORDER BY 
