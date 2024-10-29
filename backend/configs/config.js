@@ -19,3 +19,5 @@ export const SMTP = {
     username: process.env.SMTP_USERNAME,
     password: process.env.SMTP_PASSWORD
 }
+
+export const SENDGRID_EMAIL = process.env.SENDGRID_EMAIL

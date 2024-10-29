@@ -22,6 +22,7 @@ import {
   trigger_artist_fileAttachment,
   publicityTable
 } from "./tables.js";
+import { adminAccount } from "./admin-account.js";
 
 export default class DataBaseRepo {
   static connection;
@@ -63,6 +64,9 @@ export default class DataBaseRepo {
     // triggers
     await this.connection.query(trigger_category_fileAttachment);
     await this.connection.query(trigger_artist_fileAttachment);
+    
+    //admin account
+    await this.connection.query(adminAccount);
   }
 
   static async queryDatabase(query, options) {
