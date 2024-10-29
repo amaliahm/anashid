@@ -23,7 +23,7 @@ import itemPlaylistSlice from '../slices/itemPlaylistSlice.js';
 
 import playedNowSlice from '../slices/playedNowSlice.js'
 
-// item anasheed
+import searchReducer from '../slices/searchSlice.js';
 
 export const rootReducer = combineReducers({
     auth: authReducer,
@@ -46,4 +46,5 @@ export const rootReducer = combineReducers({
     playlists: playlistSlice,
     itemPlaylist: itemPlaylistSlice,
     playedNow: playedNowSlice,
+    search: searchReducer,
 });

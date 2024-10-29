@@ -3,7 +3,6 @@ import { Router } from "express";
 // MIDDLEWARES
 import AsyncHandler from "../middlewares/async-handler.js";
 import validator from "../middlewares/validator.js";
-import upload from "../middlewares/upload.js";
 
 // SCHEMA
 import languageSchema from "../schemas/language-schema.js";

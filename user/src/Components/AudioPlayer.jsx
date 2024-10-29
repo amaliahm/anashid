@@ -127,7 +127,7 @@ const AudioPlayer = () => {
       dispatch(setCurrentTrack(anasheed[nextIndex])); 
       dispatch( addListening({ id_user: loggedinUser, id_anasheed: currentTrack.id, position:Math.floor(currentPosition) }));
       dispatch( addListening({ id_user: loggedinUser, id_anasheed: anasheed[nextIndex].id, position:0 }));
-      audioRef.currentSrc = anasheed[nextIndex].audio_path
+      // audioRef.currentSrc = anasheed[nextIndex].audio_path
     }
     audioRef.current.currentTime = 0;
     setValue(0);
@@ -146,7 +146,7 @@ const AudioPlayer = () => {
         dispatch(setCurrentTrack(anasheed[prevIndex]));
         dispatch( addListening({ id_user: loggedinUser, id_anasheed: currentTrack.id, position:Math.floor(currentPosition) }));
         dispatch( addListening({ id_user: loggedinUser, id_anasheed: anasheed[prevIndex].id, position:0 }));
-        audioRef.currentSrc = anasheed[prevIndex].audio_path
+        // audioRef.currentSrc = anasheed[prevIndex].audio_path
     }
     audioRef.current.currentTime = 0;
     setValue(0);

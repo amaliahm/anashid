@@ -24,6 +24,8 @@ import ConactRouter from './contact-router.js'
 
 import PlayedNowRouter from './played-now-router.js'
 
+import SearchRouter from './search-router.js'
+
 
 const router = Router();
 
@@ -51,10 +53,13 @@ router.use("/admin/publicity", PublicityRouter);
 router.use("/user/publicity", PublicityRouter);
 
 router.use('/admin/gender', GenderRouter);
+router.use('/user/gender', GenderRouter);
 
 router.use('/admin/theme', ThemeRouter);
+router.use('/user/theme', ThemeRouter);
 
 router.use('/admin/language', LanguageRouter);
+router.use('/user/language', LanguageRouter);
 
 router.use("/admin/sendEmail", SendEmailRouter);
 router.use("/user/sendEmail", ConactRouter);
@@ -62,5 +67,7 @@ router.use("/user/sendEmail", ConactRouter);
 router.use("/user/favorites", FavoriteRouter);
 
 router.use("/user/playednow", PlayedNowRouter);
+
+router.use("/user/search", SearchRouter);
 
 export default router;

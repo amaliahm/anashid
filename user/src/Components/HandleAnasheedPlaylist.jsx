@@ -14,7 +14,7 @@ const AddToPlaylistModal = ({ isOpen, onClose, id_nasheed, playlists, is_in_play
 
   const handleAdd = async () => {
     dispatch(addToPlaylist({id: selectedPlaylist.id, id_nasheed}))
-    added && onClose()
+    onClose()
   };
 
   const handleRemove = async () => {
