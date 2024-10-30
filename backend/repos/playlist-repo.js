@@ -27,18 +27,18 @@ export default class PlaylistRepo {
       ]
     )
     const result = await DataBaseRepo.getInsertedId(_addPlaylist, [name, image.id, id_user])
-    return (result === null || result.length > 0) ? result : null
+    return (result !== null) ? result : null
   }
 
   static async findPlaylistById(id) {
     const rows = await DataBaseRepo.queryDatabase(_findPlaylistById, [id])
-    return (rows === null || rows.length > 0) ? rows : null
+    return (rows !== null) ? rows : null
   }
 
   static async deletePlaylist(id) {
     const result = await this.findPlaylistById(id)
     if (!result) {
-      return { error: 'Playlist not found' }
+      return null
     }
     await DataBaseRepo.queryDatabase(_deleteFileAttachment, [result[0].id_file])
     await DataBaseRepo.queryDatabase(_deletePlaylist, [id])
@@ -47,7 +47,7 @@ export default class PlaylistRepo {
 
   static async getPlaylists(id_user) {
     const rows = await DataBaseRepo.queryDatabase(_getPlaylist, [id_user, id_user])
-    return (rows === null || rows.length > 0) ? rows : null
+    return (rows !== null) ? rows : null
   }
 
   static async getUrl(result) {
@@ -70,12 +70,13 @@ export default class PlaylistRepo {
     const data = await DataBaseRepo.queryDatabase(_getAnasheedFromPlaylist, [id_anasheed, id_playlist])
     if (!data) {
       const rows = await DataBaseRepo.queryDatabase(_addToPlaylist, [id_anasheed, id_playlist])
-      return rows
+      return (rows !== null) ? rows : null
     }
     return data
   }
 
   static async removeFromPlaylist(anasheed_playlist_id) {
-    await DataBaseRepo.queryDatabase(_removeFromPlaylist, [anasheed_playlist_id])
+    const rows = await DataBaseRepo.queryDatabase(_removeFromPlaylist, [anasheed_playlist_id])
+    return (rows !== null) ? rows : null
   }
 }

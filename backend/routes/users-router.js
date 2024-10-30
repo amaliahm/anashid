@@ -14,13 +14,6 @@ const router = Router();
 
 /**
  * @swagger
- * tags:
- *   name: Users
- *   description: Users routes
-*/
-
-/**
- * @swagger
  * /admin/users/{id}:
  *   get:
  *     summary: get users details

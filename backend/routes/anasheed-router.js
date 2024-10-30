@@ -15,13 +15,6 @@ const router = Router();
 
 /**
  * @swagger
- * tags:
- *   name: Anasheed
- *   description: Anasheed routes
-*/
-
-/**
- * @swagger
  * /{role}/anasheed:
  *   get:
  *     summary: gets all anasheed

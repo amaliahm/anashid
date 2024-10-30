@@ -28,19 +28,69 @@ import SearchRouter from './search-router.js'
 
 const router = Router();
 
+/**
+ * @swagger
+ * tags:
+ *   name: Auth
+ *   description: Authentication routes
+*/
+
 router.use("/auth", authRouter);
+
+/**
+ * @swagger
+ * tags:
+ *   name: Admin Home
+ *   description: Admin Home routes
+*/
 
 router.use("/admin/home", AdminHomeRouter);
 
+/**
+ * @swagger
+ * tags:
+ *   name: Users
+ *   description: Users routes
+*/
+
 router.use("/admin/users", usersRouter);
+
+/**
+ * @swagger
+ * tags:
+ *   name: Anasheed
+ *   description: Anasheed routes
+*/
 
 router.use("/admin/anasheed", anasheedRouter);
 router.use("/user/anasheed", anasheedRouter);
 
+/**
+ * @swagger
+ * tags:
+ *   name: Playlist
+ *   description: Playlist routes
+*/
+
 router.use("/user/playlists", PlaylistRouter);
+
+/**
+ * @swagger
+ * tags:
+ *   name: Artist
+ *   description: Artist routes
+*/
 
 router.use("/admin/artists", artistRouter);
 router.use("/user/artists", artistRouter);
+
+
+/**
+ * @swagger
+ * tags:
+ *   name: Category
+ *   description: Category routes
+*/
 
 router.use("/admin/categories", CategoryRouter);
 router.use("/user/categories", CategoryRouter);

@@ -33,25 +33,43 @@ export default class CategoryController {
         const file_path = `${packet_name}-${file_name}-${file_size}`;
         const imageUrl = await uploadFileToS3(file, packet_name)
 
-        await CategoryRepo.addImage(name, packet_name, file_name, file_type, file_path, file_size, file_format);
+        if (!imageUrl) {
+            return res.status(404).json({ error: 'Failed to upload category image' });
+        }
+
+        const result = await CategoryRepo.addImage(name, packet_name, file_name, file_type, file_path, file_size, file_format);
+
+        if (!result) {
+            return res.status(404).json({ error: 'Failed to add category' });
+        }
+
         res.status(200).json({ message: 'Category added successfully' });
     }
   
     static async updateCategory(req, res) {
         const { id, name } = req.body;
-        await CategoryRepo.updateCategory(id, name);
+        const result = await CategoryRepo.updateCategory(id, name);
+        if (!result) {
+            return res.status(404).json({ error: 'Failed to update category' });
+        }
         res.status(200).json({ message: 'Category updated successfully' });
     }
   
     static async deleteCategory(req, res) {
         const { id } = req.params;
-        await CategoryRepo.deleteCategory(id);
+        const category = await CategoryRepo.deleteCategory(id);
+        if (!category) {
+            return res.status(404).json({ error: 'Failed to delete category' });
+        }
         res.status(200).json({ message: 'Category deleted successfully' });
     }
   
     static async confirmDeleteCategory(req, res) {
         const { id } = req.params;
-        await CategoryRepo.confirmDeleteCategory(id);
+        const result = await CategoryRepo.confirmDeleteCategory(id);
+        if (!result) {
+            return res.status(404).json({ error: 'Failed to delete category' });
+        }
         res.status(200).json({ message: 'Category deleted successfully' });
     }
   
@@ -66,7 +84,10 @@ export default class CategoryController {
   
     static async restoreCategory(req, res) {
         const { id } = req.params;
-        await CategoryRepo.restoreCategory(id);
+        const result = await CategoryRepo.restoreCategory(id);
+        if (!result) {
+            return res.status(404).json({ error: 'Failed to fetch categories' });
+        }
         res.status(200).json({ message: 'Category restored successfully' });
     }
 }

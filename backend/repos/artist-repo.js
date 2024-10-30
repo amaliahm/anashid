@@ -38,16 +38,17 @@ export default class ArtistRepo {
       ]
     )
     const result = await DataBaseRepo.getInsertedId(_addArtist, [name, bio, image.id])
-    return (result === null || result.length > 0) ? result : null
+    return (result !== null) ? result : null
   }
 
   static async findArtistById(id) {
     const rows = await DataBaseRepo.queryDatabase(_findArtistById, [id])
-    return (rows === null || rows.length > 0) ? rows : null
+    return (rows !== null) ? rows : null
   }
 
   static async deleteArtist(id) {
-    await DataBaseRepo.queryDatabase(_deleteArtist, [id])
+    const result = await DataBaseRepo.queryDatabase(_deleteArtist, [id])
+    return (result !== null) ? result : null
   }
 
   static async confirmDeleteArtist(id) {
@@ -61,12 +62,13 @@ export default class ArtistRepo {
   }
 
   static async restoreArtist(id) {
-    await DataBaseRepo.queryDatabase(_restoreArtist, [id])
+    const result = await DataBaseRepo.queryDatabase(_restoreArtist, [id])
+    return (result !== null) ? result : null
   }
 
   static async trashArtist() {
     const rows = await DataBaseRepo.queryDatabase(_trashArtist, [])
-    return (rows === null || rows.length > 0) ? rows : null
+    return (rows !== null) ? rows : null
   }
 
   static async getAllArtist() {
@@ -80,7 +82,8 @@ export default class ArtistRepo {
   }
 
   static async updateArtist(id, name, bio) {
-    await DataBaseRepo.queryDatabase(_updateArtist, [name, bio, id])
+    const result = await DataBaseRepo.queryDatabase(_updateArtist, [name, bio, id])
+    return (result !== null) ? result : null
   }
 
   static async getUrl(result) {
@@ -98,5 +101,4 @@ export default class ArtistRepo {
     }));
     return url
   }
-
 }

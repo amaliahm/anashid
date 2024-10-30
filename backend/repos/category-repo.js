@@ -38,22 +38,23 @@ export default class CategoryRepo {
       ]
     )
     const result = await DataBaseRepo.getInsertedId(_addCategory, [name, image.id])
-    return (result === null || result.length > 0) ? result : null
+    return (result == null) ? result : null
   }
 
   static async findCategoryById(id) {
     const rows = await DataBaseRepo.queryDatabase(_findCategoryById, [id])
-    return (rows === null || rows.length > 0) ? rows : null
+    return (rows !== null) ? rows : null
   }
 
   static async deleteCategory(id) {
-    await DataBaseRepo.queryDatabase(_deleteCategory, [id])
+    const result = await DataBaseRepo.queryDatabase(_deleteCategory, [id])
+    return (result !== null) ? result : null
   }
 
   static async confirmDeleteCategory(id) {
     const result = await this.findCategoryById(id)
     if (!result) {
-      return { error: 'Category not found' }
+      return null
     }
     await DataBaseRepo.queryDatabase(_deleteFileAttachment, [result[0].id_file])
     await DataBaseRepo.queryDatabase(_confirmDeleteCategory, [id])
@@ -61,21 +62,23 @@ export default class CategoryRepo {
   }
 
   static async restoreCategory(id) {
-    await DataBaseRepo.queryDatabase(_restoreCategory, [id])
+    const result = await DataBaseRepo.queryDatabase(_restoreCategory, [id])
+    return (result !== null) ? result : null
   }
 
   static async trashCategory() {
     const rows = await DataBaseRepo.queryDatabase(_trashCategory, [])
-    return (rows === null || rows.length > 0) ? rows : null
+    return (rows !== null) ? rows : null
   }
 
   static async getAllCategory() {
     const rows = await DataBaseRepo.queryDatabase(_getAllCategory)
-    return (rows === null || rows.length > 0) ? rows : null
+    return (rows !== null) ? rows : null
   }
 
   static async updateCategory(id, name) {
-    await DataBaseRepo.queryDatabase(_updateCategory, [name, id])
+    const rows = await DataBaseRepo.queryDatabase(_updateCategory, [name, id])
+    return (rows !== null) ? rows : null
   }
 
   static async getUrl(result) {

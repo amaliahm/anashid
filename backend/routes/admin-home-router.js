@@ -10,13 +10,6 @@ const router = Router();
 
 /**
  * @swagger
- * tags:
- *   name: Admin Home
- *   description: Admin Home routes
-*/
-
-/**
- * @swagger
  * /admin/home:
  *   get:
  *     summary: get data for admin dashboard

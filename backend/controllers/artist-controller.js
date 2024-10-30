@@ -28,31 +28,52 @@ export default class ArtistController {
         const file_path = `${packet_name}-${file_name}-${file_size}`;
         const imageUrl = await uploadFileToS3(file, packet_name)
 
-        await ArtistRepo.addImage(name, bio, packet_name, file_name, file_type, file_path, file_size, file_format);
-        res.status(200).json({ message: 'artist added successfully' });
+        if (!imageUrl) {
+            return res.status(404).json({ error: 'Failed to upload artist image' });
+        }
+
+        const result = await ArtistRepo.addImage(name, bio, packet_name, file_name, file_type, file_path, file_size, file_format);
+        
+        if (!result) {
+            return res.status(404).json({ error: 'Failed to add artist' });
+        }
+
+        res.status(200).json({ message: 'Artist added successfully' });
     }
   
     static async updateArtist(req, res) {
         const { id, name, bio } = req.body;
-        await ArtistRepo.updateArtist(id, name, bio);
+        const result = await ArtistRepo.updateArtist(id, name, bio);
+        if (!result) {
+            return res.status(404).json({ error: 'Failed to update artist' });
+        }
         res.status(200).json({ message: 'Artist updated successfully' });
     }
   
     static async deleteArtist(req, res) {
         const { id } = req.params;
-        await ArtistRepo.deleteArtist(id);
+        const result = await ArtistRepo.deleteArtist(id);
+        if (!result) {
+            return res.status(404).json({ error: 'Failed to delete artist' });
+        }
         res.status(200).json({ message: 'Artist deleted successfully' });
     }
   
     static async confirmDeleteArtist(req, res) {
         const { id } = req.params;
-        await ArtistRepo.confirmDeleteArtist(id);
+        const result = await ArtistRepo.confirmDeleteArtist(id);
+        if (!result) {
+            return res.status(404).json({ error: 'Failed to delete artist' });
+        }
         res.status(200).json({ message: 'Artist deleted successfully' });
     }
   
     static async restoreArtist(req, res) {
         const { id } = req.params;
-        await ArtistRepo.restoreArtist(id);
+        const result = await ArtistRepo.restoreArtist(id);
+        if (!result) {
+            return res.status(404).json({ error: 'Failed to restore artist' });
+        }
         res.status(200).json({ message: 'Artist restored successfully' });
     }
   

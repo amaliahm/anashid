@@ -14,13 +14,6 @@ const router = Router();
 
 /**
  * @swagger
- * tags:
- *   name: Auth
- *   description: Authentication routes
-*/
-
-/**
- * @swagger
  * /auth/login:
  *   post:
  *     summary: user/admin login

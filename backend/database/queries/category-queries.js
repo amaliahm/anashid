@@ -16,7 +16,7 @@ export const _confirmDeleteCategory = `
 
 export const _trashCategory = `
     SELECT 
-      c.id, c.name, c.is_deleted AS deleted_category,
+      c.id, c.name AS category_name, c.is_deleted AS deleted_category,
       f.file_path, f.file_type, f.created_at
     FROM 
       category c
@@ -33,7 +33,7 @@ export const _trashCategory = `
 
 export const _getAllCategory = `
     SELECT 
-      c.id, c.name, c.is_deleted AS deleted_category,
+      c.id, c.name AS category_name, c.is_deleted AS deleted_category,
       f.file_path, f.file_type, f.created_at, 
       COUNT(a.id) AS anasheed_count
     FROM 
