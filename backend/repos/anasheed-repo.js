@@ -34,7 +34,7 @@ export default class AnasheedRepo {
                 title, description, duration, id_artist, id_language, id_theme, id_gender, id_category,  id_image, id_audio
             ]
         )
-        return (result === null || result.length > 0) 
+        return (result !== null) 
         ? {
           id: result.id
         } 
@@ -59,14 +59,13 @@ export default class AnasheedRepo {
     }
 
     static async deleteAnasheed(id) {
-      await DataBaseRepo.queryDatabase(_deleteAnasheed, [id])
+      const result = await DataBaseRepo.queryDatabase(_deleteAnasheed, [id])
+      return (result !== null) ? result : null
     }
 
     static async confirmDeleteAnasheed(id) {
       const result = await this.findAnasheedById(id)
-      if (!result) {
-        return { error: 'Anasheed not found' }
-      }
+      if (result === null) return null
       await DataBaseRepo.queryDatabase(_deleteFileAttachment, [result[0].id_image])
       await DataBaseRepo.queryDatabase(_deleteFileAttachment, [result[0].id_audio])
       await DataBaseRepo.queryDatabase(_confirmDeleteAnasheed, [id])
@@ -74,7 +73,8 @@ export default class AnasheedRepo {
     }
 
     static async restoreAnasheed(id) {
-      await DataBaseRepo.queryDatabase(_restoreAnasheed, [id])
+      const result = await DataBaseRepo.queryDatabase(_restoreAnasheed, [id])
+      return (result !== null) ? result : null
     }
 
     static async trashAnasheed() {
@@ -126,17 +126,18 @@ export default class AnasheedRepo {
   }
 
   static async updateAnasheed(id, title, description) {
-    await DataBaseRepo.queryDatabase(_updateAnasheed, [title, description, id])
+    const result = await DataBaseRepo.queryDatabase(_updateAnasheed, [title, description, id])
+    return (result !== null) ? result : null
   }
 
   static async getCategoryAnasheed(id) {
     const rows = await DataBaseRepo.queryDatabase(_getCategoryAnasheed, [id])
-    return rows
+    return (rows !== null) ? rows : null
   }
 
   static async getArtistAnasheed(id) {
     const rows = await DataBaseRepo.queryDatabase(_getArtistAnasheed, [id])
-    return rows
+    return (rows !== null) ? rows : null
   }
 
   static async getWithFavorite(id_user, data) {
@@ -158,12 +159,12 @@ export default class AnasheedRepo {
 
   static async getPlaylistAnasheed(id, id_playlist) {
     const rows = await DataBaseRepo.queryDatabase(_getPlaylistAnasheed, [id, id_playlist])
-    return rows
+    return (rows !== null) ? rows : null
   }
 
   static async getNewAnasheed() {
     const rows = await DataBaseRepo.queryDatabase(_newAnasheed, [])
-    return rows
+    return (rows !== null) ? rows : null
   }
 
   static async getTrendingAnasheed() {

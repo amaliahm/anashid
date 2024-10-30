@@ -37,9 +37,17 @@ export default class AnasheedController {
       var file_size = photo[0].size
       var file_format = photo[0].mimetype.split('/')[1]
       var file_path = `${packet_name}-${file_name}-${file_size}`;
-      await uploadFileToS3(photo[0], packet_name)
+      const upload_result = await uploadFileToS3(photo[0], packet_name)
+
+      if (!upload_result) {
+        return res.status(500).json({ error: 'Failed to upload nasheed image' });
+      }
 
       const image = await AnasheedRepo.addFileAttachment(packet_name, file_name, file_type, file_path, file_size, file_format);
+
+      if (!image) {
+        return res.status(500).json({ error: 'Failed to save nasheed image' });
+      }
 
       packet_name = 'anasheed-audio'
       file_name = audio[0].originalname
@@ -47,36 +55,60 @@ export default class AnasheedController {
       file_size = audio[0].size
       file_format = audio[0].mimetype.split('/')[1]
       file_path = `${packet_name}-${file_name}-${file_size}`;
-      await uploadFileToS3(audio[0], packet_name)
+      const upload_audio = await uploadFileToS3(audio[0], packet_name)
+
+      if (!upload_audio) {
+        return res.status(500).json({ error: 'Failed to upload nasheed audio' });
+      }
 
       const onshouda = await AnasheedRepo.addFileAttachment(packet_name, file_name, file_type, file_path, file_size, file_format);
 
-      await AnasheedRepo.addAnasheed(title, description, duration, id_artist, id_language, id_theme, id_gender, id_category, image.id, onshouda.id)
+      if (!onshouda) {
+        return res.status(500).json({ error: 'Failed to save nasheed audio' });
+      }
+
+      const final_result = await AnasheedRepo.addAnasheed(title, description, duration, id_artist, id_language, id_theme, id_gender, id_category, image.id, onshouda.id)
+
+      if (!final_result) {
+        return res.status(404).json({ error: 'Failed to add this nasheed' });
+      }
       
-      res.status(200).json({ message: 'Anasheed saved successfully' });
+      res.status(200).json({ message: 'Nasheed added successfully' });
   }
 
   static async updateAnasheed(req, res) {
       const { id, title, description } = req.body;
-      await AnasheedRepo.updateAnasheed(id, title, description);
-      res.status(200).json({ message: 'Audio updated successfully' });
+      const result = await AnasheedRepo.updateAnasheed(id, title, description);
+      if (!result) {
+        return res.status(404).json({ error: 'Failed to update this nasheed' });
+      }
+      res.status(200).json({ message: 'Nasheed updated successfully' });
   }
 
   static async deleteAnasheed(req, res) {
       const { id } = req.params;
-      await AnasheedRepo.deleteAnasheed(id);
-      res.status(200).json({ message: 'Audio deleted successfully' });
+      const result = await AnasheedRepo.deleteAnasheed(id);
+      if (!result) {
+        return res.status(404).json({ error: 'Failed to delete this nasheed' });
+      }
+      res.status(200).json({ message: 'Nasheed deleted successfully' });
   }
 
   static async confirmDeleteAnasheed(req, res) {
     const { id } = req.params;
-    await AnasheedRepo.confirmDeleteAnasheed(id);
+    const result = await AnasheedRepo.confirmDeleteAnasheed(id);
+    if (!result) {
+      return res.status(404).json({ error: 'Failed to delete this nasheed' });
+    }
     res.status(200).json({ message: 'Anasheed deleted successfully' });
   }
   
   static async restoreAnasheed(req, res) {
       const { id } = req.params;
-      await AnasheedRepo.restoreAnasheed(id);
+      const result = await AnasheedRepo.restoreAnasheed(id);
+      if (!result) {
+        return res.status(404).json({ error: 'Failed to restore anasheed' });
+      }
       res.status(200).json({ message: 'Anasheed restored successfully' });
   }
 

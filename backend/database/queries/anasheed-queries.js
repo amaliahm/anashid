@@ -16,7 +16,7 @@ export const _restoreAnasheed = `
 
 export const _getAllAnasheed = `
   SELECT 
-    a.id, a.title, a.description, a.is_deleted AS deleted_anasheed, a.duration,
+    a.id, a.title AS nasheed_title, a.description, a.is_deleted AS deleted_anasheed, a.duration,
     f.file_path, f.file_type, f.created_at,
     artist.name AS artist_name,
     file.file_path AS audio_path,
@@ -60,7 +60,7 @@ export const _deleteFileAttachment = `
 
 export const _trashAnasheed = `
     SELECT 
-      a.id, a.title AS name, a.description, a.is_deleted AS deleted_anasheed,
+      a.id, a.title AS nasheed_title, a.description, a.is_deleted AS deleted_anasheed,
       f.file_path, f.file_type, f.created_at,
       artist.name AS artist_name
     FROM 
@@ -78,7 +78,7 @@ export const _updateAnasheed = `
 
 export const _getCategoryAnasheed = `
   SELECT 
-      a.id, a.title, a.description, a.is_deleted AS deleted_anasheed, a.duration,
+      a.id, a.title AS nasheed_title, a.description, a.is_deleted AS deleted_anasheed, a.duration,
       f.file_path, f.file_type, f.created_at,
       artist.name AS artist_name,
       file.file_path AS audio_path,
@@ -125,7 +125,7 @@ export const _getCategoryAnasheed = `
 
 export const _getArtistAnasheed = `
   SELECT 
-      a.id, a.title, a.description, a.is_deleted AS deleted_anasheed, a.duration,
+      a.id, a.title AS nasheed_title, a.description, a.is_deleted AS deleted_anasheed, a.duration,
       f.file_path, f.file_type, f.created_at,
       artist.name AS artist_name,
       file.file_path AS audio_path,
@@ -177,7 +177,7 @@ export const _getFavorite = `
 export const _getPlaylistAnasheed = `
   SELECT 
     p.id AS id_playlist, p.name,
-    a.id, a.title, a.description, a.is_deleted AS deleted_anasheed, a.duration,
+    a.id, a.title AS nasheed_title, a.description, a.is_deleted AS deleted_anasheed, a.duration,
     f.file_path, f.file_type, f.created_at,
     file.file_path AS audio_path,
     ap.id as anasheed_playlist_id,
@@ -217,20 +217,20 @@ export const _getPlaylistAnasheed = `
 
 export const _newAnasheed = `
   SELECT 
-    a.id, a.title, 
+    a.id, a.title AS nasheed_title, 
     f.file_path,
     artist.name
   FROM 
     anasheed a 
   JOIN fileAttachment f ON  f.id = a.id_image
   JOIN artist ON artist.id = a.id_artist
-  GROUP BY a.id, a.title 
+  GROUP BY a.id, nasheed_title 
   DESC LIMIT 5;
 `;
 
 export const _trendingAnasheed = `
   SELECT 
-    a.id, a.title, a.duration, a.release_date,
+    a.id, a.title AS nasheed_title, a.duration, a.release_date,
     f.file_path,
     artist.name,
     c.name AS category_name,
@@ -241,7 +241,7 @@ export const _trendingAnasheed = `
   JOIN artist ON artist.id = a.id_artist
   JOIN category c ON c.id = a.id_category
   JOIN listeningHistory l ON l.id_anasheed = a.id
-  GROUP BY a.id, a.title, a.duration, a.release_date, f.file_path, artist.name, c.name
+  GROUP BY a.id, nasheed_title, a.duration, a.release_date, f.file_path, artist.name, c.name
   ORDER BY listening_duration DESC
   LIMIT 5;
 `;

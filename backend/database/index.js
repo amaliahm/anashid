@@ -82,7 +82,7 @@ export default class DataBaseRepo {
   static async getInsertedId(query, options) {
     try {
       const rows = await this.connection.execute(query, options);
-      if (rows === null || rows.length > 0) return null;
+      if (rows === null) return null;
       const newId = rows.insertId;
       return {id: newId}
     } catch (error) {
