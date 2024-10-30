@@ -9,6 +9,9 @@ export default class SearchController {
             return res.status(404).json({ error: 'Failed to find nasheed' });
         }
         const result_with_url = await SearchRepo.getUrl(result);
+        if (!result_with_url) {
+            return res.status(404).json({ error: 'Failed to find nasheed' });
+        }
         return res.status(200).json(result_with_url);
     }
 
@@ -19,6 +22,9 @@ export default class SearchController {
             return res.status(404).json({ error: 'Failed to find nasheed' });
         }
         const result_with_url = await SearchRepo.getUrl(result);
+        if (!result_with_url) {
+            return res.status(404).json({ error: 'Failed to find nasheed' });
+        }
         return res.status(200).json(result_with_url);
     }
 }

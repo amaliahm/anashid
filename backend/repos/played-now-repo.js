@@ -10,17 +10,17 @@ export default class PlayedNowRepo {
 
   static async addListening(id_user, id_anasheed, position) {
     const result = await DataBaseRepo.getInsertedId(_addListening, [id_user, id_anasheed, position])
-    return result
+    return (result === null) ? null : result
   }
 
   static async getLastListening(id_user) {
     const rows = await DataBaseRepo.queryDatabase(_getListeningNasheed, [id_user])
-    return rows
+    return (rows === null) ? null : rows
   }
 
   static async getListening(id_user) {
     const rows = await DataBaseRepo.queryDatabase(_getAllListeningNasheed, [id_user])
-    return rows
+    return (rows === null) ? null : rows
   }
 
   static async getUrl(result, file_path) {

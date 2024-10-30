@@ -17,7 +17,7 @@ export default class PublicityRepo {
 
   static async addPublicity(id_file) {
     const result = await DataBaseRepo.getInsertedId(_insertPublicity, [id_file])
-    return (result === null || result.length > 0) 
+    return (result !== null) 
     ? {
       id: result.id
     } 
@@ -33,28 +33,31 @@ export default class PublicityRepo {
         packet_name, file_name, file_type, file_path, file_size, file_format
       ]
     )
+    if (image === null) return null
     const result = await DataBaseRepo.getInsertedId(_insertPublicity, [image.id])
-    return (result === null || result.length > 0) ? result : null
+    return (result !== null) ? result : null
   }
 
   static async findPublicityById(id) {
     const rows = await DataBaseRepo.queryDatabase(_findPublicityById, [id])
-    return (rows === null || rows.length > 0) ? rows : null
+    return (rows !== null) ? rows : null
   }
 
   static async deletePublicity(id) {
     const result = await this.findPublicityById(id)
     if (!result) {
-      return { error: 'Publicity not found' }
+      return null
     }
-    await DataBaseRepo.queryDatabase(_deleteFileAttachment, [result[0].id_file])
-    await DataBaseRepo.queryDatabase(_deletePublicity, [id])
+    const delete_file = await DataBaseRepo.queryDatabase(_deleteFileAttachment, [result[0].id_file])
+    if (delete_file === null) return null
+    const delete_pub = await DataBaseRepo.queryDatabase(_deletePublicity, [id])
+    if (delete_pub === null) return null
     return { message: 'Publicity deleted successfully' }
   }
 
   static async getAllPublicity() {
     const rows = await DataBaseRepo.queryDatabase(_getPublicity)
-    return (rows === null || rows.length > 0) ? rows : null
+    return (rows !== null) ? rows : null
   }
 
   static async getUrl(result) {

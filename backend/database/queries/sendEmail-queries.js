@@ -1,5 +1,5 @@
 export const _getEmails = `
-    select email from user where id <> ?;
+    SELECT email FROM user WHERE id <> ?;
 `;
 
 export const _getUserEmail = `

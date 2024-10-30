@@ -14,7 +14,13 @@ export default class PlayedNowController {
           return res.status(404).json({ message: 'No data to display' });
         }
         const history_with_favorites = await PlayedNowRepo.getWithFavorite(id_user, history);
+        if (!history_with_favorites) {
+          return res.status(404).json({ message: 'No data to display' });
+        }
         const history_with_urls = await PlayedNowRepo.getUrl(history_with_favorites, 'file_path');
+        if (!history_with_urls) {
+          return res.status(404).json({ message: 'No data to display' });
+        }
         const groupByDate = history_with_urls.reduce((acc, anasheed) => {
           const date = new Date(anasheed.listening_date);
           const formattedDate = date.toLocaleDateString('en-GB')
@@ -32,16 +38,34 @@ export default class PlayedNowController {
           return res.status(404).json({ message: 'No data to display' });
         }
         const history_with_favorites = await PlayedNowRepo.getWithFavorite(id_user, history);
+        if (!history_with_favorites) {
+          return res.status(404).json({ message: 'No data to display' });
+        }
         const history_with_urls = await PlayedNowRepo.getUrl(history_with_favorites, 'file_path');
+        if (!history_with_urls) {
+          return res.status(404).json({ message: 'No data to display' });
+        }
         const history_with_category = await PlayedNowRepo.getUrl(history_with_urls, 'category_image');
+        if (!history_with_category) {
+          return res.status(404).json({ message: 'No data to display' });
+        }
         const history_with_artist = await PlayedNowRepo.getUrl(history_with_category, 'artist_image');
+        if (!history_with_artist) {
+          return res.status(404).json({ message: 'No data to display' });
+        }
         const history_with_audios = await PlayedNowRepo.getAudioUrl(history_with_artist);
+        if (!history_with_audios) {
+          return res.status(404).json({ message: 'No data to display' });
+        }
         return res.status(200).json(history_with_audios);
     }
     
     static async addListening(req, res) {
         const { id_anasheed, id_user, position } = req.body;  
-        await PlayedNowRepo.addListening(id_user, id_anasheed, position)
+        const result = await PlayedNowRepo.addListening(id_user, id_anasheed, position)
+        if (!result) {
+          return res.status(404).json({ message: 'failed to add listening' });
+        }
         res.status(200).json({ message: 'This nasheed saved successfully' });
     }
 }

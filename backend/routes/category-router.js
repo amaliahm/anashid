@@ -71,19 +71,11 @@ router.get(
 
 /**
  * @swagger
- * /{role}/category/add:
+ * /admin/category/add:
  *   post:
  *     summary: add new category
  *     description: adds a new category with its image.
  *     tags: [Category]
- *     parameters:
- *       - in: path
- *         name: role
- *         required: true
- *         schema:
- *           type: string
- *           enum: [admin, user]
- *         description: role of the user requesting to add category.
  *     requestBody:
  *       required: true
  *       content:
@@ -127,19 +119,12 @@ router.post(
 
 /**
  * @swagger
- * /{role}/category/{id}:
+ * /admin/category/{id}:
  *   put:
  *     summary: update category details
  *     description: updates the name of an existing category.
  *     tags: [Category]
  *     parameters:
- *       - in: path
- *         name: role
- *         required: true
- *         schema:
- *           type: string
- *           enum: [admin, user]
- *         description: role of the user requesting to update category.
  *       - in: path
  *         name: id
  *         schema:
@@ -186,19 +171,12 @@ router.put(
 
 /**
  * @swagger
- * /{role}/category/{id}:
+ * /admin/category/{id}:
  *   delete:
  *     summary: mark category as deleted
  *     description: sets the is_deleted flag to true for the specified category.
  *     tags: [Category]
  *     parameters:
- *       - in: path
- *         name: role
- *         required: true
- *         schema:
- *           type: string
- *           enum: [admin, user]
- *         description: role of the user requesting to delete the category (mark it as deleted).
  *       - in: path
  *         name: id
  *         schema:
@@ -236,19 +214,11 @@ router.delete(
 
 /**
  * @swagger
- * /{role}/category/trash:
+ * /admin/category/trash:
  *   get:
  *     summary: retrieve list of deleted categories
  *     description: fetches a list of categories marked as deleted.
  *     tags: [Category]
- *     parameters:
- *       - in: path
- *         name: role
- *         required: true
- *         schema:
- *           type: string
- *           enum: [admin, user]
- *         description: role of the user requesting deleted categories list.
  *     responses:
  *       200:
  *         description: Successfully retrieved list of deleted categories.
@@ -289,19 +259,12 @@ router.get(
 
 /**
  * @swagger
- * /{role}/category/delete/{id}:
+ * /admin/category/delete/{id}:
  *   delete:
  *     summary: permanently delete category.
  *     description: permanently delete the specified category from the database.
  *     tags: [Category]
  *     parameters:
- *       - in: path
- *         name: role
- *         required: true
- *         schema:
- *           type: string
- *           enum: [admin, user]
- *         description: role of the user confirming permanent category deletion.
  *       - in: path
  *         name: id
  *         schema:
@@ -339,19 +302,12 @@ router.delete(
 
 /**
  * @swagger
- * /{role}/category/restore/{id}:
+ * /admin/category/restore/{id}:
  *   delete:
  *     summary: restore an archived category
  *     description: sets the `is_deleted` flag to false, restoring the specified category.
  *     tags: [Category]
  *     parameters:
- *       - in: path
- *         name: role
- *         required: true
- *         schema:
- *           type: string
- *           enum: [admin, user]
- *         description: role of the user restoring the category.
  *       - in: path
  *         name: id
  *         schema:

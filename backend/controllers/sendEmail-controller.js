@@ -12,12 +12,15 @@ export default class SendEmailController {
             return res.status(404).json({ error: 'Failed to fetch emails' });
         }
         emails.forEach( async (email) => {
-            await EmailRepo.sendEmail(
+            const result = await EmailRepo.sendEmail(
                 email.email, 
                 subject,
                 content,
                 `<p> ${content} </p>`
-              );
+            );
+            if (!result) {
+                return res.status(404).json({ error: 'Failed to send emails' });
+            }
         })
         return res.status(200).json({ message: 'Emails have been send successfully', table: 'sendEmail' });
     }
@@ -38,7 +41,10 @@ export default class SendEmailController {
             html: `<p> You have received a new email from <strong> ${email[0].email} </strong>: </p> <p> ${content} </p>`, 
         };
 
-        await EmailRepo.contactEmail( message);
+        const result = await EmailRepo.contactEmail( message);
+        if (!result) {
+            return res.status(404).json({ error: 'Failed to send the email' });
+        }
         return res.status(200).json({ message: 'Email has been send successfully' });
     }
 

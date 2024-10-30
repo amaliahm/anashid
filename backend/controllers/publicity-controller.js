@@ -13,6 +13,9 @@ export default class PublicityController {
             return res.status(404).json({ error: 'Failed to fetch publicities' });
         }
         const publicities_with_urls = await PublicityRepo.getUrl(publicity);
+        if (!publicities_with_urls) {
+            return res.status(404).json({ error: 'Failed to fetch publicities' });
+        }
         res.status(200).json(publicities_with_urls);
     }
 
@@ -27,13 +30,23 @@ export default class PublicityController {
         const file_path = `${packet_name}-${file_name}-${file_size}`;
         const imageUrl = await uploadFileToS3(file, packet_name)
 
-        await PublicityRepo.addImage(packet_name, file_name, file_type, file_path, file_size, file_format);
+        if (!imageUrl) {
+            return res.status(404).json({ error: 'Failed to add publicity' });
+        }
+
+        const result = await PublicityRepo.addImage(packet_name, file_name, file_type, file_path, file_size, file_format);
+        if (!result) {
+            return res.status(404).json({ error: 'Failed to add publicity' });
+        }
         res.status(200).json({ message: 'publicity added successfully' });
     }
   
     static async deletePublicity(req, res) {
         const { id } = req.params;
-        await PublicityRepo.deletePublicity(id);
+        const result = await PublicityRepo.deletePublicity(id);
+        if (!result) {
+            return res.status(404).json({ error: 'Failed to delete publicity' });
+        }
         res.status(200).json({ message: 'Publicity deleted successfully' });
     }
 }

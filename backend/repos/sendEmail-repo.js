@@ -7,11 +7,11 @@ export default class SendEmailRepo {
 
   static async getEmails(id) {
     const rows = await DataBaseRepo.queryDatabase(_getEmails, [id])
-    return (rows === null || rows.length > 0) ? rows : null
+    return (rows !== null) ? rows : null
   }
 
   static async getUserEmail(id) {
     const rows = await DataBaseRepo.queryDatabase(_getUserEmail, [id])
-    return rows
+    return (rows !== null) ? rows : null
   }
 }

@@ -1,6 +1,6 @@
 export const _getFavorite = `
   SELECT 
-    a.id, a.title, a.description, a.is_deleted AS deleted_anasheed, a.duration,
+    a.id, a.title AS nasheed_title, a.description, a.is_deleted AS deleted_anasheed, a.duration,
     f.file_path, f.file_type, f.created_at,
     artist.name AS artist_name,
     file.file_path AS audio_path,

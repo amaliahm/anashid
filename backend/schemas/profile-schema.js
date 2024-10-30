@@ -7,7 +7,4 @@ export default {
   getUser: joi.object({
     id: joi.number().integer().required(),
   }),
-  updatePhoto: joi.object({
-    id: joi.number().integer().required(),
-  }),
 };

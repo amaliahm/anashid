@@ -95,28 +95,105 @@ router.use("/user/artists", artistRouter);
 router.use("/admin/categories", CategoryRouter);
 router.use("/user/categories", CategoryRouter);
 
+/**
+ * @swagger
+ * tags:
+ *   name: Profile
+ *   description: Profile routes
+*/
+
 router.use("/admin/profile", ProfileRouter);
 router.use("/user/profile", ProfileRouter);
+
+/**
+ * @swagger
+ * tags:
+ *   name: Publicity
+ *   description: Publicity routes
+*/
 
 router.use("/admin/publicity", PublicityRouter);
 router.use("/user/publicity", PublicityRouter);
 
+/**
+ * @swagger
+ * tags:
+ *   name: Gender
+ *   description: Gender routes
+*/
+
 router.use('/admin/gender', GenderRouter);
 router.use('/user/gender', GenderRouter);
+
+/**
+ * @swagger
+ * tags:
+ *   name: Theme
+ *   description: Theme routes
+*/
 
 router.use('/admin/theme', ThemeRouter);
 router.use('/user/theme', ThemeRouter);
 
+/**
+ * @swagger
+ * tags:
+ *   name: Language
+ *   description: Language routes
+*/
+
 router.use('/admin/language', LanguageRouter);
 router.use('/user/language', LanguageRouter);
 
+/**
+ * @swagger
+ * tags:
+ *   name: Send Email As Admin
+ *   description: Admin Sends Email routes
+*/
+
 router.use("/admin/sendEmail", SendEmailRouter);
+
+/**
+ * @swagger
+ * tags:
+ *   name: Contact
+ *   description: Contact routes
+*/
+
 router.use("/user/sendEmail", ConactRouter);
+
+/**
+ * @swagger
+ * tags:
+ *   name: Favorite
+ *   description: Favorite routes
+*/
 
 router.use("/user/favorites", FavoriteRouter);
 
+/**
+ * @swagger
+ * tags:
+ *   name: Listening History
+ *   description: Listening History routes
+*/
+
 router.use("/user/playednow", PlayedNowRouter);
 
+/**
+ * @swagger
+ * tags:
+ *   name: Search/Filter
+ *   description: Search/Filter routes
+*/
+
 router.use("/user/search", SearchRouter);
+
+
+
+
+
+
 
 export default router;

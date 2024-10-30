@@ -73,19 +73,11 @@ router.get(
 
 /**
  * @swagger
- * /{role}/artists/add:
+ * /admin/artists/add:
  *   post:
  *     summary: add new artist
  *     description: adds a new artist with his profile image.
  *     tags: [Artist]
- *     parameters:
- *       - in: path
- *         name: role
- *         required: true
- *         schema:
- *           type: string
- *           enum: [admin, user]
- *         description: role of the user requesting to add artist.
  *     requestBody:
  *       required: true
  *       content:
@@ -131,19 +123,12 @@ router.post(
 
 /**
  * @swagger
- * /{role}/artists/{id}:
+ * /admin/artists/{id}:
  *   put:
  *     summary: update artist details
  *     description: updates the name/bio of an existing artist.
  *     tags: [Artist]
  *     parameters:
- *       - in: path
- *         name: role
- *         required: true
- *         schema:
- *           type: string
- *           enum: [admin, user]
- *         description: role of the user requesting to update artist.
  *       - in: path
  *         name: id
  *         schema:
@@ -192,19 +177,12 @@ router.put(
 
 /**
  * @swagger
- * /{role}/artists/{id}:
+ * /admin/artists/{id}:
  *   delete:
  *     summary: mark artist as deleted
  *     description: sets the is_deleted flag to true for the specified artist.
  *     tags: [Artist]
  *     parameters:
- *       - in: path
- *         name: role
- *         required: true
- *         schema:
- *           type: string
- *           enum: [admin, user]
- *         description: role of the user requesting to delete the artist (mark it as deleted).
  *       - in: path
  *         name: id
  *         schema:
@@ -242,19 +220,11 @@ router.delete(
 
 /**
  * @swagger
- * /{role}/artists/trash:
+ * /admin/artists/trash:
  *   get:
  *     summary: retrieve list of deleted artists
  *     description: fetches a list of artists marked as deleted.
  *     tags: [Artist]
- *     parameters:
- *       - in: path
- *         name: role
- *         required: true
- *         schema:
- *           type: string
- *           enum: [admin, user]
- *         description: role of the user requesting deleted artists list.
  *     responses:
  *       200:
  *         description: Successfully retrieved list of deleted artists.
@@ -297,19 +267,12 @@ router.get(
 
 /**
  * @swagger
- * /{role}/artists/delete/{id}:
+ * /admin/artists/delete/{id}:
  *   delete:
  *     summary: permanently delete artist.
  *     description: permanently delete the specified artist from the database.
  *     tags: [Artist]
  *     parameters:
- *       - in: path
- *         name: role
- *         required: true
- *         schema:
- *           type: string
- *           enum: [admin, user]
- *         description: role of the user confirming permanent artist deletion.
  *       - in: path
  *         name: id
  *         schema:
@@ -347,19 +310,12 @@ router.delete(
 
 /**
  * @swagger
- * /{role}/artists/restore/{id}:
+ * /admin/artists/restore/{id}:
  *   delete:
  *     summary: restore an archived artist
  *     description: sets the `is_deleted` flag to false, restoring the specified artist.
  *     tags: [Artist]
  *     parameters:
- *       - in: path
- *         name: role
- *         required: true
- *         schema:
- *           type: string
- *           enum: [admin, user]
- *         description: role of the user restoring the artist.
  *       - in: path
  *         name: id
  *         schema:

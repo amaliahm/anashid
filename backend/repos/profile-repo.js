@@ -18,12 +18,12 @@ export default class ProfileRepo {
       ]
     )
     const result = await DataBaseRepo.getInsertedId(_updateUser, [image.id, id])
-    return result
+    return (result !== null) ? result : null
   }
 
   static async findUserById(id) {
     const rows = await DataBaseRepo.queryDatabase(_getUserById, [id])
-    return rows
+    return (rows !== null) ? rows : null
   }
 
   static async getUrl(result) {
@@ -32,7 +32,8 @@ export default class ProfileRepo {
       Key: result[0].file_path,
     }), {
       expiresIn: 3600
-    })
+    }) 
+    if (image === null) return null
     return {
       ...result[0],
       file_path: image
@@ -48,6 +49,7 @@ export default class ProfileRepo {
         packet_name, file_name, file_type, file_path, file_size, file_format, id
       ]
     )
+    if (image === null) return null
     const result = await deleteImageFromS3(old_file_path)
     return (result || result.message ? result.message : null)
   }

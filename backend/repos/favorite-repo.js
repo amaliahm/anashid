@@ -9,16 +9,18 @@ import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 export default class FavoriteRepo {
 
   static async addToFavorite(id_user, id_anasheed) {
-    await DataBaseRepo.queryDatabase(_addToFavorite, [id_user, id_anasheed])
+    const result = await DataBaseRepo.queryDatabase(_addToFavorite, [id_user, id_anasheed])
+    return (result === null) ? null : result
   }
 
   static async removeFromFavorite(id_user, id_anasheed) {
-    await DataBaseRepo.queryDatabase(_removeFromFavorite, [id_user, id_anasheed])
+    const result = await DataBaseRepo.queryDatabase(_removeFromFavorite, [id_user, id_anasheed])
+    return (result === null) ? null : result
   }
 
   static async getFavorite(id_user) {
-    const rows = await DataBaseRepo.queryDatabase(_getFavorite, [id_user])
-    return rows
+    const result = await DataBaseRepo.queryDatabase(_getFavorite, [id_user])
+    return (result === null) ? null : result
   }
 
   static async getUrl(result) {

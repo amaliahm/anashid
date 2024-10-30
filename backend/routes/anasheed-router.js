@@ -479,19 +479,11 @@ router.get(
 
 /**
  * @swagger
- * /{role}/anasheed/add:
+ * /admin/anasheed/add:
  *   post:
  *     summary: add a new nasheed
  *     description: uploads a new nasheed with its details and associated files (image and audio).
  *     tags: [Anasheed]
- *     parameters:
- *       - in: path
- *         name: role
- *         required: true
- *         schema:
- *           type: string
- *           enum: [admin, user]
- *         description: role of the user requesting to insert nasheed.
  *     requestBody:
  *       required: true
  *       content:
@@ -569,19 +561,11 @@ router.post(
 
 /**
  * @swagger
- * /{role}/anasheed/update:
+ * /admin/anasheed/update:
  *   put:
  *     summary: update a nasheed's title and description
  *     description: updates the title and description for the specified nasheed id.
  *     tags: [Anasheed]
- *     parameters:
- *       - in: path
- *         name: role
- *         required: true
- *         schema:
- *           type: string
- *           enum: [admin, user]
- *         description: role of the user requesting the nasheed to be updated.
  *     requestBody:
  *       required: true
  *       content:
@@ -629,19 +613,12 @@ router.put(
 
 /**
  * @swagger
- * /{role}/anasheed/{id}:
+ * /admin/anasheed/{id}:
  *   delete:
  *     summary: Mark an nasheed as deleted
  *     description: Sets the is_deleted attribute to true for the specified nasheed ID, effectively archiving it.
  *     tags: [Anasheed]
  *     parameters:
- *       - in: path
- *         name: role
- *         required: true
- *         schema:
- *           type: string
- *           enum: [admin, user]
- *         description: role of the user requesting the nasheed to retrieve archived anasheed.
  *       - name: id
  *         in: path
  *         required: true
@@ -679,19 +656,11 @@ router.delete(
 
 /**
  * @swagger
- * /{role}/anasheed/trash:
+ * /admin/anasheed/trash:
  *   get:
  *     summary: retrieve archived anasheed
  *     description: fetches a list of all anasheed that have been archived (marked as deleted).
  *     tags: [Anasheed]
- *     parameters:
- *       - in: path
- *         name: role
- *         required: true
- *         schema:
- *           type: string
- *           enum: [admin, user]
- *         description: role of the user requesting the nasheed to retrieve archived anasheed.
  *     responses:
  *       200:
  *         description: Successfully retrieved archived anasheed
@@ -740,19 +709,12 @@ router.get(
 
 /**
  * @swagger
- * /{role}/anasheed/delete/{id}:
+ * /admin/anasheed/delete/{id}:
  *   delete:
  *     summary: confirm deletion of a nasheed
  *     description: permanently deletes the nasheed from the database after confirming the deletion and deleting its associated data (image and audio).
  *     tags: [Anasheed]
  *     parameters:
- *       - in: path
- *         name: role
- *         required: true
- *         schema:
- *           type: string
- *           enum: [admin, user]
- *         description: role of the user requesting the nasheed to be restored.
  *       - in: path
  *         name: id
  *         required: true
@@ -790,19 +752,12 @@ router.delete(
 
 /**
  * @swagger
- * /{role}/anasheed/restore/{id}:
+ * /admin/anasheed/restore/{id}:
  *   delete:
  *     summary: restore a soft-deleted nasheed
  *     description: restores nasheed that was previously archived by setting its `is_deleted` attribute back to `false`.
  *     tags: [Anasheed]
  *     parameters:
- *       - in: path
- *         name: role
- *         required: true
- *         schema:
- *           type: string
- *           enum: [admin, user]
- *         description: role of the user requesting the nasheed to be restored.
  *       - in: path
  *         name: id
  *         required: true
