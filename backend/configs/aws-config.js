@@ -26,7 +26,6 @@ export const uploadFileToS3 = async (file, packet_name) => {
       const result = await upload.done();
       return result.Location; 
     } catch (err) {
-      console.error("Error uploading file to S3:", err);
       throw err;
     }
   };
@@ -39,10 +38,8 @@ export const uploadFileToS3 = async (file, packet_name) => {
   
     try {
       const data = await s3client.send(new DeleteObjectCommand(params));
-      console.log("Image deleted successfully", data);
       return {message: 'photo deleted successfully'}
     } catch (error) {
-      console.error("Error deleting image: ", error);
       return {error: error}
     }
   };
