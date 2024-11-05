@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 //ICONS
@@ -80,7 +79,7 @@ const ChangePassword = () => {
               </button>
               <div 
                 className="mt-12 mb-4 flex justify-center items-center capitalize font-semibold gap-4 hover:cursor-pointer"
-                onClick={() => navigate('/')}
+                onClick={() => navigate('/auth/login')}
               >
                 login ?
               </div>

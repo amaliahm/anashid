@@ -47,7 +47,7 @@ const Artists = () => {
               >
                 <CardComponent 
                   image={artists[card].file_path}
-                  title={artists[card].name} 
+                  title={artists[card].artist_name} 
                   subTitle={artists[card].bio}
                 />
               </div>

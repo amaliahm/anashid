@@ -46,7 +46,7 @@ const Artist = () => {
                   style={{backgroundImage: `url('${itemArtist.file_path}')`}}
                 ></div>
                 <h2 className="text-xl lg:text-2xl font-bold text-[var(--mainColor)] capitalize pl-4">
-                  {itemArtist.name}
+                  {itemArtist.artist_name}
                 </h2>
               </div>
               <img  
@@ -64,14 +64,15 @@ const Artist = () => {
               {itemArtist.bio}
             </h2>
             <div className='w-full h-full'> 
-              {loading ? <Loading /> : error ? <Loading title='no data available' /> : <div 
+              {loading ? <Loading /> : error ? <Loading title='no data available' /> : 
+              <div 
                 className='flex flex-col justify-center items-center gap-2 sm:gap-4 pb-2 w-full'
               >
-                {Object.keys(anasheed).map((nasheed, index) => (
+                {anasheed && Object.keys(anasheed).map((nasheed, index) => (
                   <NasheedBar 
                     key={index} 
                     duration={anasheed[nasheed].duration}
-                    title={anasheed[nasheed].title}
+                    title={anasheed[nasheed].nasheed_title}
                     image={anasheed[nasheed].file_path}
                     date={anasheed[nasheed].created_at}
                     artist={anasheed[nasheed].artist_name}

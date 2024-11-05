@@ -59,7 +59,7 @@ const CategoriesSection = () => {
             >
               <CardComponent 
                 image={categories[card].file_path}
-                title={categories[card].name} 
+                title={categories[card].category_name} 
                 subTitle={(categories[card].anasheed_count || 0) + ' nasheed'}
               />
             </div>

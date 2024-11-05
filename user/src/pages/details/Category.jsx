@@ -43,7 +43,7 @@ const Category = () => {
             <div className="flex justify-center items-center gap-4">
               <div className="bg-gray-500 w-16 h-16 bg-cover bg-center rounded-full" style={{ background: `url('${itemCategory.file_path}')`}}></div>
               <h2 className="text-xl lg:text-2xl font-bold text-[var(--mainColor)] capitalize px-2">
-                {itemCategory.name}
+                {itemCategory.category_name}
               </h2>
             </div>
             <img 
@@ -65,7 +65,7 @@ const Category = () => {
                 <NasheedBar 
                   key={index} 
                   duration={anasheed[nasheed].duration}
-                  title={anasheed[nasheed].title}
+                  title={anasheed[nasheed].nasheed_title}
                   image={anasheed[nasheed].file_path}
                   date={anasheed[nasheed].created_at}
                   artist={anasheed[nasheed].artist_name}

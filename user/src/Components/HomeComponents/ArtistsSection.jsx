@@ -61,7 +61,7 @@ const ArtistsSection = () => {
                     style={{ backgroundImage: `url('${artists[card].file_path}')`}}
                   ></div>
                   <h3 className='text-lg text-center font-semibold capitalize'>
-                    {artists[card].name}
+                    {artists[card].artist_name}
                   </h3>
               </div>
             ))}

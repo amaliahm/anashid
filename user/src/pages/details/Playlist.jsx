@@ -68,7 +68,7 @@ const Playlist = () => {
                 <NasheedBar 
                   key={index} 
                   duration={anasheed[nasheed].duration}
-                  title={anasheed[nasheed].title}
+                  title={anasheed[nasheed].nasheed_title}
                   image={anasheed[nasheed].file_path}
                   date={anasheed[nasheed].created_at}
                   artist={anasheed[nasheed].artist_name}

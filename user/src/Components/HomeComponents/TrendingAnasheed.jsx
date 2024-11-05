@@ -73,7 +73,7 @@ const TrendingAnasheedComponent = () => {
                       <div className="bg-gray-500 w-16 h-16 rounded-xl mr-2 overflow-hidden bg-center bg-cover" style={{backgroundImage: `url('${trending[card].file_path}')`}}> </div>
                       <div className="capitalize">
                         <p>
-                          {trending[card].title}
+                          {trending[card].nasheed_title}
                         </p>
                         <p className="text-gray-400 text-sm">
                           {trending[card].name}

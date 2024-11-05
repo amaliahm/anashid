@@ -51,7 +51,7 @@ const NewAnasheedSection = () => {
                 >
                   <CardComponent 
                     image={anasheed[card].file_path}
-                    title={anasheed[card].title} 
+                    title={anasheed[card].nasheed_title} 
                     subTitle={anasheed[card].artist_name}
                   />
                 </div>

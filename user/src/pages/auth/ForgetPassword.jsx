@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 //ICONS
 import { signup } from '../../assets/images';
@@ -7,6 +7,7 @@ import { signup } from '../../assets/images';
 import apiClient from '../../services/api';
 
 const ForgetPassword = () => {
+  const navigate = useNavigate()
   const [error, setError] = useState(false)
   const [done, setDone] = useState(false)
   const [email, setEmail] = useState('');
@@ -14,7 +15,7 @@ const ForgetPassword = () => {
   const handleResetPw = async (e) => {
     e.preventDefault();
     try {
-        await apiClient.post('/forget-password', { email });
+        await apiClient.post('/auth/forget-password', { email });
         setDone(true);
         setError(false);
       } catch (error) {
@@ -66,7 +67,10 @@ const ForgetPassword = () => {
               >
                 send email
               </button>
-              <div className="mt-12 mb-4 flex justify-center items-center capitalize font-semibold gap-4">
+              <div 
+                className="mt-12 mb-4 flex justify-center items-center capitalize font-semibold gap-4 hover:cursor-pointer"
+                onClick={() => navigate('/auth/login')}
+              >
                 login ?
               </div>
             </div>

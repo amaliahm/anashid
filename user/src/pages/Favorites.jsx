@@ -39,7 +39,7 @@ const Favorites = () => {
                         {Object.keys(favoriteAnasheed).map((nasheed, index) => (
                           <NasheedBar 
                             key={index} 
-                            title={favoriteAnasheed[nasheed].title}
+                            title={favoriteAnasheed[nasheed].nasheed_title}
                             duration={favoriteAnasheed[nasheed].duration}
                             artist={favoriteAnasheed[nasheed].artist_name}
                             date={favoriteAnasheed[nasheed].created_at}
