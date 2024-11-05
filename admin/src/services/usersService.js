@@ -5,7 +5,6 @@ export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
 export const FETCH_USERS_FAILURE = 'FETCH_USERS_FAILURE';
 
 export const fetchUsers = (id) => async (dispatch) => {
-  console.log(id)
   try {
     dispatch({ type: FETCH_USERS_REQUEST });
     const response = await apiClient.get(`/admin/users/${id}`);

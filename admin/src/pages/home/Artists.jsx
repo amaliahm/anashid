@@ -99,7 +99,7 @@ const Artists = () => {
                       {artists.map((elem, index) => (
                         <tr key={index} className={`${elem.deleted_artist ? 'bg-[var(--redColor)] opacity-50' : ''} border-b border-gray-700`}>
                           <td className="px-4 lg:px-20 py-4">
-                            {elem.name} 
+                            {elem.artist_name} 
                           </td>
                           <td className="px-4 lg:px-20 py-4">
                             <div 
@@ -151,20 +151,20 @@ const Artists = () => {
                     isOpen={modal} 
                     onClose={closeModal} 
                     id={selectedArtist.id} 
-                    name={selectedArtist.name} 
+                    name={selectedArtist.artist_name} 
                     handleDelete={handleDelete}
                     loading={loading}
                     error={error}
                   />}
                 {update && 
                   <ModalUpdate 
-                    title={selectedArtist.name} 
+                    title={selectedArtist.artist_name}
                     isOpen={update} 
                     onClose={closeModal} 
                     id={selectedArtist.id} 
-                    name={selectedArtist.name} 
+                    name={selectedArtist.artist_name} 
                     oldValues={{
-                      name: selectedArtist.name,
+                      name: selectedArtist.artist_name,
                       bio: selectedArtist.bio
                     }}
                     handleUpdate={handleUpdate}

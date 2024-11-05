@@ -99,7 +99,7 @@ const Anasheed = () => {
                       {anasheed.map((elem, index) => (
                         <tr key={index} className={`${elem.deleted_anasheed ? 'bg-[var(--redColor)] opacity-50' : ''} border-b border-gray-700`}>
                           <td className="px-4 lg:px-12 py-4">
-                            {elem.title} 
+                            {elem.nasheed_title} 
                           </td>
                           <td className="px-4 lg:px-6 py-4">
                             <div 
@@ -157,14 +157,14 @@ const Anasheed = () => {
                     isOpen={modal} 
                     onClose={closeModal} 
                     id={selectedAnasheed.id} 
-                    name={selectedAnasheed.name} 
+                    name={selectedAnasheed.nasheed_title} 
                     handleDelete={handleDelete}
                     loading={loading}
                     error={error}
                   />}
                 {update && 
                   <ModalUpdate 
-                    title={selectedAnasheed.name} 
+                    title={selectedAnasheed.nasheed_title} 
                     isOpen={update} 
                     onClose={closeModal} 
                     id={selectedAnasheed.id} 

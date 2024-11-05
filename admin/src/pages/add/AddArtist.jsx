@@ -52,7 +52,7 @@ const AddArtist = () => {
     return (
         <>
           <div className="flex">
-            <SideBarComponent ele={4} />
+            <SideBarComponent ele={3} />
             <div className="flex-1">
               <NavBarComponent id={id} />
               <div className="ml-24 p-1">

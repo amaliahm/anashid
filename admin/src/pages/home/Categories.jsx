@@ -102,7 +102,7 @@ const Categories = () => {
                           className={`${elem.deleted_category ? 'bg-[var(--redColor)] opacity-50' : ''} border-b border-gray-700`}
                         >
                           <td className="px-4 lg:px-24 py-4">
-                            {elem.name} 
+                            {elem.category_name} 
                           </td>
                           <td className="px-4 lg:px-32 py-4">
                             <div 
@@ -151,20 +151,20 @@ const Categories = () => {
                     isOpen={modal} 
                     onClose={closeModal} 
                     id={selectedCategory.id} 
-                    name={selectedCategory.name} 
+                    name={selectedCategory.category_name} 
                     handleDelete={handleDelete}
                     loading={loading}
                     error={error}
                   />}
                 {update && 
                   <ModalUpdate 
-                    title={selectedCategory.name} 
+                    title={selectedCategory.category_name}
                     isOpen={update} 
                     onClose={closeModal} 
                     id={selectedCategory.id} 
-                    name={selectedCategory.name} 
+                    name={selectedCategory.category_name} 
                     oldValues={{
-                      name: selectedCategory.name
+                      name: selectedCategory.category_name
                     }}
                     handleUpdate={handleUpdate}
                     loading={loading}

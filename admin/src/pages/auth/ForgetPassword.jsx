@@ -1,26 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 //ICONS
 import { bg } from '../../assets/images';
 
-import apiClient from '../../services/api';
+// REDUX
+import { forgetPasswordAdmin } from '../../services/authService';
 
 const ForgetPassword = () => {
-  const [error, setError] = useState(false)
-  const [done, setDone] = useState(false)
+  const navigate = useNavigate()
   const [email, setEmail] = useState('');
+  const dispatch = useDispatch();
+  const { success, loading, errorForgetPwd } = useSelector((state) => state.auth);
 
   const handleResetPw = async (e) => {
     e.preventDefault();
-    try {
-        await apiClient.post('/forget-password', { email });
-        setDone(true);
-        setError(false);
-      } catch (error) {
-        console.error(error);
-        setError(true);
-        setDone(false);
-      }
+    dispatch(forgetPasswordAdmin(email));
   };
 
   return (
@@ -47,12 +43,12 @@ const ForgetPassword = () => {
                   placeholder="Email"
                   required
                 />
-                {error && 
+                {errorForgetPwd && 
                   <p className='text-red-500 text-xs italic'>
                     Error sending password reset link, please try again!
                   </p>
                 }
-                {done && 
+                {success && 
                   <p className='text-green-500 text-xs italic'>
                     Password reset link sent to your email
                   </p>
@@ -60,13 +56,15 @@ const ForgetPassword = () => {
               </div>
               <button
                 type="submit"
-                className={`capitalize border-[1px] border-[var(--mainColor)] font-medium px-16 py-2 my-6 rounded-2xl ${ email.length === 0 ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
-                disabled={email.length === 0}
+                className={`capitalize border-[1px] border-[var(--mainColor)] font-medium px-16 py-2 my-6 rounded-2xl ${ loading || email.length === 0 ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+                disabled={loading || email.length === 0}
               >
                 send email
               </button>
-              <div className="mt-12 mb-4 flex justify-center items-center capitalize font-semibold gap-4">
-                login ?
+              <div className="mt-12 mb-4 flex justify-center items-center capitalize font-semibold gap-4 hover:cursor-pointer">
+                <p onClick={() => navigate('/auth/login')}>
+                  login ?
+                </p>
               </div>
             </div>
           </form>

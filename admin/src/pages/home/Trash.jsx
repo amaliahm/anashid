@@ -33,7 +33,7 @@ const Trash = () => {
     tables.forEach(table => {
       dispatch(fetchTrashedItems(table))
     })
-  }, [dispatch])
+  }, [])
 
   const handleItem = (table, id, operation) => {
     dispatch(restoreOrDelete(table, id, operation))
@@ -248,7 +248,7 @@ const Trash = () => {
                             className="border-b border-gray-700"
                           >
                             <td className="px-4 lg:px-12 py-4">
-                              {item.name}
+                              {item.title}
                             </td>
                             <td className="px-4 lg:px-10 py-4">
                               <div

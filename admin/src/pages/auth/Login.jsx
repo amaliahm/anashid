@@ -19,7 +19,6 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     const result = await dispatch(loginAdmin({email, password}));
-    console.log(result)
   };
 
   useEffect(() => {
@@ -65,16 +64,17 @@ const Login = () => {
               </div>
               <button
                 type="submit"
-                className={`capitalize border-[1px] border-[var(--mainColor)] font-medium px-16 py-2 my-6 rounded-2xl ${ loading ? 'opacity-50 cursor-not-allowed': 'cursor-pointer'}`}
-                disabled={loading}
+                className={`capitalize border-[1px] border-[var(--mainColor)] font-medium px-16 py-2 my-6 rounded-2xl ${ loading || !email || !password ? 'opacity-50 cursor-not-allowed': 'cursor-pointer'}`}
+                disabled={loading || !email || !password}
               >
                 {loading ? 'logging in...' : 'login'}
               </button>
               <div 
                 className="mt-12 mb-4 flex justify-center items-center capitalize font-semibold gap-4 hover:cursor-pointer"
-                onClick={() => navigate('/auth/forget-password')}
               >
-                Forgot password ?
+                <p onClick={() => navigate('/auth/forget-password')}>
+                  Forgot password ?
+                </p>
               </div>
             </div>
           </form>

@@ -30,7 +30,7 @@ const renderActiveShape = (props, color) => {
         fill='#999'
         style={{ textTransform: 'capitalize' }}
       >
-        {payload.name}
+        {payload.category_name}
       </text>
       <Sector
         cx={cx}
@@ -75,7 +75,7 @@ const PopularCategories = ({categoriesData, maxCategory}) => {
           </h2>
           <ResponsiveContainer 
             width="100%" 
-            height={260}
+            height={280}
           >
             <PieChart 
               width={400} 
@@ -105,7 +105,7 @@ const PopularCategories = ({categoriesData, maxCategory}) => {
           </ResponsiveContainer>
         </div>
         <div className='text-xl font-semibold text-[var(--textColor)] text-center capitalize my-6'>
-          {maxCategory.name}
+          {maxCategory.category_name}
         </div>
       </div>
     )

@@ -60,7 +60,7 @@ export const _deleteFileAttachment = `
 
 export const _trashAnasheed = `
     SELECT 
-      a.id, a.title AS nasheed_title, a.description, a.is_deleted AS deleted_anasheed,
+      a.id, a.title AS name, a.description, a.is_deleted AS deleted_anasheed,
       f.file_path, f.file_type, f.created_at,
       artist.name AS artist_name
     FROM 

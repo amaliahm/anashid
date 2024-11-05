@@ -16,7 +16,7 @@ export const _restoreArtist = `
 
 export const _trashArtist = `
     SELECT 
-      a.id, a.name AS artist_name, a.bio, a.is_deleted AS deleted_artist,
+      a.id, a.name, a.bio, a.is_deleted AS deleted_artist,
       f.file_path, f.file_type, f.created_at
     FROM 
       artist a

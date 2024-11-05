@@ -5,6 +5,8 @@ const initialState = {
   user: null,
   loading: false,
   error: null,
+  success: false,
+  errorForgetPwd: false
 };
 
 const authSlice = createSlice({
@@ -46,8 +48,28 @@ const authSlice = createSlice({
         state.user = JSON.parse(storedUser);
       }
     },
+    forgetPasswordRequest: (state) => {
+      state.loading = true;
+      state.errorForgetPwd = false;
+      state.success = false;
+    },
+    forgetPasswordSuccess: (state) => {
+      state.loading = false;
+      state.errorForgetPwd = false;
+      state.success = true;
+    },
+    forgetPasswordFailure: (state) => {
+      state.loading = false;
+      state.success = false;
+      state.errorForgetPwd = true;
+    },
   },
 });
 
-export const { loginRequest, loginSuccess, loginFailure, logoutRequest, logoutSuccess, logoutFailure, loadUserFromLocalStorage } = authSlice.actions;
+export const { 
+  loginRequest, loginSuccess, loginFailure, 
+  logoutRequest, logoutSuccess, logoutFailure, 
+  loadUserFromLocalStorage,
+  forgetPasswordFailure, forgetPasswordSuccess, forgetPasswordRequest
+} = authSlice.actions;
 export default authSlice.reducer;

@@ -20,7 +20,7 @@ export const _newUsers = `
 
 export const _popularAnasheed = `
   SELECT 
-    a.id, a.nasheed_title, SUM(l.duration) AS duration 
+    a.id, a.title AS nasheed_title, SUM(l.duration) AS duration 
   FROM 
     anasheed a 
   JOIN 
@@ -28,7 +28,7 @@ export const _popularAnasheed = `
   ON 
     l.id_anasheed = a.id
   GROUP BY 
-    a.id, a.nasheed_title 
+    a.id, nasheed_title 
   DESC 
   LIMIT 
     5;
@@ -36,7 +36,7 @@ export const _popularAnasheed = `
 
 export const _popularCategories = `
   SELECT 
-    c.id, c.category_name, SUM(l.duration) AS duration 
+    c.id, c.name AS category_name, SUM(l.duration) AS duration 
   FROM 
     category c 
   JOIN 
@@ -55,18 +55,18 @@ export const _popularCategories = `
 `;
 
 export const _anasheedIntoCategories = `
-    SELECT c.category_name, CAST(COUNT(n.id) AS SIGNED) AS anasheed_count, f.file_path
+    SELECT c.name AS category_name, CAST(COUNT(n.id) AS SIGNED) AS anasheed_count, f.file_path
     FROM category c
     LEFT JOIN anasheed n ON c.id = n.id_category
     JOIN fileAttachment f ON c.id_file = f.id
-    GROUP BY c.id, c.category_name;
+    GROUP BY c.id, category_name;
 `;
 
 export const _artists = `
-    SELECT a.artist_name, CAST(COUNT(n.id) AS SIGNED) AS anasheed_count
+    SELECT a.name AS artist_name, CAST(COUNT(n.id) AS SIGNED) AS anasheed_count
     FROM artist a
     LEFT JOIN anasheed n ON a.id = n.id_artist
-    GROUP BY a.id, a.artist_name;
+    GROUP BY a.id, artist_name;
 `;
 
 export const _activeUsers = `

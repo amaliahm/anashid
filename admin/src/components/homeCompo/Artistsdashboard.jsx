@@ -80,7 +80,7 @@ const ArtistsDashboard = ({artistsData}) => {
           {artistsData && Object.keys(artistsData).map((artist, index) => (
             <ArtistBar 
               key={index} 
-              name={artistsData[artist].name} 
+              name={artistsData[artist].artist_name} 
               color={colors[index]} 
               index={artistsData[artist].anasheed_count}
               total={totalAnasheed}

@@ -18,9 +18,6 @@ export default class SendEmailController {
                 content,
                 `<p> ${content} </p>`
             );
-            if (!result) {
-                return res.status(404).json({ error: 'Failed to send emails' });
-            }
         })
         return res.status(200).json({ message: 'Emails have been send successfully', table: 'sendEmail' });
     }

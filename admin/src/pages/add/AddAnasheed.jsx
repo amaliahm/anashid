@@ -160,7 +160,7 @@ const AddAnasheed = () => {
                               options={categories} 
                               selectedValue={selectedValues.category} 
                               onSelect={(item) => handleSelect('category', item)} 
-                              name='name'
+                              name='category_name'
                             />
                             <SelectedAnasheedItem 
                               label="Select theme" 
